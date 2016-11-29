@@ -167,16 +167,20 @@ return [
          * Package Service Providers...
          */
 
-        //
+        /*
+         * Prettus
+         */
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        SerEducacional\Providers\RepositoryServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        SerEducacional\Providers\AppServiceProvider::class,
+        SerEducacional\Providers\AuthServiceProvider::class,
+        // SerEducacional\Providers\BroadcastServiceProvider::class,
+        SerEducacional\Providers\EventServiceProvider::class,
+        SerEducacional\Providers\RouteServiceProvider::class,
 
     ],
 
