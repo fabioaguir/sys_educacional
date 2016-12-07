@@ -174,6 +174,11 @@ return [
         SerEducacional\Providers\RepositoryServiceProvider::class,
 
         /*
+         * Blade
+         */
+        Collective\Html\HtmlServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         SerEducacional\Providers\AppServiceProvider::class,
@@ -229,6 +234,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /**
+         * Blade
+         */
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

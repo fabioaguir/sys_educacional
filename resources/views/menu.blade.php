@@ -109,13 +109,42 @@
             <li><a href=""><i class="zmdi zmdi-home"></i> Home</a></li>
             <li><a href=""><i class="zmdi zmdi-chart"></i> Dashboard</a></li>
             <li class="sub-menu">
-                <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-text"></i>CBO</a>
+                <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-text"></i>CGM</a>
                 <ul>
-                    <li><a href="">Agentes</a></li>
+                    <li class="sub-menu">
+                        <a href="" data-ma-action="submenu-toggle">Cadastros</a>
+                        <ul>
+                            <li>
+                                <a href="">Pessoa Física</a>
+                            </li>
+                            <li>
+                                <a href="">Pessoa Jurídica</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
-
         </ul>
+
+        {{--<li class="sub-menu">
+            <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-menu"></i> 3 Level Menu</a>
+
+            <ul>
+                <li><a href="form-elements.html">Level 2 link</a></li>
+                <li><a href="form-components.html">Another level 2 Link</a></li>
+                <li class="sub-menu">
+                    <a href="" data-ma-action="submenu-toggle">I have children too</a>
+
+                    <ul>
+                        <li><a href="">Level 3 link</a></li>
+                        <li><a href="">Another Level 3 link</a></li>
+                        <li><a href="">Third one</a></li>
+                    </ul>
+                </li>
+                <li><a href="form-validations.html">One more 2</a></li>
+            </ul>
+        </li>--}}
+
     </aside>
     {{--FIM Menu Lateral--}}
 

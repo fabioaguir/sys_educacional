@@ -23,7 +23,14 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\SerEducacional\Repositories\PessoaFisicaRepository::class, \SerEducacional\Repositories\PessoaFisicaRepositoryEloquent::class);
+        $this->app->bind(
+            \SerEducacional\Repositories\PessoaFisicaRepository::class,
+            \SerEducacional\Repositories\PessoaFisicaRepositoryEloquent::class);
+        //:end-bindings:
+
+        $this->app->bind(
+            \SerEducacional\Repositories\EnderecoRepository::class,
+            \SerEducacional\Repositories\EnderecoRepositoryEloquent::class);
         //:end-bindings:
     }
 }

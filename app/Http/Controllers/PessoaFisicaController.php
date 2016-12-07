@@ -11,10 +11,14 @@ use SerEducacional\Http\Requests\PessoaFisicaCreateRequest;
 use SerEducacional\Http\Requests\PessoaFisicaUpdateRequest;
 use SerEducacional\Repositories\PessoaFisicaRepository;
 use SerEducacional\Validators\PessoaFisicaValidator;
+use SerEducacional\Services\PessoaFisicaService;
 
-
-class PessoaFisicasController extends Controller
+class PessoaFisicaController extends Controller
 {
+    /**
+     * @var
+     */
+    private $service;
 
     /**
      * @var PessoaFisicaRepository
@@ -26,79 +30,86 @@ class PessoaFisicasController extends Controller
      */
     protected $validator;
 
-    public function __construct(PessoaFisicaRepository $repository, PessoaFisicaValidator $validator)
+    /**
+     * @var array
+     */
+    private $loadFields = [
+        'Sexo',
+        'Nacionalidade',
+        'CgmMunicipio',
+        'EstadoCivil',
+        'Nacionalidade',
+        'Escolaridade',
+        'Bairro'
+    ];
+
+    /**
+     * PessoaFisicaController constructor.
+     * @param PessoaFisicaService $service
+     * @param PessoaFisicaRepository $repository
+     * @param PessoaFisicaValidator $validator
+     */
+    public function __construct(PessoaFisicaService $service,
+                                PessoaFisicaRepository $repository,
+                                PessoaFisicaValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
+        $this->service    = $service;
     }
 
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $pessoaFisicas = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $pessoaFisicas,
-            ]);
-        }
-
-        return view('pessoaFisicas.index', compact('pessoaFisicas'));
+        return view('cgm.pessoaFisica.index');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  PessoaFisicaCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(PessoaFisicaCreateRequest $request)
+    public function create()
     {
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
 
+        #Retorno para view
+        return view('cgm.pessoaFisica.create', compact('loadFields'));
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
         try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+            
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+            #Validando a requisição
+            $this->service->tratamentoCampos($data);
 
-            $pessoaFisica = $this->repository->create($request->all());
+            #Executando a ação
+            $this->service->store($data);
 
-            $response = [
-                'message' => 'PessoaFisica created.',
-                'data'    => $pessoaFisica->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
-
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -114,13 +125,9 @@ class PessoaFisicasController extends Controller
         return view('pessoaFisicas.show', compact('pessoaFisica'));
     }
 
-
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -130,18 +137,13 @@ class PessoaFisicasController extends Controller
         return view('pessoaFisicas.edit', compact('pessoaFisica'));
     }
 
-
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  PessoaFisicaUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
+     * @param PessoaFisicaUpdateRequest $request
+     * @param $id
+     * @return $this|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function update(PessoaFisicaUpdateRequest $request, $id)
     {
-
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
@@ -173,13 +175,9 @@ class PessoaFisicasController extends Controller
         }
     }
 
-
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
