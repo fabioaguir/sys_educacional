@@ -10,7 +10,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\CursoRepository;
 use SerEducacional\Services\CursoService;
 use SerEducacional\Validators\CursoValidator;
-
+use Yajra\Datatables\Datatables;
 
 class CursosController extends Controller
 {
@@ -28,7 +28,11 @@ class CursosController extends Controller
     /**
      * @var array
      */
-    private $loadFields = [];
+    private $loadFields = [
+        'NivelCurso',
+        'RegimeCurso',
+        'TipoCurso'
+    ];
 
     /**
      * @var CursoService
@@ -67,12 +71,17 @@ class CursosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('disciplinas')
+        $rows = \DB::table('cursos')
+            ->leftJoin('nivel_cursos', 'nivel_cursos.id', '=', 'cursos.nivel_curso_id')
+            ->leftJoin('regime_cursos', 'regime_cursos.id', '=', 'cursos.regime_curso_id')
+            ->leftJoin('tipo_cursos', 'tipo_cursos.id', '=', 'cursos.tipo_curso_id')
             ->select([
-                'disciplinas.id',
-                'disciplinas.nome',
-                'disciplinas.codigo',
-                'disciplinas.carga_horaria'
+                'cursos.id',
+                'cursos.nome',
+                'cursos.codigo',
+                'nivel_cursos.codigo as nivel_curso',
+                'regime_cursos.codigo as regime_curso',
+                'tipo_cursos.codigo as tipo_curso'
             ]);
 
         #Editando a grid

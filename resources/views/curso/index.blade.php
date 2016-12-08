@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Disciplinas</h2>
+                <h2>Listar Cursos</h2>
             </div>
 
             <div class="card material-table">
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('disciplina.create') }}">Nova Disciplina</a>
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('curso.create') }}">Novo Curso</a>
                             </div>
                         </div>
                     </div>
@@ -38,12 +38,14 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="disciplina-grid" class="table table-hover">
+                    <table id="curso-grid" class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th>Carga Horária</th>
+                                <th>Nivel</th>
+                                <th>Regime</th>
+                                <th>Tipo</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
@@ -51,7 +53,9 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th>Carga Horária</th>
+                                <th>Nivel</th>
+                                <th>Regime</th>
+                                <th>Tipo</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
@@ -65,14 +69,16 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#disciplina-grid').DataTable({
+        var table = $('#curso-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('disciplina.grid') }}",
+            ajax: "{{ route('curso.grid') }}",
             columns: [
-                {data: 'nome', name: 'disciplinas.nome'},
-                {data: 'codigo', name: 'disciplinas.codigo'},
-                {data: 'carga_horaria', name: 'disciplinas.carga_horaria'},
+                {data: 'nome', name: 'cursos.nome'},
+                {data: 'codigo', name: 'cursos.codigo'},
+                {data: 'nivel_curso', name: 'nivel_cursos.nome'},
+                {data: 'regime_curso', name: 'regime_cursos.nome'},
+                {data: 'tipo_curso', name: 'tipo_cursos.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {

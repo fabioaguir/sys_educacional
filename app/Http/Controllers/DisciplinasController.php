@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Http\Requests\DisciplinaCreateRequest;
-use SerEducacional\Http\Requests\DisciplinaUpdateRequest;
 use SerEducacional\Repositories\DisciplinaRepository;
 use SerEducacional\Services\DisciplinaService;
 use SerEducacional\Validators\DisciplinaValidator;

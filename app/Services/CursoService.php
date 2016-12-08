@@ -28,7 +28,10 @@ class CursoService
      * @throws \Exception
      */
     public function store(array $data) : Curso
-    {        
+    {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         #Salvando o registro pincipal
         $curso =  $this->repository->create($data);
 
@@ -49,6 +52,9 @@ class CursoService
      */
     public function update(array $data, int $id) : Curso
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+        
         #Atualizando no banco de dados
         $curso = $this->repository->update($data, $id);
 
