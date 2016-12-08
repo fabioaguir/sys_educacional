@@ -108,6 +108,7 @@
         <ul class="main-menu">
             <li><a href=""><i class="zmdi zmdi-home"></i> Home</a></li>
             <li><a href=""><i class="zmdi zmdi-chart"></i> Dashboard</a></li>
+            <li><a href="{{ route('servidor.create') }}"><i class="zmdi zmdi-chart"></i> Servidor</a></li>
             <li class="sub-menu">
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-text"></i>CGM</a>
                 <ul>
@@ -185,11 +186,13 @@
 <script src="{{ asset('/lib/bootstrap-growl/jquery.bootstrap-growl.min.js') }}"></script>
 <script src="{{ asset('/lib/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+
 {{--jquery Validator https://jqueryvalidation.org/ --}}
 <script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
 <script src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/dist/js/adicional/unique.js')  }}"></script>
 <script src="{{ asset('/dist/js/fileinput/fileinput.min.js')}}"></script>
+
 {{-- Mascaras https://igorescobar.github.io/jQuery-Mask-Plugin/ --}}
 <script src="{{ asset('/lib/jquery-mask-plugin/dist/jquery.mask.js') }}"></script>
 
@@ -198,10 +201,9 @@
 <script type="text/javascript" src={{ asset('/lib/jquery-placeholder/jquery.placeholder.min.js') }}></script>
 <!--[endif]-->
 
+<script src="{{ asset('/js/laroute.js') }}"></script>
 <script src="{{ asset('/lib/chosen/chosen.jquery.js') }}"></script>
-
 <script type="text/javascript" src={{ asset('/dist/js/app.js') }}></script>
-
 <script type="text/javascript">
     $(".chosen").chosen();
     $('.dateTimePicker').datetimepicker({

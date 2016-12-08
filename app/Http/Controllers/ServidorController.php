@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Http\Requests\PessoaFisicaCreateRequest;
-use SerEducacional\Http\Requests\PessoaFisicaUpdateRequest;
-use SerEducacional\Repositories\PessoaFisicaRepository;
-use SerEducacional\Validators\PessoaFisicaValidator;
-use SerEducacional\Services\PessoaFisicaService;
+use SerEducacional\Http\Requests\ServidorCreateRequest;
+use SerEducacional\Http\Requests\ServidorUpdateRequest;
+use SerEducacional\Repositories\ServidorRepository;
+use SerEducacional\Validators\ServidorValidator;
+use SerEducacional\Services\ServidorService;
 
 class ServidorController extends Controller
 {
@@ -44,14 +44,14 @@ class ServidorController extends Controller
     ];
 
     /**
-     * PessoaFisicaController constructor.
-     * @param PessoaFisicaService $service
-     * @param PessoaFisicaRepository $repository
-     * @param PessoaFisicaValidator $validator
+     * ServidorController constructor.
+     * @param ServidorService $service
+     * @param ServidorRepository $repository
+     * @param ServidorValidator $validator
      */
-    public function __construct(PessoaFisicaService $service,
-                                PessoaFisicaRepository $repository,
-                                PessoaFisicaValidator $validator)
+    public function __construct(ServidorService $service,
+                                ServidorRepository $repository,
+                                ServidorValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -64,7 +64,7 @@ class ServidorController extends Controller
      */
     public function index()
     {
-        return view('cgm.pessoaFisica.index');
+        return view('servidor.index');
     }
 
     /**
@@ -76,7 +76,7 @@ class ServidorController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('cgm.pessoaFisica.create', compact('loadFields'));
+        return view('servidor.create', compact('loadFields'));
     }
 
     /**
@@ -113,16 +113,16 @@ class ServidorController extends Controller
      */
     public function show($id)
     {
-        $pessoaFisica = $this->repository->find($id);
+        $servidor = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $pessoaFisica,
+                'data' => $servidor,
             ]);
         }
 
-        return view('pessoaFisicas.show', compact('pessoaFisica'));
+        return view('servidor.show', compact('servidor'));
     }
 
     /**
@@ -132,9 +132,9 @@ class ServidorController extends Controller
     public function edit($id)
     {
 
-        $pessoaFisica = $this->repository->find($id);
+        $servidor = $this->repository->find($id);
 
-        return view('pessoaFisicas.edit', compact('pessoaFisica'));
+        return view('servidor.edit', compact('servidor'));
     }
 
     /**
@@ -142,17 +142,17 @@ class ServidorController extends Controller
      * @param $id
      * @return $this|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function update(PessoaFisicaUpdateRequest $request, $id)
+    public function update(ServidorUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $pessoaFisica = $this->repository->update($id, $request->all());
+            $servidor = $this->repository->update($id, $request->all());
 
             $response = [
-                'message' => 'PessoaFisica updated.',
-                'data'    => $pessoaFisica->toArray(),
+                'message' => 'Servidor updated.',
+                'data'    => $servidor->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -186,11 +186,11 @@ class ServidorController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'PessoaFisica deleted.',
+                'message' => 'Servidor deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'PessoaFisica deleted.');
+        return redirect()->back()->with('message', 'Servidor deleted.');
     }
 }
