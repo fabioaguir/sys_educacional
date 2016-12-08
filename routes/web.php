@@ -65,3 +65,4 @@ Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
     Route::post('store', ['as' => 'store', 'uses' => 'OperadorController@store']);
     Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'OperadorController@edit']);
     Route::post('update/{id}', ['as' => 'update', 'uses' => 'OperadorController@update']);*/
+

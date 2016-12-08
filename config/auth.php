@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => SerEducacional\User::class,
+            'model' => SerEducacional\Entities\User::class,
         ],
 
         // 'users' => [
