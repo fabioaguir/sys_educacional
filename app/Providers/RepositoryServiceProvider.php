@@ -26,11 +26,20 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             \SerEducacional\Repositories\PessoaFisicaRepository::class,
             \SerEducacional\Repositories\PessoaFisicaRepositoryEloquent::class);
-        //:end-bindings:
 
         $this->app->bind(
             \SerEducacional\Repositories\EnderecoRepository::class,
             \SerEducacional\Repositories\EnderecoRepositoryEloquent::class);
+
+        $this->app->bind(
+            \SerEducacional\Repositories\DisciplinaRepository::class,
+            \SerEducacional\Repositories\DisciplinaRepositoryEloquent::class);
+
+        $this->app->bind(
+            \SerEducacional\Repositories\CursoRepository::class,
+            \SerEducacional\Repositories\CursoRepositoryEloquent::class);
+
+
         //:end-bindings:
 
         $this->app->bind(

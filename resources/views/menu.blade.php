@@ -124,6 +124,7 @@
                     </li>
                 </ul>
             </li>
+            <li><a href="{{ route('disciplina.index')  }}"><i class="zmdi zmdi-chart"></i> Disciplinas</a></li>
         </ul>
 
         {{--<li class="sub-menu">
