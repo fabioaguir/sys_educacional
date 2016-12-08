@@ -17,7 +17,15 @@ Route::group(['prefix' => 'cgm', 'as' => 'cgm.'], function () {
     Route::get('pessoaFisica/index', ['as' => 'index', 'uses' => 'PessoaFisicaController@index']);
     Route::get('pessoaFisica/create', ['as' => 'create', 'uses' => 'PessoaFisicaController@create']);
     Route::post('store', ['as' => 'store', 'uses' => 'PessoaFisicaController@store']);
+});
 
+Route::group(['prefix' => 'servidor', 'as' => 'servidor.'], function () {
+    Route::get('index', ['as' => 'index', 'uses' => 'ServidorController@index']);
+    Route::post('grid', ['as' => 'grid', 'uses' => 'ServidorController@grid']);
+    Route::get('create', ['as' => 'create', 'uses' => 'ServidorController@create']);
+    Route::post('store', ['as' => 'store', 'uses' => 'ServidorController@store']);
+    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServidorController@edit']);
+    Route::post('update/{id}', ['as' => 'update', 'uses' => 'ServidorController@update']);
 });
 
 /*Route::get('index', ['as' => 'index', 'uses' => 'OperadorController@index']);
