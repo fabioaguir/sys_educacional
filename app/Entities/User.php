@@ -1,6 +1,6 @@
 <?php
 
-namespace SerEducacional;
+namespace SerEducacional\Entities;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
