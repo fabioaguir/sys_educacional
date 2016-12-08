@@ -7,6 +7,7 @@ use \Prettus\Validator\LaravelValidator;
 
 class DisciplinaValidator extends LaravelValidator
 {
+    use TraitReplaceRulesValidator;
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [],
