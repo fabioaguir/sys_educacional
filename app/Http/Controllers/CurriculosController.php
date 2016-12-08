@@ -3,46 +3,49 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Repositories\DisciplinaRepository;
-use SerEducacional\Services\DisciplinaService;
-use SerEducacional\Validators\DisciplinaValidator;
+use SerEducacional\Repositories\CurriculoRepository;
+use SerEducacional\Services\CurriculoService;
+use SerEducacional\Validators\CurriculoValidator;
 use Yajra\Datatables\Datatables;
 
 
-class DisciplinasController extends Controller
+class CurriculosController extends Controller
 {
-
     /**
-     * @var DisciplinaRepository
+     * @var CurriculoRepository
      */
     protected $repository;
 
     /**
-     * @var DisciplinaValidator
+     * @var CurriculoValidatorValidator
      */
     protected $validator;
 
     /**
      * @var array
      */
-    private $loadFields = [];
+    private $loadFields = [
+        'Curso'
+    ];
 
     /**
-     * @var DisciplinaService
+     * @var CurriculoService
      */
     private $service;
 
     /**
-     * DisciplinasController constructor.
-     * @param DisciplinaRepository $repository
-     * @param DisciplinaValidator $validator
+     * CurriculosController constructor.
+     * @param CurriculoRepository $repository
+     * @param CurriculoValidator $validator
+     * @param CurriculoService $service
      */
-    public function __construct(DisciplinaRepository $repository,
-                                DisciplinaValidator $validator,
-                                DisciplinaService $service)
+    public function __construct(CurriculoRepository $repository,
+                                CurriculoValidator $validator,
+                                CurriculoService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -57,7 +60,7 @@ class DisciplinasController extends Controller
     public function index()
     {
         # Retorno para view
-        return view('disciplina.index');
+        return view('curriculo.index');
     }
 
     /**
@@ -66,19 +69,21 @@ class DisciplinasController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('disciplinas')
+        $rows = \DB::table('curriculos')
+            ->join('cursos', 'cursos.id', '=', 'curriculos.curso_id')
             ->select([
-                'disciplinas.id',
-                'disciplinas.nome',
-                'disciplinas.codigo',
-                'disciplinas.carga_horaria'
+                'curriculos.id',
+                'curriculos.nome',
+                'curriculos.codigo',
+                'cursos.codigo as codigo_curso',
+                \DB::raw('IF(curriculos.ativo = 1, "SIM", "NÃO") as ativo')
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Disciplina" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Disciplina" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html  = '<a style="margin-right: 5%;" title="Editar Currículo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Currículo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;
@@ -94,7 +99,7 @@ class DisciplinasController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('disciplina.create', compact('loadFields'));
+        return view('curriculo.create', compact('loadFields'));
     }
 
     /**
@@ -106,7 +111,7 @@ class DisciplinasController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+        
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -120,7 +125,7 @@ class DisciplinasController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) { 
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -139,7 +144,7 @@ class DisciplinasController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('disciplina.edit', compact('model', 'loadFields'));
+            return view('curriculo.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
