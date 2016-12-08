@@ -125,6 +125,8 @@
                 </ul>
             </li>
             <li><a href="{{ route('disciplina.index')  }}"><i class="zmdi zmdi-chart"></i> Disciplinas</a></li>
+            <li><a href="{{ route('curso.index')  }}"><i class="zmdi zmdi-chart"></i> Cursos</a></li>
+            <li><a href="{{ route('curriculo.index')  }}"><i class="zmdi zmdi-chart"></i> Currículos</a></li>
         </ul>
 
         {{--<li class="sub-menu">

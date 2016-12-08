@@ -43,6 +43,22 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\TelefoneRepository::class,
             \SerEducacional\Repositories\TelefoneRepositoryEloquent::class);
 
+        $this->app->bind(
+            \SerEducacional\Repositories\NivelCursoRepository::class,
+            \SerEducacional\Repositories\NivelCursoRepositoryEloquent::class);
+
+        $this->app->bind(
+            \SerEducacional\Repositories\RegimeCursoRepository::class,
+            \SerEducacional\Repositories\RegimeCursoRepositoryEloquent::class);
+
+        $this->app->bind(
+            \SerEducacional\Repositories\TipoCursoRepository::class,
+            \SerEducacional\Repositories\TipoCursoRepositoryEloquent::class);
+
+        $this->app->bind(
+            \SerEducacional\Repositories\CurriculoRepository::class,
+            \SerEducacional\Repositories\CurriculoRepositoryEloquent::class);
+
 
         //:end-bindings:
     }

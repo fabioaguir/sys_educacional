@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Http\Requests\CursoCreateRequest;
-use SerEducacional\Http\Requests\CursoUpdateRequest;
 use SerEducacional\Repositories\CursoRepository;
+use SerEducacional\Services\CursoService;
 use SerEducacional\Validators\CursoValidator;
-
+use Yajra\Datatables\Datatables;
 
 class CursosController extends Controller
 {
@@ -26,12 +25,34 @@ class CursosController extends Controller
      */
     protected $validator;
 
-    public function __construct(CursoRepository $repository, CursoValidator $validator)
+    /**
+     * @var array
+     */
+    private $loadFields = [
+        'NivelCurso',
+        'RegimeCurso',
+        'TipoCurso'
+    ];
+
+    /**
+     * @var CursoService
+     */
+    private $service;
+
+    /**
+     * CursosController constructor.
+     * @param CursoRepository $repository
+     * @param CursoValidator $validator
+     * @param CursoService $service
+     */
+    public function __construct(CursoRepository $repository,
+                                CursoValidator $validator,
+                                CursoService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
+        $this->service = $service;
     }
-
 
     /**
      * Display a listing of the resource.
@@ -40,159 +61,144 @@ class CursosController extends Controller
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $cursos = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $cursos,
-            ]);
-        }
-
-        return view('cursos.index', compact('cursos'));
+        # Retorno para view
+        return view('curso.index');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  CursoCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function store(CursoCreateRequest $request)
+    public function grid()
     {
+        #Criando a consulta
+        $rows = \DB::table('cursos')
+            ->leftJoin('nivel_cursos', 'nivel_cursos.id', '=', 'cursos.nivel_curso_id')
+            ->leftJoin('regime_cursos', 'regime_cursos.id', '=', 'cursos.regime_curso_id')
+            ->leftJoin('tipo_cursos', 'tipo_cursos.id', '=', 'cursos.tipo_curso_id')
+            ->select([
+                'cursos.id',
+                'cursos.nome',
+                'cursos.codigo',
+                'nivel_cursos.codigo as nivel_curso',
+                'regime_cursos.codigo as regime_curso',
+                'tipo_cursos.codigo as tipo_curso'
+            ]);
 
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Variáveis de uso
+            $html  = '<a style="margin-right: 5%;" title="Editar Curso" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Curso" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
+        #Retorno para view
+        return view('curso.create', compact('loadFields'));
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
         try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $curso = $this->repository->create($request->all());
+            #Validando a requisição
+            $this->service->tratamentoCampos($data);
 
-            $response = [
-                'message' => 'Curso created.',
-                'data'    => $curso->toArray(),
-            ];
+            #Executando a ação
+            $this->service->store($data);
 
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
-
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $curso = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $curso,
-            ]);
-        }
-
-        return view('cursos.show', compact('curso'));
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function edit($id)
     {
-
-        $curso = $this->repository->find($id);
-
-        return view('cursos.edit', compact('curso'));
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  CursoUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     */
-    public function update(CursoUpdateRequest $request, $id)
-    {
-
         try {
+            #Recuperando a empresa
+            $model = $this->repository->find($id);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            #Carregando os dados para o cadastro
+            $loadFields = $this->service->load($this->loadFields);
 
-            $curso = $this->repository->update($id, $request->all());
-
-            $response = [
-                'message' => 'Curso updated.',
-                'data'    => $curso->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            #retorno para view
+            return view('curso.edit', compact('model', 'loadFields'));
+        } catch (\Throwable $e) {dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #tratando as rules
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            #Executando a ação
+            $this->service->update($data, $id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
+            #Executando a ação
+            $this->service->destroy($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Curso deleted.',
-                'deleted' => $deleted,
-            ]);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
         }
-
-        return redirect()->back()->with('message', 'Curso deleted.');
     }
 }
