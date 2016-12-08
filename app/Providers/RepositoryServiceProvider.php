@@ -32,5 +32,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\EnderecoRepository::class,
             \SerEducacional\Repositories\EnderecoRepositoryEloquent::class);
         //:end-bindings:
+
+        $this->app->bind(
+            \SerEducacional\Repositories\DisciplinaRepository::class,
+            \SerEducacional\Repositories\DisciplinaRepositoryEloquent::class);
+        //:end-bindings:
     }
 }
