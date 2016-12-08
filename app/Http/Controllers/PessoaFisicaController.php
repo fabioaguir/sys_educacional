@@ -131,9 +131,10 @@ class PessoaFisicaController extends Controller
      */
     public function edit($id)
     {
-
+        # Recuperando o objeto
         $pessoaFisica = $this->repository->find($id);
-
+        
+        # Retornando para view
         return view('pessoaFisicas.edit', compact('pessoaFisica'));
     }
 
