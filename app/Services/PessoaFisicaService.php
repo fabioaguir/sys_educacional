@@ -4,6 +4,7 @@ namespace SerEducacional\Services;
 
 use SerEducacional\Repositories\PessoaFisicaRepository;
 use SerEducacional\Repositories\EnderecoRepository;
+use SerEducacional\Repositories\TelefoneRepository;
 use SerEducacional\Entities\PessoaFisica;
 
 class PessoaFisicaService
@@ -13,6 +14,7 @@ class PessoaFisicaService
      */
     private $repository;
     private $enderecoRepository;
+    private $telefoneRepository;
 
     /**
      * PessoaFisicaService constructor.
@@ -20,10 +22,12 @@ class PessoaFisicaService
      * @param EnderecoRepository $enderecoRepository
      */
     public function __construct(PessoaFisicaRepository $repository,
-                                EnderecoRepository $enderecoRepository)
+                                EnderecoRepository $enderecoRepository,
+                                TelefoneRepository $telefoneRepository)
     {
         $this->repository = $repository;
         $this->enderecoRepository = $enderecoRepository;
+        $this->telefoneRepository = $telefoneRepository;
     }
 
     /**
@@ -51,11 +55,30 @@ class PessoaFisicaService
      */
     public function tratamentoEndereco($data)
     {
+        #Separando dados referente a endereço
         $dados = $data['endereco'];
-        //dd($dados);
+
+        #Salvando registro
         $endereco = $this->enderecoRepository->create($dados);
 
+        #Retorno
         return $endereco;
+    }
+
+    /**
+     * @param $data
+     * @param $idPessoa
+     */
+    public function tratamentoTelefone($data, $idPessoa)
+    {
+        #Separando dados referente a endereço
+        $dados = $data['telefone'];
+
+        #Criando vinculo entre telefone e PessoaFisica (tabela cgm)
+        $dados['cgm_id'] = $idPessoa;
+
+        #Salvando registro
+        $this->telefoneRepository->create($dados);
     }
 
     /**
@@ -64,8 +87,8 @@ class PessoaFisicaService
      * @throws \Exception
      */
     public function store(array $data) : PessoaFisica
-    { //dd($data);
-        #Retorno de endereço
+    {
+        #Retorno de metodos envolvidos
         $endereco = $this->tratamentoEndereco($data);
 
         #criando vinculo
@@ -73,6 +96,10 @@ class PessoaFisicaService
 
         #Salvando o registro pincipal
         $pessoaFisica =  $this->repository->create($data);
+
+        $idPessoa = $pessoaFisica->id;
+
+        $this->tratamentoTelefone($data, $idPessoa);
 
         #Verificando se foi criado no banco de dados
         if(!$pessoaFisica) {

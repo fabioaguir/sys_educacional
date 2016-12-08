@@ -80,6 +80,20 @@ class PessoaFisicaController extends Controller
     }
 
     /**
+     * @return mixed
+     */
+    public function grid()
+    {
+        #Criando a consulta
+        $rows = \DB::table('agencias_callcenter')->select(['id', 'numero_agencia', 'nome_agencia']);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+        })->make(true);
+    }
+
+    /**
      * @param Request $request
      * @return $this|\Illuminate\Http\RedirectResponse
      */

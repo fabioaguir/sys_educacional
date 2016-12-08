@@ -106,8 +106,8 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="telefones">Telefones</label>
-                                    {!! Form::text('telefones', Session::getOldInput('telefones'), array('class' => 'form-control input-sm')) !!}
+                                    <label for="telefone[nome]">Telefones</label>
+                                    {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('class' => 'form-control input-sm')) !!}
                                 </div>
                             </div>
                         </div>
