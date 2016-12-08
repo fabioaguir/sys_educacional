@@ -1,6 +1,6 @@
 {{--{{ dd($loadFields) }}--}}
 <div class="block-header">
-    <h2>Cadastro de Convênios</h2>
+    <h2>Cadastro de Servidor</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
@@ -13,6 +13,8 @@
                 <li><a href="#documentacao" aria-controls="documentacao" role="tab" data-toggle="tab">Documentação</a>
                 </li>
                 <li><a href="#endereco" aria-controls="endereco" role="tab" data-toggle="tab">Endereço</a>
+                </li>
+                <li><a href="#dadosProfiss" aria-controls="dadosProfiss" role="tab" data-toggle="tab">Dados Profissionais</a>
                 </li>
             </ul>
             <!-- Fim Guias -->
@@ -247,6 +249,72 @@
                                 <div class="fg-line">
                                     <label for="endereco[logradouro]">Logradouro *</label>
                                     {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <div class="fg-line">
+                                <div class="fg-line">
+                                    <label for="endereco[numero]">Número *</label>
+                                    {!! Form::text("endereco[numero]", Session::getOldInput("endereco[numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <div class="fg-line">
+                                <div class="fg-line">
+                                    <label for="endereco[complemento]">Complemento</label>
+                                    {!! Form::text("endereco[complemento]", Session::getOldInput("endereco[complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <div class="fg-line">
+                                <div class="fg-line">
+                                    <label for="endereco[cep]">CEP</label>
+                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <div class=" fg-line">
+                                <label for="endereco[bairro_id]">Bairro *</label>
+                                <div class="select">
+                                    {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
+                                    {!! Form::select("endereco[bairro_id]", array(), null, array()) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <div class=" fg-line">
+                                <label for="endereco['cidade_id']">Cidade *</label>
+                                <div class="select">
+                                    {!! Form::select("endereco[cidade_id]", ["" => "Selecione"], null, array('class'=> 'chosen')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- fim --}}
+
+                {{--#4--}}
+                <div role="tabpanel" class="tab-pane" id="dadosProfiss">
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <div class="fg-line">
+                                <div class="fg-line">
+                                    <label for="endereco[logradouro]">Matrícula</label>
+                                    {!! Form::text("servidor[matricula]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
                                 </div>
                             </div>
                         </div>
