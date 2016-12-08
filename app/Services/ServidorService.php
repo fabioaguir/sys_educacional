@@ -67,7 +67,7 @@ class ServidorService
      */
     public function tratamentoEndereco($data)
     {
-        $dados = $data['endereco'];
+        $dados = $data;
 
         $endereco = $this->enderecoRepository->create($dados);
 
@@ -81,17 +81,22 @@ class ServidorService
      */
     public function store(array $data) : Servidor
     {
+        //dd($data['endereco']);
+
         #Retorno de endereço
-        $endereco = $this->tratamentoEndereco($data);
+        $endereco = $this->tratamentoEndereco($data['endereco']);
 
         #criando vinculo
-        $data['endereco_id'] = $endereco->id;
+        $data['cgm']['endereco_id'] = $endereco->id;
 
         #Salvando o registro cgm
-        $pessoaFisica =  $this->pessoaFisicaRepository->create($data);
+        $cgm =  $this->pessoaFisicaRepository->create($data['cgm']);
+
+        #criando vinculo
+        $data['servidor']['id_cgm'] = $cgm->id;
 
         #Salvando o registro principal
-        $servidor =  $this->repository->create($data);
+        $servidor =  $this->repository->create($data['servidor']);
 
         #Verificando se foi criado no banco de dados
         if(!$servidor) {

@@ -36,8 +36,7 @@ class PessoaFisica extends Model implements Transformable
         'data_vencimento_cnh',
         'email',
         'num_cnh',
-        'id_ctgcnh',
-        'email'
+        'cnh_categoria_id',
     ];
 
     /**

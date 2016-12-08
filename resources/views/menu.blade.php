@@ -108,7 +108,7 @@
         <ul class="main-menu">
             <li><a href=""><i class="zmdi zmdi-home"></i> Home</a></li>
             <li><a href=""><i class="zmdi zmdi-chart"></i> Dashboard</a></li>
-            <li><a href="{{ route('servidor.create') }}"><i class="zmdi zmdi-chart"></i> Servidor</a></li>
+            <li><a href="{{ route('servidor.index') }}"><i class="zmdi zmdi-chart"></i> Servidor</a></li>
             <li class="sub-menu">
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-text"></i>CGM</a>
                 <ul>

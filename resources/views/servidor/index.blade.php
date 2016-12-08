@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Convênios</h2>
+                <h2>Listar Servidores</h2>
             </div>
 
             <div class="card material-table">
@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="">Novo Convênio</a>
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('servidor.create') }}">Novo Servidor</a>
                             </div>
                         </div>
                     </div>
@@ -22,23 +22,19 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="pessoaFisica-grid" class="table table-hover">
+                    <table id="servidor-grid" class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>CPF/CNPJ</th>
-                                <th>RG</th>
-                                <th>CGM do Município</th>
+                                <th>Matrícula</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>CPF/CNPJ</th>
-                                <th>RG</th>
-                                <th>CGM do Município</th>
-                                <th>Açao</th>
+                                <th>Matrícula</th>
+                                <th style="width: 12%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>
@@ -51,28 +47,29 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#pessoaFisica-grid').DataTable({
+        var table = $('#servidor-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "",
+            ajax: laroute.route('servidor.grid'),
             columns: [
-                {data: 'nome_convenio', name: 'convenios_callcenter.nome_convenio'},
+                {data: 'nome', name: 'cgm.nome'},
+                {data: 'matricula', name: 'servidor.matricula'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {
-                "sStripClasses": "",
-                "sSearch": "",
-                "sSearchPlaceholder": "Enter Keywords Here",
-                "sInfo": "_START_ - _END_ de _TOTAL_",
-                "sLengthMenu": '<span>Linhas por Página:</span><select class="browser-default">' +
-                '<option value="10">10</option>' +
-                '<option value="20">20</option>' +
-                '<option value="30">30</option>' +
-                '<option value="40">40</option>' +
-                '<option value="50">50</option>' +
-                '<option value="-1">All</option>' +
-                '</select></div>'
-            },*/
+             "sStripClasses": "",
+             "sSearch": "",
+             "sSearchPlaceholder": "Enter Keywords Here",
+             "sInfo": "_START_ - _END_ de _TOTAL_",
+             "sLengthMenu": '<span>Linhas por Página:</span><select class="browser-default">' +
+             '<option value="10">10</option>' +
+             '<option value="20">20</option>' +
+             '<option value="30">30</option>' +
+             '<option value="40">40</option>' +
+             '<option value="50">50</option>' +
+             '<option value="-1">All</option>' +
+             '</select></div>'
+             },*/
         });
     </script>
 @stop

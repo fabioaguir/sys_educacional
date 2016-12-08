@@ -21,7 +21,7 @@ Route::group(['prefix' => 'cgm', 'as' => 'cgm.'], function () {
 
 Route::group(['prefix' => 'servidor', 'as' => 'servidor.'], function () {
     Route::get('index', ['as' => 'index', 'uses' => 'ServidorController@index']);
-    Route::post('grid', ['as' => 'grid', 'uses' => 'ServidorController@grid']);
+    Route::get('grid', ['as' => 'grid', 'uses' => 'ServidorController@grid']);
     Route::get('create', ['as' => 'create', 'uses' => 'ServidorController@create']);
     Route::post('store', ['as' => 'store', 'uses' => 'ServidorController@store']);
     Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServidorController@edit']);

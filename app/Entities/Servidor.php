@@ -21,7 +21,6 @@ class Servidor extends Model implements Transformable
         'sessao_titulo_eleitor',
         'zona_titulo_eleitor',
         'pis_pasep',
-        'conjuge',
         'id_instituicao',
         'id_cgm',
         'inep',
@@ -31,6 +30,7 @@ class Servidor extends Model implements Transformable
         'habilitacao_escolaridade_id',
         'cargos_id',
         'funcoes_id',
+        'situacao_servidores_id'
     ];
 
     /**

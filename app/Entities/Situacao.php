@@ -5,19 +5,15 @@ namespace SerEducacional\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use SerEducacional\Uteis\SerbinarioDateFormat;
 
-class Endereco extends Model implements Transformable
+class Situacao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'endereco';
+    protected $table    = 'situacao_servidores';
 
     protected $fillable = [
-        'logradouro',
-        'numero',
-        'comp',
-        'cep',
-        'bairro_id'
+        'nome'
     ];
+
 }

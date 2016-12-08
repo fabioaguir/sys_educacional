@@ -12,6 +12,7 @@ use SerEducacional\Http\Requests\ServidorUpdateRequest;
 use SerEducacional\Repositories\ServidorRepository;
 use SerEducacional\Validators\ServidorValidator;
 use SerEducacional\Services\ServidorService;
+use Yajra\Datatables\Datatables;
 
 class ServidorController extends Controller
 {
@@ -40,7 +41,12 @@ class ServidorController extends Controller
         'EstadoCivil',
         'Nacionalidade',
         'Escolaridade',
-        'Bairro'
+        'Estado',
+        'Cargo',
+        'Funcao',
+        'HabilitacaoEscolaridade',
+        'TipoVinculo',
+        'Situacao',
     ];
 
     /**
@@ -67,6 +73,32 @@ class ServidorController extends Controller
         return view('servidor.index');
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function grid()
+    {
+        #Criando a consulta
+        $rows = \DB::table('servidor')
+            ->join('cgm', 'cgm.id', '=', 'servidor.id_cgm')
+            ->select([
+                'servidor.id',
+                'cgm.nome',
+                'servidor.matricula',
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Variáveis de uso
+            $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -88,7 +120,7 @@ class ServidorController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-            
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -102,7 +134,7 @@ class ServidorController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -127,14 +159,24 @@ class ServidorController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function edit($id)
     {
+        try {
+            #Recuperando a empresa
+            $model = $this->repository->find($id);
 
-        $servidor = $this->repository->find($id);
+            dd($model);
 
-        return view('servidor.edit', compact('servidor'));
+            #Carregando os dados para o cadastro
+            $loadFields = $this->service->load($this->loadFields);
+
+            #retorno para view
+            return view('servidor.edit', compact('model', 'loadFields'));
+        } catch (\Throwable $e) {dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
     }
 
     /**
