@@ -9,8 +9,24 @@
 
             <div class="card material-table">
                 <div class="card-header">
+                    @if(Session::has('message'))
+                        <div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <em> {!! session('message') !!}</em>
+                        </div>
+                    @endif
 
-                    <!-- Botão novo -->
+                    @if(Session::has('errors'))
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @foreach($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+
+
+                                <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
@@ -36,7 +52,7 @@
                                 <th>Nome</th>
                                 <th>Codigo</th>
                                 <th>Carga Horária</th>
-                                <th style="width: 5%;">Açao</th>
+                                <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>

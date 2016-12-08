@@ -79,8 +79,8 @@ class DisciplinasController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
-            $html  = '<a style="" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html  = '<a style="margin-right: 5%;" title="Editar Disciplina" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Disciplina" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;
@@ -127,107 +127,70 @@ class DisciplinasController extends Controller
         }
     }
 
-
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $disciplina = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $disciplina,
-            ]);
-        }
-
-        return view('disciplinas.show', compact('disciplina'));
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function edit($id)
     {
-
-        $disciplina = $this->repository->find($id);
-
-        return view('disciplinas.edit', compact('disciplina'));
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  DisciplinaUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     */
-    public function update(DisciplinaUpdateRequest $request, $id)
-    {
-
         try {
+            #Recuperando a empresa
+            $model = $this->repository->find($id);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            #Carregando os dados para o cadastro
+            $loadFields = $this->service->load($this->loadFields);
 
-            $disciplina = $this->repository->update($id, $request->all());
-
-            $response = [
-                'message' => 'Disciplina updated.',
-                'data'    => $disciplina->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            #retorno para view
+            return view('disciplina.edit', compact('model', 'loadFields'));
+        } catch (\Throwable $e) {dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #tratando as rules
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            #Executando a ação
+            $this->service->update($data, $id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
+            #Executando a ação
+            $this->service->destroy($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Disciplina deleted.',
-                'deleted' => $deleted,
-            ]);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
         }
-
-        return redirect()->back()->with('message', 'Disciplina deleted.');
     }
 }
