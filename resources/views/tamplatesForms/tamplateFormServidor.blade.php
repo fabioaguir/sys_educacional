@@ -252,7 +252,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[logradouro]">Logradouro *</label>
-                                    {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("cgm[endereco][logradouro]", Session::getOldInput("cgm[endereco][logradouro]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
                                 </div>
                             </div>
                         </div>
@@ -261,8 +261,8 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="endereco[numero]">Número *</label>
-                                    {!! Form::text("endereco[numero]", Session::getOldInput("endereco[numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    <label for="cgm[endereco][numero]">Número *</label>
+                                    {!! Form::text("cgm[endereco][numero]", Session::getOldInput("cgm[endereco][numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
                                 </div>
                             </div>
                         </div>
@@ -271,8 +271,8 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="endereco[complemento]">Complemento</label>
-                                    {!! Form::text("endereco[complemento]", Session::getOldInput("endereco[complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    <label for="cgm[endereco][comp]">Complemento</label>
+                                    {!! Form::text("cgm[endereco][comp]", Session::getOldInput("cgm[endereco][comp]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
                                 </div>
                             </div>
                         </div>
@@ -281,8 +281,8 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="endereco[cep]">CEP</label>
-                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    <label for="cgm[endereco][cep]">CEP</label>
+                                    {!! Form::text("cgm[endereco][cep]", Session::getOldInput("cgm[endereco][cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
                                 </div>
                             </div>
                         </div>
@@ -310,10 +310,10 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
-                                <label for="endereco[bairro_id]">Bairro *</label>
+                                <label for="cgm[endereco][bairro_id]">Bairro *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("endereco[bairro_id]", array(), null, array()) !!}
+                                    {!! Form::select("cgm[endereco][bairro_id]", array(), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -329,7 +329,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[carteira_prof]">Carteira Profissional</label>
-                                    {!! Form::text("servidor[carteira_prof]", Session::getOldInput("servidor[carteira_prof]"), array('class' => 'form-control input-sm', 'placeholder' => 'Carteira Profissional')) !!}
+                                    {!! Form::text("carteira_prof", Session::getOldInput("carteira_prof"), array('class' => 'form-control input-sm', 'placeholder' => 'Carteira Profissional')) !!}
                                 </div>
                             </div>
                         </div>
@@ -339,7 +339,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[serie_carteira]">Série da carteira</label>
-                                    {!! Form::text("servidor[serie_carteira]", Session::getOldInput("servidor[serie_carteira]"), array('class' => 'form-control input-sm', 'placeholder' => 'Série da carteira')) !!}
+                                    {!! Form::text("serie_carteira", Session::getOldInput("serie_carteira"), array('class' => 'form-control input-sm', 'placeholder' => 'Série da carteira')) !!}
                                 </div>
                             </div>
                         </div>
@@ -349,7 +349,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[titulo_eleitor]">Título de eleitor</label>
-                                    {!! Form::text("servidor[titulo_eleitor]", Session::getOldInput("servidor[titulo_eleitor]"), array('class' => 'form-control input-sm', 'placeholder' => 'Título de eleitor')) !!}
+                                    {!! Form::text("titulo_eleitor", Session::getOldInput("titulo_eleitor"), array('class' => 'form-control input-sm', 'placeholder' => 'Título de eleitor')) !!}
                                 </div>
                             </div>
                         </div>
@@ -359,7 +359,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[sessao_titulo_eleitor]">Sessão do título</label>
-                                    {!! Form::text("servidor[sessao_titulo_eleitor]", Session::getOldInput("servidor[sessao_titulo_eleitor]"), array('class' => 'form-control input-sm', 'placeholder' => 'Sessão do título')) !!}
+                                    {!! Form::text("sessao_titulo_eleitor", Session::getOldInput("sessao_titulo_eleitor"), array('class' => 'form-control input-sm', 'placeholder' => 'Sessão do título')) !!}
                                 </div>
                             </div>
                         </div>
@@ -369,7 +369,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[zona_titulo_eleitor]">Zona do título</label>
-                                    {!! Form::text("servidor[zona_titulo_eleitor]", Session::getOldInput("servidor[zona_titulo_eleitor]"), array('class' => 'form-control input-sm', 'placeholder' => 'Zona do título')) !!}
+                                    {!! Form::text("zona_titulo_eleitor", Session::getOldInput("zona_titulo_eleitor"), array('class' => 'form-control input-sm', 'placeholder' => 'Zona do título')) !!}
                                 </div>
                             </div>
                         </div>
@@ -379,7 +379,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[pis_pasep]">PIS/PASEP</label>
-                                    {!! Form::text("servidor[pis_pasep]", Session::getOldInput("servidor[pis_pasep]"), array('class' => 'form-control input-sm', 'placeholder' => 'PIS/PASEP')) !!}
+                                    {!! Form::text("pis_pasep", Session::getOldInput("pis_pasep"), array('class' => 'form-control input-sm', 'placeholder' => 'PIS/PASEP')) !!}
                                 </div>
                             </div>
                         </div>
@@ -394,8 +394,8 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="servidor[matricula]">Matrícula</label>
-                                    {!! Form::text("servidor[matricula]", Session::getOldInput("servidor[matricula]"), array('class' => 'form-control input-sm', 'placeholder' => 'Matrícula')) !!}
+                                    <label for="matricula">Matrícula</label>
+                                    {!! Form::text("matricula", Session::getOldInput("matricula"), array('class' => 'form-control input-sm', 'placeholder' => 'Matrícula')) !!}
                                 </div>
                             </div>
                         </div>
@@ -405,7 +405,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[data_admicao]">Data de admição *</label>
-                                    {!! Form::text("servidor[data_admicao]", Session::getOldInput("servidor[data_admicao]"), array('class' => 'form-control input-sm', 'placeholder' => 'Matrícula')) !!}
+                                    {!! Form::text("data_admicao", Session::getOldInput("data_admicao"), array('class' => 'form-control input-sm', 'placeholder' => 'Matrícula')) !!}
                                 </div>
                             </div>
                         </div>
@@ -415,7 +415,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[carga_horaria]">Carga horária</label>
-                                    {!! Form::text("servidor[carga_horaria]", Session::getOldInput("servidor[carga_horaria]"), array('class' => 'form-control input-sm', 'placeholder' => 'Carga horária')) !!}
+                                    {!! Form::text("carga_horaria", Session::getOldInput("carga_horaria"), array('class' => 'form-control input-sm', 'placeholder' => 'Carga horária')) !!}
                                 </div>
                             </div>
                         </div>
@@ -426,7 +426,7 @@
                                 <label for="servidor[tipo_vinculo_servidor_id]">Tipo de vínculo *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("servidor[tipo_vinculo_servidor_id]", (["" => "Selecione o tipo"] + $loadFields['tipovinculo']->toArray()), null, array()) !!}
+                                    {!! Form::select("tipo_vinculo_servidor_id", (["" => "Selecione o tipo"] + $loadFields['tipovinculo']->toArray()), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -437,7 +437,7 @@
                                 <label for="servidor[habilitacao_escolaridade_id]">Habilitação\Escolaridade *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("servidor[habilitacao_escolaridade_id]", (["" => "Selecione"] + $loadFields['habilitacaoescolaridade']->toArray()), null, array()) !!}
+                                    {!! Form::select("habilitacao_escolaridade_id", (["" => "Selecione"] + $loadFields['habilitacaoescolaridade']->toArray()), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -448,7 +448,7 @@
                                 <label for="servidor[cargos_id]">Cargo *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("servidor[cargos_id]", (["" => "Selecione"] + $loadFields['cargo']->toArray()), null, array()) !!}
+                                    {!! Form::select("cargos_id", (["" => "Selecione"] + $loadFields['cargo']->toArray()), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -459,7 +459,7 @@
                                 <label for="servidor[funcoes_id]">Função *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("servidor[funcoes_id]", (["" => "Selecione"] + $loadFields['funcao']->toArray()), null, array()) !!}
+                                    {!! Form::select("funcoes_id", (["" => "Selecione"] + $loadFields['funcao']->toArray()), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -475,7 +475,7 @@
                                 <label for="servidor[situacao_servidores_id]">Situação</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("servidor[situacao_servidores_id]", (["" => "Selecione"] + $loadFields['situacao']->toArray()), null, array()) !!}
+                                    {!! Form::select("situacao_servidores_id", (["" => "Selecione"] + $loadFields['situacao']->toArray()), null, array()) !!}
                                 </div>
                             </div>
                         </div>

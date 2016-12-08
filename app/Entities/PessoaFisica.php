@@ -39,6 +39,15 @@ class PessoaFisica extends Model implements Transformable
         'cnh_categoria_id',
     ];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class, 'endereco_id');
+    }
+    
     /**
      * @return string
      */

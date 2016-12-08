@@ -141,33 +141,15 @@ class ServidorController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $servidor = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $servidor,
-            ]);
-        }
-
-        return view('servidor.show', compact('servidor'));
-    }
-
-    /**
-     * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function edit($id)
     {
         try {
             #Recuperando a empresa
-            $model = $this->repository->find($id);
+            $model = $this->repository->with('cgm.endereco')->find($id);
 
-            dd($model);
+           // dd($model->cgm->endereco);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
@@ -180,40 +162,34 @@ class ServidorController extends Controller
     }
 
     /**
-     * @param PessoaFisicaUpdateRequest $request
+     * @param Request $request
      * @param $id
-     * @return $this|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(ServidorUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            #tratando as rules
+            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
-            $servidor = $this->repository->update($id, $request->all());
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $response = [
-                'message' => 'Servidor updated.',
-                'data'    => $servidor->toArray(),
-            ];
+            #Validando a requisição
+            $this->service->tratamentoCampos($data);
 
-            if ($request->wantsJson()) {
+            #Executando a ação
+            $this->service->update($data, $id);
 
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 

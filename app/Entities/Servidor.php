@@ -40,7 +40,7 @@ class Servidor extends Model implements Transformable
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_admicao']);
     }
-
+    
     /**
      *
      * @return \DateTime
@@ -48,5 +48,14 @@ class Servidor extends Model implements Transformable
     public function setDataAdmicaoAttribute($value)
     {
         $this->attributes['data_admicao'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cgm()
+    {
+        //return $this->belongsTo(PessoaFisica::class, 'id_cgm');
+        return $this->belongsTo(PessoaFisica::class, 'id_cgm');
     }
 }

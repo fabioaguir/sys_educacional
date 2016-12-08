@@ -41,26 +41,7 @@ class ServidorService
         $this->enderecoRepository = $enderecoRepository;
         $this->pessoaFisicaRepository = $pessoaFisicaRepository;
     }
-
-    /**
-     * @param $id
-     * @return mixed
-     * @throws \Exception
-     */
-    public function find($id)
-    {
-        #Recuperando o registro no banco de dados
-        $servidor = $this->repository->find($id);
-
-        #Verificando se o registro foi encontrado
-        if(!$servidor) {
-            throw new \Exception('Empresa não encontrada!');
-        }
-
-        #retorno
-        return $servidor;
-    }
-
+    
     /**
      * @param $data
      * @return mixed
@@ -81,10 +62,8 @@ class ServidorService
      */
     public function store(array $data) : Servidor
     {
-        //dd($data['endereco']);
-
         #Retorno de endereço
-        $endereco = $this->tratamentoEndereco($data['endereco']);
+        $endereco = $this->tratamentoEndereco($data['cgm']['endereco']);
 
         #criando vinculo
         $data['cgm']['endereco_id'] = $endereco->id;
@@ -93,10 +72,10 @@ class ServidorService
         $cgm =  $this->pessoaFisicaRepository->create($data['cgm']);
 
         #criando vinculo
-        $data['servidor']['id_cgm'] = $cgm->id;
+        $data['id_cgm'] = $cgm->id;
 
         #Salvando o registro principal
-        $servidor =  $this->repository->create($data['servidor']);
+        $servidor =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
         if(!$servidor) {
@@ -115,16 +94,22 @@ class ServidorService
      */
     public function update(array $data, int $id) : Servidor
     {
-        #Atualizando no banco de dados
-        $convenioCallCenter = $this->repository->update($data, $id);
+        #Atualizando no banco de dados servidor
+        $servidor = $this->repository->update($data, $id);
+
+        #Atualizando no banco de dados cgm
+        $cgm = $this->pessoaFisicaRepository->update($data['cgm'], $servidor->id_cgm);
+
+        #Atualizando no banco de dados endereço
+        $endereco = $this->enderecoRepository->update($data['cgm']['endereco'], $cgm->endereco_id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$convenioCallCenter) {
+        if(!$servidor) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $convenioCallCenter;
+        return $servidor;
     }
 
     /**
