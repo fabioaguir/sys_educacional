@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Convênios</h2>
+                <h2>Consultar CGM - Pessoa Física/Jurídica</h2>
             </div>
 
             <div class="card material-table">
@@ -13,10 +13,15 @@
                     <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="">Novo Convênio</a>
+                            <div class="text-left">
+                                <a class="btn btn-primary btn-sm m-t-10" href="">Nova pessoa física</a>
                             </div>
                         </div>
+                        {{--<div class="col-xs-12">
+                            <div class="text-right">
+                                <a class="btn btn-primary btn-sm m-t-10" href="">Nava pessoa jurídica</a>
+                            </div>
+                        </div>--}}
                     </div>
                     <!-- Botão novo -->
                 </div>
@@ -54,7 +59,7 @@
         var table = $('#pessoaFisica-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "",
+            ajax: "{!! route('pessoaFisica.grid') !!}",
             columns: [
                 {data: 'nome_convenio', name: 'convenios_callcenter.nome_convenio'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}

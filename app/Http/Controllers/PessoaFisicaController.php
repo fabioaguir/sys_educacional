@@ -85,7 +85,7 @@ class PessoaFisicaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('agencias_callcenter')->select(['id', 'numero_agencia', 'nome_agencia']);
+        $rows = \DB::table('cgm')->select(['id', 'numero_agencia', 'nome_agencia']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
