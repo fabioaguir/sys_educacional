@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNivelCursosTable extends Migration
+class CreateFuncaosTable extends Migration
 {
 
 	/**
@@ -13,7 +13,7 @@ class CreateNivelCursosTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('nivel_cursos', function(Blueprint $table) {
+		Schema::create('funcaos', function(Blueprint $table) {
             $table->increments('id');
 
             $table->timestamps();
@@ -27,7 +27,7 @@ class CreateNivelCursosTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('nivel_cursos');
+		Schema::drop('funcaos');
 	}
 
 }

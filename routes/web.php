@@ -33,6 +33,16 @@ Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
     Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
 });
 
+Route::group(['prefix' => 'servidor', 'as' => 'servidor.'], function () {
+    Route::get('index', ['as' => 'index', 'uses' => 'ServidorController@index']);
+    Route::get('grid', ['as' => 'grid', 'uses' => 'ServidorController@grid']);
+    Route::get('create', ['as' => 'create', 'uses' => 'ServidorController@create']);
+    Route::post('store', ['as' => 'store', 'uses' => 'ServidorController@store']);
+    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServidorController@edit']);
+    Route::post('update/{id}', ['as' => 'update', 'uses' => 'ServidorController@update']);
+    Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
+});
+
 Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
     Route::get('index', ['as' => 'index', 'uses' => 'CursosController@index']);
     Route::get('grid', ['as' => 'grid', 'uses' => 'CursosController@grid']);
@@ -59,3 +69,4 @@ Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
     Route::post('store', ['as' => 'store', 'uses' => 'OperadorController@store']);
     Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'OperadorController@edit']);
     Route::post('update/{id}', ['as' => 'update', 'uses' => 'OperadorController@update']);*/
+

@@ -99,7 +99,11 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="telefone[nome]">Telefones</label>
+                                    @if (isset($model))
+                                    {!! Form::text('telefone[nome]', $model->telefone->first()->nome ?? '', array('class' => 'form-control input-sm')) !!}
+                                    @else
                                     {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('class' => 'form-control input-sm')) !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>

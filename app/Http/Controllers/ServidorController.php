@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Http\Requests\PessoaFisicaCreateRequest;
-use SerEducacional\Http\Requests\PessoaFisicaUpdateRequest;
-use SerEducacional\Repositories\PessoaFisicaRepository;
-use SerEducacional\Validators\PessoaFisicaValidator;
-use SerEducacional\Services\PessoaFisicaService;
+use SerEducacional\Http\Requests\ServidorCreateRequest;
+use SerEducacional\Http\Requests\ServidorUpdateRequest;
+use SerEducacional\Repositories\ServidorRepository;
+use SerEducacional\Validators\ServidorValidator;
+use SerEducacional\Services\ServidorService;
 use Yajra\Datatables\Datatables;
 
-class PessoaFisicaController extends Controller
+class ServidorController extends Controller
 {
     /**
      * @var
@@ -39,33 +39,64 @@ class PessoaFisicaController extends Controller
         'Nacionalidade',
         'CgmMunicipio',
         'EstadoCivil',
+        'Nacionalidade',
         'Escolaridade',
-        'Bairro',
-        'CategoriaCnh',
-        'Cidade'
+        'Estado',
+        'Cargo',
+        'Funcao',
+        'HabilitacaoEscolaridade',
+        'TipoVinculo',
+        'Situacao',
     ];
 
     /**
-     * PessoaFisicaController constructor.
-     * @param PessoaFisicaService $service
-     * @param PessoaFisicaRepository $repository
-     * @param PessoaFisicaValidator $validator
+     * ServidorController constructor.
+     * @param ServidorService $service
+     * @param ServidorRepository $repository
+     * @param ServidorValidator $validator
      */
-    public function __construct(PessoaFisicaService $service,
-                                PessoaFisicaRepository $repository,
-                                PessoaFisicaValidator $validator)
+    public function __construct(ServidorService $service,
+                                ServidorRepository $repository,
+                                ServidorValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
         $this->service    = $service;
     }
 
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view('cgm.pessoaFisica.index');
+        return view('servidor.index');
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function grid()
+    {
+        #Criando a consulta
+        $rows = \DB::table('servidor')
+            ->join('cgm', 'cgm.id', '=', 'servidor.id_cgm')
+            ->select([
+                'servidor.id',
+                'cgm.nome',
+                'servidor.matricula',
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Variáveis de uso
+            $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
     }
 
     /**
@@ -77,29 +108,7 @@ class PessoaFisicaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('cgm.pessoaFisica.create', compact('loadFields'));
-    }
-
-    /**
-     * @return mixed
-     */
-    public function grid()
-    {
-        #Criando a consulta
-        $rows = \DB::table('cgm')
-            ->join('cgm_municipio', 'cgm.cgm_municipio_id', 'cgm_municipio.id')
-            ->select([
-                'cgm.id',
-                'cgm.nome',
-                'cgm.rg',
-                'cgm.cpf',
-                'cgm_municipio.nome as statusCgm'
-            ])
-            ->get();
-        #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
-        })->make(true);
+        return view('servidor.create', compact('loadFields'));
     }
 
     /**
@@ -111,7 +120,7 @@ class PessoaFisicaController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-            
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -125,27 +134,9 @@ class PessoaFisicaController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $pessoaFisica = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $pessoaFisica,
-            ]);
-        }
-
-        return view('pessoaFisicas.show', compact('pessoaFisica'));
     }
 
     /**
@@ -156,22 +147,24 @@ class PessoaFisicaController extends Controller
     {
         try {
             #Recuperando a empresa
-            $model = $this->service->find($id);
+            $model = $this->repository->with('cgm.endereco')->find($id);
+
+           // dd($model->cgm->endereco);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('cgm.pessoaFisica.edit', compact('model', 'loadFields'));
+            return view('servidor.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
     /**
-     * @param PessoaFisicaUpdateRequest $request
+     * @param Request $request
      * @param $id
-     * @return $this|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -179,8 +172,14 @@ class PessoaFisicaController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
+            #tratando as rules
+            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            #Validando a requisição
+            $this->service->tratamentoCampos($data);
 
             #Executando a ação
             $this->service->update($data, $id);
@@ -188,7 +187,7 @@ class PessoaFisicaController extends Controller
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -205,11 +204,11 @@ class PessoaFisicaController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'PessoaFisica deleted.',
+                'message' => 'Servidor deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'PessoaFisica deleted.');
+        return redirect()->back()->with('message', 'Servidor deleted.');
     }
 }
