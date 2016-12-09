@@ -20,6 +20,10 @@ class PessoaFisicaService
      * @var EnderecoRepository
      */
     private $enderecoRepository;
+
+    /**
+     * @var TelefoneRepository
+     */
     private $telefoneRepository;
 
     /**
@@ -44,11 +48,19 @@ class PessoaFisicaService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $pessoaFisica = $this->repository->find($id);
+        $objPessoaFisica = $this->repository->find($id);
 
+        $relacao = [
+            'endereco.bairro.cidade',
+            'telefone'
+        ];
+
+        #Recuperando o registro no banco de dados
+        $pessoaFisica = $this->repository->with($relacao)->find($id);
+        //dd($pessoaFisica);
         #Verificando se o registro foi encontrado
         if(!$pessoaFisica) {
-            throw new \Exception('Empresa não encontrada!');
+            throw new \Exception('Pessoa não encontrada!');
         }
 
         #retorno
@@ -122,18 +134,19 @@ class PessoaFisicaService
      * @return ConvenioCallCenter
      * @throws \Exception
      */
-    public function update(array $data, int $id) : ConvenioCallCenter
-    {
+    public function update(array $data, int $id) : PessoaFisica
+    { //dd($id);
         #Atualizando no banco de dados
-        $convenioCallCenter = $this->repository->update($data, $id);
-
+        $pessoaFisica = $this->repository->update($data, $id);
+        $endereco = $this->enderecoRepository->update($data['endereco'], $id);
+        $telefone = $this->telefoneRepository->update($data['telefone'], $id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$convenioCallCenter) {
+        if(!$pessoaFisica) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $convenioCallCenter;
+        return $pessoaFisica;
     }
-}
+};

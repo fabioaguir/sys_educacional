@@ -23,7 +23,7 @@
             </div>
             {{-- Fim mensagem de alerta --}}
             {{--Formulario--}}
-            {!! Form::open(['route'=>'cgm.store', 'id' => 'formPessoaFisica', 'method' => "POST" ]) !!}
+            {!! Form::open(['route'=>'pessoaFisica.store', 'id' => 'formPessoaFisica', 'method' => "POST" ]) !!}
             @include('tamplatesForms.tamplateFormPessoaFisica')
             {!! Form::close() !!}
             {{--Fim formulario--}}

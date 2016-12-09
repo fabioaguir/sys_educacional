@@ -13,6 +13,23 @@ class Bairro extends Model implements Transformable
     protected $table    = 'bairros';
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'cidades_id'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function endereco()
+    {
+        return $this->hasMany(Endereco::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cidade()
+    {
+        return $this->belongsTo(Cidade::class);
+    }
 }

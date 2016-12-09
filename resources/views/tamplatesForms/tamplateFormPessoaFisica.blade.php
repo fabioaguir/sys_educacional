@@ -1,6 +1,6 @@
 {{--{{ dd($loadFields) }}--}}
 <div class="block-header">
-    <h2>Cadastro de Convênios</h2>
+    <h2>Cadastro de Pessoa Física</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
@@ -22,7 +22,7 @@
                 {{--#1--}}
                 <div role="tabpanel" class="tab-pane active" id="infoBasicas">
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="Nome *">Nome</label>
@@ -30,9 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-md-4">
                             <div class=" fg-line">
                                 <label for="sexo_id">Sexo *</label>
                                 <div class="select">
@@ -42,7 +40,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_nascimento">Data de Nascimento *</label>
@@ -51,33 +49,29 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="data_falecimento">Data de Falecimento *</label>
+                                    <label for="data_falecimento">Data de Falecimento</label>
                                     {!! Form::text('data_falecimento', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Falecimento')) !!}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-md-4">
                             <div class=" fg-line">
                                 <label for="nacionalidade">Nacionalidade *</label>
                                 <div class="select">
-                                    {!! Form::select('nacionalidade_id', (["" => "Selecione local"] + $loadFields['nacionalidade']->toArray()), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('nacionalidade_id', (["" => "Selecione nacionalidade"] + $loadFields['nacionalidade']->toArray()), null, array('class'=> 'chosen')) !!}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="naturalidade">Naturalidade</label>
-                                    {!! Form::text('naturalidade', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Naturalidade')) !!}
+                                    {!! Form::text('naturalidade', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Local de Nascimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -91,8 +85,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cgm_municipio_id">CGM do Município *</label>
@@ -118,7 +110,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="email">E-mail</label>
-                                    {!! Form::text('email', Session::getOldInput('inscricao_estadual'), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text('email', Session::getOldInput('email'), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
                                 </div>
                             </div>
                         </div>
@@ -232,7 +224,7 @@
                             <div class=" fg-line">
                                 <label for="cnh_categoria_id">Categoria CNH</label>
                                 <div class="select">
-                                    {!! Form::select('cnh_categoria_id', ["" => "Selecione"], null, array()) !!}
+                                    {!! Form::select('cnh_categoria_id', (["" => "Selecione grau"] + $loadFields['categoriacnh']->toArray()), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -286,8 +278,7 @@
                             <div class=" fg-line">
                                 <label for="endereco[bairro_id]">Bairro *</label>
                                 <div class="select">
-                                    {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("endereco[bairro_id]", array(), null, array()) !!}
+                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"] + $loadFields['bairro']->toArray(), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -297,7 +288,7 @@
                             <div class=" fg-line">
                                 <label for="endereco['cidade_id']">Cidade *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[cidade_id]", ["" => "Selecione"], null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione grau"] + $loadFields['cidade']->toArray()), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -306,7 +297,7 @@
                 {{-- fim --}}
 
                 <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
-                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('cgm.index') }}">Listar</a>
+                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('pessoaFisica.index') }}">Voltar</a>
             </div>
             <!-- Fim Conteúdo -->
         </div>

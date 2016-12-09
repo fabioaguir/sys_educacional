@@ -12,6 +12,7 @@ use SerEducacional\Http\Requests\PessoaFisicaUpdateRequest;
 use SerEducacional\Repositories\PessoaFisicaRepository;
 use SerEducacional\Validators\PessoaFisicaValidator;
 use SerEducacional\Services\PessoaFisicaService;
+use Yajra\Datatables\Datatables;
 
 class PessoaFisicaController extends Controller
 {
@@ -38,9 +39,10 @@ class PessoaFisicaController extends Controller
         'Nacionalidade',
         'CgmMunicipio',
         'EstadoCivil',
-        'Nacionalidade',
         'Escolaridade',
-        'Bairro'
+        'Bairro',
+        'CategoriaCnh',
+        'Cidade'
     ];
 
     /**
@@ -57,7 +59,6 @@ class PessoaFisicaController extends Controller
         $this->validator  = $validator;
         $this->service    = $service;
     }
-
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -85,8 +86,16 @@ class PessoaFisicaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('cgm')->select(['id', 'numero_agencia', 'nome_agencia']);
-
+        $rows = \DB::table('cgm')
+            ->join('cgm_municipio', 'cgm.cgm_municipio_id', 'cgm_municipio.id')
+            ->select([
+                'cgm.id',
+                'cgm.nome',
+                'cgm.rg',
+                'cgm.cpf',
+                'cgm_municipio.nome as statusCgm'
+            ])
+            ->get();
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
@@ -141,15 +150,22 @@ class PessoaFisicaController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function edit($id)
     {
-        # Recuperando o objeto
-        $pessoaFisica = $this->repository->find($id);
-        
-        # Retornando para view
-        return view('pessoaFisicas.edit', compact('pessoaFisica'));
+        try {
+            #Recuperando a empresa
+            $model = $this->service->find($id);
+
+            #Carregando os dados para o cadastro
+            $loadFields = $this->service->load($this->loadFields);
+            //dd($model);
+            #retorno para view
+            return view('cgm.pessoaFisica.edit', compact('model', 'loadFields'));
+        } catch (\Throwable $e) {dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
     }
 
     /**
@@ -157,36 +173,24 @@ class PessoaFisicaController extends Controller
      * @param $id
      * @return $this|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function update(PessoaFisicaUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $pessoaFisica = $this->repository->update($id, $request->all());
+            #Executando a ação
+            $this->service->update($data, $id);
 
-            $response = [
-                'message' => 'PessoaFisica updated.',
-                'data'    => $pessoaFisica->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 

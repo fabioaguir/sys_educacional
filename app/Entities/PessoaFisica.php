@@ -36,9 +36,26 @@ class PessoaFisica extends Model implements Transformable
         'data_vencimento_cnh',
         'email',
         'num_cnh',
-        'id_ctgcnh',
+        'cnh_categoria_id',
         'email'
     ];
+
+    //Relacionamento entre entidades
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function telefone()
+    {
+        return $this->hasMany(Telefone::class, 'cgm_id');
+    }
 
     /**
      * @return string

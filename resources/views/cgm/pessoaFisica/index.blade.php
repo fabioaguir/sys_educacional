@@ -13,8 +13,8 @@
                     <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="text-left">
-                                <a class="btn btn-primary btn-sm m-t-10" href="">Nova pessoa física</a>
+                            <div class="text-right">
+                                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('pessoaFisica.create') }}">Nova pessoa física</a>
                             </div>
                         </div>
                         {{--<div class="col-xs-12">
@@ -31,8 +31,8 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>CPF/CNPJ</th>
                                 <th>RG</th>
+                                <th>CPF</th>
                                 <th>CGM do Município</th>
                                 <th>Açao</th>
                             </tr>
@@ -40,8 +40,8 @@
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>CPF/CNPJ</th>
                                 <th>RG</th>
+                                <th>CPF</th>
                                 <th>CGM do Município</th>
                                 <th>Açao</th>
                             </tr>
@@ -61,7 +61,11 @@
             serverSide: true,
             ajax: "{!! route('pessoaFisica.grid') !!}",
             columns: [
-                {data: 'nome_convenio', name: 'convenios_callcenter.nome_convenio'},
+
+                {data: 'nome', name: 'cgm.nome'},
+                {data: 'rg', name: 'cgm.rg'},
+                {data: 'cpf', name: 'cgm.cpf'},
+                {data: 'statusCgm', name: 'cgm_municipio.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {
@@ -77,7 +81,7 @@
                 '<option value="50">50</option>' +
                 '<option value="-1">All</option>' +
                 '</select></div>'
-            },*/
+            }*/
         });
     </script>
 @stop

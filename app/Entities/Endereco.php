@@ -20,4 +20,20 @@ class Endereco extends Model implements Transformable
         'cep',
         'bairro_id'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function pessoaFisica()
+    {
+        return $this->$this->hasMany(PessoaFisica::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bairro()
+    {
+        return $this->belongsTo(Bairro::class);
+    }
 }

@@ -17,4 +17,12 @@ class Telefone extends Model implements Transformable
         'cgm_id'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pessoaFisica()
+    {
+        return $this->belongsTo(PessoaFisica::class, 'cgm_id');
+    }
+
 }

@@ -111,16 +111,11 @@
             <li class="sub-menu">
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-text"></i>CGM</a>
                 <ul>
-                    <li class="sub-menu">
-                        <a href="" data-ma-action="submenu-toggle">Cadastros</a>
-                        <ul>
-                            <li>
-                                <a href="">Pessoa Física</a>
-                            </li>
-                            <li>
-                                <a href="">Pessoa Jurídica</a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a href="{{ route('pessoaFisica.create') }}">Pessoa Física</a>
+                    </li>
+                    <li>
+                        <a href="">Pessoa Jurídica</a>
                     </li>
                 </ul>
             </li>
@@ -128,26 +123,6 @@
             <li><a href="{{ route('curso.index')  }}"><i class="zmdi zmdi-chart"></i> Cursos</a></li>
             <li><a href="{{ route('curriculo.index')  }}"><i class="zmdi zmdi-chart"></i> Currículos</a></li>
         </ul>
-
-        {{--<li class="sub-menu">
-            <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-menu"></i> 3 Level Menu</a>
-
-            <ul>
-                <li><a href="form-elements.html">Level 2 link</a></li>
-                <li><a href="form-components.html">Another level 2 Link</a></li>
-                <li class="sub-menu">
-                    <a href="" data-ma-action="submenu-toggle">I have children too</a>
-
-                    <ul>
-                        <li><a href="">Level 3 link</a></li>
-                        <li><a href="">Another Level 3 link</a></li>
-                        <li><a href="">Third one</a></li>
-                    </ul>
-                </li>
-                <li><a href="form-validations.html">One more 2</a></li>
-            </ul>
-        </li>--}}
-
     </aside>
     {{--FIM Menu Lateral--}}
 
@@ -165,18 +140,10 @@
         <p>Please wait...</p>
     </div>
 </div>
-
+<!-- -->
 
 <footer id="footer" class="p-t-0">
     <strong>Copyright &copy; 2015-2016 <a target="_blank" href="http://serbinario.com.br"><i></i>SERBINARIO</a> .</strong> Todos os direitos reservados.
-
-    {{-- <ul class="f-menu">
-         <li><a href="http://serbinario.com.br/">Início</a></li>
-         <li><a href="http://serbinario.com.br/#sobre">Sobre</a></li>
-         <li><a href="http://serbinario.com.br/#service">Serviços</a></li>
-         <li><a href="http://serbinario.com.br/#produtos">Produtos</a></li>
-         <li><a href="http://serbinario.com.br/#contato">Contato</a></li>
-     </ul>--}}
 </footer>
 
 <!-- Javascript Libraries -->
