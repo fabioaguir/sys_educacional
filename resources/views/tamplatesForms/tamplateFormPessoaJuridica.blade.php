@@ -33,8 +33,7 @@
                             <div class=" fg-line">
                                 <label for="cgm_municipio_id">CGM do município *</label>
                                 <div class="select">
-                                    {{--["" => "Selecione nacionalidade"] + $loadFields['cgmmunicipio']->toArray()--}}
-                                    {!! Form::select('cgm_municipio_id', array(), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('cgm_municipio_id', ["" => "Selecione nacionalidade"] + $loadFields['cgmmunicipio']->toArray(), null, array('class'=> 'chosen')) !!}
                                 </div>
                             </div>
                         </div>
@@ -162,10 +161,9 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
-                                <label for="endereco[bairro_id]">Bairro *</label>
+                                <label for="endereco['estado_id']">Estado *</label>
                                 <div class="select">
-                                    {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("endereco[bairro_id]", array(), null, array()) !!}
+                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione grau"] + $loadFields['estado']->toArray()), null, array('id' => 'estado')) !!}
                                 </div>
                             </div>
                         </div>
@@ -175,8 +173,17 @@
                             <div class=" fg-line">
                                 <label for="endereco['cidade_id']">Cidade *</label>
                                 <div class="select">
-                                    {{--["" => "Selecione grau"] + $loadFields['cidade']->toArray()--}}
-                                    {!! Form::select("endereco[cidade_id]", array(), null, array()) !!}
+                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione grau"]), null, array('id' => 'cidade')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <div class=" fg-line">
+                                <label for="endereco[bairro_id]">Bairro *</label>
+                                <div class="select">
+                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('id' => 'bairro')) !!}
                                 </div>
                             </div>
                         </div>
@@ -200,4 +207,80 @@
     <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
     --}}{{--Regras de validação--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
+
+    <script type="text/javascript">
+        //Incio - Retorno de cidades associadas aos estados
+        $(document).on('change', "#estado", function () {
+
+            //Removendo as cidades
+            $('#cidade option').remove();
+
+            //Recuperando o estado
+            var estado = $(this).val();
+
+            if (estado !== "") {
+                var dados = {
+                    'id' : estado
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('pessoaJuridica.findCidade')  }}',
+                    data: dados,
+                    datatype: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione um municipio</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#cidade option').remove();
+                    $('#cidade').append(option);
+                });
+            }
+        });
+        //Fim - Retorno de cidades associadas ao estados
+
+        //Incio - Retorno de cidades associadas aos estados
+        $(document).on('change', "#cidade", function () {
+
+            //Removendo as cidades
+            $('#bairro option').remove();
+
+            //Recuperando o estado
+            var estado = $(this).val();
+
+            if (estado !== "") {
+                var dados = {
+                    'id' : estado
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('pessoaJuridica.findBairro')  }}',
+                    data: dados,
+                    datatype: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione um municipio</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#bairro option').remove();
+                    $('#bairro').append(option);
+                });
+            }
+        });
+        //Fim - Retorno de cidades associadas ao estados
+    </script>
 @endsection

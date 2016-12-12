@@ -38,6 +38,10 @@ Route::group(['prefix' => 'pessoaJuridica', 'as' => 'pessoaJuridica.'], function
     Route::post('update/{id}', ['as' => 'update', 'uses' => 'PessoaJuridicaController@update']);
     Route::post('store', ['as' => 'store', 'uses' => 'PessoaJuridicaController@store']);
     Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'PessoaJuridicaController@destroy']);
+    //cidade>bairro
+    Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'PessoaJuridicaController@findBairro']);
+    //estado>cidade
+    Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'PessoaJuridicaController@findCidade']);
 });
 /**
  *  CADASTRO GERAL MUNICIPAL (CGM)

@@ -7,17 +7,27 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Repositories\PessoaJuridicaValidator;
 use SerEducacional\Repositories\PessoaJuridicaRepository;
 use SerEducacional\Services\PessoaJuridicaService;
 use Yajra\Datatables\Datatables;
 
 class PessoaJuridicaController extends Controller
 {
+    /**
+     * @var PessoaJuridicaService
+     */
+    private $service;
+
+    /**
+     * @var PessoaJuridicaRepository
+     */
+    protected $repository;
+
     private $loadFields = [
         'CgmMunicipio',
         'Bairro',
-        'Cidade'
+        'Cidade',
+        'Estado'
     ];
 
     /**
@@ -45,8 +55,11 @@ class PessoaJuridicaController extends Controller
      */
     public function create()
     {
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
         #Retorno para view
-        return view('cgm.pessoaJuridica.create');
+        return view('cgm.pessoaJuridica.create', compact ('loadFields'));
     }
 
     /**
@@ -73,5 +86,39 @@ class PessoaJuridicaController extends Controller
             # Retorno
             return $html;
         })->make(true);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findCidade(Request $request)
+    {
+        $idEstado = $request->get('id');
+
+        $cidades = \DB::table('cidades')
+            ->join('estados', 'estados.id', '=', 'cidades.estados_id')
+            ->select('cidades.id', 'cidades.nome')
+            ->where('estados.id', $idEstado)
+            ->get();
+
+        return response()->json($cidades);
+
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findBairro(Request $request)
+    {
+        $idCidade = $request->get('id');
+
+        $cidades = \DB::table('bairros')
+            ->join('cidades', 'cidades.id', '=', 'bairros.cidades_id')
+            ->select('bairros.id', 'bairros.nome')
+            ->where('cidades.id', $idCidade)
+            ->get();
+
+        return response()->json($cidades);
     }
 }
