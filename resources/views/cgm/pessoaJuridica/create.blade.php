@@ -22,10 +22,9 @@
                 @endif
             </div>
             {{-- Fim mensagem de alerta --}}
-
             {{--Formulario--}}
-            {!! Form::open(['route'=>'curso.store', 'id' => 'formCurso', 'method' => "POST" ]) !!}
-            @include('tamplatesForms.tamplateFormCurso')
+            {!! Form::open(['route'=>'pessoaJuridica.store', 'id' => 'formPessoaJuridica', 'method' => "POST" ]) !!}
+            @include('tamplatesForms.tamplateFormPessoaJuridica')
             {!! Form::close() !!}
             {{--Fim formulario--}}
         </section>

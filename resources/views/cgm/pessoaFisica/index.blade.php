@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Consultar CGM - Pessoa Física/Jurídica</h2>
+                <h2>Consultar CGM - Pessoa Física</h2>
             </div>
 
             <div class="card material-table">
@@ -59,7 +59,7 @@
         var table = $('#pessoaFisica-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('pessoaFisica.grid') !!}",
+            ajax: laroute.route('pessoaFisica.grid'),
             columns: [
 
                 {data: 'nome', name: 'cgm.nome'},

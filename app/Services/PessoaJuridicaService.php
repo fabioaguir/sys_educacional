@@ -2,12 +2,12 @@
 
 namespace SerEducacional\Services;
 
-use SerEducacional\Repositories\PessoaFisicaRepository;
+use SerEducacional\Repositories\PessoaJuridicaRepository;
 use SerEducacional\Repositories\EnderecoRepository;
 use SerEducacional\Repositories\TelefoneRepository;
-use SerEducacional\Entities\PessoaFisica;
+use SerEducacional\Entities\PessoaJuridica;
 
-class PessoaFisicaService
+class PessoaJuridicaService
 {
     use TraitService;
 
@@ -31,7 +31,7 @@ class PessoaFisicaService
      * @param PessoaFisicaRepository $repository
      * @param EnderecoRepository $enderecoRepository
      */
-    public function __construct(PessoaFisicaRepository $repository,
+    public function __construct(PessoaJuridicaRepository $repository,
                                 EnderecoRepository $enderecoRepository,
                                 TelefoneRepository $telefoneRepository)
     {

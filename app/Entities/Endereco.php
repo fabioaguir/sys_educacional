@@ -16,7 +16,7 @@ class Endereco extends Model implements Transformable
     protected $fillable = [
         'logradouro',
         'numero',
-        'comp',
+        'complemento',
         'cep',
         'bairro_id'
     ];

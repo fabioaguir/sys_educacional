@@ -19,7 +19,7 @@ class PessoaJuridica extends Model implements Transformable
         'data_cadastramento',
         'cnpj',
         'email',
-        'id_tipo_empresa',
+        'tipo_empresa_id',
         'nire',
         'nome_complemento',
         'nome_fantasia',

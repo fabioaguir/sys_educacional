@@ -42,7 +42,8 @@ class PessoaFisicaController extends Controller
         'Escolaridade',
         'Bairro',
         'CategoriaCnh',
-        'Cidade'
+        'Cidade',
+        'Estado'
     ];
 
     /**
@@ -98,7 +99,11 @@ class PessoaFisicaController extends Controller
             ->get();
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a> ';
+            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i>Deletar</a>';
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
@@ -111,7 +116,7 @@ class PessoaFisicaController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-            
+            //dd($data);
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -128,24 +133,6 @@ class PessoaFisicaController extends Controller
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->with('message', $e->getMessage());
         }
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $pessoaFisica = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $pessoaFisica,
-            ]);
-        }
-
-        return view('pessoaFisicas.show', compact('pessoaFisica'));
     }
 
     /**
@@ -196,20 +183,53 @@ class PessoaFisicaController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
+            #Executando a ação
+            $this->service->destroy($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'PessoaFisica deleted.',
-                'deleted' => $deleted,
-            ]);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) {
+            dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
         }
+    }
 
-        return redirect()->back()->with('message', 'PessoaFisica deleted.');
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findCidade(Request $request)
+    {
+        $idEstado = $request->get('id');
+
+        $cidades = \DB::table('cidades')
+            ->join('estados', 'estados.id', '=', 'cidades.estados_id')
+            ->select('cidades.id', 'cidades.nome')
+            ->where('estados.id', $idEstado)
+            ->get();
+
+        return response()->json($cidades);
+
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findBairro(Request $request)
+    {
+        $idCidade = $request->get('id');
+
+        $cidades = \DB::table('bairros')
+            ->join('cidades', 'cidades.id', '=', 'bairros.cidades_id')
+            ->select('bairros.id', 'bairros.nome')
+            ->where('cidades.id', $idCidade)
+            ->get();
+
+        return response()->json($cidades);
     }
 }

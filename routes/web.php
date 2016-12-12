@@ -13,6 +13,9 @@
 
 Route::get('index', ['as' => 'index', 'uses' => 'DefaultController@index']);
 
+/**
+ *  CADASTRO GERAL MUNICIPAL (CGM)
+ */
 Route::group(['prefix' => 'pessoaFisica', 'as' => 'pessoaFisica.'], function () {
     Route::get('index', ['as' => 'index', 'uses' => 'PessoaFisicaController@index']);
     Route::get('create', ['as' => 'create', 'uses' => 'PessoaFisicaController@create']);
@@ -20,8 +23,25 @@ Route::group(['prefix' => 'pessoaFisica', 'as' => 'pessoaFisica.'], function () 
     Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PessoaFisicaController@edit']);
     Route::post('update/{id}', ['as' => 'update', 'uses' => 'PessoaFisicaController@update']);
     Route::post('store', ['as' => 'store', 'uses' => 'PessoaFisicaController@store']);
-
+    Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'PessoaFisicaController@destroy']);
+    //cidade>bairro
+    Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'PessoaFisicaController@findBairro']);
+    //estado>cidade
+    Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'PessoaFisicaController@findCidade']);
 });
+
+Route::group(['prefix' => 'pessoaJuridica', 'as' => 'pessoaJuridica.'], function () {
+    Route::get('index', ['as' => 'index', 'uses' => 'PessoaJuridicaController@index']);
+    Route::get('create', ['as' => 'create', 'uses' => 'PessoaJuridicaController@create']);
+    Route::get('grid', ['as' => 'grid', 'uses' => 'PessoaJuridicaController@grid']);
+    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PessoaJuridicaController@edit']);
+    Route::post('update/{id}', ['as' => 'update', 'uses' => 'PessoaJuridicaController@update']);
+    Route::post('store', ['as' => 'store', 'uses' => 'PessoaJuridicaController@store']);
+    Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'PessoaJuridicaController@destroy']);
+});
+/**
+ *  CADASTRO GERAL MUNICIPAL (CGM)
+ */
 
 Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
     Route::get('index', ['as' => 'index', 'uses' => 'DisciplinasController@index']);

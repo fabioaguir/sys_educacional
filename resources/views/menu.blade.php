@@ -116,7 +116,7 @@
                         <a href="{{ route('pessoaFisica.create') }}">Pessoa Física</a>
                     </li>
                     <li>
-                        <a href="">Pessoa Jurídica</a>
+                        <a href="{{ route('pessoaJuridica.create') }}">Pessoa Jurídica</a>
                     </li>
                 </ul>
             </li>

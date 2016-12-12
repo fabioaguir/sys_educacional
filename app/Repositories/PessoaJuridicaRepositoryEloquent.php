@@ -4,9 +4,9 @@ namespace SerEducacional\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use SerEducacional\Repositories\PessoaFisicaRepository;
-use SerEducacional\Entities\PessoaFisica;
-use SerEducacional\Validators\PessoaFisicaValidator;
+use SerEducacional\Repositories\PessoaJuridicaRepository;
+use SerEducacional\Entities\PessoaJuridica;
+use SerEducacional\Validators\PessoaJuridicaValidator;
 
 /**
  * Class PessoaFisicaRepositoryEloquent

@@ -271,8 +271,8 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="cgm[endereco][comp]">Complemento</label>
-                                    {!! Form::text("cgm[endereco][comp]", Session::getOldInput("cgm[endereco][comp]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    <label for="cgm[endereco][complemento]">Complemento</label>
+                                    {!! Form::text("cgm[endereco][complemento]", Session::getOldInput("cgm[endereco][complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
                                 </div>
                             </div>
                         </div>
@@ -484,7 +484,7 @@
                 {{-- fim --}}
 
                 <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
-                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('cgm.index') }}">Listar</a>
+                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('pessoaJuridica.index') }}">Listar</a>
             </div>
             <!-- Fim Conteúdo -->
         </div>
