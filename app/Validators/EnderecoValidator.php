@@ -7,6 +7,7 @@ use \Prettus\Validator\LaravelValidator;
 
 class EnderecoValidator extends LaravelValidator
 {
+    use TraitReplaceRulesValidator;
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [],

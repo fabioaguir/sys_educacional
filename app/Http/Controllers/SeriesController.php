@@ -7,24 +7,24 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Http\Requests\CargoCreateRequest;
-use SerEducacional\Http\Requests\CargoUpdateRequest;
-use SerEducacional\Repositories\CargoRepository;
-use SerEducacional\Services\CargoService;
-use SerEducacional\Validators\CargoValidator;
+use SerEducacional\Http\Requests\SerieCreateRequest;
+use SerEducacional\Http\Requests\SerieUpdateRequest;
+use SerEducacional\Repositories\SerieRepository;
+use SerEducacional\Services\SerieService;
+use SerEducacional\Validators\SerieValidator;
 use Yajra\Datatables\Datatables;
 
 
-class CargosController extends Controller
+class SeriesController extends Controller
 {
 
     /**
-     * @var CargoRepository
+     * @var SerieRepository
      */
     protected $repository;
 
     /**
-     * @var CargoValidator
+     * @var SerieValidator
      */
     protected $validator;
 
@@ -38,9 +38,15 @@ class CargosController extends Controller
      */
     private $service;
 
-    public function __construct(CargoRepository $repository,
-                                CargoValidator $validator,
-                                CargoService $service)
+    /**
+     * SeriesController constructor.
+     * @param SerieRepository $repository
+     * @param SerieValidator $validator
+     * @param SerieService $service
+     */
+    public function __construct(SerieRepository $repository,
+                                SerieValidator $validator,
+                                SerieService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -56,7 +62,7 @@ class CargosController extends Controller
     public function index()
     {
         # Retorno para view
-        return view('cargo.index');
+        return view('serie.index');
     }
 
     /**
@@ -65,18 +71,17 @@ class CargosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('cargos')
+        $rows = \DB::table('series')
             ->select([
-                'cargos.id',
-                'cargos.nome',
-                'cargos.codigo',
+                'series.id',
+                'series.nome',
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html  = '<a style="margin-right: 5%;" title="Editar Disciplina" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Disciplina" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;
@@ -92,7 +97,7 @@ class CargosController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('cargo.create', compact('loadFields'));
+        return view('serie.create', compact('loadFields'));
     }
 
     /**
@@ -137,11 +142,12 @@ class CargosController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('cargo.edit', compact('model', 'loadFields'));
+            return view('serie.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
 
     /**
      * @param Request $request

@@ -6,16 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Cargo extends Model implements Transformable
+class Serie extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'cargos';
-
-    protected $fillable = [
-        'nome',
-        'codigo',
-        'cargo_professor',
-    ];
+    protected $fillable = [];
 
 }
