@@ -4,17 +4,33 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Consultar CGM - Pessoa Jurídica</h2>
+                <h2>Listar Cursos</h2>
             </div>
 
             <div class="card material-table">
                 <div class="card-header">
+                    @if(Session::has('message'))
+                        <div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <em> {!! session('message') !!}</em>
+                        </div>
+                    @endif
 
-                    <!-- Botão novo -->
+                    @if(Session::has('errors'))
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @foreach($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+
+
+                                <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('pessoaJuridica.create') }}">Nova pessoa jurídica</a>
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('funcao.create') }}">Novo Curso</a>
                             </div>
                         </div>
                     </div>
@@ -22,21 +38,25 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="pessoaJuridica-grid" class="table table-hover">
+                    <table id="funcao-grid" class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>CNPJ</th>
-                                <th>CGM do Município</th>
+                                <th>Codigo</th>
+                                <th>Nivel</th>
+                                <th>Regime</th>
+                                <th>Tipo</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>CNPJ</th>
-                                <th>CGM do Município</th>
-                                <th>Açao</th>
+                                <th>Codigo</th>
+                                <th>Nivel</th>
+                                <th>Regime</th>
+                                <th>Tipo</th>
+                                <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>
@@ -49,17 +69,18 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#pessoaJuridica-grid').DataTable({
+        var table = $('#funcao-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: laroute.route('pessoaJuridica.grid'),
+            ajax: laroute.route('funcao.grid'),
             columns: [
-
-                {data: 'nome', name: 'cgm.nome'},
-                {data: 'cnpj', name: 'cgm.cnpj'},
-                {data: 'statusCgm', name: 'cgm_municipio.nome'},
+                {data: 'nome', name: 'cursos.nome'},
+                {data: 'codigo', name: 'cursos.codigo'},
+                {data: 'nivel_curso', name: 'nivel_cursos.nome'},
+                {data: 'regime_curso', name: 'regime_cursos.nome'},
+                {data: 'tipo_curso', name: 'tipo_cursos.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
+            ],
             /*"oLanguage": {
                 "sStripClasses": "",
                 "sSearch": "",
@@ -73,7 +94,7 @@
                 '<option value="50">50</option>' +
                 '<option value="-1">All</option>' +
                 '</select></div>'
-            }*/
+            },*/
         });
     </script>
 @stop

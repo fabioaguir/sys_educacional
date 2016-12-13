@@ -57,7 +57,7 @@ class PessoaJuridicaService
 
         #Recuperando o registro no banco de dados
         $pessoaJuridica = $this->repository->with($relacao)->find($id);
-        //dd($pessoaFisica);
+
         #Verificando se o registro foi encontrado
         if(!$pessoaJuridica) {
             throw new \Exception('Pessoa não encontrada!');
@@ -139,8 +139,16 @@ class PessoaJuridicaService
     {
         #Atualizando no banco de dados
         $pessoaJuridica = $this->repository->update($data, $id);
-        $endereco = $this->enderecoRepository->update($data['endereco'], $id);
-        $telefone = $this->telefoneRepository->update($data['telefone'], $id);
+
+        #Buscando e atualizando registro de endereço
+        $objTelefone = $this->enderecoRepository->find($pessoaJuridica->endereco_id);
+        $endereco = $this->enderecoRepository->update($data['endereco'], $objTelefone->id);
+
+        #Buscando e atualizando registro de telefone
+        $objTelefone = $this->telefoneRepository->findWhere(['cgm_id' => $pessoaJuridica->id]);
+        $idTelefone = $objTelefone[0]->id;
+
+        $telefone = $this->telefoneRepository->update($data['telefone'], $idTelefone);
 
         #Verificando se foi atualizado no banco de dados
         if(!$pessoaJuridica) {

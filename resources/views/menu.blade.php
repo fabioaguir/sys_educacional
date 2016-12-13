@@ -123,6 +123,7 @@
                 </ul>
             </li>
             <li><a href="{{ route('servidor.index') }}"><i class="zmdi zmdi-chart"></i> Servidor</a></li>
+            <li><a href="{{ route('funcao.index')  }}"><i class="zmdi zmdi-chart"></i> Função</a></li>
             <li><a href="{{ route('disciplina.index')  }}"><i class="zmdi zmdi-chart"></i> Disciplinas</a></li>
             <li><a href="{{ route('curso.index')  }}"><i class="zmdi zmdi-chart"></i> Cursos</a></li>
             <li><a href="{{ route('curriculo.index')  }}"><i class="zmdi zmdi-chart"></i> Currículos</a></li>
