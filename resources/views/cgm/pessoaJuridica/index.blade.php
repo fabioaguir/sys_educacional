@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('create') }}">Nova pessoa jurídica</a>
+                                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('pessoaJuridica.create') }}">Nova pessoa jurídica</a>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,6 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>RG</th>
                                 <th>CNPJ</th>
                                 <th>CGM do Município</th>
                                 <th>Açao</th>
@@ -35,7 +34,6 @@
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>RG</th>
                                 <th>CNPJ</th>
                                 <th>CGM do Município</th>
                                 <th>Açao</th>
@@ -58,7 +56,6 @@
             columns: [
 
                 {data: 'nome', name: 'cgm.nome'},
-                {data: 'rg', name: 'cgm.rg'},
                 {data: 'cnpj', name: 'cgm.cnpj'},
                 {data: 'statusCgm', name: 'cgm_municipio.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}

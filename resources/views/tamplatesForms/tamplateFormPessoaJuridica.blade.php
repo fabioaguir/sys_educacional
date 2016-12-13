@@ -33,7 +33,7 @@
                             <div class=" fg-line">
                                 <label for="cgm_municipio_id">CGM do município *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm_municipio_id', ["" => "Selecione nacionalidade"] + $loadFields['cgmmunicipio']->toArray(), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('cgm_municipio_id', ["" => "Selecione nacionalidade"] + $loadFields['cgmmunicipio']->toArray(), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -71,12 +71,12 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="tipo_empresa_id">Tipo empresa</label>
-                                    {!! Form::text('tipo_empresa_id', Session::getOldInput('tipo_empresa_id'), array('class' => 'form-control input-sm', 'placeholder' => 'Local de Nascimento')) !!}
+                                    <label for="tipo_empresa_id">Tipo empresa *</label>
+                                    <div class="select">
+                                    {!! Form::select("tipo_empresa_id", (["" => "Selecione tipo"] + $loadFields['tipoempresa']->toArray()), null, array()) !!}
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                     <div class="row">

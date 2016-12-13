@@ -40,7 +40,6 @@ class PessoaFisica extends Model implements Transformable
         'email'
     ];
 
-    //Relacionamento entre entidades
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
