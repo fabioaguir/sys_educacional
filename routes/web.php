@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
     # Fim rotas cgm
 
-    # Rotas do funcao
+    # Rotas de funcao
     Route::group(['prefix' => 'funcao', 'as' => 'funcao.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'FuncaoController@index']);
         Route::get('grid', ['as' => 'grid', 'uses' => 'FuncaoController@grid']);
@@ -42,6 +42,20 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'FuncaoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'FuncaoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'FuncaoController@destroy']);
+    });
+
+    # Rotas de escola
+    Route::group(['prefix' => 'escola', 'as' => 'escola.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'EscolaController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'EscolaController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'EscolaController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'EscolaController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'EscolaController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'EscolaController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'EscolaController@destroy']);
+
+        Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'EscolaController@findBairro']);
+        Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'EscolaController@findCidade']);
     });
 
     #Rotas servidor

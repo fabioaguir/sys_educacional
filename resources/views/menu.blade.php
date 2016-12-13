@@ -128,6 +128,7 @@
             <li><a href="{{ route('curso.index')  }}"><i class="zmdi zmdi-chart"></i> Cursos</a></li>
             <li><a href="{{ route('curriculo.index')  }}"><i class="zmdi zmdi-chart"></i> Currículos</a></li>
             <li><a href="{{ route('cargo.index')  }}"><i class="zmdi zmdi-chart"></i> Cargos</a></li>
+            <li><a href="{{ route('escola.index')  }}"><i class="zmdi zmdi-chart"></i> Escolas</a></li>
         </ul>
     </aside>
     {{--FIM Menu Lateral--}}

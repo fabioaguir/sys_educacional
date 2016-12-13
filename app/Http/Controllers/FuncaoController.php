@@ -49,6 +49,9 @@ class FuncaoController extends Controller
         return view('funcao.index');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         #Carregando os dados para o cadastro
