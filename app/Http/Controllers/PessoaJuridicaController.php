@@ -102,8 +102,8 @@ class PessoaJuridicaController extends Controller
             ->select([
                 'cgm.id',
                 'cgm.nome',
-                'cgm.rg',
                 'cgm.cnpj',
+                'cgm.cpf',
                 'cgm_municipio.nome as statusCgm'
             ])
             ->get();
@@ -159,6 +159,24 @@ class PessoaJuridicaController extends Controller
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
         } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->destroy($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) {
+            dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

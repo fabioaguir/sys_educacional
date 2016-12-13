@@ -57,7 +57,7 @@ class PessoaFisicaService
 
         #Recuperando o registro no banco de dados
         $pessoaFisica = $this->repository->with($relacao)->find($id);
-        //dd($pessoaFisica);
+
         #Verificando se o registro foi encontrado
         if(!$pessoaFisica) {
             throw new \Exception('Pessoa não encontrada!');
@@ -131,15 +131,23 @@ class PessoaFisicaService
     /**
      * @param array $data
      * @param int $id
-     * @return ConvenioCallCenter
+     * @return PessoaFisica
      * @throws \Exception
      */
     public function update(array $data, int $id) : PessoaFisica
-    { //dd($id);
+    {
         #Atualizando no banco de dados
         $pessoaFisica = $this->repository->update($data, $id);
-        $endereco = $this->enderecoRepository->update($data['endereco'], $id);
-        $telefone = $this->telefoneRepository->update($data['telefone'], $id);
+
+        #Buscando e atualizando registro de endereço
+        $objTelefone = $this->enderecoRepository->find($pessoaFisica->endereco_id);
+        $endereco = $this->enderecoRepository->update($data['endereco'], $objTelefone->id);
+
+        #Buscando e atualizando registro de telefone
+        $objTelefone = $this->telefoneRepository->findWhere(['cgm_id' => $pessoaFisica->id]);
+        $idTelefone = $objTelefone[0]->id;
+
+        $telefone = $this->telefoneRepository->update($data['telefone'], $idTelefone);
 
         #Verificando se foi atualizado no banco de dados
         if(!$pessoaFisica) {

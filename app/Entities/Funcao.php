@@ -13,7 +13,9 @@ class Funcao extends Model implements Transformable
     protected $table    = 'funcoes';
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'sigla',
+        'funcao_professor'
     ];
 
 }

@@ -31,6 +31,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'PessoaJuridicaController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'PessoaJuridicaController@findCidade']);
     });
+    # Fim rotas cgm
+
+    # Rotas do funcao
+    Route::group(['prefix' => 'funcao', 'as' => 'funcao.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'FuncaoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'FuncaoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'FuncaoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'FuncaoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'FuncaoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'FuncaoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'FuncaoController@destroy']);
+    });
 
     #Rotas servidor
     Route::group(['prefix' => 'servidor', 'as' => 'servidor.'], function () {
