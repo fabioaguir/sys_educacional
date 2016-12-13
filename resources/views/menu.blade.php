@@ -17,6 +17,8 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css') }}"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/datatables.net-dt/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('/dist/css/datetimepicker/build/jquery.datetimepicker.min.css')}}" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('/lib/select2/dist/css/select2.min.css')}}" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('/lib/select2-bootstrap-theme/dist/select2-bootstrap.min.css')}}" rel="stylesheet"/>
 
     {{--<link href="/lib/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">--}}
     {{--<link href="/lib/nouislider/distribute/nouislider.min.css" rel="stylesheet">--}}
@@ -71,7 +73,6 @@
 
 
 <section id="main">
-
     {{--Menu Lateral--}}
     <aside id="sidebar" class="sidebar c-overflow">
         <div class="s-profile">
@@ -100,26 +101,28 @@
                     <a href=""><i class="zmdi zmdi-settings"></i>Alterar Senha</a>
                 </li>
                 <li>
-                    <a href="http://ser.cbo/index.php/auth/logout"><i class="zmdi zmdi-time-restore"></i>Sair</a>
+                    <a href="{{ route('logout') }}"><i class="zmdi zmdi-time-restore"></i>Sair</a>
                 </li>
             </ul>
         </div>
 
         <ul class="main-menu">
-            <li><a href=""><i class="zmdi zmdi-home"></i> Home</a></li>
-            <li><a href=""><i class="zmdi zmdi-chart"></i> Dashboard</a></li>
-            <li><a href="{{ route('servidor.index') }}"><i class="zmdi zmdi-chart"></i> Servidor</a></li>
             <li class="sub-menu">
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-text"></i>CGM</a>
                 <ul>
-                    <li>
-                        <a href="{{ route('pessoaFisica.index') }}">Pessoa Física</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('pessoaJuridica.index') }}">Pessoa Jurídica</a>
-                    </li>
+                    <li class="sub-menu">
+                        <a href="" data-ma-action="submenu-toggle">Cadastros</a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('pessoaFisica.index') }}">Pessoa Física</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pessoaJuridica.index') }}">Pessoa Jurídica</a>
+                            </li>
+                        </ul>
                 </ul>
             </li>
+            <li><a href="{{ route('servidor.index') }}"><i class="zmdi zmdi-chart"></i> Servidor</a></li>
             <li><a href="{{ route('disciplina.index')  }}"><i class="zmdi zmdi-chart"></i> Disciplinas</a></li>
             <li><a href="{{ route('curso.index')  }}"><i class="zmdi zmdi-chart"></i> Cursos</a></li>
             <li><a href="{{ route('curriculo.index')  }}"><i class="zmdi zmdi-chart"></i> Currículos</a></li>
@@ -156,6 +159,8 @@
 <script src="{{ asset('/lib/bootstrap-growl/jquery.bootstrap-growl.min.js') }}"></script>
 <script src="{{ asset('/lib/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('/lib/select2/dist/js/select2.full.js') }}"></script>
+
 
 {{--jquery Validator https://jqueryvalidation.org/ --}}
 <script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
@@ -167,9 +172,7 @@
 <script src="{{ asset('/lib/jquery-mask-plugin/dist/jquery.mask.js') }}"></script>
 
 <!-- Placeholder for IE9 -->
-<!--[if IE 9 ]-->
 <script type="text/javascript" src={{ asset('/lib/jquery-placeholder/jquery.placeholder.min.js') }}></script>
-<!--[endif]-->
 
 <script src="{{ asset('/js/laroute.js') }}"></script>
 <script src="{{ asset('/lib/chosen/chosen.jquery.js') }}"></script>

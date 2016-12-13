@@ -59,4 +59,12 @@ class Curriculo extends Model implements Transformable
         $this->attributes['validade_fim'] = SerbinarioDateFormat::toUsa($value);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function disciplinas()
+    {
+        return $this->belongsToMany(Disciplina::class, 'curriculos_disciplinas', 'curriculos_id', 'disciplinas_id');
+    }
+
 }
