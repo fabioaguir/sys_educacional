@@ -23,6 +23,25 @@ class PessoaJuridica extends Model implements Transformable
         'nire',
         'nome_complemento',
         'nome_fantasia',
-        'tipo_cadastro'
+        'tipo_cadastro',
+        'inscricao_estadual',
+        'endereco_id',
+        'cgm_municipio_id'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function telefone()
+    {
+        return $this->hasMany(Telefone::class, 'cgm_id');
+    }
 }

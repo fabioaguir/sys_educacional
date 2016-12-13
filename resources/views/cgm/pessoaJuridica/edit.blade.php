@@ -23,7 +23,7 @@
                 @endif
 
                 {!! Form::model($model, ['route'=> ['pessoaJuridica.update', $model->id], 'id' => 'formPessoaJuridica', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormPessoaFisica')
+                @include('tamplatesForms.tamplateFormPessoaJuridica')
                 {!! Form::close() !!}
             </section>
         </div>

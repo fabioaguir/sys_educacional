@@ -113,10 +113,10 @@
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-text"></i>CGM</a>
                 <ul>
                     <li>
-                        <a href="{{ route('pessoaFisica.create') }}">Pessoa Física</a>
+                        <a href="{{ route('pessoaFisica.index') }}">Pessoa Física</a>
                     </li>
                     <li>
-                        <a href="{{ route('pessoaJuridica.create') }}">Pessoa Jurídica</a>
+                        <a href="{{ route('pessoaJuridica.index') }}">Pessoa Jurídica</a>
                     </li>
                 </ul>
             </li>

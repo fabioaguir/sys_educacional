@@ -56,15 +56,15 @@ class PessoaJuridicaService
         ];
 
         #Recuperando o registro no banco de dados
-        $pessoaFisica = $this->repository->with($relacao)->find($id);
+        $pessoaJuridica = $this->repository->with($relacao)->find($id);
         //dd($pessoaFisica);
         #Verificando se o registro foi encontrado
-        if(!$pessoaFisica) {
+        if(!$pessoaJuridica) {
             throw new \Exception('Pessoa não encontrada!');
         }
 
         #retorno
-        return $pessoaFisica;
+        return $pessoaJuridica;
     }
 
     /**
@@ -96,15 +96,16 @@ class PessoaJuridicaService
         $dados['cgm_id'] = $idPessoa;
 
         #Salvando registro
-        $this->telefoneRepository->create($dados);
+        $telefone = $this->telefoneRepository->create($dados);
+
     }
 
     /**
      * @param array $data
-     * @return PessoaFisica
+     * @return PessoaJuridica
      * @throws \Exception
      */
-    public function store(array $data) : PessoaFisica
+    public function store(array $data) : PessoaJuridica
     {
         #Retorno de metodos envolvidos
         $endereco = $this->tratamentoEndereco($data);
@@ -113,41 +114,41 @@ class PessoaJuridicaService
         $data['endereco_id'] = $endereco->id;
 
         #Salvando o registro pincipal
-        $pessoaFisica =  $this->repository->create($data);
+        $pessoaJuridica =  $this->repository->create($data);
 
-        $idPessoa = $pessoaFisica->id;
+        $idPessoa = $pessoaJuridica->id;
 
         $this->tratamentoTelefone($data, $idPessoa);
 
         #Verificando se foi criado no banco de dados
-        if(!$pessoaFisica) {
+        if(!$pessoaJuridica) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $pessoaFisica;
+        return $pessoaJuridica;
     }
 
     /**
      * @param array $data
      * @param int $id
-     * @return ConvenioCallCenter
+     * @return PessoaJuridica
      * @throws \Exception
      */
-    public function update(array $data, int $id) : PessoaFisica
-    { //dd($id);
+    public function update(array $data, int $id) : PessoaJuridica
+    {
         #Atualizando no banco de dados
-        $pessoaFisica = $this->repository->update($data, $id);
+        $pessoaJuridica = $this->repository->update($data, $id);
         $endereco = $this->enderecoRepository->update($data['endereco'], $id);
         $telefone = $this->telefoneRepository->update($data['telefone'], $id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$pessoaFisica) {
+        if(!$pessoaJuridica) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $pessoaFisica;
+        return $pessoaJuridica;
     }
 
     /**
