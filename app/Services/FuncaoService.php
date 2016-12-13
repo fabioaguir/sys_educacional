@@ -2,22 +2,23 @@
 
 namespace SerEducacional\Services;
 
-use SerEducacional\Repositories\CursoRepository;
-use SerEducacional\Entities\Curso;
+use SerEducacional\Repositories\FuncaoRepository;
+use SerEducacional\Entities\Funcao;
 
 class FuncaoService
 {
     use TraitService;
-    
+
     /**
-     * @var CursoRepository
+     * @var FuncaoRepository|CursoRepository
      */
     private $repository;
 
     /**
-     * @param CursoRepository $repository
+     * FuncaoService constructor.
+     * @param FuncaoRepository $repository
      */
-    public function __construct(CursoRepository $repository)
+    public function __construct(FuncaoRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -27,21 +28,18 @@ class FuncaoService
      * @return Curso
      * @throws \Exception
      */
-    public function store(array $data) : Curso
+    public function store(array $data) : Funcao
     {
-        # Regras de negócios
-        $this->tratamentoCampos($data);
-
         #Salvando o registro pincipal
-        $curso =  $this->repository->create($data);
+        $funcao =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$curso) {
+        if(!$funcao) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $curso;
+        return $funcao;
     }
 
     /**
@@ -50,21 +48,21 @@ class FuncaoService
      * @return Curso
      * @throws \Exception
      */
-    public function update(array $data, int $id) : Curso
+    public function update(array $data, int $id) : Funcao
     {
-        # Regras de negócios
-        $this->tratamentoCampos($data);
-        
+        /*# Regras de negócios
+        $this->tratamentoCampos($data);*/
+        //dd($data);
         #Atualizando no banco de dados
-        $curso = $this->repository->update($data, $id);
+        $funcao = $this->repository->update($data, $id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$curso) {
+        if(!$funcao) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $curso;
+        return $funcao;
     }
 
     /**
@@ -85,4 +83,25 @@ class FuncaoService
         #retorno
         return true;
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function find($id)
+    {
+        #Recuperando o registro no banco de dados
+        $funcao = $this->repository->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$funcao) {
+            throw new \Exception('Pessoa não encontrada!');
+        }
+
+        #retorno
+        return $funcao;
+    }
+
+
 }

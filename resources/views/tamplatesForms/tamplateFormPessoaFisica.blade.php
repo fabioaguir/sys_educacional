@@ -1,4 +1,3 @@
-{{--{{ dd($loadFields) }}--}}
 <div class="block-header">
     <h2>Cadastro de Pessoa Física</h2>
 </div>
