@@ -81,10 +81,21 @@ class CurriculosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Currículo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Currículo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            # recuperando o curriculo
+            $curriculo = $this->repository->find($row->id);
 
+            # Html do edit
+            $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+
+            # Verificando se o currículo possui disciplinas
+            if(count($curriculo->disciplinas) == 0) {
+                # Html de delete
+                $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
+
+            # Html de adicionar disciplina
+            $html .= '<a title="Adicionar Disciplina" id="btnModalAdicionarDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            
             # Retorno
             return $html;
         })->make(true);
