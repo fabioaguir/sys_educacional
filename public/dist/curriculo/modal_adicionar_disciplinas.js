@@ -17,6 +17,8 @@ function loadTableAdicionarDisciplina (idCurriculo) {
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
+
+    return tableAdicionarDisciplina;
 }
 
 // Função de execução
@@ -24,7 +26,7 @@ function runModalAdicionarDisciplinas(idCurriculo)
 {
     //Carregando as grids de situações
     if(tableAdicionarDisciplina) {
-        tableAdicionarDisciplina.ajax.reload();
+        loadTableAdicionarDisciplina(idCurriculo).ajax.url(laroute.route('curriculo.gridAdicionarDisciplina', {'id' :idCurriculo })).load();
     } else {
         loadTableAdicionarDisciplina(idCurriculo);
     }
