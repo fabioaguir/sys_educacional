@@ -24,7 +24,7 @@ function runModalAdicionarDisciplinas(idCurriculo)
 {
     //Carregando as grids de situações
     if(tableAdicionarDisciplina) {
-        loadTableAdicionarDisciplina(idCurriculo).ajax.url(laroute.route('gridAdicionarDisciplina', {'id' :idCurriculo })).load();
+        tableAdicionarDisciplina.ajax.reload();
     } else {
         loadTableAdicionarDisciplina(idCurriculo);
     }
