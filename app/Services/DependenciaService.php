@@ -2,63 +2,63 @@
 
 namespace SerEducacional\Services;
 
-use SerEducacional\Repositories\SerieRepository;
-use SerEducacional\Entities\Serie;
+use SerEducacional\Repositories\DependenciaRepository;
+use SerEducacional\Entities\Dependencia;
 
-class SerieService
+class DependenciaService
 {
     use TraitService;
     
     /**
-     * @var SerieRepository
+     * @var DependenciaRepository
      */
     private $repository;
 
     /**
-     * @param SerieRepository $repository
+     * @param DependenciaRepository $repository
      */
-    public function __construct(SerieRepository $repository)
+    public function __construct(DependenciaRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
      * @param array $data
-     * @return Cargo
+     * @return Dependencia
      * @throws \Exception
      */
-    public function store(array $data) : Serie
+    public function store(array $data) : Dependencia
     {        
         #Salvando o registro pincipal
-        $serie =  $this->repository->create($data);
+        $dependencia =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$serie) {
+        if(!$dependencia) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $serie;
+        return $dependencia;
     }
 
     /**
      * @param array $data
      * @param int $id
-     * @return Cargo
+     * @return Dependencia
      * @throws \Exception
      */
-    public function update(array $data, int $id) : Serie
+    public function update(array $data, int $id) : Dependencia
     {
         #Atualizando no banco de dados
-        $serie = $this->repository->update($data, $id);
+        $dependencia = $this->repository->update($data, $id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$serie) {
+        if(!$dependencia) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $serie;
+        return $dependencia;
     }
 
     /**

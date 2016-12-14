@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="container">
-        <br>
-        <div class="ibox-content">
-
-            <section id="content">
+        <section id="content">
+            {{-- Mensagem de alerta quando os dados não atendem as regras de validação que foramd efinidas no servidor --}}
+            <div class="ibox-content">
                 @if(Session::has('message'))
                     <div class="alert alert-success">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -21,11 +20,13 @@
                         @endforeach
                     </div>
                 @endif
-
-                {!! Form::model($model, ['route'=> ['serie.update', $model->id], 'id' => 'formSerie', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormSerie')
-                {!! Form::close() !!}
-            </section>
-        </div>
+            </div>
+            {{-- Fim mensagem de alerta --}}
+            {{--Formulario--}}
+            {!! Form::open(['route'=>'dependencia.store', 'id' => 'formSerie', 'method' => "POST" ]) !!}
+            @include('tamplatesForms.tamplateFormSerie')
+            {!! Form::close() !!}
+            {{--Fim formulario--}}
+        </section>
     </div>
 @stop
