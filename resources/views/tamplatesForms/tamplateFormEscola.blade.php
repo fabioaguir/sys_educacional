@@ -1,5 +1,5 @@
 <div class="block-header">
-    <h2>Cadastro de Função</h2>
+    <h2>Cadastro de Escolas</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
@@ -79,8 +79,8 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="ano_inicio">Ano inicial</label>
-                                    {!! Form::text("ano_inicio", Session::getOldInput("ano_inicio"), array('class' => 'form-control input-sm', 'placeholder' => 'Ano inicial')) !!}
+                                    <label for="ano_incio">Ano inicial</label>
+                                    {!! Form::text("ano_incio", Session::getOldInput("ano_incio"), array('class' => 'form-control input-sm', 'placeholder' => 'Ano inicial')) !!}
                                 </div>
                             </div>
                         </div>
@@ -169,8 +169,8 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="logitude">Latitude</label>
-                                    {!! Form::text("logitude", Session::getOldInput("logitude"), array('class' => 'form-control input-sm', 'placeholder' => 'Logitude')) !!}
+                                    <label for="longitude">Longitude</label>
+                                    {!! Form::text("longitude", Session::getOldInput("longitude"), array('class' => 'form-control input-sm', 'placeholder' => 'Logitude')) !!}
                                 </div>
                             </div>
                         </div>
@@ -268,7 +268,7 @@
             </div>--}}
 
         <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
-        <a class="btn btn-primary btn-sm m-t-10" href="{{ route('funcao.index') }}">Voltar</a>
+        <a class="btn btn-primary btn-sm m-t-10" href="{{ route('escola.index') }}">Voltar</a>
     </div>
 </div>
 

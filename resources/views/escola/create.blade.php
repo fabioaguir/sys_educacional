@@ -24,7 +24,7 @@
             {{-- Fim mensagem de alerta --}}
 
             {{--Formulario--}}
-            {!! Form::open(['route'=>'funcao.store', 'id' => 'formEscola', 'method' => "POST" ]) !!}
+            {!! Form::open(['route'=>'escola.store', 'id' => 'formEscola', 'method' => "POST" ]) !!}
             @include('tamplatesForms.tamplateFormEscola')
             {!! Form::close() !!}
             {{--Fim formulario--}}

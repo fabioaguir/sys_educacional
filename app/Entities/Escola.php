@@ -18,7 +18,7 @@ class Escola extends Model implements Transformable
         'nome_abreviado',
         'coordenadoria_id',
         'mantenedora_id',
-        'ano_inicio',
+        'ano_incio',
         'endereco_id',
         'email',
         'telefone',
@@ -27,9 +27,26 @@ class Escola extends Model implements Transformable
         'instituicao_id',
         'localizacao_escola_id',
         'latitude',
-        'logitude',
+        'longitude',
         'inep',
         'portaria'
     ];
+
+    /**
+     * @return string
+     */
+    public function getDataPublicacaoAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['dt_pub_portaria']);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setDataPublicacaoAttribute($value)
+    {
+        $this->attributes['dt_pub_portaria'] = SerbinarioDateFormat::toUsa($value);
+    }
 
 }

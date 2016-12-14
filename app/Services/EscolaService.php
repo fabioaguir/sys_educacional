@@ -2,6 +2,7 @@
 
 namespace SerEducacional\Services;
 
+use SerEducacional\Repositories\EnderecoRepository;
 use SerEducacional\Repositories\EscolaRepository;
 use SerEducacional\Entities\Escola;
 
@@ -15,31 +16,58 @@ class EscolaService
     private $repository;
 
     /**
+     * @var EnderecoRepository
+     */
+    private $enderecoRepository;
+
+    /**
      * EscolaService constructor.
      * @param EscolaRepository $repository
      */
-    public function __construct(EscolaRepository $repository)
+    public function __construct(EscolaRepository $repository,
+                                EnderecoRepository $enderecoRepository)
     {
         $this->repository = $repository;
+        $this->enderecoRepository = $enderecoRepository;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function tratamentoEndereco($data)
+    {
+        #Separando dados referente a endereço
+        $dados = $data['endereco'];
+
+        #Salvando registro
+        $endereco = $this->enderecoRepository->create($dados);
+
+        #Retorno
+        return $endereco;
     }
 
     /**
      * @param array $data
-     * @return Curso
+     * @return Escola
      * @throws \Exception
      */
     public function store(array $data) : Escola
     {
+        $endereco = $this->tratamentoEndereco($data);
+
+        $data['endereco_id'] = $endereco->id;
+
         #Salvando o registro pincipal
-        $funcao =  $this->repository->create($data);
+        $escola =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$funcao) {
+        if(!$escola) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $funcao;
+        return $escola;
     }
 
     /**

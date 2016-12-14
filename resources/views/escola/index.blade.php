@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Cursos</h2>
+                <h2>Listar Escolas</h2>
             </div>
 
             <div class="card material-table">
@@ -41,17 +41,21 @@
                     <table id="escola-grid" class="table table-hover">
                             <thead>
                             <tr>
+                                <th>Código</th>
                                 <th>Nome</th>
-                                <th>Sigla</th>
-                                <th>Professor</th>
+                                <th>Abreviação</th>
+                                <th>Coordenadoria</th>
+                                <th>Mantenedora</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
+                                <th>Código</th>
                                 <th>Nome</th>
-                                <th>Sigla</th>
-                                <th>Professor</th>
+                                <th>Abreviação</th>
+                                <th>Coordenadoria</th>
+                                <th>Mantenedora</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
@@ -70,11 +74,13 @@
             serverSide: true,
             ajax: laroute.route('escola.grid'),
             columns: [
-                {data: 'nome', name: 'funcoes.nome'},
-                {data: 'sigla', name: 'funcoes.sigla'},
-                {data: 'funcao_professor', name: 'funcoes.funcao_professor'},
+                {data: 'codigo', name: 'escola.codigo'},
+                {data: 'nome', name: 'escola.nome'},
+                {data: 'nome_abreviado', name: 'escola.nome_abreviado'},
+                {data: 'coordenadoria', name: 'coordenadoria.nome'},
+                {data: 'mantenedora', name: 'mantenedora.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ],
+            ]
             /*"oLanguage": {
                 "sStripClasses": "",
                 "sSearch": "",
