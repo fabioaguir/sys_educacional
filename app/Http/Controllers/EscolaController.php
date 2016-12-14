@@ -69,6 +69,62 @@ class EscolaController extends Controller
 
     /**
      * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            /*#Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
+
+            #Validando a requisição
+            $this->service->tratamentoCampos($data);
+
+            #Executando a ação
+            $this->service->store($data);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function grid()
+    {
+        #Criando a consulta
+        $rows = \DB::table('escola')
+            ->join('coordenadoria', 'coordenadoria.id', 'escola.coordenadoria_id')
+            ->join('mantenedora', 'mantenedora.id', 'escola.mantenedora_id')
+            ->select([
+                'escola.id',
+                'escola.codigo',
+                'escola.nome',
+                'escola.nome_abreviado',
+                'coordenadoria.nome as coordenadoria',
+                'mantenedora.nome as mantenedora'
+            ])
+            ->get();
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a> ';
+            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i>Deletar</a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /**
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function findCidade(Request $request)
