@@ -23,6 +23,16 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <div class=" fg-line">
+                        <label for="modalidade_id">Modalidade *</label>
+                        <div class="select">
+                            {!! Form::select('modalidade_id', (["" => "Selecione modalidade"] + $loadFields['modalidadeensino']->toArray()), null, array('class'=> 'form-control')) !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
         <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
         <a class="btn btn-primary btn-sm m-t-10" href="{{ route('modalidadeEnsino.index') }}">Voltar</a>
     </div>

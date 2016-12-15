@@ -2,53 +2,47 @@
 
 namespace SerEducacional\Services;
 
-use SerEducacional\Repositories\FuncaoRepository;
-use SerEducacional\Entities\Funcao;
+use SerEducacional\Repositories\NivelEnsinoRepository;
+use SerEducacional\Entities\NivelEnsino;
 
-class FuncaoService
+
+class NivelEnsinoService
 {
     use TraitService;
 
-    /**
-     * @var FuncaoRepository|CursoRepository
-     */
     private $repository;
 
-    /**
-     * FuncaoService constructor.
-     * @param FuncaoRepository $repository
-     */
-    public function __construct(FuncaoRepository $repository)
+    public function __construct(NivelEnsinoRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
      * @param array $data
-     * @return Curso
+     * @return Funcao
      * @throws \Exception
      */
-    public function store(array $data) : Funcao
+    public function store(array $data) : NivelEnsino
     {
         #Salvando o registro pincipal
-        $funcao =  $this->repository->create($data);
+        $nivelEnsino =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$funcao) {
+        if(!$nivelEnsino) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $funcao;
+        return $nivelEnsino;
     }
 
     /**
      * @param array $data
      * @param int $id
-     * @return Curso
+     * @return Funcao
      * @throws \Exception
      */
-    public function update(array $data, int $id) : Funcao
+    public function update(array $data, int $id) : NivelEnsino
     {
         # Regras de negócios
 

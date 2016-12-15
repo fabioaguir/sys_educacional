@@ -129,14 +129,35 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'CurriculosController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'CurriculosController@destroy']);
 
-        # ROtas de disciplinas do currículo
+        # Rotas de disciplinas do currículo
         Route::get('gridAdicionarDisciplina/{id}', ['as' => 'gridAdicionarDisciplina', 'uses' => 'CurriculoDisciplinaController@grid']);
         Route::post('disciplna/select2', ['as' => 'disciplina.select2', 'uses' => 'CurriculoDisciplinaController@disciplinasSelect2']);
         Route::post('adicionarDisciplina', ['as' => 'adicionarDisciplina', 'uses' => 'CurriculoDisciplinaController@adicionarDisciplina']);
         Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'CurriculoDisciplinaController@removerDisciplina']);
     });
-});
 
+    # Rotas de Modalidade de ensino
+    Route::group(['prefix' => 'modalidadeEnsino', 'as' => 'modalidadeEnsino.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'ModalidadeEnsinoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'ModalidadeEnsinoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'ModalidadeEnsinoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'ModalidadeEnsinoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ModalidadeEnsinoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'ModalidadeEnsinoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ModalidadeEnsinoController@destroy']);
+    });
+
+    # Rotas de Modalidade de ensino
+    Route::group(['prefix' => 'nivelEnsino', 'as' => 'nivelEnsino.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'NivelEnsinoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'NivelEnsinoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'NivelEnsinoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'NivelEnsinoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'NivelEnsinoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'NivelEnsinoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'NivelEnsinoController@destroy']);
+    });
+});
 
 /*Route::get('index', ['as' => 'index', 'uses' => 'OperadorController@index']);
     Route::get('grid', ['as' => 'grid', 'uses' => 'OperadorController@grid']);

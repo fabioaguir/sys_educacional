@@ -12,9 +12,7 @@ class Disciplina extends Model implements Transformable
 
     protected $fillable = [
         'nome',
-        'codigo',
-        'carga_horaria',
-        'descricao',
+        'codigo'
     ];
 
 }

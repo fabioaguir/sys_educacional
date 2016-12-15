@@ -29,7 +29,9 @@ class CurriculosController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Curso'
+        'Curso',
+        'Turno',
+        'Serie'
     ];
 
     /**
@@ -126,9 +128,6 @@ class CurriculosController extends Controller
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            #Validando a requisição
-            $this->service->tratamentoCampos($data);
-
             #Executando a ação
             $this->service->store($data);
 
@@ -154,8 +153,12 @@ class CurriculosController extends Controller
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
+            # Recuperando o ranger de séries
+            $serieInicial = $model->series->first();
+            $serieFinal   = $model->series->last();
+
             #retorno para view
-            return view('curriculo.edit', compact('model', 'loadFields'));
+            return view('curriculo.edit', compact('model', 'loadFields', 'serieInicial', 'serieFinal'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

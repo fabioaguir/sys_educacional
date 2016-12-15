@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Cursos</h2>
+                <h2>Listar Modalidades de Ensino</h2>
             </div>
 
             <div class="card material-table">
@@ -24,13 +24,11 @@
                             @endforeach
                         </div>
                     @endif
-
-
                                 <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('funcao.create') }}">Nova Função</a>
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('modalidadeEnsino.create') }}">Nova Modalidade</a>
                             </div>
                         </div>
                     </div>
@@ -38,20 +36,18 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="funcao-grid" class="table table-hover">
+                    <table id="modalidadeEnsino-grid" class="table table-hover">
                             <thead>
                             <tr>
+                                <th>Código</th>
                                 <th>Nome</th>
-                                <th>Sigla</th>
-                                <th>Professor</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
+                                <th>Código</th>
                                 <th>Nome</th>
-                                <th>Sigla</th>
-                                <th>Professor</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
@@ -65,16 +61,15 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#funcao-grid').DataTable({
+        var table = $('#modalidadeEnsino-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: laroute.route('funcao.grid'),
+            ajax: laroute.route('modalidadeEnsino.grid'),
             columns: [
-                {data: 'nome', name: 'funcoes.nome'},
-                {data: 'sigla', name: 'funcoes.sigla'},
-                {data: 'funcao_professor', name: 'funcoes.funcao_professor'},
+                {data: 'codigo', name: 'modalidades.codigo'},
+                {data: 'nome', name: 'modalidades.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ],
+            ]
             /*"oLanguage": {
                 "sStripClasses": "",
                 "sSearch": "",

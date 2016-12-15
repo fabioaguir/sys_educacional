@@ -123,6 +123,8 @@
                 </ul>
             </li>
             <li><a href="{{ route('servidor.index') }}"><i class="zmdi zmdi-chart"></i> Servidor</a></li>
+            <li><a href="{{ route('modalidadeEnsino.index') }}"><i class="zmdi zmdi-chart"></i>Modalidade de Ensino</a></li>
+            <li><a href="{{ route('nivelEnsino.index') }}"><i class="zmdi zmdi-chart"></i>Nível de Ensino</a></li>
             <li><a href="{{ route('funcao.index')  }}"><i class="zmdi zmdi-chart"></i> Função</a></li>
             <li><a href="{{ route('disciplina.index')  }}"><i class="zmdi zmdi-chart"></i> Disciplinas</a></li>
             <li><a href="{{ route('curso.index')  }}"><i class="zmdi zmdi-chart"></i> Cursos</a></li>
@@ -169,7 +171,7 @@
 {{--jquery Validator https://jqueryvalidation.org/ --}}
 <script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
 <script src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/dist/js/adicional/unique.js')  }}"></script>
+<script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/unique.js')  }}"></script>
 <script src="{{ asset('/dist/js/fileinput/fileinput.min.js')}}"></script>
 
 {{-- Mascaras https://igorescobar.github.io/jQuery-Mask-Plugin/ --}}

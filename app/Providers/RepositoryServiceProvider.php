@@ -75,15 +75,35 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\FuncaoRepository::class,
             \SerEducacional\Repositories\FuncaoRepositoryEloquent::class);
 
+        
         $this->app->bind(\SerEducacional\Repositories\SerieRepository::class,
             \SerEducacional\Repositories\SerieRepositoryEloquent::class);
+
 
         $this->app->bind(\SerEducacional\Repositories\EscolaRepository::class,
             \SerEducacional\Repositories\EscolaRepositoryEloquent::class);
 
 
-        $this->app->bind(\SerEducacional\Repositories\DependenciaRepository::class, \SerEducacional\Repositories\DependenciaRepositoryEloquent::class);
-        $this->app->bind(\SerEducacional\Repositories\InstituicaoRepository::class, \SerEducacional\Repositories\InstituicaoRepositoryEloquent::class);
+        $this->app->bind(\SerEducacional\Repositories\DependenciaRepository::class,
+            \SerEducacional\Repositories\DependenciaRepositoryEloquent::class);
+
+
+        $this->app->bind(\SerEducacional\Repositories\InstituicaoRepository::class, 
+            \SerEducacional\Repositories\InstituicaoRepositoryEloquent::class);
+
+
+        $this->app->bind(\SerEducacional\Repositories\TurnoRepository::class,
+            \SerEducacional\Repositories\TurnoRepositoryEloquent::class);
+
+
+        $this->app->bind(\SerEducacional\Repositories\ModalidadeEnsinoRepository::class,
+            \SerEducacional\Repositories\ModalidadeEnsinoRepositoryEloquent::class);
+
+
+        $this->app->bind(\SerEducacional\Repositories\NivelEnsinoRepository::class,
+            \SerEducacional\Repositories\NivelEnsinoRepositoryEloquent::class);
+
+
         //:end-bindings:
     }
 }

@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Serie extends Model implements Transformable
+class NivelEnsino extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'series';
+    protected $table    = 'niveis_ensino';
 
     protected $fillable = [
         'nome',
-        'codigo'
+        'codigo',
+        'modalidade_id'
     ];
-
 }
