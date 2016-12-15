@@ -131,6 +131,7 @@
             <li><a href="{{ route('curriculo.index')  }}"><i class="zmdi zmdi-chart"></i> Currículos</a></li>
             <li><a href="{{ route('cargo.index')  }}"><i class="zmdi zmdi-chart"></i> Cargos</a></li>
             <li><a href="{{ route('escola.index')  }}"><i class="zmdi zmdi-chart"></i> Escolas</a></li>
+            <li><a href="{{ route('dependencia.index')  }}"><i class="zmdi zmdi-chart"></i> Dependências</a></li>
         </ul>
     </aside>
     {{--FIM Menu Lateral--}}
@@ -169,7 +170,7 @@
 {{--jquery Validator https://jqueryvalidation.org/ --}}
 <script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
 <script src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/dist/js/adicional/unique.js')  }}"></script>
+<script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/unique.js')  }}"></script>
 <script src="{{ asset('/dist/js/fileinput/fileinput.min.js')}}"></script>
 
 {{-- Mascaras https://igorescobar.github.io/jQuery-Mask-Plugin/ --}}

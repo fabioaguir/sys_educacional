@@ -22,8 +22,8 @@
                     </div>
                 @endif
 
-                {!! Form::model($model, ['route'=> ['dependencia.update', $model->id], 'id' => 'formSerie', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormSerie')
+                {!! Form::model($model, ['route'=> ['dependencia.update', $model->id], 'id' => 'formDependencia', 'method' => "POST" ]) !!}
+                @include('tamplatesForms.tamplateFormDependencia')
                 {!! Form::close() !!}
             </section>
         </div>
