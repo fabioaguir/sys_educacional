@@ -6,23 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Bairro extends Model implements Transformable
+class Instituicao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'bairros';
+    protected $table    = 'Instituicao';
 
     protected $fillable = [
         'nome',
-        'cidades_id'
+        'cnpj',
+        'insc_municipal',
+        'insc_estadual',
+        'endereco_id'
     ];
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function cidade()
+    public function endereco()
     {
-        return $this->belongsTo(Cidade::class, 'cidades_id');
+        return $this->belongsTo(Endereco::class, 'endereco_id');
     }
+
 }

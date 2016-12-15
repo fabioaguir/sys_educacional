@@ -146,6 +146,7 @@
             <li><a href="{{ route('curriculo.index')  }}"><i class="zmdi zmdi-chart"></i> Currículos</a></li>
             <li><a href="{{ route('cargo.index')  }}"><i class="zmdi zmdi-chart"></i> Cargos</a></li>
             <li><a href="{{ route('dependencia.index')  }}"><i class="zmdi zmdi-chart"></i> Dependências</a></li>
+<<<<<<< HEAD
             {{--<li><a href="{{ route('funcao.index')  }}"><i class="zmdi zmdi-chart"></i> Função</a></li>
             <li><a href="{{ route('nivelEnsino.index') }}"><i class="zmdi zmdi-chart"></i>Nível de Ensino</a></li>
             <li><a href="{{ route('modalidadeEnsino.index') }}"><i class="zmdi zmdi-chart"></i>Modalidade de Ensino</a></li>
@@ -153,6 +154,9 @@
             <li><a href="{{ route('servidor.index') }}"><i class="zmdi zmdi-chart"></i> Servidor</a></li>
             <li><a href="{{ route('disciplina.index')  }}"><i class="zmdi zmdi-chart"></i> Disciplinas</a></li>
             <li><a href="{{ route('curso.index')  }}"><i class="zmdi zmdi-chart"></i> Cursos</a></li>--}}
+=======
+            <li><a href="{{ route('instituicao.edit')  }}"><i class="zmdi zmdi-chart"></i> Instituição</a></li>
+>>>>>>> 882bfbb228eadccb6e9d09fd8a34c110b614c640
         </ul>
     </aside>
     {{--FIM Menu Lateral--}}

@@ -13,14 +13,15 @@ class Cidade extends Model implements Transformable
     protected $table    = 'cidades';
 
     protected $fillable = [
-    'nome'
-];
+        'nome',
+        'estado_id'
+    ];
 
     /**
      * @return mixed
      */
-    public function bairro()
+    public function estado()
     {
-        return $this->hasMany(Bairro::class);
+        return $this->belongsTo(Estado::class, 'estado_id');
     }
 }
