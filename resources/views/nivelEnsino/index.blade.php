@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Modalidades de Ensino</h2>
+                <h2>Listar Níveis de Ensino</h2>
             </div>
 
             <div class="card material-table">
@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('modalidadeEnsino.create') }}">Nova Modalidade</a>
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('nivelEnsino.create') }}">Novo Nível</a>
                             </div>
                         </div>
                     </div>
@@ -36,11 +36,12 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="modalidadeEnsino-grid" class="table table-hover">
+                    <table id="nivelEnsino-grid" class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Código</th>
                                 <th>Nome</th>
+                                <th>Modalidade de Ensino</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </thead>
@@ -48,6 +49,7 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Nome</th>
+                                <th>Modalidade de Ensino</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
@@ -61,13 +63,14 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#modalidadeEnsino-grid').DataTable({
+        var table = $('#nivelEnsino-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: laroute.route('modalidadeEnsino.grid'),
+            ajax: laroute.route('nivelEnsino.grid'),
             columns: [
-                {data: 'codigo', name: 'modalidades.codigo'},
-                {data: 'nome', name: 'modalidades.nome'},
+                {data: 'codigo', name: 'niveis_ensino.codigo'},
+                {data: 'nome', name: 'niveis_ensino.nome'},
+                {data: 'modalidade', name: 'modalidades.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
             /*"oLanguage": {

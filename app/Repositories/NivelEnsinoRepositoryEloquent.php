@@ -4,15 +4,15 @@ namespace SerEducacional\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use SerEducacional\Repositories\ModalidadeEnsinoRepository;
-use SerEducacional\Entities\ModalidadeEnsino;
-use SerEducacional\Validators\ModalidadeEnsinoValidator;
+use SerEducacional\Repositories\NivelEnsinoRepository;
+use SerEducacional\Entities\NivelEnsino;
+use SerEducacional\Validators\NivelEnsinoValidator;
 
 /**
- * Class ModalidadeRepositoryEloquent
+ * Class NivelEnsinoRepositoryEloquent
  * @package namespace SerEducacional\Repositories;
  */
-class ModalidadeEnsinoRepositoryEloquent extends BaseRepository implements ModalidadeEnsinoRepository
+class NivelEnsinoRepositoryEloquent extends BaseRepository implements NivelEnsinoRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class ModalidadeEnsinoRepositoryEloquent extends BaseRepository implements Modal
      */
     public function model()
     {
-        return ModalidadeEnsino::class;
+        return NivelEnsino::class;
     }
 
     
