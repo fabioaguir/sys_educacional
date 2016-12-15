@@ -12,6 +12,7 @@ use SerEducacional\Http\Requests\DependenciaUpdateRequest;
 use SerEducacional\Repositories\DependenciaRepository;
 use SerEducacional\Services\DependenciaService;
 use SerEducacional\Validators\DependenciaValidator;
+use Yajra\Datatables\Datatables;
 
 
 class DependenciasController extends Controller
@@ -61,7 +62,7 @@ class DependenciasController extends Controller
     public function index()
     {
         # Retorno para view
-        return view('disciplina.index');
+        return view('dependencia.index');
     }
 
     /**

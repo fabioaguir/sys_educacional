@@ -42,7 +42,7 @@
                             <div class=" fg-line">
                                 <label for="cgm[sexo_id]">Sexo *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm[sexo_id]', (["" => "Selecione gênero"] + $loadFields['sexo']->toArray()), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('cgm[sexo_id]', (["" => "Selecione gênero"] + $loadFields['sexo']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="cgm[data_falecimento]">Data de Falecimento *</label>
+                                    <label for="cgm[data_falecimento]">Data de Falecimento</label>
                                     {!! Form::text('cgm[data_falecimento]', Session::getOldInput('cgm[data_falecimento]'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Falecimento')) !!}
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                             <div class=" fg-line">
                                 <label for="cgm[nacionalidade_id]">Nacionalidade *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm[nacionalidade_id]', (["" => "Selecione local"] + $loadFields['nacionalidade']->toArray()), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('cgm[nacionalidade_id]', (["" => "Selecione local"] + $loadFields['nacionalidade']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                             <div class=" fg-line">
                                 <label for="cgm[cgm_municipio_id]">CGM do Município *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm[cgm_municipio_id]', (["" => "Selecione"] + $loadFields['cgmmunicipio']->toArray()), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('cgm[cgm_municipio_id]', (["" => "Selecione"] + $loadFields['cgmmunicipio']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="cgm[pai]">Nome Pai *</label>
+                                    <label for="cgm[pai]">Nome Pai</label>
                                     {!! Form::text('cgm[pai]', Session::getOldInput('cgm[pai]'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome do pai completo')) !!}
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="cgm[mae]">Nome Mãe *</label>
+                                    <label for="cgm[mae]">Nome Mãe</label>
                                     {!! Form::text('cgm[mae]', Session::getOldInput('cgm[mae]'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome da mãe completo')) !!}
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                             <div class=" fg-line">
                                 <label for="cgm[estado_civil_id]">Estado Civil *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm[estado_civil_id]', (["" => "Selecione gênero"] + $loadFields['estadocivil']->toArray()), null, array()) !!}
+                                    {!! Form::select('cgm[estado_civil_id]', (["" => "Selecione gênero"] + $loadFields['estadocivil']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
                             <div class=" fg-line">
                                 <label for="cgm[escolaridade_id]">Escolaridade *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm[escolaridade_id]', (["" => "Selecione grau"] + $loadFields['escolaridade']->toArray()), null, array()) !!}
+                                    {!! Form::select('cgm[escolaridade_id]', (["" => "Selecione grau"] + $loadFields['escolaridade']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="cgm[orgao_emissor]">Orgão Emissor *</label>
+                                    <label for="cgm[orgao_emissor]">Orgão Emissor</label>
                                     {!! Form::text('cgm[orgao_emissor]', Session::getOldInput('cgm[orgao_emissor]'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
                                 </div>
                             </div>
@@ -207,7 +207,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="cgm[data_expedicao]">Data de expedição *</label>
+                                    <label for="cgm[data_expedicao]">Data de expedição</label>
                                     {!! Form::text('cgm[data_expedicao]', Session::getOldInput('cgm[data_expedicao]'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
                                 </div>
                             </div>
@@ -238,7 +238,7 @@
                             <div class=" fg-line">
                                 <label for="cgm[cnh_categoria_id]">Categoria CNH</label>
                                 <div class="select">
-                                    {!! Form::select('cgm[cnh_categoria_id]', ["" => "Selecione"], null, array()) !!}
+                                    {!! Form::select('cgm[cnh_categoria_id]', ["" => "Selecione"], null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -292,7 +292,7 @@
                             <div class=" fg-line">
                                 <label for="estado">Estado *</label>
                                 <div class="select">
-                                    {!! Form::select("estado", (["" => "Selecione"] + $loadFields['estado']->toArray()), null, array()) !!}
+                                    {!! Form::select("estado", (["" => "Selecione"] + $loadFields['estado']->toArray()), null, array('class'=> 'form-control', 'id' => 'estado')) !!}
                                 </div>
                             </div>
                         </div>
@@ -302,7 +302,7 @@
                             <div class=" fg-line">
                                 <label for="cidade">Cidade *</label>
                                 <div class="select">
-                                    {!! Form::select("cidade", array(), null, array()) !!}
+                                    {!! Form::select("cidade", array(), null, array('class'=> 'form-control', 'id' => 'cidade')) !!}
                                 </div>
                             </div>
                         </div>
@@ -313,7 +313,7 @@
                                 <label for="cgm[endereco][bairro_id]">Bairro *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("cgm[endereco][bairro_id]", array(), null, array()) !!}
+                                    {!! Form::select("cgm[endereco][bairro_id]", array(), null, array('class'=> 'form-control', 'id' => 'bairro')) !!}
                                 </div>
                             </div>
                         </div>
@@ -404,7 +404,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="servidor[data_admicao]">Data de admição *</label>
+                                    <label for="servidor[data_admicao]">Data de admissão *</label>
                                     {!! Form::text("data_admicao", Session::getOldInput("data_admicao"), array('class' => 'form-control input-sm', 'placeholder' => 'Matrícula')) !!}
                                 </div>
                             </div>
@@ -414,7 +414,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="servidor[carga_horaria]">Carga horária</label>
+                                    <label for="servidor[carga_horaria]">Carga horária *</label>
                                     {!! Form::text("carga_horaria", Session::getOldInput("carga_horaria"), array('class' => 'form-control input-sm', 'placeholder' => 'Carga horária')) !!}
                                 </div>
                             </div>
@@ -426,7 +426,7 @@
                                 <label for="servidor[tipo_vinculo_servidor_id]">Tipo de vínculo *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("tipo_vinculo_servidor_id", (["" => "Selecione o tipo"] + $loadFields['tipovinculo']->toArray()), null, array()) !!}
+                                    {!! Form::select("tipo_vinculo_servidor_id", (["" => "Selecione o tipo"] + $loadFields['tipovinculo']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -434,10 +434,10 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
-                                <label for="servidor[habilitacao_escolaridade_id]">Habilitação\Escolaridade *</label>
+                                <label for="servidor[habilitacao_escolaridade_id]">Habilitação\Escolaridade</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("habilitacao_escolaridade_id", (["" => "Selecione"] + $loadFields['habilitacaoescolaridade']->toArray()), null, array()) !!}
+                                    {!! Form::select("habilitacao_escolaridade_id", (["" => "Selecione"] + $loadFields['habilitacaoescolaridade']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -448,7 +448,7 @@
                                 <label for="servidor[cargos_id]">Cargo *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("cargos_id", (["" => "Selecione"] + $loadFields['cargo']->toArray()), null, array()) !!}
+                                    {!! Form::select("cargos_id", (["" => "Selecione"] + $loadFields['cargo']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -459,7 +459,7 @@
                                 <label for="servidor[funcoes_id]">Função *</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("funcoes_id", (["" => "Selecione"] + $loadFields['funcao']->toArray()), null, array()) !!}
+                                    {!! Form::select("funcoes_id", (["" => "Selecione"] + $loadFields['funcao']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -475,7 +475,7 @@
                                 <label for="servidor[situacao_servidores_id]">Situação</label>
                                 <div class="select">
                                     {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("situacao_servidores_id", (["" => "Selecione"] + $loadFields['situacao']->toArray()), null, array()) !!}
+                                    {!! Form::select("situacao_servidores_id", (["" => "Selecione"] + $loadFields['situacao']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -494,9 +494,87 @@
 
 @section('javascript')
     {{--Mensagens personalizadas--}}{{--
-    <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
+     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
     --}}{{--Regras adicionais--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
     --}}{{--Regras de validação--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/servidor.js')  }}"></script>
+    <script type="text/javascript">
+
+        //Incio - Retorno de cidades associadas aos estados
+        $(document).on('change', "#estado", function () {
+
+            //Removendo as cidades
+            $('#cidade option').remove();
+
+            //Recuperando o estado
+            var estado = $(this).val();
+
+            if (estado !== "") {
+                var dados = {
+                    'id' : estado
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('pessoaFisica.findCidade')  }}',
+                    data: dados,
+                    datatype: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione um municipio</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#cidade option').remove();
+                    $('#cidade').append(option);
+                });
+            }
+        });
+        //Fim - Retorno de cidades associadas ao estados
+
+        //Incio - Retorno de cidades associadas aos estados
+        $(document).on('change', "#cidade", function () {
+
+            //Removendo as cidades
+            $('#bairro option').remove();
+
+            //Recuperando o estado
+            var estado = $(this).val();
+
+            if (estado !== "") {
+                var dados = {
+                    'id' : estado
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('pessoaFisica.findBairro')  }}',
+                    data: dados,
+                    datatype: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione um municipio</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#bairro option').remove();
+                    $('#bairro').append(option);
+                });
+            }
+        });
+        //Fim - Retorno de cidades associadas ao estados
+    </script>
 @endsection

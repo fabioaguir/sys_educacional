@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Séries</h2>
+                <h2>Listar Dependências</h2>
             </div>
 
             <div class="card material-table">
@@ -26,14 +26,14 @@
                     @endif
 
 
-                                <!-- Botão novo -->
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('cargo.create') }}">Nova Série</a>
+                    <!-- Botão novo -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="text-right">
+                                    <a class="btn btn-primary btn-sm m-t-10", href="{{ route('dependencia.create') }}">Nova Dependência</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <!-- Botão novo -->
                 </div>
 
@@ -42,14 +42,14 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Codigo</th>
+                                <th>Capacidade</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>Codigo</th>
+                                <th>Capacidade</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>

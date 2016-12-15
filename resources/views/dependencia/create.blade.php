@@ -23,8 +23,8 @@
             </div>
             {{-- Fim mensagem de alerta --}}
             {{--Formulario--}}
-            {!! Form::open(['route'=>'dependencia.store', 'id' => 'formSerie', 'method' => "POST" ]) !!}
-            @include('tamplatesForms.tamplateFormSerie')
+            {!! Form::open(['route'=>'dependencia.store', 'id' => 'formDependencia', 'method' => "POST" ]) !!}
+            @include('tamplatesForms.tamplateFormDependencia')
             {!! Form::close() !!}
             {{--Fim formulario--}}
         </section>

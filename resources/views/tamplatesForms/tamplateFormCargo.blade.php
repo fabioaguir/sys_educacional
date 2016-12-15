@@ -27,12 +27,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <label>Ativo:</label>
-                    <div class="form-group">
-                        <label for="status" class="checkbox checkbox-inline m-r-20">
+                    <div class="form-group col-md-4">
+                        <label for="funcao_professor" class="checkbox checkbox-inline m-r-20">
                             {!! Form::hidden('cargo_professor', 0) !!}
                             {!! Form::checkbox('cargo_professor', 1, null, ['id' => 'cargo_professor']) !!}
                             <i class="input-helper"></i>
+                            Cargo professor
                         </label>
                     </div>
                 </div>
@@ -51,4 +51,6 @@
     <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
     --}}{{--Regras de validação--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/cargos.js')  }}"></script>
 @endsection
