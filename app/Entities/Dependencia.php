@@ -10,11 +10,19 @@ class Dependencia extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'coordenadoria';
+    protected $table    = 'dependencias';
 
     protected $fillable = [
         'nome',
-        'capacidade'
+        'capacidade',
+        'escola_id'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function escola()
+    {
+        return $this->belongsTo(Escola::class, 'escola_id');
+    }
 }

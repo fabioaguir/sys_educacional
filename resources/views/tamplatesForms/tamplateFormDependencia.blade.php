@@ -1,16 +1,28 @@
 <div class="block-header">
-    <h2>Cadastro de série</h2>
+    <h2>Cadastro de dependência</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
         <div class="row">
             <div class="col-md-12">
+
+                <div class="row">
+                    <div class="col-sm-5 m-b-15">
+                        {{--<div class="fg-line">--}}
+                        <label for="escola_id">Escola *</label>
+                        <div class="select">
+                            {!! Form::select("escola_id", ["" => "Selecione"] + $loadFields['escola']->toArray(), null, array('class'=> 'chosen')) !!}
+                        </div>
+                        {{-- </div>--}}
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="form-group col-md-6">
                         <div class="fg-line">
                             <div class="fg-line">
                                 <label for="nome">Nome *</label>
-                                {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome da Disciplina')) !!}
+                                {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome da Dependência')) !!}
                             </div>
                         </div>
                     </div>
@@ -20,24 +32,14 @@
                     <div class="form-group col-md-4">
                         <div class="fg-line">
                             <div class="fg-line">
-                                <label for="codigo">Código *</label>
-                                {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código da Disciplina')) !!}
+                                <label for="capacidade">Capacidade *</label>
+                                {!! Form::text('capacidade', Session::getOldInput('capacidade'), array('class' => 'form-control input-sm', 'placeholder' => 'Capacidade da Dependência')) !!}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <label>Ativo:</label>
-                    <div class="form-group">
-                        <label for="status" class="checkbox checkbox-inline m-r-20">
-                            {!! Form::hidden('cargo_professor', 0) !!}
-                            {!! Form::checkbox('cargo_professor', 1, null, ['id' => 'cargo_professor']) !!}
-                            <i class="input-helper"></i>
-                        </label>
-                    </div>
-                </div>
                 <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
-                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('serie.index') }}">Voltar</a>
+                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('dependencia.index') }}">Voltar</a>
                 </div>
             </div>
         </div>
