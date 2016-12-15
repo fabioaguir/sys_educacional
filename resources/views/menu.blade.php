@@ -124,28 +124,25 @@
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-home"></i>Instituição</a>
                 <ul>
                     <li>
-                        <a href="">Instituições</a>
-                        <a href="{{ route('disciplina.index')  }}">Disciplinas</a>
+                        <a href="{{ route('instituicao.edit')  }}">Instituição</a>
+                        <a href="{{ route('servidor.index')  }}">Servidores</a>
                         <a href="{{ route('curso.index')  }}">Cursos</a>
+                        <a href="{{ route('disciplina.index')  }}">Disciplinas</a>
                         <a href="{{ route('curriculo.index')  }}">Currículos</a>
                         <a href="{{ route('escola.index')  }}">Escolas</a>
-                        <a href="{{ route('servidor.index')  }}">Servidores</a>
                     </li>
                 </ul>
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-wrench"></i>Parâmetros</a>
                 <ul>
                     <li>
-                        <a href="">Instituições</a>
+                        <a href="{{ route('dependencia.index')  }}"> Dependências</a>
+                        <a href="{{ route('cargo.index')  }}"> Cargos</a>
                         <a href="{{ route('modalidadeEnsino.index')  }}">Modalidade de Ensino</a>
                         <a href="{{ route('nivelEnsino.index')  }}">Níveis de Ensino</a>
                         <a href="{{ route('funcao.index')  }}">Funções</a>
-                        <a href="{{ route('servidor.index')  }}">Servidores</a>
                     </li>
                 </ul>
             </li>
-
-            <li><a href="{{ route('cargo.index')  }}"><i class="zmdi zmdi-chart"></i> Cargos</a></li>
-            <li><a href="{{ route('dependencia.index')  }}"><i class="zmdi zmdi-chart"></i> Dependências</a></li>
         </ul>
     </aside>
     {{--FIM Menu Lateral--}}
