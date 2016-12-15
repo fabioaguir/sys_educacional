@@ -113,6 +113,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DependenciasController@destroy']);
     });
 
+    # ROtas do série
+    Route::group(['prefix' => 'instituicao', 'as' => 'instituicao.'], function () {
+        Route::get('edit', ['as' => 'edit', 'uses' => 'InstituicaosController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'InstituicaosController@update']);
+    });
+
     # ROtas do currículo
     Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'CurriculosController@index']);
