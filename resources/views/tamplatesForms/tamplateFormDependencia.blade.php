@@ -11,7 +11,7 @@
                         {{--<div class="fg-line">--}}
                         <label for="escola_id">Escola *</label>
                         <div class="select">
-                            {!! Form::select("escola_id", ["" => "Selecione"] + $loadFields['escola']->toArray(), null, array('class'=> 'chosen')) !!}
+                            {!! Form::select("escola_id", ["" => "Selecione"] + $loadFields['escola']->toArray(), null, array('class'=> 'form-control')) !!}
                         </div>
                         {{-- </div>--}}
                     </div>
@@ -53,4 +53,6 @@
     <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
     --}}{{--Regras de validação--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/dependencia.js')  }}"></script>
 @endsection
