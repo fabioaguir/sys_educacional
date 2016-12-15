@@ -66,10 +66,10 @@
         var table = $('#serie-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('cargo.grid') }}",
+            ajax: "{{ route('dependencia.grid') }}",
             columns: [
-                {data: 'nome', name: 'cargos.nome'},
-                {data: 'codigo', name: 'cargos.codigo'},
+                {data: 'nome', name: 'dependencias.nome'},
+                {data: 'capacidade', name: 'dependencias.capacidade'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {

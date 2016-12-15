@@ -103,14 +103,14 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     # ROtas do série
-    Route::group(['prefix' => 'serie', 'as' => 'serie.'], function () {
-        Route::get('index', ['as' => 'index', 'uses' => 'SeriesController@index']);
-        Route::get('grid', ['as' => 'grid', 'uses' => 'SeriesController@grid']);
-        Route::get('create', ['as' => 'create', 'uses' => 'SeriesController@create']);
-        Route::post('store', ['as' => 'store', 'uses' => 'SeriesController@store']);
-        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'SeriesController@edit']);
-        Route::post('update/{id}', ['as' => 'update', 'uses' => 'SeriesController@update']);
-        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'SeriesController@destroy']);
+    Route::group(['prefix' => 'dependencia', 'as' => 'dependencia.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'DependenciasController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'DependenciasController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'DependenciasController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'DependenciasController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'DependenciasController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'DependenciasController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DependenciasController@destroy']);
     });
 
     # ROtas do currículo
