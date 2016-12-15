@@ -132,6 +132,7 @@
             <li><a href="{{ route('cargo.index')  }}"><i class="zmdi zmdi-chart"></i> Cargos</a></li>
             <li><a href="{{ route('escola.index')  }}"><i class="zmdi zmdi-chart"></i> Escolas</a></li>
             <li><a href="{{ route('dependencia.index')  }}"><i class="zmdi zmdi-chart"></i> Dependências</a></li>
+            <li><a href="{{ route('instituicao.edit')  }}"><i class="zmdi zmdi-chart"></i> Instituição</a></li>
         </ul>
     </aside>
     {{--FIM Menu Lateral--}}
