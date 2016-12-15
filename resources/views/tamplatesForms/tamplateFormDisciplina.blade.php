@@ -27,17 +27,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <div class="fg-line">
-                            <div class="fg-line">
-                                <label for="carga_horaria">Carga Horária</label>
-                                {!! Form::text('carga_horaria', Session::getOldInput('carga_horaria'), array('class' => 'form-control input-sm', 'placeholder' => 'Carga Horária')) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
                 <a class="btn btn-primary btn-sm m-t-10" href="{{ route('disciplina.index') }}">Voltar</a>
                 </div>

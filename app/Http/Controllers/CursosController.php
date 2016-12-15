@@ -29,9 +29,7 @@ class CursosController extends Controller
      * @var array
      */
     private $loadFields = [
-        'NivelCurso',
-        'RegimeCurso',
-        'TipoCurso'
+       
     ];
 
     /**
@@ -72,16 +70,10 @@ class CursosController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('cursos')
-            ->leftJoin('nivel_cursos', 'nivel_cursos.id', '=', 'cursos.nivel_curso_id')
-            ->leftJoin('regime_cursos', 'regime_cursos.id', '=', 'cursos.regime_curso_id')
-            ->leftJoin('tipo_cursos', 'tipo_cursos.id', '=', 'cursos.tipo_curso_id')
             ->select([
                 'cursos.id',
                 'cursos.nome',
-                'cursos.codigo',
-                'nivel_cursos.codigo as nivel_curso',
-                'regime_cursos.codigo as regime_curso',
-                'tipo_cursos.codigo as tipo_curso'
+                'cursos.codigo'
             ]);
 
         #Editando a grid
