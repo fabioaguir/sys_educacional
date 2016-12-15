@@ -13,32 +13,14 @@ class Curso extends Model implements Transformable
     protected $fillable = [
         'nome',
         'codigo',
-        'nivel_curso_id',
-        'regime_curso_id',
-        'tipo_curso_id'
+        'nivel_ensino_id'
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function nivelCurso()
+    public function nivelEnsino()
     {
-        return $this->belongsTo(NivelCurso::class, 'nivel_curso_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function regimeCurso()
-    {
-        return $this->belongsTo(RegimeCurso::class, 'regime_curso_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function tipoCurso()
-    {
-        return $this->belongsTo(TipoCurso::class, 'tipo_curso_id');
+        return $this->belongsTo(NivelEnsino::class, 'nivel_ensino_id');
     }
 }

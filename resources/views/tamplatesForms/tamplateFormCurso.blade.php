@@ -15,11 +15,20 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
                         <div class="fg-line">
                             <div class="fg-line">
                                 <label for="codigo">Código *</label>
                                 {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código da Disciplina')) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <div class=" fg-line">
+                            <label for="nivel_ensino_id">Nível de Ensino *</label>
+                            <div class="select">
+                                {!! Form::select("nivel_ensino_id", ["" => "Selecione um nível de ensino"] + $loadFields['nivelensino']->toArray(), null, array('class'=> 'form-control')) !!}
                             </div>
                         </div>
                     </div>

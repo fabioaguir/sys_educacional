@@ -11,7 +11,8 @@ class CursoValidator extends LaravelValidator
 
     protected $attributes = [
         'nome' => 'Nome',
-        'codigo' => 'Código'
+        'codigo' => 'Código',
+        'nivel_ensino_id' => 'Nível de Ensino'
     ];
 
     protected $messages = [
@@ -22,11 +23,13 @@ class CursoValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|max:100',
-            'codigo' => 'required|max:50'
+            'codigo' => 'required|max:50',
+            'nivel_ensino_id' => 'required'
         ],
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:100',
-            'codigo' => 'required|max:50'
+            'codigo' => 'required|max:50',
+            'nivel_ensino_id' => 'required'
         ],
     ];
 }

@@ -43,6 +43,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
+                                <th>Nível de Ensino</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
@@ -50,6 +51,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
+                                <th>Nível de Ensino</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
@@ -70,6 +72,7 @@
             columns: [
                 {data: 'nome', name: 'cursos.nome'},
                 {data: 'codigo', name: 'cursos.codigo'},
+                {data: 'nivel_ensino', name: 'niveis_ensino.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

@@ -9,6 +9,10 @@ $(document).ready(function () {
 
             codigo: {
                 required: true,
+            },
+
+            nivel_ensino_id: {
+                required: true,
             }
         },
         //For custom messages
