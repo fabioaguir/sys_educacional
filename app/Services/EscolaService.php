@@ -54,8 +54,13 @@ class EscolaService
      */
     public function store(array $data) : Escola
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
+        #retorno com objeto endereço
         $endereco = $this->tratamentoEndereco($data);
 
+        #criando vinculo entre escola e endereco
         $data['endereco_id'] = $endereco->id;
 
         #Salvando o registro pincipal
@@ -73,7 +78,7 @@ class EscolaService
     /**
      * @param array $data
      * @param int $id
-     * @return Curso
+     * @return Escola
      * @throws \Exception
      */
     public function update(array $data, int $id) : Escola

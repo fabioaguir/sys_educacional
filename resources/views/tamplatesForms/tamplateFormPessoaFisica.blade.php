@@ -29,11 +29,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-2">
                             <div class=" fg-line">
                                 <label for="sexo_id">Sexo *</label>
                                 <div class="select">
-                                    {!! Form::select('sexo_id', (["" => "Selecione gênero"] + $loadFields['sexo']->toArray()), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('sexo_id', (["" => "Selecione gênero"] + $loadFields['sexo']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -58,19 +58,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <div class=" fg-line">
                                 <label for="nacionalidade">Nacionalidade *</label>
                                 <div class="select">
-                                    {!! Form::select('nacionalidade_id', (["" => "Selecione nacionalidade"] + $loadFields['nacionalidade']->toArray()), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('nacionalidade_id', (["" => "Selecione nacionalidade"] + $loadFields['nacionalidade']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-sm-offset-1 col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="naturalidade">Naturalidade</label>
-                                    {!! Form::text('naturalidade', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Local de Nascimento')) !!}
+                                    {!! Form::text('naturalidade', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Cidade onde nasceu')) !!}
                                 </div>
                             </div>
                         </div>
@@ -80,24 +80,24 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="inscricao_estadual">Inscrição Estadual</label>
-                                    {!! Form::text('inscricao_estadual', Session::getOldInput('inscricao_estadual'), array('class' => 'form-control input-sm', 'placeholder' => 'Inscricao Estadual')) !!}
+                                    {!! Form::text('inscricao_estadual', Session::getOldInput('inscricao_estadual'), array('class' => 'form-control input-sm', 'placeholder' => 'Inscricao estadual')) !!}
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-2">
                             <div class=" fg-line">
                                 <label for="cgm_municipio_id">CGM do Município *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm_municipio_id', (["" => "Selecione"] + $loadFields['cgmmunicipio']->toArray()), null, array('class'=> 'chosen')) !!}
+                                    {!! Form::select('cgm_municipio_id', (["" => "Selecione"] + $loadFields['cgmmunicipio']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-2">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="telefone[nome]">Telefones</label>
+                                    <label for="telefone[nome]">Telefone</label>
                                     @if (isset($model))
                                     {!! Form::text('telefone[nome]', $model->telefone->first()->nome ?? '', array('class' => 'form-control input-sm')) !!}
                                     @else
@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-sm m-t-10">Adicionar</button>
+                        {{--<button class="btn btn-primary btn-sm m-t-10">Adicionar</button>--}}
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-4">
@@ -131,33 +131,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="mae">Nome Mãe *</label>
                                     {!! Form::text('mae', Session::getOldInput('mae'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome da mãe completo')) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
-                            <div class=" fg-line">
-                                <label for="estado_civil_id">Estado Civil *</label>
-                                <div class="select">
-                                    {!! Form::select('estado_civil_id', (["" => "Selecione gênero"] + $loadFields['estadocivil']->toArray()), null, array()) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
-                            <div class=" fg-line">
-                                <label for="escolaridade_id">Escolaridade *</label>
-                                <div class="select">
-                                    {!! Form::select('escolaridade_id', (["" => "Selecione grau"] + $loadFields['escolaridade']->toArray()), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -171,13 +149,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="rg">RG *</label>
-                                    {!! Form::text('rg', Session::getOldInput('rg'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
+                                    {!! Form::text('rg', Session::getOldInput('rg'), array('class' => 'form-control input-sm', 'placeholder' => 'Registro geral')) !!}
                                 </div>
                             </div>
                         </div>
@@ -187,17 +163,35 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="orgao_emissor">Orgão Emissor *</label>
-                                    {!! Form::text('orgao_emissor', Session::getOldInput('orgao_emissor'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
+                                    {!! Form::text('orgao_emissor', Session::getOldInput('orgao_emissor'), array('class' => 'form-control input-sm', 'placeholder' => 'Orgão Emissor')) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <div class="fg-line">
+                                <div class="fg-line">
+                                    <label for="data_expedicao">Data de expedição *</label>
+                                    {!! Form::text('data_expedicao', Session::getOldInput('data_expedicao'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de expedição')) !!}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-4">
-                            <div class="fg-line">
-                                <div class="fg-line">
-                                    <label for="data_expedicao">Data de expedição *</label>
-                                    {!! Form::text('data_expedicao', Session::getOldInput('data_expedicao'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
+                            <div class=" fg-line">
+                                <label for="estado_civil_id">Estado Civil *</label>
+                                <div class="select">
+                                    {!! Form::select('estado_civil_id', (["" => "Selecione estado"] + $loadFields['estadocivil']->toArray()), null, array('class' => 'Form::select')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <div class=" fg-line">
+                                <label for="escolaridade_id">Escolaridade *</label>
+                                <div class="select">
+                                    {!! Form::select('escolaridade_id', (["" => "Selecione grau"] + $loadFields['escolaridade']->toArray()), null, array('class' => 'Form::select')) !!}
                                 </div>
                             </div>
                         </div>
@@ -207,27 +201,23 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="num_cnh">Número da CNH</label>
-                                    {!! Form::text('num_cnh', Session::getOldInput('num_cnh'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
+                                    {!! Form::text('num_cnh', Session::getOldInput('num_cnh'), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
-                            <div class="fg-line">
-                                <div class="fg-line">
-                                    <label for="data_vencimento_cnh">Data Vencimento</label>
-                                    {!! Form::text('data_vencimento_cnh', Session::getOldInput('data_vencimento_cnh'), array('class' => 'form-control input-sm', 'placeholder' => 'Registro geral')) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-2">
                             <div class=" fg-line">
                                 <label for="cnh_categoria_id">Categoria CNH</label>
                                 <div class="select">
-                                    {!! Form::select('cnh_categoria_id', (["" => "Selecione grau"] + $loadFields['categoriacnh']->toArray()), null, array()) !!}
+                                    {!! Form::select('cnh_categoria_id', (["" => "Selecione categoria"] + $loadFields['categoriacnh']->toArray()), null, array('class' => 'Form::select')) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-offset-2 col-sm-4">
+                            <div class="fg-line">
+                                <div class="fg-line">
+                                    <label for="data_vencimento_cnh">Data Vencimento</label>
+                                    {!! Form::text('data_vencimento_cnh', Session::getOldInput('data_vencimento_cnh'), array('class' => 'form-control input-sm', 'placeholder' => 'Data Vencimento CNH')) !!}
                                 </div>
                             </div>
                         </div>
@@ -241,17 +231,15 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[logradouro]">Logradouro *</label>
-                                    {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'Logradouro')) !!}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-2">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[numero]">Número *</label>
-                                    {!! Form::text("endereco[numero]", Session::getOldInput("endereco[numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[numero]", Session::getOldInput("endereco[numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                 </div>
                             </div>
                         </div>
@@ -261,17 +249,15 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[complemento]">Complemento</label>
-                                    {!! Form::text("endereco[complemento]", Session::getOldInput("endereco[complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[complemento]", Session::getOldInput("endereco[complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'Ponto de referência')) !!}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-2">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[cep]">CEP</label>
-                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
                                 </div>
                             </div>
                         </div>
@@ -281,27 +267,23 @@
                             <div class=" fg-line">
                                 <label for="endereco['estado_id']">Estado *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione grau"] + $loadFields['estado']->toArray()), null, array('id' => 'estado')) !!}
+                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione grau"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select', 'id' => 'estado')) !!}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="endereco['cidade_id']">Cidade *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione grau"] + $loadFields['cidade']->toArray()), null, array('id' => 'cidade')) !!}
+                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione grau"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select', 'id' => 'cidade')) !!}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="endereco[bairro_id]">Bairro *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('id' => 'bairro')) !!}
+                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('class' => 'Form::select', 'id' => 'bairro')) !!}
                                 </div>
                             </div>
                         </div>

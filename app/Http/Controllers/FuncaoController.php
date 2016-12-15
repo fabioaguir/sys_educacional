@@ -96,10 +96,7 @@ class FuncaoController extends Controller
             $data = $request->all();
 
             /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            #Validando a requisição
-            $this->service->tratamentoCampos($data);*/
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
 
             #Executando a ação
             $this->service->store($data);

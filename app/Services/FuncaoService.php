@@ -30,6 +30,9 @@ class FuncaoService
      */
     public function store(array $data) : Funcao
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         #Salvando o registro pincipal
         $funcao =  $this->repository->create($data);
 

@@ -10,7 +10,7 @@
                         <div class="fg-line">
                             <div class="fg-line">
                                 <label for="nome">Nome *</label>
-                                {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome da Disciplina')) !!}
+                                {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome do Cargo')) !!}
                             </div>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                         <div class="fg-line">
                             <div class="fg-line">
                                 <label for="codigo">Código *</label>
-                                {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código da Disciplina')) !!}
+                                {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código do Cargo')) !!}
                             </div>
                         </div>
                     </div>

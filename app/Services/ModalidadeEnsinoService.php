@@ -26,6 +26,9 @@ class ModalidadeEnsinoService
      */
     public function store(array $data) : ModalidadeEnsino
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         #Salvando o registro pincipal
         $modalidadeEnsino =  $this->repository->create($data);
 

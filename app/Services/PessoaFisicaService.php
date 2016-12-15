@@ -106,6 +106,9 @@ class PessoaFisicaService
      */
     public function store(array $data) : PessoaFisica
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         #Retorno de metodos envolvidos
         $endereco = $this->tratamentoEndereco($data);
 

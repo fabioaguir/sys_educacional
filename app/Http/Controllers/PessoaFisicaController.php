@@ -117,11 +117,8 @@ class PessoaFisicaController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            #Validando a requisição
-            $this->service->tratamentoCampos($data);
+            /*#Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
 
             #Executando a ação
             $this->service->store($data);
