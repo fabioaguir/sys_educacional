@@ -165,7 +165,6 @@
 <script src="{{ asset('/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/lib/select2/dist/js/select2.full.js') }}"></script>
 
-
 {{--jquery Validator https://jqueryvalidation.org/ --}}
 <script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
 <script src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js') }}"></script>
