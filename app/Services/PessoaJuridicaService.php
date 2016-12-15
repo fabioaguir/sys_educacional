@@ -12,7 +12,7 @@ class PessoaJuridicaService
     use TraitService;
 
     /**
-     * @var PessoaFisicaRepository
+     * @var PessoaJuridicaRepository|PessoaFisicaRepository
      */
     private $repository;
 
@@ -27,9 +27,10 @@ class PessoaJuridicaService
     private $telefoneRepository;
 
     /**
-     * PessoaFisicaService constructor.
-     * @param PessoaFisicaRepository $repository
+     * PessoaJuridicaService constructor.
+     * @param PessoaJuridicaRepository $repository
      * @param EnderecoRepository $enderecoRepository
+     * @param TelefoneRepository $telefoneRepository
      */
     public function __construct(PessoaJuridicaRepository $repository,
                                 EnderecoRepository $enderecoRepository,
@@ -107,6 +108,9 @@ class PessoaJuridicaService
      */
     public function store(array $data) : PessoaJuridica
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         #Retorno de metodos envolvidos
         $endereco = $this->tratamentoEndereco($data);
 

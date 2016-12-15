@@ -8,6 +8,14 @@ use \Prettus\Validator\LaravelValidator;
 class PessoaFisicaValidator extends LaravelValidator
 {
 
+    protected $attributes = [
+
+    ];
+
+    protected $messages = [
+
+    ];
+
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [],
         ValidatorInterface::RULE_UPDATE => [],

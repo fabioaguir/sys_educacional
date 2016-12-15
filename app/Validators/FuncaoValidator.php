@@ -7,16 +7,12 @@ use \Prettus\Validator\LaravelValidator;
 
 class FuncaoValidator extends LaravelValidator
 {
-    /**
-     * @var array
-     */
+
     protected $attributes = [
 
     ];
 
-    /**
-     * @var array
-     */
+
     protected $messages = [
 
     ];

@@ -24,6 +24,9 @@ class NivelEnsinoService
      */
     public function store(array $data) : NivelEnsino
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         #Salvando o registro pincipal
         $nivelEnsino =  $this->repository->create($data);
 
