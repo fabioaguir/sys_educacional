@@ -10,7 +10,9 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Http\Requests\CargoCreateRequest;
 use SerEducacional\Http\Requests\CargoUpdateRequest;
 use SerEducacional\Repositories\CargoRepository;
+use SerEducacional\Services\CargoService;
 use SerEducacional\Validators\CargoValidator;
+use Yajra\Datatables\Datatables;
 
 
 class CargosController extends Controller
@@ -26,10 +28,23 @@ class CargosController extends Controller
      */
     protected $validator;
 
-    public function __construct(CargoRepository $repository, CargoValidator $validator)
+    /**
+     * @var array
+     */
+    private $loadFields = [];
+
+    /**
+     * @var DisciplinaService
+     */
+    private $service;
+
+    public function __construct(CargoRepository $repository,
+                                CargoValidator $validator,
+                                CargoService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
+        $this->service  = $service;
     }
 
 
@@ -40,159 +55,137 @@ class CargosController extends Controller
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $cargos = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $cargos,
-            ]);
-        }
-
-        return view('cargos.index', compact('cargos'));
+        # Retorno para view
+        return view('cargo.index');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  CargoCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function store(CargoCreateRequest $request)
+    public function grid()
     {
+        #Criando a consulta
+        $rows = \DB::table('cargos')
+            ->select([
+                'cargos.id',
+                'cargos.nome',
+                'cargos.codigo',
+            ]);
 
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Variáveis de uso
+            $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
+        #Retorno para view
+        return view('cargo.create', compact('loadFields'));
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
         try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $cargo = $this->repository->create($request->all());
+            #Validando a requisição
+            $this->service->tratamentoCampos($data);
 
-            $response = [
-                'message' => 'Cargo created.',
-                'data'    => $cargo->toArray(),
-            ];
+            #Executando a ação
+            $this->service->store($data);
 
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
-
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $cargo = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $cargo,
-            ]);
-        }
-
-        return view('cargos.show', compact('cargo'));
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function edit($id)
     {
-
-        $cargo = $this->repository->find($id);
-
-        return view('cargos.edit', compact('cargo'));
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  CargoUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     */
-    public function update(CargoUpdateRequest $request, $id)
-    {
-
         try {
+            #Recuperando a empresa
+            $model = $this->repository->find($id);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            #Carregando os dados para o cadastro
+            $loadFields = $this->service->load($this->loadFields);
 
-            $cargo = $this->repository->update($id, $request->all());
-
-            $response = [
-                'message' => 'Cargo updated.',
-                'data'    => $cargo->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            #retorno para view
+            return view('cargo.edit', compact('model', 'loadFields'));
+        } catch (\Throwable $e) {dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #tratando as rules
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            #Executando a ação
+            $this->service->update($data, $id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return mixed
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
+            #Executando a ação
+            $this->service->destroy($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Cargo deleted.',
-                'deleted' => $deleted,
-            ]);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
         }
-
-        return redirect()->back()->with('message', 'Cargo deleted.');
     }
 }

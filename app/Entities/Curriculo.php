@@ -22,6 +22,8 @@ class Curriculo extends Model implements Transformable
         'curso_id',
         'validade_inicio',
         'validade_fim',
+        'turno_id',
+        'observacao',
         'ativo'
     ];
 
@@ -67,4 +69,19 @@ class Curriculo extends Model implements Transformable
         return $this->belongsToMany(Disciplina::class, 'curriculos_disciplinas', 'curriculos_id', 'disciplinas_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function turno()
+    {
+        return $this->belongsTo(Turno::class, 'turno_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function series()
+    {
+        return $this->belongsToMany(Serie::class, 'curriculos_series', 'curriculo_id', 'serie_id');
+    }
 }

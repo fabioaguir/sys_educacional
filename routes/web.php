@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
     # Fim rotas cgm
 
-    # Rotas do funcao
+    # Rotas de funcao
     Route::group(['prefix' => 'funcao', 'as' => 'funcao.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'FuncaoController@index']);
         Route::get('grid', ['as' => 'grid', 'uses' => 'FuncaoController@grid']);
@@ -42,6 +42,20 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'FuncaoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'FuncaoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'FuncaoController@destroy']);
+    });
+
+    # Rotas de escola
+    Route::group(['prefix' => 'escola', 'as' => 'escola.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'EscolaController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'EscolaController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'EscolaController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'EscolaController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'EscolaController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'EscolaController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'EscolaController@destroy']);
+
+        Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'EscolaController@findBairro']);
+        Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'EscolaController@findCidade']);
     });
 
     #Rotas servidor
@@ -77,6 +91,28 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'CursosController@destroy']);
     });
 
+    # ROtas do Cargos
+    Route::group(['prefix' => 'cargo', 'as' => 'cargo.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'CargosController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'CargosController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'CargosController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'CargosController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CargosController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'CargosController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'CargosController@destroy']);
+    });
+
+    # ROtas do série
+    Route::group(['prefix' => 'dependencia', 'as' => 'dependencia.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'DependenciasController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'DependenciasController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'DependenciasController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'DependenciasController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'DependenciasController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'DependenciasController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DependenciasController@destroy']);
+    });
+
     # ROtas do currículo
     Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'CurriculosController@index']);
@@ -94,6 +130,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'CurriculoDisciplinaController@removerDisciplina']);
     });
 });
+
+
+/*Route::get('index', ['as' => 'index', 'uses' => 'OperadorController@index']);
+    Route::get('grid', ['as' => 'grid', 'uses' => 'OperadorController@grid']);
+    Route::get('create', ['as' => 'create', 'uses' => 'OperadorController@create']);
+    Route::post('store', ['as' => 'store', 'uses' => 'OperadorController@store']);
+    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'OperadorController@edit']);
+    Route::post('update/{id}', ['as' => 'update', 'uses' => 'OperadorController@update']);*/
+
 
 # ROtas de autenticação
 Route::group(['middleware' => 'web'], function () {

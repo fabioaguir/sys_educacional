@@ -1,25 +1,23 @@
 // Regras de validação
 $(document).ready(function () {
 
-    $("#formOperador").validate({
+    $("#formDisciplina").validate({
         rules: {
-            nome_operadores: {
-                required: true,
-                alphaSpace: true,
-                maxlength: 200
+            nome: {
+                required: true
             },
-            cod_operadores: {
+
+            codigo: {
                 required: true,
-                chaveJ: true
             }
         },
         //For custom messages
         /*messages: {
-            nome_operadores:{
-                required: "Enter a username",
-                minlength: "Enter at least 5 characters"
-            }
-        },*/
+             nome_operadores:{
+             required: "Enter a username",
+             minlength: "Enter at least 5 characters"
+         }
+         },*/
         //Define qual elemento será adicionado
         errorElement : 'small',
         errorPlacement: function(error, element) {

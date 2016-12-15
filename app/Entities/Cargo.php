@@ -13,7 +13,9 @@ class Cargo extends Model implements Transformable
     protected $table    = 'cargos';
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'codigo',
+        'cargo_professor',
     ];
 
 }

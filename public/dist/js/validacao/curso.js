@@ -1,17 +1,14 @@
 // Regras de validação
 $(document).ready(function () {
 
-    $("#formAgencia").validate({
+    $("#formCurso").validate({
         rules: {
-            numero_agencia: {
-                required: true,
-                bankBr: true,
-                minlength: 4,
-                maxlength: 15
+            nome: {
+                required: true
             },
-            nome_agencia: {
+
+            codigo: {
                 required: true,
-                alphaSpace: true
             }
         },
         //For custom messages
