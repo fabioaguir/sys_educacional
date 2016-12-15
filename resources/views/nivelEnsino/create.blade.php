@@ -24,8 +24,8 @@
             {{-- Fim mensagem de alerta --}}
 
             {{--Formulario--}}
-            {!! Form::open(['route'=>'modalidadeEnsino.store', 'id' => 'formModalidadeEnsino', 'method' => "POST" ]) !!}
-            @include('tamplatesForms.tamplateFormModalidadeEnsino')
+            {!! Form::open(['route'=>'nivelEnsino.store', 'id' => 'formNivelEnsino', 'method' => "POST" ]) !!}
+            @include('tamplatesForms.tamplateFormNivelEnsino')
             {!! Form::close() !!}
             {{--Fim formulario--}}
         </section>

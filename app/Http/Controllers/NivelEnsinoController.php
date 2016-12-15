@@ -5,37 +5,36 @@ namespace SerEducacional\Http\Controllers;
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Repositories\ModalidadeEnsinoRepository;
-use SerEducacional\Services\ModalidadeEnsinoService;
+use SerEducacional\Repositories\NivelEnsinoRepository;
+use SerEducacional\Services\NivelEnsinoService;
 use Yajra\Datatables\Datatables;
 
-class ModalidadeEnsinoController extends Controller
+class NivelEnsinoController extends Controller
 {
-
     /**
-     * @var ModalidadeEnsinoRepository
+     * @var NivelEnsinoRepository
      */
     protected $repository;
 
     /**
-     * @var array3
+     * @var array
      */
     private $loadFields = [
-
+        'ModalidadeEnsino'
     ];
 
     /**
-     * @var ModalidadeEnsinoService
+     * @var NivelEnsinoService
      */
     private $service;
 
     /**
-     * ModalidadeEnsinoController constructor.
-     * @param ModalidadeEnsinoRepository $repository
-     * @param ModalidadeEnsinoService $service
+     * NivelEnsinoController constructor.
+     * @param NivelEnsinoRepository $repository
+     * @param NivelEnsinoService $service
      */
-    public function __construct(ModalidadeEnsinoRepository $repository,
-                                ModalidadeEnsinoService $service)
+    public function __construct(NivelEnsinoRepository $repository,
+                                NivelEnsinoService $service)
     {
         $this->repository = $repository;
         $this->service = $service;
@@ -47,7 +46,7 @@ class ModalidadeEnsinoController extends Controller
     public function index()
     {
         # Retorno para view
-        return view('modalidade.index');
+        return view('nivelEnsino.index');
     }
 
     /**
@@ -55,8 +54,11 @@ class ModalidadeEnsinoController extends Controller
      */
     public function create()
     {
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
         # Retorno para view
-        return view('modalidade.create');
+        return view('nivelEnsino.create', compact('loadFields'));
     }
 
     /**
@@ -65,18 +67,20 @@ class ModalidadeEnsinoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('modalidades')
+        $rows = \DB::table('niveis_ensino')
+            ->join('modalidades', 'modalidades.id', '=', 'niveis_ensino.modalidade_id')
             ->select([
-                'modalidades.id',
-                'modalidades.nome',
-                'modalidades.codigo',
+                'niveis_ensino.id',
+                'niveis_ensino.nome',
+                'niveis_ensino.codigo',
+                'modalidades.nome as modalidade',
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Modalidade" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Modalidade" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html  = '<a style="margin-right: 5%;" title="Editar Nível" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Nível" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;
@@ -125,7 +129,7 @@ class ModalidadeEnsinoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('modalidade.edit', compact('model', 'loadFields'));
+            return view('nivelEnsino.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -157,10 +161,6 @@ class ModalidadeEnsinoController extends Controller
         }
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy($id)
     {
         try {
