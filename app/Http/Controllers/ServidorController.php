@@ -17,17 +17,17 @@ use Yajra\Datatables\Datatables;
 class ServidorController extends Controller
 {
     /**
-     * @var
+     * @var ServidorService
      */
     private $service;
 
     /**
-     * @var PessoaFisicaRepository
+     * @var ServidorRepository
      */
     protected $repository;
 
     /**
-     * @var PessoaFisicaValidator
+     * @var ServidorValidator
      */
     protected $validator;
 
@@ -120,7 +120,7 @@ class ServidorController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-            //dd($data);
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -149,8 +149,6 @@ class ServidorController extends Controller
             #Recuperando a empresa
             $model = $this->repository->with('cgm.endereco')->find($id);
 
-           // dd($model->cgm->endereco);
-
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
@@ -173,7 +171,7 @@ class ServidorController extends Controller
             $data = $request->all();
 
             #tratando as rules
-            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);

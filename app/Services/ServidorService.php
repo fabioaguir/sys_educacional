@@ -65,6 +65,9 @@ class ServidorService
         #Retorno de endereço
         $endereco = $this->tratamentoEndereco($data['cgm']['endereco']);
 
+        # Recuperando instituição
+        $instituicao = \DB::table('instituicao')->first();
+
         #criando vinculo
         $data['cgm']['endereco_id'] = $endereco->id;
 
@@ -72,6 +75,7 @@ class ServidorService
         $cgm =  $this->pessoaFisicaRepository->create($data['cgm']);
 
         #criando vinculo
+        $data['id_instituicao'] = $instituicao->id;
         $data['id_cgm'] = $cgm->id;
 
         #Salvando o registro principal
