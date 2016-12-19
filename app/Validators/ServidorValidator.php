@@ -17,6 +17,10 @@ class ServidorValidator extends LaravelValidator
         'cargos_id' => 'Cargo',
         'funcoes_id' => 'Função',
     ];
+    
+    protected $messages = [
+
+    ];
 
     protected $rules = [
         

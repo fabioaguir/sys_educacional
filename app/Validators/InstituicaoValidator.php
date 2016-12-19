@@ -9,7 +9,15 @@ class InstituicaoValidator extends LaravelValidator
 {
 
     use TraitReplaceRulesValidator;
+    
+    protected $attributes = [
 
+    ];
+
+    protected $messages = [
+
+    ];
+    
     protected $rules = [
         
         ValidatorInterface::RULE_CREATE => [

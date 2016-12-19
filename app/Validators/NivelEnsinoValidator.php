@@ -8,6 +8,10 @@ use \Prettus\Validator\LaravelValidator;
 class NivelEnsinoValidator extends LaravelValidator
 {
 
+    protected $attributes = [
+
+    ];
+
     protected $messages = [
 
     ];

@@ -12,7 +12,6 @@ class FuncaoValidator extends LaravelValidator
 
     ];
 
-
     protected $messages = [
 
     ];
