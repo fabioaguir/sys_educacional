@@ -8,10 +8,6 @@ use \Prettus\Validator\LaravelValidator;
 class ModalidadeEnsinoValidator extends LaravelValidator
 {
     protected $attributes = [
-
-    ];
-
-    protected $attributes = [
         'nome' => 'Nome',
         'codigo' => 'Código',
     ];
