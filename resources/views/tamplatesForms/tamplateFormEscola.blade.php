@@ -207,7 +207,7 @@
                                     </div>
                                 @else
                                     <div class="select">
-                                        {!! Form::select("estado", $loadFields['estado'], array('class' => 'form-control', 'id' => 'estado')) !!}
+                                        {!! Form::select("estado", $loadFields['estado'], null,array('class' => 'form-control', 'id' => 'estado')) !!}
                                     </div>
                                 @endif
                             </div>
@@ -281,6 +281,7 @@
     <script type="text/javascript">
         //Incio - Retorno de cidades associadas aos estados
         $(document).on('change', "#estado", function () {
+            console.log('sdsdsd');
 
             //Removendo as cidades
             $('#cidade option').remove();
