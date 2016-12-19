@@ -80,9 +80,16 @@ class CursosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o curso
+            $curso = $this->repository->find($row->id);
+
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Curso" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Curso" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Validando a possibilidade de remoção
+            if(count($curso->curriculos) == 0) {
+                $html .= '<a href="destroy/'.$row->id.'" title="Remover Curso" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Retorno
             return $html;

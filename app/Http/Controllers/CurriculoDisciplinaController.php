@@ -33,25 +33,45 @@ class CurriculoDisciplinaController extends Controller
     /**
      * @return mixed
      */
-    public function grid($id)
+    public function gridSerie($id)
+    {
+        #Criando a consulta
+        $rows = \DB::table('series')
+            ->join('curriculos_series', 'curriculos_series.serie_id', '=', 'series.id')
+            ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
+            ->select([
+                 'series.id',
+                 'series.nome',
+                 'curriculos_series.id as curriculoSerieId'
+            ])
+            ->where('curriculos.id', $id);
+
+        #Editando a grid
+        return Datatables::of($rows)->make(true);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function grid($idCurriculoSerie)
     {
         #Criando a consulta
         $rows = \DB::table('disciplinas')
-            ->join('curriculos_disciplinas', 'curriculos_disciplinas.disciplinas_id', '=', 'disciplinas.id')
-            ->join('curriculos', 'curriculos.id', '=', 'curriculos_disciplinas.curriculos_id')           
+            ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
+            ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
             ->select([
-                 'disciplinas.id',
-                 'disciplinas.nome',
-                 'disciplinas.codigo',
-                 'curriculos.id as idCurriculo'                    
+                'disciplinas.id',
+                'disciplinas.nome',
+                'disciplinas.codigo',
+                'curriculos_series_disciplinas.id as idCurriculoSerieDisciplina'
             ])
-            ->where('curriculos.id', $id);
+            ->where('curriculos_series.id', $idCurriculoSerie);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # variáveis de uso
             $html = '';
-            
+
             # Verifica a se a condição é válida
             if(true) {
                 $html .= '<a href="#" class="removerDisciplina btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
@@ -61,6 +81,7 @@ class CurriculoDisciplinaController extends Controller
             return $html;
         })->make(true);
     }
+
 
     /**
      * @param Request $request
@@ -74,17 +95,18 @@ class CurriculoDisciplinaController extends Controller
             $result = [];
 
             # Dados individuais
-            $idCurriculo = $dados['idCurriculo'];
+            $idCurriculoSerie = $dados['idCurriculoSerie'];
             $valueSearch = $dados['search'] ?? "";
             $pageValue   = $dados['page'];
 
             # QUery Principal
             $query = \DB::table('disciplinas')
-                ->whereNotIn('disciplinas.id', function ($where) use ($idCurriculo) {
+                ->whereNotIn('disciplinas.id', function ($where) use ($idCurriculoSerie) {
                    $where->from('disciplinas')
                        ->select('disciplinas.id')
-                       ->join('curriculos_disciplinas', 'curriculos_disciplinas.disciplinas_id', '=', 'disciplinas.id')
-                       ->where('curriculos_disciplinas.curriculos_id', $idCurriculo);
+                       ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
+                       ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
+                       ->where('curriculos_series.id', $idCurriculoSerie);
                 })
                 ->select([
                     'disciplinas.id',
@@ -139,7 +161,8 @@ class CurriculoDisciplinaController extends Controller
             $dados = $request->all();
 
             #Validando os parametros de entrada
-            if(!isset($dados['idCurriculo']) && !isset($dados['idDisciplinas'])) {
+            if(!isset($dados['curriculoSerieId']) && !isset($dados['idDisciplinas'])
+                && !isset($dados['idSerie'])) {
                 return new \Exception("Parâmetros inválidos");
             }
 
@@ -157,7 +180,7 @@ class CurriculoDisciplinaController extends Controller
                 }
 
                 #Adicionando a entidade principal
-                $curriculo->disciplinas()->attach($disciplina->id);
+                $curriculo->series()->find($dados['idSerie'])->pivot->disciplinas()->attach($disciplina->id);
             }
 
             # Retorno
@@ -177,23 +200,12 @@ class CurriculoDisciplinaController extends Controller
             $dados = $request->all();
 
             #Validando os parametros de entrada
-            if(!isset($dados['idCurriculo']) && !isset($dados['idDisciplina'])) {
+            if(!isset($dados['idCurriculoSerieDisciplina'])) {
                 return new \Exception("Parâmetros inválidos");
             }
 
-            #Recuperando a entidade
-            $curriculo = $this->curriculoRepository->find($dados['idCurriculo']);
-
-            #Recuperando a entidade
-            $disciplina = $this->disciplinaRepository->find($dados['idDisciplina']);
-
-            #Válidando a disciplina
-            if(!$disciplina) {
-                return new \Exception("Disciplina não existe");
-            }
-
-            #Adicionando a entidade principal
-            $curriculo->disciplinas()->detach($disciplina->id);
+            # Removendo a disciplina
+            \DB::table('curriculos_series_disciplinas')->where('id', $dados['idCurriculoSerieDisciplina'])->delete();
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

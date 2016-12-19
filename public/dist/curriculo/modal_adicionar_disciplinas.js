@@ -1,6 +1,27 @@
 // Carregando a table
+var tableCurriculoSerie;
+function loadTableCurriculoSerie (idCurriculo) {
+    // Carregaando a grid
+    tableCurriculoSerie = $('#serie-grid').DataTable({
+        retrieve: true,
+        processing: true,
+        serverSide: true,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        autoWidth: false,
+        ajax: laroute.route('curriculo.gridSerie', {'id' :idCurriculo }),
+        columns: [
+            {data: 'nome', name: 'series.nome'}
+        ]
+    });
+
+    return tableCurriculoSerie;
+}
+
+// Carregando a table
 var tableAdicionarDisciplina;
-function loadTableAdicionarDisciplina (idCurriculo) {
+function loadTableAdicionarDisciplina (curriculoSerieId) {
     // Carregaando a grid
     tableAdicionarDisciplina = $('#disciplina-grid').DataTable({
         retrieve: true,
@@ -10,7 +31,7 @@ function loadTableAdicionarDisciplina (idCurriculo) {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: laroute.route('curriculo.gridAdicionarDisciplina', {'id' :idCurriculo }),
+        ajax: laroute.route('curriculo.gridAdicionarDisciplina', {'idCurriculoSerie' : curriculoSerieId }),
         columns: [
             {data: 'codigo', name: 'disciplinas.codigo'},
             {data: 'nome', name: 'disciplinas.nome'},
@@ -24,16 +45,49 @@ function loadTableAdicionarDisciplina (idCurriculo) {
 // Função de execução
 function runModalAdicionarDisciplinas(idCurriculo)
 {
+    // Zerando a grid de disciplinas
+    loadTableAdicionarDisciplina(curriculoSerieId).ajax.url(laroute.route('curriculo.gridAdicionarDisciplina', {'idCurriculoSerie' : 0 })).load();
+
     //Carregando as grids de situações
-    if(tableAdicionarDisciplina) {
-        loadTableAdicionarDisciplina(idCurriculo).ajax.url(laroute.route('curriculo.gridAdicionarDisciplina', {'id' :idCurriculo })).load();
+    if(tableCurriculoSerie) {
+        loadTableCurriculoSerie(idCurriculo).ajax.url(laroute.route('curriculo.gridSerie', {'id' :idCurriculo })).load();
     } else {
-        loadTableAdicionarDisciplina(idCurriculo);
+        loadTableCurriculoSerie(idCurriculo);
     }
+
+    // Desabilitando a o select2 e o botão de adicionar
+    $('#select-disciplinas').prop('disabled', true);
+    $('#addDisciplina').prop('disabled', true);
 
     // Exibindo o modal
     $('#modal-adicionar-disciplinas').modal({'show' : true});
 }
+
+// Id do pivot do curriculo e série
+var curriculoSerieId, serieId;
+
+// evento para abrir a grid de disciplina
+$(document).on("click", "#serie-grid tbody tr", function (event) {
+    if (tableCurriculoSerie.rows().data().length > 0  && $(event.target).is("td")) {
+        $(this).parent().find("tr td").removeClass('row_selected');
+        $(this).find("td").addClass("row_selected");
+
+        //Recuperando o id da turma selecionada e o index da linha selecionada
+        curriculoSerieId = tableCurriculoSerie.row($(this).index()).data().curriculoSerieId;
+        serieId = tableCurriculoSerie.row($(this).index()).data().id;
+
+        // habilitando o select2 e o botão de adicionar
+        $('#select-disciplinas').prop('disabled', false);
+        $('#addDisciplina').prop('disabled', false);
+
+        //Carregando as grids de situações
+        if(tableAdicionarDisciplina) {
+            loadTableAdicionarDisciplina(curriculoSerieId).ajax.url(laroute.route('curriculo.gridAdicionarDisciplina', {'idCurriculoSerie' :curriculoSerieId })).load();
+        } else {
+            loadTableAdicionarDisciplina(curriculoSerieId);
+        }
+    }
+});
 
 //consulta via select2
 $("#select-disciplinas").select2({
@@ -49,7 +103,7 @@ $("#select-disciplinas").select2({
             return {
                 'search': params.term,
                 'page': params.page || 1,
-                'idCurriculo':  idCurriculo
+                'idCurriculoSerie':  curriculoSerieId
             };
         },
         processResults: function (data, params) {
@@ -91,7 +145,8 @@ $(document).on('click', '#addDisciplina', function (event) {
     //Setando o o json para envio
     var dados = {
         'idCurriculo' : idCurriculo,
-        'idDisciplinas' : arrayId
+        'idDisciplinas' : arrayId,
+        'idSerie' : serieId
     };
 
     // Requisição Ajax
@@ -109,13 +164,11 @@ $(document).on('click', '#addDisciplina', function (event) {
 
 //Evento de remover a disciplina
 $(document).on('click', '.removerDisciplina', function () {
-    idCurriculo  = tableAdicionarDisciplina.row($(this).parents('tr').index()).data().idCurriculo;
-    idDisciplina = tableAdicionarDisciplina.row($(this).parents('tr').index()).data().id;
+    var idCurriculoSerieDisciplina = tableAdicionarDisciplina.row($(this).parents('tr').index()).data().idCurriculoSerieDisciplina;
 
     //Setando o o json para envio
     var dados = {
-        'idCurriculo' : idCurriculo,
-        'idDisciplina' : idDisciplina
+        'idCurriculoSerieDisciplina' : idCurriculoSerieDisciplina
     };
 
     // Requisição Ajax
