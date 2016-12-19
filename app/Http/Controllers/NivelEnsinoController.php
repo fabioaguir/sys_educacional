@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\NivelEnsinoRepository;
+use SerEducacional\Validators\NivelEnsinoValidator;
 use SerEducacional\Services\NivelEnsinoService;
 use Yajra\Datatables\Datatables;
 
@@ -34,10 +35,12 @@ class NivelEnsinoController extends Controller
      * @param NivelEnsinoService $service
      */
     public function __construct(NivelEnsinoRepository $repository,
-                                NivelEnsinoService $service)
+                                NivelEnsinoService $service,
+                                NivelEnsinoValidator $validator)
     {
         $this->repository = $repository;
         $this->service = $service;
+        $this->validator = $validator;
     }
 
     /**
@@ -97,8 +100,8 @@ class NivelEnsinoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -143,8 +146,8 @@ class NivelEnsinoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);
