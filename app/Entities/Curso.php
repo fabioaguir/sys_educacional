@@ -23,4 +23,12 @@ class Curso extends Model implements Transformable
     {
         return $this->belongsTo(NivelEnsino::class, 'nivel_ensino_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function curriculos()
+    {
+        return $this->hasMany(Curriculo::class, 'curso_id');
+    }
 }
