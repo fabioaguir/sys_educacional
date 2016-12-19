@@ -7,6 +7,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\FuncaoRepository;
 use SerEducacional\Services\FuncaoService;
+use SerEducacional\Validators\FuncaoValidator;
 use Yajra\Datatables\Datatables;
 
 class FuncaoController extends Controller
@@ -34,10 +35,12 @@ class FuncaoController extends Controller
      * @param FuncaoService $service
      */
     public function __construct(FuncaoRepository $repository,
-                                FuncaoService $service)
+                                FuncaoService $service,
+                                FuncaoValidator $validator)
     {
         $this->repository = $repository;
         $this->service = $service;
+        $this->validator = $validator;
     }
 
     /**
@@ -95,8 +98,8 @@ class FuncaoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -141,8 +144,8 @@ class FuncaoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);

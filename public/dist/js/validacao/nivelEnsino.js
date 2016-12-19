@@ -1,20 +1,22 @@
 // Regras de validação
 $(document).ready(function () {
 
-    $("#formFuncao").validate({
+    $("#formNivelEnsino").validate({
         rules: {
             nome: {
                 required: true,
-                alphaSpace: true
+                alphaSpace: true,
+                maxlength: 30
             },
 
-            sigla: {
+            codigo: {
                 alphaSpace: true,
                 maxlength: 15
             },
 
-            funcao_professor: {
-                //required: true,
+            modalidade_id: {
+                required: true
+                //integer: true
             }
         },
         //For custom messages
