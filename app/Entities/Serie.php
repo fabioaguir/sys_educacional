@@ -17,4 +17,28 @@ class Serie extends Model implements Transformable
         'codigo'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function curriculos()
+    {
+        return $this->belongsToMany(Curriculo::class, 'curriculos_series', 'serie_id', 'curriculo_id')
+            ->withPivot(['id']);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Curriculo) {
+            return new PivotCurriculoSerie($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
 }
