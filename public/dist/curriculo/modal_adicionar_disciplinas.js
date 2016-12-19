@@ -159,6 +159,7 @@ $(document).on('click', '#addDisciplina', function (event) {
         $('#select-disciplinas').val(null).trigger("change");
         swal("Disciplina(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
         tableAdicionarDisciplina.ajax.reload();
+        table.ajax.reload();
     });
 });
 
@@ -181,6 +182,7 @@ $(document).on('click', '.removerDisciplina', function () {
         $('#select-disciplinas').val(null).trigger("change");
         swal("Disciplina removida com sucesso!", "Click no botão abaixo!", "success");
         tableAdicionarDisciplina.ajax.reload();
+        table.ajax.reload();
     });
 });
 
