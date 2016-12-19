@@ -21,7 +21,7 @@
                         <div class="form-group col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="codigo">Código</label>
+                                    <label for="codigo">Código *</label>
                                     {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código')) !!}
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                         <div class="form-group col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="inep">Código INEP</label>
+                                    <label for="inep">Código INEP *</label>
                                     {!! Form::text('inep', Session::getOldInput('inep'), array('class' => 'form-control input-sm', 'placeholder' => 'Código inep')) !!}
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                             <div class=" fg-line">
                                 <label for="coordenadoria_id">Coordenadoria</label>
                                 <div class="select">
-                                    {!! Form::select("coordenadoria_id", (["" => "Selecione grau"] + $loadFields['coordenadoria']->toArray()), null, array('class' => 'form-control')) !!}
+                                    {!! Form::select("coordenadoria_id", (["" => "Selecione"] + $loadFields['coordenadoria']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                             <div class=" fg-line">
                                 <label for="mantenedora_id">Mantenedora</label>
                                 <div class="select">
-                                    {!! Form::select("mantenedora_id", (["" => "Selecione grau"] + $loadFields['mantenedora']->toArray()), null, array('class' => 'form-control')) !!}
+                                    {!! Form::select("mantenedora_id", (["" => "Selecione"] + $loadFields['mantenedora']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="telefone">E-mail</label>
+                                    <label for="telefone">Telefone</label>
                                     {!! Form::text("telefone", Session::getOldInput("telefone"), array('class' => 'form-control input-sm', 'placeholder' => 'Número telefone')) !!}
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                             <div class=" fg-line">
                                 <label for="zona_id">Zona</label>
                                 <div class="select">
-                                    {!! Form::select("zona_id", (["" => "Selecione grau"] + $loadFields['zona']->toArray()), null, array('class' => 'form-control')) !!}
+                                    {!! Form::select("zona_id", (["" => "Selecione"] + $loadFields['zona']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[logradouro]">Logradouro *</label>
-                                    {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'Logradouro')) !!}
                                 </div>
                             </div>
                         </div>
@@ -172,7 +172,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[numero]">Número *</label>
-                                    {!! Form::text("endereco[numero]", Session::getOldInput("endereco[numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[numero]", Session::getOldInput("endereco[numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[complemento]">Complemento</label>
-                                    {!! Form::text("endereco[complemento]", Session::getOldInput("endereco[complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[complemento]", Session::getOldInput("endereco[complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'Completo')) !!}
                                 </div>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[cep]">CEP</label>
-                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
                                 </div>
                             </div>
                         </div>
@@ -275,6 +275,8 @@
     <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
     --}}{{--Regras de validação--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/escola.js')  }}"></script>
 
     <script type="text/javascript">
         //Incio - Retorno de cidades associadas aos estados
