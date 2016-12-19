@@ -163,6 +163,16 @@
 </div>
 <!-- -->
 
+<!-- Imagem de carregamento em requisições ajax-->
+<div class="modal">
+    <div class="preloader pl-xxl">
+        <svg class="pl-circular" viewBox="25 25 50 50">
+            <circle class="plc-path" cx="50" cy="50" r="20"/>
+        </svg>
+    </div>
+</div>
+<!-- -->
+
 <footer id="footer" class="p-t-0">
     <strong>Copyright &copy; 2015-2016 <a target="_blank" href="http://serbinario.com.br"><i></i>SERBINARIO</a> .</strong> Todos os direitos reservados.
 </footer>
@@ -198,6 +208,10 @@
     $('.dateTimePicker').datetimepicker({
         format : 'd/m/Y'
     });
+    $.validator.setDefaults({
+        ignore: [],
+    });
+
 </script>
 
 @yield('javascript')
