@@ -28,7 +28,9 @@ class NivelEnsinoValidator extends LaravelValidator
         ],
 
         ValidatorInterface::RULE_UPDATE => [
-
+            'nome' => 'required|serbinario_alpha_space|max:30',
+            'codigo' => 'serbinario_alpha_space|max:15',
+            'modalidade_id' => 'required|integer'
         ],
    ];
 }

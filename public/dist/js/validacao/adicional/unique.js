@@ -1,5 +1,7 @@
 $.validator.addMethod("unique",
     function(value, element, params) {
+        //Declaração de variaveis de uso
+        //$body = $('body');
         var isUnique = false;
         if(value == '')
             return isUnique;
@@ -12,9 +14,15 @@ $.validator.addMethod("unique",
             url: params[0],
             type : 'POST',
             async: false,
-            data: { idCliente : params[1], value : value},
+            data: { pessoaFisica : params[0], value : value},
             dataType: 'json',
             cache: true,
+            /*beforeSend: function () {
+                $body.addClass("loading");
+            },
+            complete: function () {
+                $body.removeClass("loading");
+            },*/
             success: function(data){
                 console.log(data);
                 if (data.success == false) {

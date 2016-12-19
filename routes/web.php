@@ -17,6 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'PessoaFisicaController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'PessoaFisicaController@findCidade']);
+        Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'PessoaFisicaController@searchCpf']);
     });
 
     Route::group(['prefix' => 'pessoaJuridica', 'as' => 'pessoaJuridica.'], function () {

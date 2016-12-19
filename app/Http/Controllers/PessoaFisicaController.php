@@ -229,4 +229,35 @@ class PessoaFisicaController extends Controller
 
         return response()->json($cidades);
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function searchCpf(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $contrato = $request->all();
+
+            $cpfCliente = \DB::table('cgm')
+                ->select([
+                    'cgm.id',
+                    'cgm.cpf'
+                ])
+                ->where('cgm.cpf', $contrato['value'])
+                ->get();
+
+            if (count($cpfCliente) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }
