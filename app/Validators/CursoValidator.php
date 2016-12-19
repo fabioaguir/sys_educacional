@@ -17,18 +17,19 @@ class CursoValidator extends LaravelValidator
 
     protected $messages = [
         'required' => ':attribute é requerido',
-        'max' => ':attribute só pode ter no máximo :max caracteres'
+        'max' => ':attribute só pode ter no máximo :max caracteres',
+        'unique' => ':attribute já está cadastrado'
     ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|max:100',
-            'codigo' => 'required|max:50',
+            'codigo' => 'required|max:50|unique:cursos,codigo',
             'nivel_ensino_id' => 'required'
         ],
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:100',
-            'codigo' => 'required|max:50',
+            'codigo' => 'required|max:50|unique:cursos,codigo,:id',
             'nivel_ensino_id' => 'required'
         ],
     ];

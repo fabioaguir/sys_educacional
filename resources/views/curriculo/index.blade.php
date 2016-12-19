@@ -15,6 +15,12 @@
         .select2-dropdown{
             z-index: 3051;
         }
+
+        .row_selected {
+            background-color: #6A5ACD !important;
+            color: #FFF;
+            font-weight: bold;
+        }
     </style>
 @endsection
 

@@ -62,14 +62,6 @@ class Curriculo extends Model implements Transformable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function disciplinas()
-    {
-        return $this->belongsToMany(Disciplina::class, 'curriculos_disciplinas', 'curriculos_id', 'disciplinas_id');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function turno()
@@ -82,6 +74,23 @@ class Curriculo extends Model implements Transformable
      */
     public function series()
     {
-        return $this->belongsToMany(Serie::class, 'curriculos_series', 'curriculo_id', 'serie_id');
+        return $this->belongsToMany(Serie::class, 'curriculos_series', 'curriculo_id', 'serie_id')
+            ->withPivot(['id']);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Serie) {
+            return new PivotCurriculoSerie($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 }
