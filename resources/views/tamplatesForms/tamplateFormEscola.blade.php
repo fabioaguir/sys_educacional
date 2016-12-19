@@ -60,7 +60,7 @@
                             <div class=" fg-line">
                                 <label for="coordenadoria_id">Coordenadoria</label>
                                 <div class="select">
-                                    {!! Form::select("coordenadoria_id", (["" => "Selecione grau"] + $loadFields['coordenadoria']->toArray()), null, array()) !!}
+                                    {!! Form::select("coordenadoria_id", (["" => "Selecione grau"] + $loadFields['coordenadoria']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                             <div class=" fg-line">
                                 <label for="mantenedora_id">Mantenedora</label>
                                 <div class="select">
-                                    {!! Form::select("mantenedora_id", (["" => "Selecione grau"] + $loadFields['mantenedora']->toArray()), null, array()) !!}
+                                    {!! Form::select("mantenedora_id", (["" => "Selecione grau"] + $loadFields['mantenedora']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                             <div class=" fg-line">
                                 <label for="zona_id">Zona</label>
                                 <div class="select">
-                                    {!! Form::select("zona_id", (["" => "Selecione grau"] + $loadFields['zona']->toArray()), null, array()) !!}
+                                    {!! Form::select("zona_id", (["" => "Selecione grau"] + $loadFields['zona']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -135,28 +135,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
-                            <div class=" fg-line">
-                                <label for="instituicao_id">Instituição</label>
-                                <div class="select">
-                                    {{--["" => "Selecione grau"] + $loadFields['instituicao']->toArray()--}}
-                                    {!! Form::select("instituicao_id", array(), null, array()) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{--<div class="row">
-                        <div class="form-group col-sm-4">
-                            <div class=" fg-line">
-                                <label for="localizacao_escola_id">Localização da escola</label>
-                                <div class="select">
-                                    --}}{{--["" => "Selecione grau"] + $loadFields['instituicao']->toArray()--}}{{--
-                                    {!! Form::select("localizacao_escola_id", array(), null, array()) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>--}}
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
@@ -222,10 +200,16 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
-                                <label for="endereco['estado_id']">Estado *</label>
-                                <div class="select">
-                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione grau"] + $loadFields['estado']->toArray()), null, array('id' => 'estado')) !!}
-                                </div>
+                                <label for="estado">Estado *</label>
+                                @if(isset($model->endereco->bairro->cidade->estado->id))
+                                    <div class="select">
+                                        {!! Form::select("estado", $loadFields['estado'], $model->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
+                                    </div>
+                                @else
+                                    <div class="select">
+                                        {!! Form::select("estado", $loadFields['estado'], array('class' => 'form-control', 'id' => 'estado')) !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -233,9 +217,15 @@
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="endereco['cidade_id']">Cidade *</label>
-                                <div class="select">
-                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione grau"] + $loadFields['cidade']->toArray()), null, array('id' => 'cidade')) !!}
-                                </div>
+                                @if(isset($model->endereco->bairro->cidade->id))
+                                    <div class="select">
+                                        {!! Form::select("endereco[cidade_id]", array($model->endereco->bairro->cidade->id => $model->endereco->bairro->cidade->nome), $model->endereco->bairro->cidade->id, array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                    </div>
+                                @else
+                                    <div class="select">
+                                        {!! Form::select('endereco[cidade_id]', array(), Session::getOldInput('cidade_id'), array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -243,9 +233,15 @@
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="endereco[bairro_id]">Bairro *</label>
-                                <div class="select">
-                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('id' => 'bairro')) !!}
-                                </div>
+                                @if(isset($model->endereco->bairro->id))
+                                    <div class="select">
+                                        {!! Form::select("endereco[bairro_id]", array($model->endereco->bairro->id => $model->endereco->bairro->nome), $model->endereco->bairro->id, array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                    </div>
+                                @else
+                                    <div class="select">
+                                        {!! Form::select("endereco[bairro_id]", array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

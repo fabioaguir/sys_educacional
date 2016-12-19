@@ -25,7 +25,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="Nome *">Nome</label>
-                                    {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome Completo')) !!}
+                                    {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome completo')) !!}
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_nascimento">Data de Nascimento *</label>
-                                    {!! Form::date('data_nascimento', null, ['class' => 'form-control input-sm', 'placeholder' => 'Data de Nascimento']) !!}
+                                    {!! Form::date('data_nascimento', null, ['class' => 'form-control input-sm', 'placeholder' => 'Data de nascimento']) !!}
                                     {{--{!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Nascimento')) !!}--}}
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_falecimento">Data de Falecimento</label>
-                                    {!! Form::text('data_falecimento', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Falecimento')) !!}
+                                    {!! Form::text('data_falecimento', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de falecimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="orgao_emissor">Orgão Emissor *</label>
-                                    {!! Form::text('orgao_emissor', Session::getOldInput('orgao_emissor'), array('class' => 'form-control input-sm', 'placeholder' => 'Orgão Emissor')) !!}
+                                    {!! Form::text('orgao_emissor', Session::getOldInput('orgao_emissor'), array('class' => 'form-control input-sm', 'placeholder' => 'Orgão emissor')) !!}
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                             <div class=" fg-line">
                                 <label for="cnh_categoria_id">Categoria CNH</label>
                                 <div class="select">
-                                    {!! Form::select('cnh_categoria_id', (["" => "Selecione categoria"] + $loadFields['categoriacnh']->toArray()), null, array('class' => 'Form::select')) !!}
+                                    {!! Form::select('cnh_categoria_id', (["" => "Selecione categoria"] + $loadFields['categoriacnh']->toArray()), null, array('class' => '')) !!}
                                 </div>
                             </div>
                         </div>
@@ -217,7 +217,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_vencimento_cnh">Data Vencimento</label>
-                                    {!! Form::text('data_vencimento_cnh', Session::getOldInput('data_vencimento_cnh'), array('class' => 'form-control input-sm', 'placeholder' => 'Data Vencimento CNH')) !!}
+                                    {!! Form::text('data_vencimento_cnh', Session::getOldInput('data_vencimento_cnh'), array('class' => 'form-control input-sm', 'placeholder' => 'Data vencimento CNH')) !!}
                                 </div>
                             </div>
                         </div>
@@ -267,7 +267,7 @@
                             <div class=" fg-line">
                                 <label for="endereco['estado_id']">Estado *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione grau"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select', 'id' => 'estado')) !!}
+                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione estado"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select', 'id' => 'estado')) !!}
                                 </div>
                             </div>
                         </div>
@@ -275,7 +275,7 @@
                             <div class=" fg-line">
                                 <label for="endereco['cidade_id']">Cidade *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione grau"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select', 'id' => 'cidade')) !!}
+                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione cidade"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select', 'id' => 'cidade')) !!}
                                 </div>
                             </div>
                         </div>

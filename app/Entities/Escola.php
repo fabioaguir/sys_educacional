@@ -5,6 +5,7 @@ namespace SerEducacional\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use SerEducacional\Uteis\SerbinarioDateFormat;
 
 class Escola extends Model implements Transformable
 {
@@ -35,7 +36,7 @@ class Escola extends Model implements Transformable
     /**
      * @return string
      */
-    public function getDataPublicacaoAttribute()
+    public function getDtPubPortariaAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['dt_pub_portaria']);
     }
@@ -44,9 +45,16 @@ class Escola extends Model implements Transformable
      *
      * @return \DateTime
      */
-    public function setDataPublicacaoAttribute($value)
+    public function setDtPubPortariaAttribute($value)
     {
         $this->attributes['dt_pub_portaria'] = SerbinarioDateFormat::toUsa($value);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class);
+    }
 }

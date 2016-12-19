@@ -29,7 +29,7 @@ class ServidorValidator extends LaravelValidator
             //Tabela CGM
             'cgm.nome' => 'required',
             'cgm.sexo_id' => 'required',
-            'cgm.data_nascimento' => 'required|serbinario_date_format:"d/m/Y"',
+            'cgm.data_nascimento' => 'required',
             'cgm.nacionalidade_id' => 'required',
             'cgm.cgm_municipio_id' => 'required',
             'cgm.estado_civil_id' => 'required',
@@ -39,7 +39,7 @@ class ServidorValidator extends LaravelValidator
             'cgm.rg' => 'required',
 
             //Tabela Servidor
-            'data_admicao' => 'required|serbinario_date_format:"d/m/Y"',
+            'data_admicao' => 'required',
             'carga_horaria' => 'required',
             'tipo_vinculo_servidor_id' => 'required',
             'cargos_id' => 'required',
@@ -56,7 +56,7 @@ class ServidorValidator extends LaravelValidator
             //Tabela CGM
             'cgm.nome' => 'required',
             'cgm.sexo_id' => 'required',
-            'cgm.data_nascimento' => 'required|serbinario_date_format:"d/m/Y"',
+            'cgm.data_nascimento' => 'required',
             'cgm.nacionalidade_id' => 'required',
             'cgm.cgm_municipio_id' => 'required',
             'cgm.estado_civil_id' => 'required',
@@ -66,7 +66,7 @@ class ServidorValidator extends LaravelValidator
             'cgm.rg' => 'required',
 
             //Tabela Servidor
-            'data_admicao' => 'required|serbinario_date_format:"d/m/Y"',
+            'data_admicao' => 'required',
             'carga_horaria' => 'required',
             'tipo_vinculo_servidor_id' => 'required',
             'cargos_id' => 'required',

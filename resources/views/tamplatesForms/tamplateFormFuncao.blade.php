@@ -47,11 +47,11 @@
 
 @section('javascript')
     {{--Mensagens personalizadas--}}
-    {{--<script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
     {{--Regras adicionais--}}
-    {{--<script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
     {{--Regras de validação--}}
-    {{--<script type="text/javascript" src="{{ asset('/dist/js/validacao/funcao.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/funcao.js')  }}"></script>
 
     <script type="text/javascript">
         //Incio - Retorno de cidades associadas aos estados

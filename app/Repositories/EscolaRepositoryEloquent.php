@@ -24,7 +24,16 @@ class EscolaRepositoryEloquent extends BaseRepository implements EscolaRepositor
         return Escola::class;
     }
 
-    
+    /**
+     * Specify Validator class name
+     *
+     * @return mixed
+     */
+    public function validator()
+    {
+
+        return EscolaValidator::class;
+    }
 
     /**
      * Boot up the repository, pushing criteria

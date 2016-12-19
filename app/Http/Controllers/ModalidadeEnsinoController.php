@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\ModalidadeEnsinoRepository;
+use SerEducacional\Validators\ModalidadeEnsinoValidator;
 use SerEducacional\Services\ModalidadeEnsinoService;
 use Yajra\Datatables\Datatables;
 
@@ -35,10 +36,12 @@ class ModalidadeEnsinoController extends Controller
      * @param ModalidadeEnsinoService $service
      */
     public function __construct(ModalidadeEnsinoRepository $repository,
-                                ModalidadeEnsinoService $service)
+                                ModalidadeEnsinoService $service,
+                                ModalidadeEnsinoValidator $validator)
     {
         $this->repository = $repository;
         $this->service = $service;
+        $this->validator = $validator;
     }
 
     /**
@@ -93,8 +96,8 @@ class ModalidadeEnsinoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -139,8 +142,8 @@ class ModalidadeEnsinoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);
