@@ -89,8 +89,16 @@ class CurriculosController extends Controller
             # Html do edit
             $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
 
+            # Recuperando as disciplinas
+            $disciplinas = \DB::table('disciplinas')
+                ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
+                ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
+                ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
+                ->where('curriculos.id', $curriculo->id)
+                ->select(['disciplinas.id'])->get();
+
             # Verificando se o currículo possui disciplinas
-            if(count($curriculo->disciplinas) == 0) {
+            if(count($disciplinas) == 0) {
                 # Html de delete
                 $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
