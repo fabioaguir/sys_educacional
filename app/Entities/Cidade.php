@@ -14,7 +14,7 @@ class Cidade extends Model implements Transformable
 
     protected $fillable = [
         'nome',
-        'estado_id'
+        'estados_id'
     ];
 
     /**
@@ -22,6 +22,6 @@ class Cidade extends Model implements Transformable
      */
     public function estado()
     {
-        return $this->belongsTo(Estado::class, 'estado_id');
+        return $this->belongsTo(Estado::class, 'estados_id');
     }
 }

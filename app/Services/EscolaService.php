@@ -57,10 +57,17 @@ class EscolaService
         # Regras de negócios
         $this->tratamentoCampos($data);
 
+        # Tratando os campos latitude e longitude
+        $this->latitudeLongitude($data);
+
+        # Recuperando instituição
+        $instituicao = \DB::table('instituicao')->first();
+
         #retorno com objeto endereço
         $endereco = $this->tratamentoEndereco($data);
 
         #criando vinculo entre escola e endereco
+        $data['instituicao_id'] = $instituicao->id;
         $data['endereco_id'] = $endereco->id;
 
         #Salvando o registro pincipal
@@ -83,19 +90,25 @@ class EscolaService
      */
     public function update(array $data, int $id) : Escola
     {
-        /*# Regras de negócios
-        $this->tratamentoCampos($data);*/
-        //dd($data);
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
+        # Tratando os campos latitude e longitude
+        $this->latitudeLongitude($data);
+
         #Atualizando no banco de dados
-        $funcao = $this->repository->update($data, $id);
+        $escola = $this->repository->update($data, $id);
+
+        #Atualizando no banco de dados endereço
+        $endereco = $this->enderecoRepository->update($data['endereco'], $escola->endereco_id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$funcao) {
+        if(!$escola) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $funcao;
+        return $escola;
     }
 
     /**
@@ -118,22 +131,23 @@ class EscolaService
     }
 
     /**
-     * @param $id
+     * @param $data
      * @return mixed
-     * @throws \Exception
      */
-    public function find($id)
+    public function latitudeLongitude(array &$data)
     {
-        #Recuperando o registro no banco de dados
-        $funcao = $this->repository->find($id);
-
-        #Verificando se o registro foi encontrado
-        if(!$funcao) {
-            throw new \Exception('Pessoa não encontrada!');
+        # Validando se o campo latitude está vindo vazio
+        if($data['latitude'] == "") {
+            $data['latitude'] = null;
         }
 
-        #retorno
-        return $funcao;
+        # Validando se o campo longitude está vindo vazio
+        if($data['longitude'] == "") {
+            $data['longitude'] = null;
+        }
+
+        #Retorno
+        return $data;
     }
 
 
