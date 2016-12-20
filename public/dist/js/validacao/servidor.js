@@ -1,6 +1,7 @@
 // Regras de validação
 $(document).ready(function () {
 
+   /// $.validator.setDefaults({ ignore: '' });
     $("#formServidor").validate({
         rules: {
             'cgm[nome]': {

@@ -44,8 +44,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -60,7 +58,7 @@
                 {{--#2--}}
                 <div role="tabpanel" class="tab-pane" id="endereco">
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-8">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[logradouro]">Logradouro *</label>
@@ -68,8 +66,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -79,6 +75,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
@@ -88,8 +85,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -100,7 +95,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-3">
                             <div class=" fg-line">
                                 <label for="endereco['estado_id']">Estado *</label>
                                 @if(isset($model->endereco->bairro->cidade->estado->id))
@@ -114,8 +109,6 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cidade_id">Cidade *</label>
@@ -130,9 +123,7 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-5">
                             <div class=" fg-line">
                                 <label for="endereco[bairro_id]">Bairro *</label>
                                 @if(isset($model->endereco->bairro->id))
@@ -147,6 +138,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             <!-- Conteúdo -->
             </div>
