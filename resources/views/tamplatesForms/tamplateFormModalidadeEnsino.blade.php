@@ -34,5 +34,5 @@
     {{--Regras adicionais--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
     {{--Regras de validação--}}
-    {{--<script type="text/javascript" src="{{ asset('/dist/js/validacao/modalidadeEnsino.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/modalidadeEnsino.js')  }}"></script>
 @endsection

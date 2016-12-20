@@ -3,6 +3,9 @@
 </div>
 <div class="card">
     <div class="card-body card-padding">
+
+        <input type="hidden" id="idPessoaFisica" value="{{ isset($model->id) ? $model->id : null }}">
+
         <!-- Painel -->
         <div role="tabpanel">
             <!-- Guias -->
@@ -24,7 +27,7 @@
                         <div class="form-group col-md-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="Nome *">Nome</label>
+                                    <label for="nome">Nome *</label>
                                     {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome completo')) !!}
                                 </div>
                             </div>
@@ -145,7 +148,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cpf">CPF *</label>
-                                    {!! Form::text('cpf', Session::getOldInput('cpf'), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
+                                    {!! Form::text('cpf', Session::getOldInput('cpf'), array('id' => 'cpf', 'class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                 </div>
                             </div>
                         </div>
@@ -301,12 +304,16 @@
 </div>
 
 @section('javascript')
-    {{--Mensagens personalizadas--}}{{--
+    {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
-    --}}{{--Regras adicionais--}}{{--
-    <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
-    --}}{{--Regras de validação--}}{{--
-    <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
+    {{--Regras adicionais--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/unique.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/dateBr.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js')  }}"></script>
+    {{--Regras de validação--}}
+    {{--<script type="text/javascript" src="{{ asset('/dist/js/validacao/pessoaFisica.js')  }}"></script>--}}
 
     <script type="text/javascript">
         //Incio - Retorno de cidades associadas aos estados
