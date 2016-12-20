@@ -159,7 +159,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[cpf]">CPF *</label>
-                                    {!! Form::text('cgm[cpf]', Session::getOldInput('cgm[cpf]'), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
+                                    {!! Form::text('cgm[cpf]', Session::getOldInput('cgm[cpf]'), array('class' => 'form-control input-sm', 'placeholder' => 'CPF')) !!}
                                 </div>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[rg]">RG *</label>
-                                    {!! Form::text('cgm[rg]', Session::getOldInput('cgm[rg]'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
+                                    {!! Form::text('cgm[rg]', Session::getOldInput('cgm[rg]'), array('class' => 'form-control input-sm', 'placeholder' => 'RG')) !!}
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[orgao_emissor]">Orgão Emissor</label>
-                                    {!! Form::text('cgm[orgao_emissor]', Session::getOldInput('cgm[orgao_emissor]'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
+                                    {!! Form::text('cgm[orgao_emissor]', Session::getOldInput('cgm[orgao_emissor]'), array('class' => 'form-control input-sm', 'placeholder' => 'Orgão Emissor')) !!}
                                 </div>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[data_expedicao]">Data de expedição</label>
-                                    {!! Form::text('cgm[data_expedicao]', Session::getOldInput('cgm[data_expedicao]'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
+                                    {!! Form::text('cgm[data_expedicao]', Session::getOldInput('cgm[data_expedicao]'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de expedição')) !!}
                                 </div>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[num_cnh]">Número da CNH</label>
-                                    {!! Form::text('cgm[num_cnh]', Session::getOldInput('cgm[num_cnh]'), array('class' => 'form-control input-sm', 'placeholder' => 'REgistro geral')) !!}
+                                    {!! Form::text('cgm[num_cnh]', Session::getOldInput('cgm[num_cnh]'), array('class' => 'form-control input-sm', 'placeholder' => 'Número da CNH')) !!}
                                 </div>
                             </div>
                         </div>
@@ -204,7 +204,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[data_vencimento_cnh]">Data Vencimento</label>
-                                    {!! Form::text('cgm[data_vencimento_cnh]', Session::getOldInput('cgm[data_vencimento_cnh]'), array('class' => 'form-control input-sm', 'placeholder' => 'Registro geral')) !!}
+                                    {!! Form::text('cgm[data_vencimento_cnh]', Session::getOldInput('cgm[data_vencimento_cnh]'), array('class' => 'form-control input-sm', 'placeholder' => 'Data Vencimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -226,7 +226,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[logradouro]">Logradouro *</label>
-                                    {!! Form::text("cgm[endereco][logradouro]", Session::getOldInput("cgm[endereco][logradouro]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("cgm[endereco][logradouro]", Session::getOldInput("cgm[endereco][logradouro]"), array('class' => 'form-control input-sm', 'placeholder' => 'Logradouro')) !!}
                                 </div>
                             </div>
                         </div>
@@ -234,7 +234,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[endereco][numero]">Número *</label>
-                                    {!! Form::text("cgm[endereco][numero]", Session::getOldInput("cgm[endereco][numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("cgm[endereco][numero]", Session::getOldInput("cgm[endereco][numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                 </div>
                             </div>
                         </div>
@@ -245,7 +245,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[endereco][complemento]">Complemento</label>
-                                    {!! Form::text("cgm[endereco][complemento]", Session::getOldInput("cgm[endereco][complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("cgm[endereco][complemento]", Session::getOldInput("cgm[endereco][complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'Complemento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[endereco][cep]">CEP</label>
-                                    {!! Form::text("cgm[endereco][cep]", Session::getOldInput("cgm[endereco][cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("cgm[endereco][cep]", Session::getOldInput("cgm[endereco][cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
                                 </div>
                             </div>
                         </div>
@@ -382,7 +382,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[data_admicao]">Data de admissão *</label>
-                                    {!! Form::text("data_admicao", Session::getOldInput("data_admicao"), array('class' => 'form-control input-sm', 'placeholder' => 'Matrícula')) !!}
+                                    {!! Form::text("data_admicao", Session::getOldInput("data_admicao"), array('class' => 'form-control input-sm', 'placeholder' => 'Data de admissão')) !!}
                                 </div>
                             </div>
                         </div>
