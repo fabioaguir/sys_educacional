@@ -46,8 +46,8 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_nascimento">Data de Nascimento *</label>
-                                    {!! Form::date('data_nascimento', null, ['class' => 'form-control input-sm', 'placeholder' => 'Data de nascimento']) !!}
-                                    {{--{!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Nascimento')) !!}--}}
+                                    {{--{!! Form::date('data_nascimento', null, ['class' => 'form-control input-sm', 'placeholder' => 'Data de nascimento']) !!}--}}
+                                    {!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de nascimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -313,7 +313,7 @@
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js')  }}"></script>
     {{--Regras de validação--}}
-    {{--<script type="text/javascript" src="{{ asset('/dist/js/validacao/pessoaFisica.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/pessoaFisica.js')  }}"></script>
 
     <script type="text/javascript">
         //Incio - Retorno de cidades associadas aos estados

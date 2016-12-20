@@ -14,7 +14,6 @@ class PessoaJuridica extends Model implements Transformable
 
     protected $fillable = [
         'nome',
-        'cgmmunicipio',
         'num_cgm',
         'data_cadastramento',
         'cnpj',

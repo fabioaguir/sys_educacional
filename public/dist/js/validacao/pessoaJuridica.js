@@ -1,7 +1,7 @@
 // Regras de validação
 $(document).ready(function () {
 
-    $("#formPessoaFisica").validate({
+    $("#formPessoaJuridica").validate({
         rules: {
             nome: {
                 required: true,
@@ -9,119 +9,59 @@ $(document).ready(function () {
                 maxlength: 200
             },
 
-            sexo_id: {
-                required: true,
-                integer: true
-            },
-
-            estado_civil_id: {
-                required: true,
-                integer: true
-            },
-
-            nacionalidade_id: {
-                required: true,
-                integer: true
-            },
-
             cgm_municipio_id: {
                 required: true,
                 integer: true
             },
 
-            escolaridade_id: {
+            cnpj: {
+                unique: [laroute.route('pessoaJuridica.searchCnpj'), $('#cnpj')],
+                required: true,
+                number: true
+            },
+
+            nome_complemento: {
+                required: true,
+                alphaSpace: true
+            },
+
+            nome_fantasia: {
+                required: true,
+                alphaSpace: true
+            },
+
+            num_cgm: {
+                required: true,
+                alphaSpace: true
+            },
+
+            data_cadastramento: {
+                dateBr: true
+            },
+
+            email: {
+                email: true
+            },
+
+            tipo_empresa_id: {
                 required: true,
                 integer: true
+            },
+
+            nire: {
+                number: true
+            },
+
+            tipo_cadastro: {
+                integer: true
+            },
+
+            inscricao_estadual: {
+                number: true
             },
 
             endereco_id: {
                 integer: true
-            },
-
-            cnh_categoria_id: {
-                integer: true
-            },
-
-            num_cgm: {
-                number: true,
-                maxlength: 30
-            },
-
-            cpf: {
-                required: true,
-                cpfBR: true,
-                maxlength: 15,
-                unique: [laroute.route('pessoaFisica.searchCpf'), $('#cpf')]
-            },
-
-            rg: {
-                required: true,
-                number: true,
-                maxlength: 15
-
-            },
-
-            orgao_emissor: {
-                required: true,
-                alphaSpace: true,
-                maxlength: 30
-            },
-
-            pai: {
-                required: true,
-                alphaSpace: true,
-                maxlength: 200
-            },
-
-            mae: {
-                required: true,
-                alphaSpace: true,
-                maxlength: 200
-            },
-
-            naturalidade: {
-                alphaSpace: true,
-                maxlength: 100
-            },
-
-            inscricao_estadual: {
-                number: true,
-                maxlength: 30
-            },
-
-            data_nascimento: {
-                dateBr: true,
-                maxlength: 15
-            },
-
-            data_falecimento: {
-                dateBr: true,
-                maxlength: 15
-            },
-
-            data_expedicao: {
-                dateBr: true,
-                required: true,
-                maxlength: 15
-            },
-
-            data_cadastramento: {
-                dateBr: true,
-                maxlength: 15
-            },
-
-            data_vencimento_cnh: {
-                dateBr: true,
-                maxlength: 15
-            },
-
-            email: {
-                email: true,
-            },
-
-            num_cnh: {
-                number: true,
-                maxlength: 30
             },
 
             'telefone[nome]': {
