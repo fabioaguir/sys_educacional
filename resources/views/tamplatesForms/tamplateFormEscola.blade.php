@@ -191,11 +191,11 @@
                                 <label for="estado">Estado *</label>
                                 @if(isset($model->endereco->bairro->cidade->estado->id))
                                     <div class="select">
-                                        {!! Form::select("estado", $loadFields['estado'], $model->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
+                                        {!! Form::select("estado", (["" => "Selecione"] + $loadFields['estado']->toArray()), $model->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
                                     </div>
                                 @else
                                     <div class="select">
-                                        {!! Form::select("estado", $loadFields['estado'], null,array('class' => 'form-control', 'id' => 'estado')) !!}
+                                        {!! Form::select("estado", (["" => "Selecione"] + $loadFields['estado']->toArray()), null,array('class' => 'form-control', 'id' => 'estado')) !!}
                                     </div>
                                 @endif
                             </div>
