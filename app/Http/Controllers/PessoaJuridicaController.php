@@ -9,6 +9,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\PessoaJuridicaRepository;
 use SerEducacional\Services\PessoaJuridicaService;
+use SerEducacional\Validators\PessoaJuridicaValidator;
 use Yajra\Datatables\Datatables;
 
 class PessoaJuridicaController extends Controller
@@ -35,12 +36,15 @@ class PessoaJuridicaController extends Controller
      * PessoaJuridicaController constructor.
      * @param PessoaJuridicaRepository $repository
      * @param PessoaJuridicaService $service
+     * @param PessoaJuridicaValidator $validator
      */
     public function __construct(PessoaJuridicaRepository $repository,
-                                PessoaJuridicaService $service)
+                                PessoaJuridicaService $service,
+                                PessoaJuridicaValidator $validator)
     {
         $this->repository = $repository;
         $this->service = $service;
+        $this->validator = $validator;
     }
 
     /**
@@ -73,8 +77,8 @@ class PessoaJuridicaController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -145,8 +149,8 @@ class PessoaJuridicaController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);
@@ -210,5 +214,36 @@ class PessoaJuridicaController extends Controller
             ->get();
 
         return response()->json($cidades);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function searchCnpj(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $contrato = $request->all();
+
+            $cpfCliente = \DB::table('cgm')
+                ->select([
+                    'cgm.id',
+                    'cgm.cnpj'
+                ])
+                ->where('cgm.cnpj', $contrato['value'])
+                ->get();
+
+            if (count($cpfCliente) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
     }
 }

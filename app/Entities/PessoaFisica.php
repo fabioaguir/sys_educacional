@@ -56,7 +56,7 @@ class PessoaFisica extends Model implements Transformable
         return $this->hasMany(Telefone::class, 'cgm_id');
     }
 
-    /**
+   /**
      * @return string
      */
     public function getDataNascimentoAttribute()

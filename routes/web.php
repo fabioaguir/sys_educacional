@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'PessoaJuridicaController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'PessoaJuridicaController@findCidade']);
+        Route::post('searchCnpj', ['as' => 'searchCnpj', 'uses' => 'PessoaJuridicaController@searchCnpj']);
     });
     # Fim rotas cgm
 
