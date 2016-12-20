@@ -36,7 +36,6 @@ class ServidorValidator extends LaravelValidator
             'cgm.escolaridade_id' => 'required',
             'cgm.cpf' => 'required',
             'cgm.rg' => 'required',
-            'cgm.rg' => 'required',
 
             //Tabela Servidor
             'data_admicao' => 'required',
@@ -62,7 +61,6 @@ class ServidorValidator extends LaravelValidator
             'cgm.estado_civil_id' => 'required',
             'cgm.escolaridade_id' => 'required',
             'cgm.cpf' => 'required',
-            'cgm.rg' => 'required',
             'cgm.rg' => 'required',
 
             //Tabela Servidor

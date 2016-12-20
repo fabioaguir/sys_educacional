@@ -28,7 +28,7 @@
                 {{--#1--}}
                 <div role="tabpanel" class="tab-pane active" id="infoBasicas">
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-8">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[nome]">Nome *</label>
@@ -36,8 +36,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cgm[sexo_id]">Sexo *</label>
@@ -57,8 +55,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -67,8 +63,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cgm[nacionalidade_id]">Nacionalidade *</label>
@@ -77,8 +71,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -97,8 +89,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cgm[cgm_municipio_id]">CGM do Município *</label>
@@ -109,22 +99,19 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="form-group col-sm-8">
+                            <div class="fg-line">
+                                <div class="fg-line">
+                                    <label for="cgm[email]">E-mail</label>
+                                    {!! Form::text('cgm[email]', Session::getOldInput('cgm[email]'), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[telefones]">Telefones</label>
                                     {!! Form::text('cgm[telefones]', Session::getOldInput('cgm[telefones]'), array('class' => 'form-control input-sm')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        {{--<button class="btn btn-primary btn-sm m-t-10">Adicionar</button>--}}
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
-                            <div class="fg-line">
-                                <div class="fg-line">
-                                    <label for="cgm[email]">E-mail</label>
-                                    {!! Form::text('cgm[email]', Session::getOldInput('cgm[email]'), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
                                 </div>
                             </div>
                         </div>
@@ -134,7 +121,7 @@
                 {{--#2--}}
                 <div role="tabpanel" class="tab-pane" id="documentacao">
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-6">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[pai]">Nome Pai</label>
@@ -142,9 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-6">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[mae]">Nome Mãe</label>
@@ -162,8 +147,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cgm[escolaridade_id]">Escolaridade *</label>
@@ -172,8 +155,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -183,6 +164,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
@@ -192,8 +174,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -202,8 +182,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -222,8 +200,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -232,8 +208,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cgm[cnh_categoria_id]">Categoria CNH</label>
@@ -248,7 +222,7 @@
                 {{--#3--}}
                 <div role="tabpanel" class="tab-pane" id="endereco">
                     <div class="row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-6">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[logradouro]">Logradouro *</label>
@@ -256,8 +230,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -267,6 +239,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
@@ -276,8 +249,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -287,6 +258,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
@@ -296,8 +268,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cidade">Cidade *</label>
@@ -306,8 +276,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cgm[endereco][bairro_id]">Bairro *</label>
@@ -333,8 +301,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -353,8 +319,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -363,8 +327,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -399,8 +361,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
@@ -419,8 +379,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="servidor[tipo_vinculo_servidor_id]">Tipo de vínculo *</label>
@@ -430,8 +388,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="servidor[habilitacao_escolaridade_id]">Habilitação\Escolaridade</label>
@@ -442,6 +398,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
@@ -452,8 +409,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="servidor[funcoes_id]">Função *</label>
@@ -484,7 +439,7 @@
                 {{-- fim --}}
 
                 <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
-                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('pessoaJuridica.index') }}">Listar</a>
+                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('servidor.index') }}">Voltar</a>
             </div>
             <!-- Fim Conteúdo -->
         </div>
