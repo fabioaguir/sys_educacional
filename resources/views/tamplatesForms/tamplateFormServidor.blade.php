@@ -263,26 +263,43 @@
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="estado">Estado *</label>
-                                <div class="select">
-                                    {!! Form::select("estado", (["" => "Selecione"] + $loadFields['estado']->toArray()), null, array('class'=> 'form-control', 'id' => 'estado')) !!}
-                                </div>
+                                @if(isset($model->cgm->endereco->bairro->cidade->estado->id))
+                                    <div class="select">
+                                        {!! Form::select("estado", (["" => "Selecione"] + $loadFields['estado']->toArray()), $model->cgm->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
+                                    </div>
+                                @else
+                                    <div class="select">
+                                        {!! Form::select("estado", (["" => "Selecione"] + $loadFields['estado']->toArray()), null,array('class' => 'form-control', 'id' => 'estado')) !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cidade">Cidade *</label>
-                                <div class="select">
-                                    {!! Form::select("cidade", array(), null, array('class'=> 'form-control', 'id' => 'cidade')) !!}
-                                </div>
+                                @if(isset($model->cgm->endereco->bairro->cidade->id))
+                                    <div class="select">
+                                        {!! Form::select("cidade", array($model->cgm->endereco->bairro->cidade->id => $model->cgm->endereco->bairro->cidade->nome), $model->cgm->endereco->bairro->cidade->id, array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                    </div>
+                                @else
+                                    <div class="select">
+                                        {!! Form::select('cidade', array(), Session::getOldInput('cidade_id'), array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="cgm[endereco][bairro_id]">Bairro *</label>
-                                <div class="select">
-                                    {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
-                                    {!! Form::select("cgm[endereco][bairro_id]", array(), null, array('class'=> 'form-control', 'id' => 'bairro')) !!}
-                                </div>
+                                @if(isset($model->cgm->endereco->bairro->id))
+                                    <div class="select">
+                                        {!! Form::select("cgm[endereco][bairro_id]", array($model->cgm->endereco->bairro->id => $model->cgm->endereco->bairro->nome), $model->cgm->endereco->bairro->id, array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                    </div>
+                                @else
+                                    <div class="select">
+                                        {!! Form::select("cgm[endereco][bairro_id]", array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

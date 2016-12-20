@@ -147,7 +147,7 @@ class ServidorController extends Controller
     {
         try {
             #Recuperando a empresa
-            $model = $this->repository->with('cgm.endereco')->find($id);
+            $model = $this->repository->with('cgm.endereco.bairro.cidade.estado')->find($id);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
