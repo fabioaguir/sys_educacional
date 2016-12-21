@@ -56,8 +56,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'EscolaController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'EscolaController@destroy']);
 
+        # Rotas para endereço
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'EscolaController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'EscolaController@findCidade']);
+
+        # Rotas para cursos
+        Route::get('curso/gridCursos/{id}', ['as' => 'curso.gridCursos', 'uses' => 'EscolaCursoController@gridCursos']);
+        Route::post('curso/select2', ['as' => 'curso.select2', 'uses' => 'EscolaCursoController@cursosSelect2']);
+        Route::post('curso/adicionarCursos', ['as' => 'curso.adicionarCursos', 'uses' => 'EscolaCursoController@adicionarCursos']);
+        Route::post('curso/removerCurso/{idEscolaCurso}', ['as' => 'curso.removerCurso', 'uses' => 'EscolaCursoController@removerCurso']);
+
+        # Rotas para turnos
+        Route::get('turno/gridTurnos/{idEscolaCurso}', ['as' => 'turno.gridTurnos', 'uses' => 'EscolaCursoTurnoController@gridTurnos']);
+        Route::post('turno/select2', ['as' => 'turno.select2', 'uses' => 'EscolaCursoTurnoController@turnosSelect2']);
+        Route::post('turno/adicionarTurnos', ['as' => 'turno.adicionarTurnos', 'uses' => 'EscolaCursoTurnoController@adicionarTurnos']);
+        Route::post('turno/removerTurno', ['as' => 'turno.removerTurno', 'uses' => 'EscolaCursoTurnoController@removerTurno']);
     });
 
     #Rotas servidor
@@ -159,6 +172,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'NivelEnsinoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'NivelEnsinoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'NivelEnsinoController@destroy']);
+    });
+
+    # Rotas de funcao
+    Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'CalendariosController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'CalendariosController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'CalendariosController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'CalendariosController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendariosController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendariosController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'CalendariosController@destroy']);
     });
 });
 

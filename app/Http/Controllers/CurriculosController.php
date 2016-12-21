@@ -167,7 +167,7 @@ class CurriculosController extends Controller
 
             #retorno para view
             return view('curriculo.edit', compact('model', 'loadFields', 'serieInicial', 'serieFinal'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -197,7 +197,7 @@ class CurriculosController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

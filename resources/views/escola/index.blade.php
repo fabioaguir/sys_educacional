@@ -1,5 +1,24 @@
 @extends('menu')
 
+@section('css')
+    @parent
+    <style type="text/css">
+        .select2-close-mask{
+            z-index: 2099;
+        }
+
+        .select2-dropdown{
+            z-index: 3051;
+        }
+
+        .row_selected {
+            background-color: #6A5ACD !important;
+            color: #FFF;
+            font-weight: bold;
+        }
+    </style>
+@endsection
+
 @section('content')
     <section id="content">
         <div class="container">
@@ -46,7 +65,7 @@
                                 <th>Abreviação</th>
                                 <th>Coordenadoria</th>
                                 <th>Mantenedora</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th style="width: 15%;">Açao</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -56,7 +75,7 @@
                                 <th>Abreviação</th>
                                 <th>Coordenadoria</th>
                                 <th>Mantenedora</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th style="width: 15%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>
@@ -65,9 +84,15 @@
 
         </div>
     </section>
+
+    @include('escola.modal_adicionar_cursos')
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/dist/escola/modal_adicionar_cursos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/escola/controller_cursos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/escola/controller_turnos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/escola/select2.js') }}"></script>
     <script type="text/javascript">
         var table = $('#escola-grid').DataTable({
             processing: true,
@@ -80,21 +105,26 @@
                 {data: 'coordenadoria', name: 'coordenadoria.nome'},
                 {data: 'mantenedora', name: 'mantenedora.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
-            /*"oLanguage": {
-                "sStripClasses": "",
-                "sSearch": "",
-                "sSearchPlaceholder": "Enter Keywords Here",
-                "sInfo": "_START_ - _END_ de _TOTAL_",
-                "sLengthMenu": '<span>Linhas por Página:</span><select class="browser-default">' +
-                '<option value="10">10</option>' +
-                '<option value="20">20</option>' +
-                '<option value="30">30</option>' +
-                '<option value="40">40</option>' +
-                '<option value="50">50</option>' +
-                '<option value="-1">All</option>' +
-                '</select></div>'
-            },*/
+            ]});
+
+        // Global IdCurriulo
+        var idEscola;
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#btnModalAdicionarCursos", function () {
+            // Recuperando o id do currículo
+            idEscola = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#eNome').text(codigo);
+            $('#eCodigo').text(nome);
+
+            // Executando o modal
+            runModalAdicionarCursos(idEscola);
         });
     </script>
 @stop

@@ -57,8 +57,7 @@ class InstituicaosController extends Controller
 
 
     /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return mixed
      */
     public function edit()
     {
@@ -71,7 +70,7 @@ class InstituicaosController extends Controller
 
             #retorno para view
             return view('instituicao.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

@@ -132,6 +132,12 @@
                         <a href="{{ route('escola.index')  }}">Escolas</a>
                     </li>
                 </ul>
+                <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-home"></i>Escolas</a>
+                <ul>
+                    <li>
+                        <a href="{{ route('calendario.index')  }}">Calendário</a>
+                    </li>
+                </ul>
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-wrench"></i>Parâmetros</a>
                 <ul>
                     <li>

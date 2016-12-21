@@ -3,46 +3,54 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Repositories\ModalidadeEnsinoRepository;
-use SerEducacional\Repositories\NivelEnsinoRepository;
-use SerEducacional\Validators\ModalidadeEnsinoValidator;
-use SerEducacional\Services\ModalidadeEnsinoService;
+use SerEducacional\Http\Requests\CalendarioCreateRequest;
+use SerEducacional\Http\Requests\CalendarioUpdateRequest;
+use SerEducacional\Repositories\CalendarioRepository;
+use SerEducacional\Validators\CalendarioValidator;
+use SerEducacional\Services\CalendarioService;
 use Yajra\Datatables\Datatables;
 
-class ModalidadeEnsinoController extends Controller
-{
 
+class CalendariosController extends Controller
+{
     /**
-     * @var ModalidadeEnsinoRepository
+     * @var CalendarioRepository
      */
     protected $repository;
 
     /**
-     * @var array3
-     */
-    private $loadFields = [
-
-    ];
-
-    /**
-     * @var ModalidadeEnsinoService
+     * @var CalendarioService
      */
     private $service;
 
     /**
-     * ModalidadeEnsinoController constructor.
-     * @param ModalidadeEnsinoRepository $repository
-     * @param ModalidadeEnsinoService $service
+     * @var CalendarioRepository
      */
-    public function __construct(ModalidadeEnsinoRepository $repository,
-                                NivelEnsinoRepository $nivelEnsinoRepository,
-                                ModalidadeEnsinoService $service,
-                                ModalidadeEnsinoValidator $validator)
+    protected $validator;
+
+    /**
+     * @var array
+     */
+    private $loadFields = [
+        'Status',
+        'Duracao'
+    ];
+
+    /**
+     * CalendariosController constructor.
+     * @param CalendarioRepository $repository
+     * @param CalendarioService $service
+     * @param CalendarioValidator $validator
+     */
+    public function __construct(CalendarioRepository $repository,
+                                CalendarioService $service,
+                                CalendarioValidator $validator)
     {
         $this->repository = $repository;
-        $this->nivelEnsinoRepository = $nivelEnsinoRepository;
         $this->service = $service;
         $this->validator = $validator;
     }
@@ -53,7 +61,7 @@ class ModalidadeEnsinoController extends Controller
     public function index()
     {
         # Retorno para view
-        return view('modalidade.index');
+        return view('calendario.index');
     }
 
     /**
@@ -61,8 +69,11 @@ class ModalidadeEnsinoController extends Controller
      */
     public function create()
     {
-        # Retorno para view
-        return view('modalidade.create');
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
+        #Retorno para view
+        return view('calendario.create', compact('loadFields'));
     }
 
     /**
@@ -71,26 +82,26 @@ class ModalidadeEnsinoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('modalidades')
+        $rows = \DB::table('calendarios')
+            ->join('duracoes', 'duracoes.id', '=', 'calendarios.duracoes_id')
+            ->join('status', 'status.id', '=', 'calendarios.status_id')
             ->select([
-                'modalidades.id',
-                'modalidades.nome',
-                'modalidades.codigo',
+                'calendarios.id',
+                'calendarios.nome as nome',
+                \DB::raw('DATE_FORMAT(calendarios.data_inicial,"%d/%m/%Y") as data_inicial'),
+                \DB::raw('DATE_FORMAT(calendarios.data_final,"%d/%m/%Y") as data_final'),
+                \DB::raw('DATE_FORMAT(calendarios.data_resultado_final,"%d/%m/%Y") as data_resultado_final'),
+                'calendarios.dias_letivos',
+                'calendarios.semanas_letivas',
+                'status.nome as status',
+                'duracoes.nome as duracao',
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-
-            #verificando se existe vinculo com outra tabela (servidores)
-            $nivelEnsino = $this->nivelEnsinoRepository->findWhere(['modalidade_id' => $row->id]);
-
-            #botão editar
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
-
-            #condição para que habilite a opção de remover
-            if (count($nivelEnsino) == 0) {
-                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-            }
+            # Variáveis de uso
+            $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;
@@ -98,7 +109,6 @@ class ModalidadeEnsinoController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -136,7 +146,7 @@ class ModalidadeEnsinoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('modalidade.edit', compact('model', 'loadFields'));
+            return view('calendario.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -168,10 +178,6 @@ class ModalidadeEnsinoController extends Controller
         }
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy($id)
     {
         try {

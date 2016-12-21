@@ -31,4 +31,30 @@ class Curso extends Model implements Transformable
     {
         return $this->hasMany(Curriculo::class, 'curso_id');
     }
+
+    /**
+     * @return $this
+     */
+    public function escolas()
+    {
+        return $this->belongsToMany(Escola::class, 'escolas_cursos', 'curso_id', 'escola_id')
+            ->withPivot(['id']);
+    }
+
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Escola) {
+            return new PivotEscolaCurso($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
 }

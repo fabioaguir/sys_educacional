@@ -10,6 +10,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Http\Requests\PessoaFisicaCreateRequest;
 use SerEducacional\Http\Requests\PessoaFisicaUpdateRequest;
 use SerEducacional\Repositories\PessoaFisicaRepository;
+use SerEducacional\Repositories\ServidorRepository;
 use SerEducacional\Validators\PessoaFisicaValidator;
 use SerEducacional\Services\PessoaFisicaService;
 use Yajra\Datatables\Datatables;
@@ -25,6 +26,11 @@ class PessoaFisicaController extends Controller
      * @var PessoaFisicaRepository
      */
     protected $repository;
+
+    /**
+     * @var ServidorRepository
+     */
+    protected $servidorRepository;
 
     /**
      * @var PessoaFisicaValidator
@@ -54,9 +60,11 @@ class PessoaFisicaController extends Controller
      */
     public function __construct(PessoaFisicaService $service,
                                 PessoaFisicaRepository $repository,
-                                PessoaFisicaValidator $validator)
+                                PessoaFisicaValidator $validator,
+                                ServidorRepository $servidorRepository)
     {
         $this->repository = $repository;
+        $this->servidorRepository = $servidorRepository;
         $this->validator  = $validator;
         $this->service    = $service;
     }
@@ -95,12 +103,21 @@ class PessoaFisicaController extends Controller
                 'cgm.rg',
                 'cgm.cpf',
                 'cgm_municipio.nome as statusCgm'
-            ])
-            ->get();
+            ]);
+        
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a> ';
-            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i>Deletar</a>';
+
+            #verificando se existe vinculo com outra tabela (servidores)
+            $servidor = $this->servidorRepository->findWhere(['id_cgm' => $row->id]);
+
+            #botão editar
+            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+
+            #condição para que habilite a opção de remover
+            if (count($servidor) == 0) {
+                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Retorno
             return $html;
