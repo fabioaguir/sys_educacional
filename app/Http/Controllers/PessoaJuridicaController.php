@@ -106,8 +106,8 @@ class PessoaJuridicaController extends Controller
                 'cgm.cnpj',
                 'cgm.cpf',
                 'cgm_municipio.nome as statusCgm'
-            ])
-            ->get();
+            ]);
+        
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a> ';

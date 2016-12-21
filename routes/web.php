@@ -56,8 +56,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'EscolaController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'EscolaController@destroy']);
 
+        # Rotas para endereço
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'EscolaController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'EscolaController@findCidade']);
+
+        # Rotas para cursos
+        Route::get('curso/gridCursos/{id}', ['as' => 'curso.gridCursos', 'uses' => 'EscolaCursoController@gridCursos']);
+        Route::post('curso/select2', ['as' => 'curso.select2', 'uses' => 'EscolaCursoController@cursosSelect2']);
+        Route::post('curso/adicionarCursos', ['as' => 'curso.adicionarCursos', 'uses' => 'EscolaCursoController@adicionarCursos']);
+        Route::post('curso/removerCurso/{idEscolaCurso}', ['as' => 'curso.removerCurso', 'uses' => 'EscolaCursoController@removerCurso']);
+
+        # Rotas para turnos
+        Route::get('turno/gridTurnos/{idEscolaCurso}', ['as' => 'turno.gridTurnos', 'uses' => 'EscolaCursoTurnoController@gridTurnos']);
+        Route::post('turno/select2', ['as' => 'turno.select2', 'uses' => 'EscolaCursoTurnoController@turnosSelect2']);
+        Route::post('turno/adicionarTurnos', ['as' => 'turno.adicionarTurnos', 'uses' => 'EscolaCursoTurnoController@adicionarTurnos']);
+        Route::post('turno/removerTurno', ['as' => 'turno.removerTurno', 'uses' => 'EscolaCursoTurnoController@removerTurno']);
     });
 
     #Rotas servidor

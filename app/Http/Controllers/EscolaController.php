@@ -80,13 +80,17 @@ class EscolaController extends Controller
                 'escola.nome_abreviado',
                 'coordenadoria.nome as coordenadoria',
                 'mantenedora.nome as mantenedora'
-            ])
-            ->get();
+            ]);
+        
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Variáveis de uso
             $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
             $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
+            # Html de adicionar disciplina
+            $html .= '<a title="Adicionar Cursos" id="btnModalAdicionarCursos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            
             # Retorno
             return $html;
         })->make(true);
