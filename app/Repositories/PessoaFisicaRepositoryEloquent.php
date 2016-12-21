@@ -29,11 +29,11 @@ class PessoaFisicaRepositoryEloquent extends BaseRepository implements PessoaFis
     *
     * @return mixed
     */
-    public function validator()
+    /*public function validator()
     {
 
         return PessoaFisicaValidator::class;
-    }
+    }*/
 
 
     /**
