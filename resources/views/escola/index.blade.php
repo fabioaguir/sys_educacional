@@ -65,7 +65,7 @@
                                 <th>Abreviação</th>
                                 <th>Coordenadoria</th>
                                 <th>Mantenedora</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th style="width: 15%;">Açao</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -75,7 +75,7 @@
                                 <th>Abreviação</th>
                                 <th>Coordenadoria</th>
                                 <th>Mantenedora</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th style="width: 15%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>

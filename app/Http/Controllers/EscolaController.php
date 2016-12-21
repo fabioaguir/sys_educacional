@@ -84,9 +84,16 @@ class EscolaController extends Controller
         
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando a escola
+            $escola = $this->repository->find($row->id);
+
             # Variáveis de uso
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
-            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html  = '<a style="margin-right: 1%;" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+
+            # Verificando a possibilidade de exclusão
+            if(count($escola->cursos) == 0) {
+                $html .= '<a style="margin-right: 3%;" href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Html de adicionar disciplina
             $html .= '<a title="Adicionar Cursos" id="btnModalAdicionarCursos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
