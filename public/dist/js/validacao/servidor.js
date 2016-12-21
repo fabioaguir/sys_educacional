@@ -54,7 +54,7 @@ $(document).ready(function () {
                 required: true
             },
             funcoes_id: {
-                required: true
+                //required: true
             },
             
         },

@@ -17,4 +17,12 @@ class NivelEnsino extends Model implements Transformable
         'codigo',
         'modalidade_id'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function curso()
+    {
+        return $this->hasMany(Curso::class);
+    }
 }
