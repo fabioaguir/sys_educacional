@@ -46,7 +46,7 @@ function loadTableCursoTurno (idEscolaCurso) {
 function runModalAdicionarCursos(idEscola)
 {
     // Zerando a grid de disciplinas
-    loadTableCursoTurno(0).ajax.url(laroute.route('escola.turno.gridTurnos', {'idEscolaCurso' :idEscolaCurso })).load();
+    loadTableCursoTurno(0).ajax.url(laroute.route('escola.turno.gridTurnos', {'idEscolaCurso' : 0})).load();
 
     //Carregando as grids de situações
     if(tableEscolaCurso) {
