@@ -43,7 +43,7 @@ class PessoaJuridicaValidator extends LaravelValidator
             'nome_complemento' => 'required|serbinario_alpha_space|max:200',
             'nome_fantasia' => 'required|serbinario_alpha_space|max:200',
             //'tipo_cadastro' => '',
-            'inscricao_estadual' => 'integer',
+            'inscricao_estadual' => 'numeric',
             'endereco_id' => 'integer',
             'cgm_municipio_id' => 'required|integer',
             //Endereço
@@ -64,7 +64,7 @@ class PessoaJuridicaValidator extends LaravelValidator
             'nome_complemento' => 'serbinario_alpha_space|max:200',
             'nome_fantasia' => 'serbinario_alpha_space|max:200',
             //'tipo_cadastro' => '',
-            'inscricao_estadual' => 'integer',
+            'inscricao_estadual' => 'numeric',
             'endereco_id' => 'integer',
             'cgm_municipio_id' => 'integer'
         ],

@@ -10,6 +10,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Http\Requests\PessoaFisicaCreateRequest;
 use SerEducacional\Http\Requests\PessoaFisicaUpdateRequest;
 use SerEducacional\Repositories\PessoaFisicaRepository;
+use SerEducacional\Repositories\ServidorRepository;
 use SerEducacional\Validators\PessoaFisicaValidator;
 use SerEducacional\Services\PessoaFisicaService;
 use Yajra\Datatables\Datatables;
@@ -25,6 +26,11 @@ class PessoaFisicaController extends Controller
      * @var PessoaFisicaRepository
      */
     protected $repository;
+
+    /**
+     * @var ServidorRepository
+     */
+    protected $servidorRepository;
 
     /**
      * @var PessoaFisicaValidator
@@ -54,9 +60,11 @@ class PessoaFisicaController extends Controller
      */
     public function __construct(PessoaFisicaService $service,
                                 PessoaFisicaRepository $repository,
-                                PessoaFisicaValidator $validator)
+                                PessoaFisicaValidator $validator,
+                                ServidorRepository $servidorRepository)
     {
         $this->repository = $repository;
+        $this->servidorRepository = $servidorRepository;
         $this->validator  = $validator;
         $this->service    = $service;
     }
@@ -99,8 +107,17 @@ class PessoaFisicaController extends Controller
             ->get();
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+
+            #
+            $servidor = $this->servidorRepository->findWhere(['id_cgm' == $row->id]);
+
+            #
             $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a> ';
-            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i>Deletar</a>';
+
+            #
+            if (count($servidor) == 0) {
+                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i>Deletar</a>';
+            }
 
             # Retorno
             return $html;

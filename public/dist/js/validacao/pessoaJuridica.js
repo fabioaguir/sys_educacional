@@ -17,7 +17,8 @@ $(document).ready(function () {
             cnpj: {
                 unique: [laroute.route('pessoaJuridica.searchCnpj'), $('#cnpj')],
                 required: true,
-                number: true
+                //cnpj: true
+
             },
 
             nome_complemento: {
