@@ -92,6 +92,12 @@ class CurriculoService
      */
     public function destroy(int $id)
     {
+        # Recuperando o currículo
+        $curriculo = $this->repository->find($id);
+
+        # Removendo as séries
+        $curriculo->series()->detach();
+
         #deletando o curso
         $result = $this->repository->delete($id);
 
