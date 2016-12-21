@@ -108,15 +108,15 @@ class PessoaFisicaController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 
-            #
-            $servidor = $this->servidorRepository->findWhere(['id_cgm' == $row->id]);
+            #verificando se existe vinculo com outra tabela (servidores)
+            $servidor = $this->servidorRepository->findWhere(['id_cgm' => $row->id]);
 
-            #
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a> ';
+            #botão editar
+            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
 
-            #
+            #condição para que habilite a opção de remover
             if (count($servidor) == 0) {
-                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i>Deletar</a>';
+                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
             # Retorno

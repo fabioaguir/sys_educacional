@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\ModalidadeEnsinoRepository;
+use SerEducacional\Repositories\NivelEnsinoRepository;
 use SerEducacional\Validators\ModalidadeEnsinoValidator;
 use SerEducacional\Services\ModalidadeEnsinoService;
 use Yajra\Datatables\Datatables;
@@ -36,10 +37,12 @@ class ModalidadeEnsinoController extends Controller
      * @param ModalidadeEnsinoService $service
      */
     public function __construct(ModalidadeEnsinoRepository $repository,
+                                NivelEnsinoRepository $nivelEnsinoRepository,
                                 ModalidadeEnsinoService $service,
                                 ModalidadeEnsinoValidator $validator)
     {
         $this->repository = $repository;
+        $this->nivelEnsinoRepository = $nivelEnsinoRepository;
         $this->service = $service;
         $this->validator = $validator;
     }
@@ -77,9 +80,17 @@ class ModalidadeEnsinoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Modalidade" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Modalidade" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            #verificando se existe vinculo com outra tabela (servidores)
+            $nivelEnsino = $this->nivelEnsinoRepository->findWhere(['modalidade_id' => $row->id]);
+
+            #botão editar
+            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+
+            #condição para que habilite a opção de remover
+            if (count($nivelEnsino) == 0) {
+                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Retorno
             return $html;
