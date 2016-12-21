@@ -42,7 +42,7 @@ class ServidorValidator extends LaravelValidator
             'carga_horaria' => 'required',
             'tipo_vinculo_servidor_id' => 'required',
             'cargos_id' => 'required',
-            'funcoes_id' => 'required',
+            //'funcoes_id' => 'required',
 
             //Tabela Endereço
             'cgm.endereco.logradouro' => 'required',

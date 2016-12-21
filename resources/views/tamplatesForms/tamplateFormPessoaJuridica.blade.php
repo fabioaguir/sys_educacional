@@ -67,7 +67,7 @@
                             <div class=" fg-line">
                                 <label for="cgm_municipio_id">CGM do município *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm_municipio_id', ["" => "Selecione nacionalidade"] + $loadFields['cgmmunicipio']->toArray(), null, array()) !!}
+                                    {!! Form::select('cgm_municipio_id', ["" => "Selecion"] + $loadFields['cgmmunicipio']->toArray(), null, array()) !!}
                                 </div>
                             </div>
                         </div>
@@ -189,6 +189,7 @@
     {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
     {{--Regras adicionais--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/cnpj.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/dateBr.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>

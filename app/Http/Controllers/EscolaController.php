@@ -81,7 +81,7 @@ class EscolaController extends Controller
                 'coordenadoria.nome as coordenadoria',
                 'mantenedora.nome as mantenedora'
             ]);
-        
+       
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Recuperando a escola

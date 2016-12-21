@@ -30,8 +30,20 @@ $(document).on('click', '#addCurso', function (event) {
         data: dados,
         datatype: 'json'
     }).done(function (json) {
+        // Limpando o select
         $('#select-cursos').val(null).trigger("change");
+
+        // Mensagem de retorno
         swal("Curso(s) adicionado(s) com sucesso!", "Click no botão abaixo!", "success");
+
+        // Desabilitando a o select2 e o botão de adicionar
+        $('#select-turnos').prop('disabled', true);
+        $('#addTurno').prop('disabled', true);
+
+        // Zerando a grid de disciplinas
+        loadTableCursoTurno(0).ajax.url(laroute.route('escola.turno.gridTurnos', {'idEscolaCurso' :idEscolaCurso })).load();
+
+        // Recarregando as grids
         tableEscolaCurso.ajax.reload();
         table.ajax.reload();
     });
@@ -53,8 +65,20 @@ $(document).on('click', '#removerCurso', function () {
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
+        // Limpando o select
         $('#select-cursos').val(null).trigger("change");
+
+        // Desabilitando a o select2 e o botão de adicionar
+        $('#select-turnos').prop('disabled', true);
+        $('#addTurno').prop('disabled', true);
+
+        // Menagem de retorno
         swal("Curso removido com sucesso!", "Click no botão abaixo!", "success");
+
+        // Zerando a grid de disciplinas
+        loadTableCursoTurno(0).ajax.url(laroute.route('escola.turno.gridTurnos', {'idEscolaCurso' :idEscolaCurso })).load();
+
+        // recaregando as grids
         tableEscolaCurso.ajax.reload();
         table.ajax.reload();
     });

@@ -173,6 +173,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'NivelEnsinoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'NivelEnsinoController@destroy']);
     });
+
+    # Rotas de funcao
+    Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'CalendariosController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'CalendariosController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'CalendariosController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'CalendariosController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendariosController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendariosController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'CalendariosController@destroy']);
+    });
 });
 
 /*Route::get('index', ['as' => 'index', 'uses' => 'OperadorController@index']);

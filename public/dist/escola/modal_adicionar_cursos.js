@@ -46,11 +46,11 @@ function loadTableCursoTurno (idEscolaCurso) {
 function runModalAdicionarCursos(idEscola)
 {
     // Zerando a grid de disciplinas
-    //loadTableCursoTurno(0).ajax.url(laroute.route('curriculo.gridAdicionarDisciplina', {'idEscolaCurso' : 0 })).load();
+    loadTableCursoTurno(0).ajax.url(laroute.route('escola.turno.gridTurnos', {'idEscolaCurso' :idEscolaCurso })).load();
 
     //Carregando as grids de situações
     if(tableEscolaCurso) {
-        loadTableEscolaCurso(idEscola).ajax.url(laroute.route('escola.gridCursos', {'id' :idEscola })).load();
+        loadTableEscolaCurso(idEscola).ajax.url(laroute.route('escola.curso.gridCursos', {'id' :idEscola })).load();
     } else {
         loadTableEscolaCurso(idEscola);
     }
@@ -83,7 +83,7 @@ $(document).on("click", "#cursos-grid tbody tr", function (event) {
 
         //Carregando as grids de turnos
         if(tableCursoTurno) {
-            loadTableCursoTurno(idEscolaCurso).ajax.url(laroute.route('curriculo.gridAdicionarDisciplina', {'idCurriculoSerie' :idEscolaCurso })).load();
+            loadTableCursoTurno(idEscolaCurso).ajax.url(laroute.route('escola.turno.gridTurnos', {'idEscolaCurso' :idEscolaCurso })).load();
         } else {
             loadTableCursoTurno(idEscolaCurso);
         }

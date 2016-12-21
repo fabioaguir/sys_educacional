@@ -77,4 +77,5 @@ $.extend( $.validator.messages, {
 	alphaSpace: "Este campo deve conter apenas letras e espaços entre palavras",
 	decimal: "Este campo deve conter apenas números",
 	dateBr: "Por favor, forneça uma data válida",
+	cnpj: "Por favor, forneça um número válido"
 } );
