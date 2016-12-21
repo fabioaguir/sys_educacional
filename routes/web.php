@@ -160,15 +160,22 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'NivelEnsinoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'NivelEnsinoController@destroy']);
     });
+
+    Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'AlunoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'AlunoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'AlunoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'AlunoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AlunoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'AlunoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'AlunoController@destroy']);
+
+        Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'AlunoController@findBairro']);
+        Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'AlunoController@findCidade']);
+        Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'AlunoController@searchCpf']);
+    });
+
 });
-
-/*Route::get('index', ['as' => 'index', 'uses' => 'OperadorController@index']);
-    Route::get('grid', ['as' => 'grid', 'uses' => 'OperadorController@grid']);
-    Route::get('create', ['as' => 'create', 'uses' => 'OperadorController@create']);
-    Route::post('store', ['as' => 'store', 'uses' => 'OperadorController@store']);
-    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'OperadorController@edit']);
-    Route::post('update/{id}', ['as' => 'update', 'uses' => 'OperadorController@update']);*/
-
 
 # ROtas de autenticação
 Route::group(['middleware' => 'web'], function () {

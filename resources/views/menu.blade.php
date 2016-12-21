@@ -125,6 +125,7 @@
                 <ul>
                     <li>
                         <a href="{{ route('instituicao.edit')  }}">Instituição</a>
+                        <a href="{{ route('aluno.index')  }}">Alunos</a>
                         <a href="{{ route('servidor.index')  }}">Servidores</a>
                         <a href="{{ route('curso.index')  }}">Cursos</a>
                         <a href="{{ route('disciplina.index')  }}">Disciplinas</a>
