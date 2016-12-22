@@ -136,6 +136,7 @@
                 <ul>
                     <li>
                         <a href="{{ route('calendario.index')  }}">Calendário</a>
+                        <a href="{{ route('formaAvaliacao.index')  }}">Formas de Avaliações</a>
                     </li>
                 </ul>
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-wrench"></i>Parâmetros</a>

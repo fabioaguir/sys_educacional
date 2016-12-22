@@ -88,7 +88,6 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\DependenciaRepository::class,
             \SerEducacional\Repositories\DependenciaRepositoryEloquent::class);
 
-
         $this->app->bind(\SerEducacional\Repositories\InstituicaoRepository::class,
             \SerEducacional\Repositories\InstituicaoRepositoryEloquent::class);
 
@@ -108,8 +107,27 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\CalendarioRepository::class,
             \SerEducacional\Repositories\CalendarioRepositoryEloquent::class);
         
-        $this->app->bind(\SerEducacional\Repositories\StatusRepository::class, \SerEducacional\Repositories\StatusRepositoryEloquent::class);
-        $this->app->bind(\SerEducacional\Repositories\DuracaoRepository::class, \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);
+        $this->app->bind(
+            \SerEducacional\Repositories\StatusRepository::class,
+            \SerEducacional\Repositories\StatusRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\DuracaoRepository::class,
+            \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);        
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\FormaAvaliacaoRepository::class,
+            \SerEducacional\Repositories\FormaAvaliacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\TipoResultadoRepository::class,
+            \SerEducacional\Repositories\TipoResultadoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\NivelAlfabetizacaoRepository::class,
+            \SerEducacional\Repositories\NivelAlfabetizacaoRepositoryEloquent::class);
+        
+        
         //:end-bindings:
     }
 }

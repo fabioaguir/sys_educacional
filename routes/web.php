@@ -174,7 +174,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'NivelEnsinoController@destroy']);
     });
 
-    # Rotas de funcao
+    # Rotas de Calendários
     Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'CalendariosController@index']);
         Route::get('grid', ['as' => 'grid', 'uses' => 'CalendariosController@grid']);
@@ -186,13 +186,21 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-/*Route::get('index', ['as' => 'index', 'uses' => 'OperadorController@index']);
-    Route::get('grid', ['as' => 'grid', 'uses' => 'OperadorController@grid']);
-    Route::get('create', ['as' => 'create', 'uses' => 'OperadorController@create']);
-    Route::post('store', ['as' => 'store', 'uses' => 'OperadorController@store']);
-    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'OperadorController@edit']);
-    Route::post('update/{id}', ['as' => 'update', 'uses' => 'OperadorController@update']);*/
+#Rotas das formas de avaliações
+Route::group(['prefix' => 'formaAvaliacao', 'as' => 'formaAvaliacao.'], function () {
+    Route::get('index', ['as' => 'index', 'uses' => 'FormaAvaliacoesController@index']);
+    Route::get('grid', ['as' => 'grid', 'uses' => 'FormaAvaliacoesController@grid']);
+    Route::get('create', ['as' => 'create', 'uses' => 'FormaAvaliacoesController@create']);
+    Route::post('store', ['as' => 'store', 'uses' => 'FormaAvaliacoesController@store']);
+    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'FormaAvaliacoesController@edit']);
+    Route::post('update/{id}', ['as' => 'update', 'uses' => 'FormaAvaliacoesController@update']);
+    Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'FormaAvaliacoesController@destroy']);
 
+    # Rotas para niveis de alfabetizacao
+    Route::get('nivelAlfabetizacao/grid/{id}', ['as' => 'nivelAlfabetizacao.grid', 'uses' => 'FormaAvaliacoesController@gridNiveis']);
+    Route::post('nivelAlfabetizacao/store', ['as' => 'nivelAlfabetizacao.store', 'uses' => 'FormaAvaliacoesController@storeNivel']);
+    Route::post('nivelAlfabetizacao/destroy/{id}', ['as' => 'nivelAlfabetizacao.destroy', 'uses' => 'FormaAvaliacoesController@destroyNivel']);
+});
 
 # ROtas de autenticação
 Route::group(['middleware' => 'web'], function () {
