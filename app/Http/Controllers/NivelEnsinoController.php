@@ -177,6 +177,10 @@ class NivelEnsinoController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         try {
@@ -188,6 +192,68 @@ class NivelEnsinoController extends Controller
         } catch (\Throwable $e) {
             dd($e);
             return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function uniqueNome(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $nivelEnsino = $request->all();
+
+            $nome = \DB::table('niveis_ensino')
+                ->select([
+                    'niveis_ensino.id',
+                    'niveis_ensino.nome'
+                ])
+                ->where('niveis_ensino.nome', $nivelEnsino['value'])
+                ->get();
+
+            if (count($nome) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function uniqueCodigo(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $nivelEnsino = $request->all();
+
+            $codigo = \DB::table('niveis_ensino')
+                ->select([
+                    'niveis_ensino.id',
+                    'niveis_ensino.codigo'
+                ])
+                ->where('niveis_ensino.codigo', $nivelEnsino['value'])
+                ->get();
+
+            if (count($codigo) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }

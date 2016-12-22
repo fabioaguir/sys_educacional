@@ -148,6 +148,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ModalidadeEnsinoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'ModalidadeEnsinoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ModalidadeEnsinoController@destroy']);
+
+        Route::post('uniqueNome', ['as' => 'uniqueNome', 'uses' => 'ModalidadeEnsinoController@uniqueNome']);
+        Route::post('uniqueCodigo', ['as' => 'uniqueCodigo', 'uses' => 'ModalidadeEnsinoController@uniqueCodigo']);
     });
 
     # Rotas de Modalidade de ensino
@@ -159,6 +162,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'NivelEnsinoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'NivelEnsinoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'NivelEnsinoController@destroy']);
+
+        Route::post('uniqueNome', ['as' => 'uniqueNome', 'uses' => 'NivelEnsinoController@uniqueNome']);
+        Route::post('uniqueCodigo', ['as' => 'uniqueCodigo', 'uses' => 'NivelEnsinoController@uniqueCodigo']);
     });
 
     Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {

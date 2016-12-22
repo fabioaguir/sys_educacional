@@ -8,57 +8,58 @@ use SerEducacional\Entities\Aluno;
 class AlunoService
 {
     use TraitService;
-    
+
     /**
-     * @var CargoRepository
+     * @var AlunoRepository|CargoRepository
      */
     private $repository;
 
     /**
-     * @param CargoRepository $repository
+     * AlunoService constructor.
+     * @param AlunoRepository $repository
      */
-    public function __construct(CargoRepository $repository)
+    public function __construct(AlunoRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
      * @param array $data
-     * @return Cargo
+     * @return Aluno
      * @throws \Exception
      */
-    public function store(array $data) : Cargo
+    public function store(array $data) : Aluno
     {        
         #Salvando o registro pincipal
-        $cargo =  $this->repository->create($data);
+        $aluno =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$cargo) {
+        if(!$aluno) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $cargo;
+        return $aluno;
     }
 
     /**
      * @param array $data
      * @param int $id
-     * @return Cargo
+     * @return Aluno
      * @throws \Exception
      */
-    public function update(array $data, int $id) : Cargo
+    public function update(array $data, int $id) : Aluno
     {
         #Atualizando no banco de dados
-        $cargo = $this->repository->update($data, $id);
+        $aluno = $this->repository->update($data, $id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$cargo) {
+        if(!$aluno) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $cargo;
+        return $aluno;
     }
 
     /**
