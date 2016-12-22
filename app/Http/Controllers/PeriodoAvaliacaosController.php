@@ -7,28 +7,29 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Http\Requests\CalendarioCreateRequest;
-use SerEducacional\Http\Requests\CalendarioUpdateRequest;
-use SerEducacional\Repositories\CalendarioRepository;
-use SerEducacional\Validators\CalendarioValidator;
-use SerEducacional\Services\CalendarioService;
+use SerEducacional\Http\Requests\PeriodoAvaliacaoCreateRequest;
+use SerEducacional\Http\Requests\PeriodoAvaliacaoUpdateRequest;
+use SerEducacional\Repositories\PeriodoAvaliacaoRepository;
+use SerEducacional\Validators\PeriodoAvaliacaoValidator;
+use SerEducacional\Services\PeriodoAvaliacaoService;
 use Yajra\Datatables\Datatables;
+use SerEducacional\Uteis\SerbinarioDateFormat;
 
 
-class CalendariosController extends Controller
+class PeriodoAvaliacaosController extends Controller
 {
     /**
-     * @var CalendarioRepository
+     * @var PeriodoAvaliacaoRepository
      */
     protected $repository;
 
     /**
-     * @var CalendarioService
+     * @var PeriodoAvaliacaoService
      */
     private $service;
 
     /**
-     * @var CalendarioValidator
+     * @var PeriodoAvaliacaoValidator
      */
     protected $validator;
 
@@ -41,14 +42,14 @@ class CalendariosController extends Controller
     ];
 
     /**
-     * CalendariosController constructor.
-     * @param CalendarioRepository $repository
-     * @param CalendarioService $service
-     * @param CalendarioValidator $validator
+     * PeriodoAvaliacaosController constructor.
+     * @param PeriodoAvaliacaoRepository $repository
+     * @param PeriodoAvaliacaoService $service
+     * @param PeriodoAvaliacaoValidator $validator
      */
-    public function __construct(CalendarioRepository $repository,
-                                CalendarioService $service,
-                                CalendarioValidator $validator)
+    public function __construct(PeriodoAvaliacaoRepository $repository,
+                                PeriodoAvaliacaoService $service,
+                                PeriodoAvaliacaoValidator $validator)
     {
         $this->repository = $repository;
         $this->service = $service;
@@ -56,46 +57,22 @@ class CalendariosController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-        # Retorno para view
-        return view('calendario.index');
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
-
-        #Retorno para view
-        return view('calendario.create', compact('loadFields'));
-    }
-
-    /**
      * @return mixed
      */
-    public function grid()
+    public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('calendarios')
-            ->join('duracoes', 'duracoes.id', '=', 'calendarios.duracoes_id')
-            ->join('status', 'status.id', '=', 'calendarios.status_id')
+        $rows = \DB::table('periodos_avaliacao')
+            ->join('periodos', 'periodos.id', '=', 'periodos_avaliacao.periodos_id')
+            ->join('calendarios', 'calendarios.id', '=', 'periodos_avaliacao.calendarios_id')
+            ->where('periodos_avaliacao.calendarios_id', '=', $id)
             ->select([
-                'calendarios.id',
-                'calendarios.nome as nome',
-                \DB::raw('DATE_FORMAT(calendarios.data_inicial,"%d/%m/%Y") as data_inicial'),
-                \DB::raw('DATE_FORMAT(calendarios.data_final,"%d/%m/%Y") as data_final'),
-                \DB::raw('DATE_FORMAT(calendarios.data_resultado_final,"%d/%m/%Y") as data_resultado_final'),
-                'calendarios.dias_letivos',
-                'calendarios.semanas_letivas',
-                'calendarios.ano',
-                'status.nome as status',
-                'duracoes.nome as duracao',
+                'periodos_avaliacao.id as id',
+                \DB::raw('DATE_FORMAT(periodos_avaliacao.data_inicial,"%d/%m/%Y") as data_inicial'),
+                \DB::raw('DATE_FORMAT(periodos_avaliacao.data_final,"%d/%m/%Y") as data_final'),
+                'periodos_avaliacao.dias_letivos',
+                'periodos_avaliacao.semanas_letivas',
+                'periodos.nome as periodo',
             ]);
 
         #Editando a grid
@@ -104,8 +81,6 @@ class CalendariosController extends Controller
             $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             $html .= '<a href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
-            # Html de adicionar período de avaliação
-            $html .= '<a title="Adicionar Período de Avaliação" id="btnModalAdicionarPeriodo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
             # Retorno
             return $html;
         })->make(true);
@@ -119,6 +94,8 @@ class CalendariosController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
+
+            //dd($data);
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
@@ -193,5 +170,55 @@ class CalendariosController extends Controller
             dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getPeriodo(Request $request)
+    {
+
+        $periodos = \DB::table('periodos')
+            ->select('periodos.id', 'periodos.nome')
+            ->get();
+
+        return response()->json($periodos);
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function validarDataCalendario(Request $request)
+    {
+
+        #recuperando o id do calendário
+        $idCalendario = $request->get('idCalendario');
+
+        // Validando se o campo data existe e está vazio
+        if($request->has('data') && $request->get('data') != "") {
+            #recuperando a data incial e transformando no formanto americano
+            $data = SerbinarioDateFormat::toUsa($request->get('data'));
+
+            // Validando de a data está entre o período do calendário
+            $query = \DB::table('calendarios')
+                ->where('calendarios.id', '=', $idCalendario)
+                ->where('calendarios.data_inicial', '<=', $data)
+                ->where('calendarios.data_final', '>=', $data)
+                ->first();
+
+            // Valida se o retorno da quary foi nula ou não
+            $retorno = $query == null ? 0 : 1;
+
+        } else {
+            $retorno = 2;
+        }
+
+
+        
+        return response()->json($retorno);
+
     }
 }

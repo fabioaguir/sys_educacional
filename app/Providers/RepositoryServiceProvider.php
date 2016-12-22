@@ -110,6 +110,7 @@ class RepositoryServiceProvider extends ServiceProvider
         
         $this->app->bind(\SerEducacional\Repositories\StatusRepository::class, \SerEducacional\Repositories\StatusRepositoryEloquent::class);
         $this->app->bind(\SerEducacional\Repositories\DuracaoRepository::class, \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);
+        $this->app->bind(\SerEducacional\Repositories\PeriodoAvaliacaoRepository::class, \SerEducacional\Repositories\PeriodoAvaliacaoRepositoryEloquent::class);
         //:end-bindings:
     }
 }

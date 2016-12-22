@@ -170,6 +170,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendariosController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendariosController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'CalendariosController@destroy']);
+        
+        # rotas para períodos de avaliação
+        Route::get('gridPeriodo/{id}', ['as' => 'gridPeriodo', 'uses' => 'PeriodoAvaliacaosController@grid']);
+        Route::post('getPeriodo/{id}', ['as' => 'getPeriodo', 'uses' => 'PeriodoAvaliacaosController@getPeriodo']);
+        Route::post('storePeriodo', ['as' => 'storePeriodo', 'uses' => 'PeriodoAvaliacaosController@store']);
+        Route::post('validarDataCalendario', ['as' => 'validarDataCalendario', 'uses' => 'PeriodoAvaliacaosController@validarDataCalendario']);
     });
 });
 
