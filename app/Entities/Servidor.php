@@ -55,7 +55,6 @@ class Servidor extends Model implements Transformable
      */
     public function cgm()
     {
-        //return $this->belongsTo(PessoaFisica::class, 'id_cgm');
         return $this->belongsTo(PessoaFisica::class, 'id_cgm');
     }
 }

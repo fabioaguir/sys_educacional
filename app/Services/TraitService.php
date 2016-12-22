@@ -111,6 +111,10 @@ trait TraitService
             if (in_array('id', $explodeKey) && $value == null ) {
                 $data[$key] = null;
             }
+
+            if ($value == "" ) {
+                $data[$key] = null;
+            }
         }
 
         #Retorno
