@@ -51,7 +51,7 @@ $(document).ready(function () {
                 required: true,
                 cpfBR: true,
                 maxlength: 15,
-                unique: [laroute.route('pessoaFisica.searchCpf'), $('#cpf')]
+                unique: [laroute.route('modalidadeEnsino.searchCpf'), $('#cpf')]
             },
 
             rg: {

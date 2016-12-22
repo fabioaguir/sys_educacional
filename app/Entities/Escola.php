@@ -57,4 +57,29 @@ class Escola extends Model implements Transformable
     {
         return $this->belongsTo(Endereco::class);
     }
+
+    /**
+     * @return $this
+     */
+    public function cursos()
+    {
+        return $this->belongsToMany(Curso::class, 'escolas_cursos', 'escola_id', 'curso_id')
+            ->withPivot(['id']);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Curso) {
+            return new PivotEscolaCurso($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
 }

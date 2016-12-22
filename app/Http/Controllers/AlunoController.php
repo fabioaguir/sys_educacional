@@ -7,21 +7,24 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Repositories\CurriculoRepository;
-use SerEducacional\Services\CurriculoService;
-use SerEducacional\Validators\CurriculoValidator;
+use SerEducacional\Http\Requests\AlunoCreateRequest;
+use SerEducacional\Http\Requests\AlunoUpdateRequest;
+use SerEducacional\Repositories\AlunoRepository;
+use SerEducacional\Services\AlunoService;
+use SerEducacional\Validators\AlunoValidator;
 use Yajra\Datatables\Datatables;
 
 
-class CurriculosController extends Controller
+class AlunoController extends Controller
 {
+
     /**
-     * @var CurriculoRepository
+     * @var AlunoRepository
      */
     protected $repository;
 
     /**
-     * @var CurriculoValidatorValidator
+     * @var AlunoValidator
      */
     protected $validator;
 
@@ -29,40 +32,37 @@ class CurriculosController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Curso',
-        'Turno',
-        'Serie'
+
     ];
 
     /**
-     * @var CurriculoService
+     * @var AlunoService
      */
     private $service;
 
     /**
-     * CurriculosController constructor.
-     * @param CurriculoRepository $repository
-     * @param CurriculoValidator $validator
-     * @param CurriculoService $service
+     * CargosController constructor.
+     * @param AlunoRepository $repository
+     * @param AlunoValidator $validator
+     * @param AlunoService $service
      */
-    public function __construct(CurriculoRepository $repository,
-                                CurriculoValidator $validator,
-                                CurriculoService $service)
+    public function __construct(AlunoRepository $repository,
+                                AlunoValidator $validator,
+                                AlunoService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
-        $this->service = $service;
+        $this->service  = $service;
     }
 
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
         # Retorno para view
-        return view('curriculo.index');
+        return view('aluno.index');
     }
 
     /**
@@ -71,41 +71,19 @@ class CurriculosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('curriculos')
-            ->join('cursos', 'cursos.id', '=', 'curriculos.curso_id')
+        $rows = \DB::table('cargos')
             ->select([
-                'curriculos.id',
-                'curriculos.nome',
-                'curriculos.codigo',
-                'cursos.codigo as codigo_curso',
-                \DB::raw('IF(curriculos.ativo = 1, "SIM", "NÃO") as ativo')
+                'cargos.id',
+                'cargos.nome',
+                'cargos.codigo',
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            # recuperando o curriculo
-            $curriculo = $this->repository->find($row->id);
+            # Variáveis de uso
+            $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
-            # Html do edit
-            $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-
-            # Recuperando as disciplinas
-            $disciplinas = \DB::table('disciplinas')
-                ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
-                ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
-                ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
-                ->where('curriculos.id', $curriculo->id)
-                ->select(['disciplinas.id'])->get();
-
-            # Verificando se o currículo possui disciplinas
-            if(count($disciplinas) == 0) {
-                # Html de delete
-                $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-            }
-
-            # Html de adicionar disciplina
-            $html .= '<a title="Adicionar Disciplina" id="btnModalAdicionarDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
-            
             # Retorno
             return $html;
         })->make(true);
@@ -120,7 +98,7 @@ class CurriculosController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('curriculo.create', compact('loadFields'));
+        return view('aluno.create', compact('loadFields'));
     }
 
     /**
@@ -132,7 +110,7 @@ class CurriculosController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-        
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -143,7 +121,7 @@ class CurriculosController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) { 
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -161,17 +139,12 @@ class CurriculosController extends Controller
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
-            # Recuperando o ranger de séries
-            $serieInicial = $model->series->first();
-            $serieFinal   = $model->series->last();
-
             #retorno para view
-            return view('curriculo.edit', compact('model', 'loadFields', 'serieInicial', 'serieFinal'));
-        } catch (\Throwable $e) {
+            return view('aluno.edit', compact('model', 'loadFields'));
+        } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
-
 
     /**
      * @param Request $request
@@ -197,7 +170,7 @@ class CurriculosController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

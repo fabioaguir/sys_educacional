@@ -56,8 +56,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'EscolaController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'EscolaController@destroy']);
 
+        # Rotas para endereço
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'EscolaController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'EscolaController@findCidade']);
+
+        # Rotas para cursos
+        Route::get('curso/gridCursos/{id}', ['as' => 'curso.gridCursos', 'uses' => 'EscolaCursoController@gridCursos']);
+        Route::post('curso/select2', ['as' => 'curso.select2', 'uses' => 'EscolaCursoController@cursosSelect2']);
+        Route::post('curso/adicionarCursos', ['as' => 'curso.adicionarCursos', 'uses' => 'EscolaCursoController@adicionarCursos']);
+        Route::post('curso/removerCurso/{idEscolaCurso}', ['as' => 'curso.removerCurso', 'uses' => 'EscolaCursoController@removerCurso']);
+
+        # Rotas para turnos
+        Route::get('turno/gridTurnos/{idEscolaCurso}', ['as' => 'turno.gridTurnos', 'uses' => 'EscolaCursoTurnoController@gridTurnos']);
+        Route::post('turno/select2', ['as' => 'turno.select2', 'uses' => 'EscolaCursoTurnoController@turnosSelect2']);
+        Route::post('turno/adicionarTurnos', ['as' => 'turno.adicionarTurnos', 'uses' => 'EscolaCursoTurnoController@adicionarTurnos']);
+        Route::post('turno/removerTurno', ['as' => 'turno.removerTurno', 'uses' => 'EscolaCursoTurnoController@removerTurno']);
     });
 
     #Rotas servidor
@@ -148,6 +161,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ModalidadeEnsinoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'ModalidadeEnsinoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ModalidadeEnsinoController@destroy']);
+
+        Route::post('uniqueNome', ['as' => 'uniqueNome', 'uses' => 'ModalidadeEnsinoController@uniqueNome']);
+        Route::post('uniqueCodigo', ['as' => 'uniqueCodigo', 'uses' => 'ModalidadeEnsinoController@uniqueCodigo']);
     });
 
     # Rotas de Modalidade de ensino
@@ -159,6 +175,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'NivelEnsinoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'NivelEnsinoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'NivelEnsinoController@destroy']);
+
+        Route::post('uniqueNome', ['as' => 'uniqueNome', 'uses' => 'NivelEnsinoController@uniqueNome']);
+        Route::post('uniqueCodigo', ['as' => 'uniqueCodigo', 'uses' => 'NivelEnsinoController@uniqueCodigo']);
     });
 
     # Rotas de funcao
@@ -177,15 +196,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('storePeriodo', ['as' => 'storePeriodo', 'uses' => 'PeriodoAvaliacaosController@store']);
         Route::post('validarDataCalendario', ['as' => 'validarDataCalendario', 'uses' => 'PeriodoAvaliacaosController@validarDataCalendario']);
     });
+
+    Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'AlunoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'AlunoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'AlunoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'AlunoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AlunoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'AlunoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'AlunoController@destroy']);
+
+        Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'AlunoController@findBairro']);
+        Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'AlunoController@findCidade']);
+        Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'AlunoController@searchCpf']);
+    });
 });
-
-/*Route::get('index', ['as' => 'index', 'uses' => 'OperadorController@index']);
-    Route::get('grid', ['as' => 'grid', 'uses' => 'OperadorController@grid']);
-    Route::get('create', ['as' => 'create', 'uses' => 'OperadorController@create']);
-    Route::post('store', ['as' => 'store', 'uses' => 'OperadorController@store']);
-    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'OperadorController@edit']);
-    Route::post('update/{id}', ['as' => 'update', 'uses' => 'OperadorController@update']);*/
-
 
 # ROtas de autenticação
 Route::group(['middleware' => 'web'], function () {

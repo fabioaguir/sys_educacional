@@ -8,7 +8,7 @@
                     <div class="fg-line">
                         <div class="fg-line">
                             <label for="nome">Nome *</label>
-                            {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome da modalidade')) !!}
+                            {!! Form::text('nome', Session::getOldInput('nome'), array('id' => 'modalidadeNome', 'class' => 'form-control input-sm', 'placeholder' => 'Nome da modalidade')) !!}
                         </div>
                     </div>
                 </div>
@@ -17,8 +17,8 @@
                 <div class="form-group col-md-4">
                     <div class="fg-line">
                         <div class="fg-line">
-                            <label for="codigo">Código</label>
-                            {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código')) !!}
+                            <label for="codigo">Código *</label>
+                            {!! Form::text('codigo', Session::getOldInput('codigo'), array('id' => 'modalidadeCodigo', 'class' => 'form-control input-sm', 'placeholder' => 'Código')) !!}
                         </div>
                     </div>
                 </div>

@@ -103,8 +103,8 @@ class PessoaFisicaController extends Controller
                 'cgm.rg',
                 'cgm.cpf',
                 'cgm_municipio.nome as statusCgm'
-            ])
-            ->get();
+            ]);
+        
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 

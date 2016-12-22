@@ -4,12 +4,15 @@ $(document).ready(function () {
     $("#formModalidadeEnsino").validate({
         rules: {
             nome: {
+                unique: [laroute.route('modalidadeEnsino.uniqueNome'), $('#modalidadeNome')],
                 required: true,
                 alphaSpace: true,
                 maxlength: 30
             },
 
             codigo: {
+                unique: [laroute.route('modalidadeEnsino.uniqueCodigo'), $('#modalidadeCodigo')],
+                required: true,
                 alphaSpace: true,
                 maxlength: 15
             }
