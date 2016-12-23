@@ -33,7 +33,6 @@
                                 <th>Nome</th>
                                 <th>RG</th>
                                 <th>CPF</th>
-                                <th>CGM do Município</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
@@ -42,7 +41,6 @@
                                 <th>Nome</th>
                                 <th>RG</th>
                                 <th>CPF</th>
-                                <th>CGM do Município</th>
                                 <th>Açao</th>
                             </tr>
                             </tfoot>
@@ -65,7 +63,6 @@
                 {data: 'nome', name: 'cgm.nome'},
                 {data: 'rg', name: 'cgm.rg'},
                 {data: 'cpf', name: 'cgm.cpf'},
-                {data: 'statusCgm', name: 'cgm_municipio.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {

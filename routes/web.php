@@ -221,6 +221,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AlunoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'AlunoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'AlunoController@destroy']);
+
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'AlunoController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'AlunoController@findCidade']);
         Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'AlunoController@searchCpf']);
