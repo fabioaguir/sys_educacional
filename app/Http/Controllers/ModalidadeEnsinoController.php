@@ -198,15 +198,31 @@ class ModalidadeEnsinoController extends Controller
             #Dados vindo na requisição
             $modalidadeEnsino = $request->all();
 
-            $nome = \DB::table('modalidades')
-                ->select([
-                    'modalidades.id',
-                    'modalidades.nome'
-                ])
-                ->where('modalidades.nome', $modalidadeEnsino['value'])
-                ->get();
+            //dd($modalidadeEnsino);
 
-            if (count($nome) > 0 ) {
+            #
+            if (empty($modalidadeEnsino['idModel'])) {
+                #Consultando
+                $modalidadeNome = \DB::table('modalidades')
+                    ->select([
+                        'modalidades.nome'
+                    ])
+                    ->where('modalidades.nome', $modalidadeEnsino['value'])
+                    ->get();
+
+            } else {
+                #Consultando
+                $modalidadeNome = \DB::table('modalidades')
+                    ->select([
+                        'modalidades.id',
+                        'modalidades.nome'
+                    ])
+                    ->where('modalidades.id', '!=', $modalidadeEnsino['idModel'])
+                    ->where('modalidades.nome', $modalidadeEnsino['value'])
+                    ->get();
+            }
+
+            if (count($modalidadeNome) > 0 ) {
                 $result = true;
             }
 
@@ -229,15 +245,29 @@ class ModalidadeEnsinoController extends Controller
             #Dados vindo na requisição
             $modalidadeEnsino = $request->all();
 
-            $codigo = \DB::table('modalidades')
-                ->select([
-                    'modalidades.id',
-                    'modalidades.codigo'
-                ])
-                ->where('modalidades.codigo', $modalidadeEnsino['value'])
-                ->get();
+            #
+            if (empty($modalidadeEnsino['idModel'])) {
+                #Consultando
+                $modalidadeEnsino = \DB::table('modalidades')
+                    ->select([
+                        'modalidades.codigo'
+                    ])
+                    ->where('modalidades.codigo', $modalidadeEnsino['value'])
+                    ->get();
 
-            if (count($codigo) > 0 ) {
+            } else {
+                #Consultando
+                $modalidadeEnsino = \DB::table('modalidades')
+                    ->select([
+                        'modalidades.id',
+                        'modalidades.codigo'
+                    ])
+                    ->where('modalidades.id', '!=', $modalidadeEnsino['idModel'])
+                    ->where('modalidades.codigo', $modalidadeEnsino['value'])
+                    ->get();
+            }
+
+            if (count($modalidadeEnsino) > 0 ) {
                 $result = true;
             }
 

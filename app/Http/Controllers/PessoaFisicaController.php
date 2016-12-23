@@ -266,17 +266,31 @@ class PessoaFisicaController extends Controller
             #Declaração de variável de uso
             $result = false;
             #Dados vindo na requisição
-            $contrato = $request->all();
+            $pessoaFisica = $request->all();
 
-            $cpfCliente = \DB::table('cgm')
-                ->select([
-                    'cgm.id',
-                    'cgm.cpf'
-                ])
-                ->where('cgm.cpf', $contrato['value'])
-                ->get();
+            #
+            if (empty($pessoaFisica['idModel'])) {
+                #Consultando
+                $pessoa = \DB::table('cgm')
+                    ->select([
+                        'cgm.cpf'
+                    ])
+                    ->where('cgm.cpf', $pessoaFisica['value'])
+                    ->get();
 
-            if (count($cpfCliente) > 0 ) {
+            } else {
+                #Consultando
+                $pessoa = \DB::table('cgm')
+                    ->select([
+                        'cgm.id',
+                        'cgm.cpf'
+                    ])
+                    ->where('cgm.id', '!=' ,$pessoaFisica['idModel'])
+                    ->where('cgm.cpf', $pessoaFisica['value'])
+                    ->get();
+            }
+
+            if (count($pessoa) > 0 ) {
                 $result = true;
             }
 

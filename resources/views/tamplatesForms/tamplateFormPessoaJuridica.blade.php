@@ -3,6 +3,11 @@
 </div>
 <div class="card">
     <div class="card-body card-padding">
+
+        <!-- Campo que recebe o id do model em questão, possibilitando a edição do cadastro sem que haja conflito com o
+        CPF que foi cadastrado no ato do cadastro de pessoa jurídica -->
+        <input type="hidden" id="idPessoaJuridica" value="{{ isset($model->id) ? $model->id : null }}">
+
         <!-- Painel -->
         <div role="tabpanel">
             <!-- Guias -->

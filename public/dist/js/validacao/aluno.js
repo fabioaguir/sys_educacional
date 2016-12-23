@@ -42,7 +42,7 @@ $(document).ready(function () {
                 required: true,
                 cpfBr: true,
                 maxlength: 15,
-                unique: [laroute.route('aluno.searchCpf'), $('#cpf')]
+                unique: [laroute.route('aluno.searchCpf'), $('#idAluno')]
             },
 
             'cgm[rg]': {
