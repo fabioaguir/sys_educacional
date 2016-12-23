@@ -43,6 +43,8 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
+                                <th>Data de Nascimento</th>
+                                <th>Nome da Mãe</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
@@ -50,7 +52,9 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th>Data de Nascimento</th>
+                                <th>Nome da Mãe</th>
+                                <th>Açao</th>
                             </tr>
                             </tfoot>
                     </table>
@@ -68,8 +72,10 @@
             serverSide: true,
             ajax: "{{ route('aluno.grid') }}",
             columns: [
-                {data: 'nome', name: 'cargos.nome'},
-                {data: 'codigo', name: 'cargos.codigo'},
+                {data: 'nome', name: 'cgm.nome'},
+                {data: 'codigo', name: 'alunos.codigo'},
+                {data: 'data_nascimento', name: 'cgm.data_nascimento'},
+                {data: 'mae', name: 'cgm.mae'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

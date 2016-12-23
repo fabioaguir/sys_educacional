@@ -18,7 +18,8 @@ class Endereco extends Model implements Transformable
         'numero',
         'complemento',
         'cep',
-        'bairro_id'
+        'bairro_id',
+        'zona_id'
     ];
 
     /**
@@ -26,7 +27,7 @@ class Endereco extends Model implements Transformable
      */
     public function pessoaFisica()
     {
-        return $this->$this->hasMany(PessoaFisica::class);
+        return $this->hasMany(PessoaFisica::class);
     }
 
     /**

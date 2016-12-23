@@ -10,6 +10,20 @@ class Aluno extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [];
+    protected $table    = 'alunos';
 
+    protected $fillable = [
+        'codigo',
+        'num_nis',
+        'num_inep',
+        'cgm_id',
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cgm()
+    {
+        return $this->belongsTo(PessoaFisica::class);
+    }
 }
