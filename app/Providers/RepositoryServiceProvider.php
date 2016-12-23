@@ -88,6 +88,7 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\DependenciaRepository::class,
             \SerEducacional\Repositories\DependenciaRepositoryEloquent::class);
 
+
         $this->app->bind(\SerEducacional\Repositories\InstituicaoRepository::class,
             \SerEducacional\Repositories\InstituicaoRepositoryEloquent::class);
 
@@ -102,18 +103,26 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             \SerEducacional\Repositories\NivelEnsinoRepository::class,
             \SerEducacional\Repositories\NivelEnsinoRepositoryEloquent::class);
-        
+
+        $this->app->bind(
+            \SerEducacional\Repositories\AlunoRepository::class,
+            \SerEducacional\Repositories\AlunoRepositoryEloquent::class);
+
         $this->app->bind(
             \SerEducacional\Repositories\CalendarioRepository::class,
             \SerEducacional\Repositories\CalendarioRepositoryEloquent::class);
-        
+
         $this->app->bind(
             \SerEducacional\Repositories\StatusRepository::class,
             \SerEducacional\Repositories\StatusRepositoryEloquent::class);
         
         $this->app->bind(
             \SerEducacional\Repositories\DuracaoRepository::class,
-            \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);        
+            \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);
+
+        $this->app->bind(
+            \SerEducacional\Repositories\PeriodoAvaliacaoRepository::class,
+            \SerEducacional\Repositories\PeriodoAvaliacaoRepositoryEloquent::class);
         
         $this->app->bind(
             \SerEducacional\Repositories\FormaAvaliacaoRepository::class,
