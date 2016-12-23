@@ -102,10 +102,14 @@ class CalendariosController extends Controller
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Html de adicionar período de avaliação
-            $html .= '<a title="Adicionar Período de Avaliação" id="btnModalAdicionarPeriodo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            $html .= '<a style="margin-right: 5%;" title="Adicionar Período de Avaliação" id="btnModalAdicionarPeriodo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+
+            # Html de adicionar eventos
+            $html .= '<a title="Adicionar Evento" id="btnModalAdicionarEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            
             # Retorno
             return $html;
         })->make(true);

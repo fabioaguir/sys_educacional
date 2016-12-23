@@ -87,7 +87,7 @@
                                 <th>Semanas letivas</th>
                                 <th>Passivo</th>
                                 <th>Duração</th>
-                                <th style="width: 13%;">Açao</th>
+                                <th style="width: 15%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>
@@ -98,12 +98,14 @@
     </section>
 
     @include('calendario.modal_adicionar_periodos_avaliacao')
+    @include('calendario.modal_adicionar_eventos')
 @stop
 
 @section('javascript')
     @parent
     <script type="text/javascript" src="{{ asset('/dist/calendario/loadFields.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/calendario/modal_adicionar_periodos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/calendario/modal_adicionar_eventos.js') }}"></script>
     <script type="text/javascript">
         var table = $('#calendario-grid').DataTable({
             processing: true,
@@ -140,6 +142,24 @@
 
             // Executando o modal
             runModalAdicionarPeriodos(idCalendario);
+        });
+
+
+        // Evento para abrir o modal de eventos
+        $(document).on("click", "#btnModalAdicionarEvento", function () {
+            // Recuperando o id do calendário
+            idCalendario = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var ano = table.row($(this).parents('tr')).data().ano;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#eNome').text(nome);
+            $('#eAno').text(ano);
+
+            // Executando o modal
+            runModalAdicionarEventos(idCalendario);
         });
     </script>
 @stop

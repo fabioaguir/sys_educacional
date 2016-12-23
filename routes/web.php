@@ -195,6 +195,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('getPeriodo/{id}', ['as' => 'getPeriodo', 'uses' => 'PeriodoAvaliacaosController@getPeriodo']);
         Route::post('storePeriodo', ['as' => 'storePeriodo', 'uses' => 'PeriodoAvaliacaosController@store']);
         Route::post('validarDataCalendario', ['as' => 'validarDataCalendario', 'uses' => 'PeriodoAvaliacaosController@validarDataCalendario']);
+
+        # rotas para eventos
+        Route::get('gridEventoAtivo/{id}', ['as' => 'gridEventoAtivo', 'uses' => 'EventosController@gridLetivos']);
+        Route::get('gridEventoNLetivo/{id}', ['as' => 'gridEventoNLetivo', 'uses' => 'EventosController@gridNLetivos']);
+        Route::post('getTipoEvento/{id}', ['as' => 'getTipoEvento', 'uses' => 'EventosController@getTipoEvento']);
+        Route::post('getDiaLetivo/{id}', ['as' => 'getDiaLetivo', 'uses' => 'EventosController@getDiaLetivo']);
+        Route::post('storeEvento', ['as' => 'storeEvento', 'uses' => 'EventosController@store']);
+        Route::post('updateEvento/{id}', ['as' => 'updateEvento', 'uses' => 'EventosController@update']);
+        Route::post('removerEvento/{id}', ['as' => 'removerEvento', 'uses' => 'EventosController@destroy']);
+        Route::post('getDiaSemana', ['as' => 'getDiaSemana', 'uses' => 'EventosController@getDiaSemana']);
     });
 
     #Rotas das formas de avaliações
@@ -225,6 +235,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'AlunoController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'AlunoController@findCidade']);
         Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'AlunoController@searchCpf']);
+    });
+
+    # Rotas dos tipos de eventos
+    Route::group(['prefix' => 'tipoEvento', 'as' => 'tipoEvento.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'TipoEventosController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'TipoEventosController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'TipoEventosController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'TipoEventosController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TipoEventosController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'TipoEventosController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TipoEventosController@destroy']);
     });
 });
 

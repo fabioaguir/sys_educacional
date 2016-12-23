@@ -75,6 +75,7 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\FuncaoRepository::class,
             \SerEducacional\Repositories\FuncaoRepositoryEloquent::class);
 
+
         $this->app->bind(
             \SerEducacional\Repositories\SerieRepository::class,
             \SerEducacional\Repositories\SerieRepositoryEloquent::class);
@@ -106,7 +107,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             \SerEducacional\Repositories\AlunoRepository::class,
             \SerEducacional\Repositories\AlunoRepositoryEloquent::class);
-
+        
         $this->app->bind(
             \SerEducacional\Repositories\CalendarioRepository::class,
             \SerEducacional\Repositories\CalendarioRepositoryEloquent::class);
@@ -118,19 +119,35 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             \SerEducacional\Repositories\DuracaoRepository::class,
             \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);
-
+        
         $this->app->bind(
             \SerEducacional\Repositories\PeriodoAvaliacaoRepository::class,
             \SerEducacional\Repositories\PeriodoAvaliacaoRepositoryEloquent::class);
         
         $this->app->bind(
+            \SerEducacional\Repositories\PeriodoRepository::class,
+            \SerEducacional\Repositories\PeriodoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\EventoRepository::class,
+            \SerEducacional\Repositories\EventoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\DiaLetivoRepository::class,
+            \SerEducacional\Repositories\DiaLetivoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\TipoEventoRepository::class,
+            \SerEducacional\Repositories\TipoEventoRepositoryEloquent::class);
+
+        $this->app->bind(
             \SerEducacional\Repositories\FormaAvaliacaoRepository::class,
             \SerEducacional\Repositories\FormaAvaliacaoRepositoryEloquent::class);
-        
+
         $this->app->bind(
             \SerEducacional\Repositories\TipoResultadoRepository::class,
             \SerEducacional\Repositories\TipoResultadoRepositoryEloquent::class);
-        
+
         $this->app->bind(
             \SerEducacional\Repositories\NivelAlfabetizacaoRepository::class,
             \SerEducacional\Repositories\NivelAlfabetizacaoRepositoryEloquent::class);
