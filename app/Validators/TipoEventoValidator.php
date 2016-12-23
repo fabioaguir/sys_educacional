@@ -19,7 +19,15 @@ class TipoEventoValidator extends LaravelValidator
     ];
     
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        
+        ValidatorInterface::RULE_CREATE => [
+            'nome' => 'required',
+            'abreviatura' => 'required'
+        ],
+        
+        ValidatorInterface::RULE_UPDATE => [
+            'nome' => 'required',
+            'abreviatura' => 'required'
+        ],
    ];
 }

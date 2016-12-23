@@ -42,5 +42,5 @@
     --}}{{--Regras de validação--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/dist/js/validacao/cargos.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/tipo_evento.js')  }}"></script>
 @endsection

@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Http\Requests\AlunoCreateRequest;
-use SerEducacional\Http\Requests\AlunoUpdateRequest;
+/*use SerEducacional\Http\Requests\AlunoCreateRequest;
+use SerEducacional\Http\Requests\AlunoUpdateRequest;*/
 use SerEducacional\Repositories\AlunoRepository;
 use SerEducacional\Services\AlunoService;
 use SerEducacional\Validators\AlunoValidator;
@@ -17,7 +17,6 @@ use Yajra\Datatables\Datatables;
 
 class AlunoController extends Controller
 {
-
     /**
      * @var AlunoRepository
      */
@@ -32,7 +31,12 @@ class AlunoController extends Controller
      * @var array
      */
     private $loadFields = [
-
+        'Estado',
+        'Cidade',
+        'Bairro',
+        'Nacionalidade',
+        'Zona',
+        'Sexo'
     ];
 
     /**
@@ -55,7 +59,6 @@ class AlunoController extends Controller
         $this->service  = $service;
     }
 
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -71,11 +74,14 @@ class AlunoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('cargos')
+        $rows = \DB::table('alunos')
+            ->join('cgm', 'cgm.id', '=', 'alunos.cgm_id')
             ->select([
-                'cargos.id',
-                'cargos.nome',
-                'cargos.codigo',
+                'alunos.id',
+                'alunos.codigo',
+                'cgm.nome',
+                'cgm.data_nascimento',
+                'cgm.mae'
             ]);
 
         #Editando a grid
@@ -133,8 +139,8 @@ class AlunoController extends Controller
     public function edit($id)
     {
         try {
-            #Recuperando a empresa
-            $model = $this->repository->find($id);
+            #Recuperando o aluno
+            $model = $this->service->find($id);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
@@ -189,6 +195,71 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findCidade(Request $request)
+    {
+        $idEstado = $request->get('id');
+
+        $cidades = \DB::table('cidades')
+            ->join('estados', 'estados.id', '=', 'cidades.estados_id')
+            ->select('cidades.id', 'cidades.nome')
+            ->where('estados.id', $idEstado)
+            ->get();
+
+        return response()->json($cidades);
+
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findBairro(Request $request)
+    {
+        $idCidade = $request->get('id');
+
+        $cidades = \DB::table('bairros')
+            ->join('cidades', 'cidades.id', '=', 'bairros.cidades_id')
+            ->select('bairros.id', 'bairros.nome')
+            ->where('cidades.id', $idCidade)
+            ->get();
+
+        return response()->json($cidades);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function searchCpf(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $contrato = $request->all();
+
+            $cpfCliente = \DB::table('cgm')
+                ->select([
+                    'cgm.id',
+                    'cgm.cpf'
+                ])
+                ->where('cgm.cpf', $contrato['value'])
+                ->get();
+
+            if (count($cpfCliente) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }

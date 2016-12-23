@@ -43,6 +43,14 @@ class PessoaFisica extends Model implements Transformable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function aluno()
+    {
+        return $this->hasMany(Aluno::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function servidor()
     {
         return $this->hasMany(Servidor::class, 'id_cgm');

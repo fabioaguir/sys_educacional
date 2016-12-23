@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Alunos</h2>
+                <h2>Listar Formas de Avaliações</h2>
             </div>
 
             <div class="card material-table">
@@ -25,12 +25,11 @@
                         </div>
                     @endif
 
-
-                                <!-- Botão novo -->
+                    <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('aluno.create') }}">Novo Aluno</a>
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('formaAvaliacao.create') }}">Nova Forma de Avaliação</a>
                             </div>
                         </div>
                     </div>
@@ -38,13 +37,12 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="aluno-grid" class="table table-hover">
+                    <table id="forma-avaliacao-grid" class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th>Data de Nascimento</th>
-                                <th>Nome da Mãe</th>
+                                <th>Tipo Resultado</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
@@ -52,9 +50,8 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th>Data de Nascimento</th>
-                                <th>Nome da Mãe</th>
-                                <th>Açao</th>
+                                <th>Tipo Resultado</th>
+                                <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>
@@ -67,15 +64,14 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#aluno-grid').DataTable({
+        var table = $('#forma-avaliacao-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('aluno.grid') }}",
+            ajax: "{{ route('formaAvaliacao.grid') }}",
             columns: [
-                {data: 'nome', name: 'cgm.nome'},
-                {data: 'codigo', name: 'alunos.codigo'},
-                {data: 'data_nascimento', name: 'cgm.data_nascimento'},
-                {data: 'mae', name: 'cgm.mae'},
+                {data: 'nome', name: 'formas_avaliacoes.nome'},
+                {data: 'codigo', name: 'formas_avaliacoes.codigo'},
+                {data: 'tipo_resultado', name: 'tipos_resultados.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

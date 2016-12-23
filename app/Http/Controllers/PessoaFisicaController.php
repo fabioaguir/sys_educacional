@@ -10,6 +10,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Http\Requests\PessoaFisicaCreateRequest;
 use SerEducacional\Http\Requests\PessoaFisicaUpdateRequest;
 use SerEducacional\Repositories\PessoaFisicaRepository;
+use SerEducacional\Repositories\AlunoRepository;
 use SerEducacional\Repositories\ServidorRepository;
 use SerEducacional\Validators\PessoaFisicaValidator;
 use SerEducacional\Services\PessoaFisicaService;
@@ -31,6 +32,11 @@ class PessoaFisicaController extends Controller
      * @var ServidorRepository
      */
     protected $servidorRepository;
+
+    /**
+     * @var AlunoRepository
+     */
+    protected $alunoRepository;
 
     /**
      * @var PessoaFisicaValidator
@@ -61,10 +67,12 @@ class PessoaFisicaController extends Controller
     public function __construct(PessoaFisicaService $service,
                                 PessoaFisicaRepository $repository,
                                 PessoaFisicaValidator $validator,
-                                ServidorRepository $servidorRepository)
+                                ServidorRepository $servidorRepository,
+                                AlunoRepository $alunoRepository)
     {
         $this->repository = $repository;
         $this->servidorRepository = $servidorRepository;
+        $this->alunoRepository = $alunoRepository;
         $this->validator  = $validator;
         $this->service    = $service;
     }
@@ -96,26 +104,27 @@ class PessoaFisicaController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('cgm')
-            ->join('cgm_municipio', 'cgm.cgm_municipio_id', 'cgm_municipio.id')
             ->select([
                 'cgm.id',
                 'cgm.nome',
                 'cgm.rg',
                 'cgm.cpf',
-                'cgm_municipio.nome as statusCgm'
-            ]);
+            ])
+            ->where('cnpj', '=', null);
         
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 
-            #verificando se existe vinculo com outra tabela (servidores)
+            #verificando se existe vinculo com outra tabela (servidores e alunos)
             $servidor = $this->servidorRepository->findWhere(['id_cgm' => $row->id]);
+            $aluno = $this->alunoRepository->findWhere(['cgm_id' => $row->id]);
 
+            //dd(count($aluno));
             #botão editar
             $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
 
             #condição para que habilite a opção de remover
-            if (count($servidor) == 0) {
+            if (count($servidor) == 0 && count($aluno) == 0) {
                 $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
