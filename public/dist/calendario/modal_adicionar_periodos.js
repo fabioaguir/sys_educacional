@@ -80,7 +80,7 @@ $(document).on('click', '#addPeriodo', function (event) {
         data: dados,
         datatype: 'json'
     }).done(function (json) {
-        swal("Disciplina(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
+        swal("Período(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
         tablePeriodos.ajax.reload();
         table.ajax.reload();
     });

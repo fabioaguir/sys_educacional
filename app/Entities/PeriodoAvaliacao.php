@@ -71,6 +71,6 @@ class PeriodoAvaliacao extends Model implements Transformable
      */
     public function periodo()
     {
-        return $this->belongsTo(Calendario::class, 'periodos_id');
+        return $this->belongsTo(Periodo::class, 'periodos_id');
     }
 }

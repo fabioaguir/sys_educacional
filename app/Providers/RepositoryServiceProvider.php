@@ -117,6 +117,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\SerEducacional\Repositories\StatusRepository::class, \SerEducacional\Repositories\StatusRepositoryEloquent::class);
         $this->app->bind(\SerEducacional\Repositories\DuracaoRepository::class, \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);
         $this->app->bind(\SerEducacional\Repositories\PeriodoAvaliacaoRepository::class, \SerEducacional\Repositories\PeriodoAvaliacaoRepositoryEloquent::class);
+        $this->app->bind(\SerEducacional\Repositories\PeriodoRepository::class, \SerEducacional\Repositories\PeriodoRepositoryEloquent::class);
+        $this->app->bind(\SerEducacional\Repositories\EventoRepository::class, \SerEducacional\Repositories\EventoRepositoryEloquent::class);
+        $this->app->bind(\SerEducacional\Repositories\DiaLetivoRepository::class, \SerEducacional\Repositories\DiaLetivoRepositoryEloquent::class);
+        $this->app->bind(\SerEducacional\Repositories\TipoEventoRepository::class, \SerEducacional\Repositories\TipoEventoRepositoryEloquent::class);
         //:end-bindings:
     }
 }
