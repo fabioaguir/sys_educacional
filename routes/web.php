@@ -180,7 +180,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('uniqueCodigo', ['as' => 'uniqueCodigo', 'uses' => 'NivelEnsinoController@uniqueCodigo']);
     });
 
-    # Rotas de funcao
+    # Rotas de Calendários
     Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'CalendariosController@index']);
         Route::get('grid', ['as' => 'grid', 'uses' => 'CalendariosController@grid']);
@@ -189,6 +189,28 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendariosController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendariosController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'CalendariosController@destroy']);
+
+        # rotas para períodos de avaliação
+        Route::get('gridPeriodo/{id}', ['as' => 'gridPeriodo', 'uses' => 'PeriodoAvaliacaosController@grid']);
+        Route::post('getPeriodo/{id}', ['as' => 'getPeriodo', 'uses' => 'PeriodoAvaliacaosController@getPeriodo']);
+        Route::post('storePeriodo', ['as' => 'storePeriodo', 'uses' => 'PeriodoAvaliacaosController@store']);
+        Route::post('validarDataCalendario', ['as' => 'validarDataCalendario', 'uses' => 'PeriodoAvaliacaosController@validarDataCalendario']);
+    });
+
+    #Rotas das formas de avaliações
+    Route::group(['prefix' => 'formaAvaliacao', 'as' => 'formaAvaliacao.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'FormaAvaliacoesController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'FormaAvaliacoesController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'FormaAvaliacoesController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'FormaAvaliacoesController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'FormaAvaliacoesController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'FormaAvaliacoesController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'FormaAvaliacoesController@destroy']);
+
+        # Rotas para niveis de alfabetizacao
+        Route::get('nivelAlfabetizacao/grid/{id}', ['as' => 'nivelAlfabetizacao.grid', 'uses' => 'FormaAvaliacoesController@gridNiveis']);
+        Route::post('nivelAlfabetizacao/store', ['as' => 'nivelAlfabetizacao.store', 'uses' => 'FormaAvaliacoesController@storeNivel']);
+        Route::post('nivelAlfabetizacao/destroy/{id}', ['as' => 'nivelAlfabetizacao.destroy', 'uses' => 'FormaAvaliacoesController@destroyNivel']);
     });
 
     Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
@@ -199,7 +221,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AlunoController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'AlunoController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'AlunoController@destroy']);
-
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'AlunoController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'AlunoController@findCidade']);
         Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'AlunoController@searchCpf']);

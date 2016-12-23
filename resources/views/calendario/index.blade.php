@@ -1,5 +1,30 @@
 @extends('menu')
 
+
+@section('css')
+    @parent
+    <style type="text/css">
+        .select2-container {
+            width: 100% !important;
+            padding: 0;
+        }
+
+        .select2-close-mask{
+            z-index: 2099;
+        }
+
+        .select2-dropdown{
+            z-index: 3051;
+        }
+
+        .row_selected {
+            background-color: #6A5ACD !important;
+            color: #FFF;
+            font-weight: bold;
+        }
+    </style>
+@endsection
+
 @section('content')
     <section id="content">
         <div class="container">
@@ -49,7 +74,7 @@
                                 <th>Semanas letivas</th>
                                 <th>Passivo</th>
                                 <th>Duração</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th style="width: 13%;">Açao</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -62,7 +87,7 @@
                                 <th>Semanas letivas</th>
                                 <th>Passivo</th>
                                 <th>Duração</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th style="width: 13%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>
@@ -71,9 +96,14 @@
 
         </div>
     </section>
+
+    @include('calendario.modal_adicionar_periodos_avaliacao')
 @stop
 
 @section('javascript')
+    @parent
+    <script type="text/javascript" src="{{ asset('/dist/calendario/loadFields.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/calendario/modal_adicionar_periodos.js') }}"></script>
     <script type="text/javascript">
         var table = $('#calendario-grid').DataTable({
             processing: true,
@@ -89,21 +119,27 @@
                 {data: 'status', name: 'status.nome'},
                 {data: 'duracao', name: 'duracoes.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ],
-            /*"oLanguage": {
-                "sStripClasses": "",
-                "sSearch": "",
-                "sSearchPlaceholder": "Enter Keywords Here",
-                "sInfo": "_START_ - _END_ de _TOTAL_",
-                "sLengthMenu": '<span>Linhas por Página:</span><select class="browser-default">' +
-                '<option value="10">10</option>' +
-                '<option value="20">20</option>' +
-                '<option value="30">30</option>' +
-                '<option value="40">40</option>' +
-                '<option value="50">50</option>' +
-                '<option value="-1">All</option>' +
-                '</select></div>'
-            },*/
+            ]
+        });
+
+        //Global idCalendario
+        var idCalendario;
+
+        // Evento para abrir o modal de períodos de avaliação
+        $(document).on("click", "#btnModalAdicionarPeriodo", function () {
+            // Recuperando o id do calendário
+            idCalendario = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var ano = table.row($(this).parents('tr')).data().ano;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#cNome').text(nome);
+            $('#cAno').text(ano);
+
+            // Executando o modal
+            runModalAdicionarPeriodos(idCalendario);
         });
     </script>
 @stop

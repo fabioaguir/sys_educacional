@@ -75,7 +75,6 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\FuncaoRepository::class,
             \SerEducacional\Repositories\FuncaoRepositoryEloquent::class);
 
-
         $this->app->bind(
             \SerEducacional\Repositories\SerieRepository::class,
             \SerEducacional\Repositories\SerieRepositoryEloquent::class);
@@ -108,14 +107,35 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\AlunoRepository::class,
             \SerEducacional\Repositories\AlunoRepositoryEloquent::class);
 
-
-
         $this->app->bind(
             \SerEducacional\Repositories\CalendarioRepository::class,
             \SerEducacional\Repositories\CalendarioRepositoryEloquent::class);
 
-        $this->app->bind(\SerEducacional\Repositories\StatusRepository::class, \SerEducacional\Repositories\StatusRepositoryEloquent::class);
-        $this->app->bind(\SerEducacional\Repositories\DuracaoRepository::class, \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);
+        $this->app->bind(
+            \SerEducacional\Repositories\StatusRepository::class,
+            \SerEducacional\Repositories\StatusRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\DuracaoRepository::class,
+            \SerEducacional\Repositories\DuracaoRepositoryEloquent::class);
+
+        $this->app->bind(
+            \SerEducacional\Repositories\PeriodoAvaliacaoRepository::class,
+            \SerEducacional\Repositories\PeriodoAvaliacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\FormaAvaliacaoRepository::class,
+            \SerEducacional\Repositories\FormaAvaliacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\TipoResultadoRepository::class,
+            \SerEducacional\Repositories\TipoResultadoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\NivelAlfabetizacaoRepository::class,
+            \SerEducacional\Repositories\NivelAlfabetizacaoRepositoryEloquent::class);
+        
+        
         //:end-bindings:
     }
 }
