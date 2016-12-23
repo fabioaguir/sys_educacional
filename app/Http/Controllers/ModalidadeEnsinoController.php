@@ -185,4 +185,66 @@ class ModalidadeEnsinoController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function uniqueNome(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $modalidadeEnsino = $request->all();
+
+            $nome = \DB::table('modalidades')
+                ->select([
+                    'modalidades.id',
+                    'modalidades.nome'
+                ])
+                ->where('modalidades.nome', $modalidadeEnsino['value'])
+                ->get();
+
+            if (count($nome) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function uniqueCodigo(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $modalidadeEnsino = $request->all();
+
+            $codigo = \DB::table('modalidades')
+                ->select([
+                    'modalidades.id',
+                    'modalidades.codigo'
+                ])
+                ->where('modalidades.codigo', $modalidadeEnsino['value'])
+                ->get();
+
+            if (count($codigo) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

@@ -8,7 +8,7 @@
                     <div class="fg-line">
                         <div class="fg-line">
                             <label for="nome">Nome *</label>
-                            {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome do nível')) !!}
+                            {!! Form::text('nome', Session::getOldInput('nome'), array('id' => 'nivelNome', 'class' => 'form-control input-sm', 'placeholder' => 'Nome do nível')) !!}
                         </div>
                     </div>
                 </div>
@@ -17,8 +17,8 @@
                 <div class="form-group col-md-4">
                     <div class="fg-line">
                         <div class="fg-line">
-                            <label for="codigo">Código</label>
-                            {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código')) !!}
+                            <label for="codigo">Código *</label>
+                            {!! Form::text('codigo', Session::getOldInput('codigo'), array('id' => 'nivelCodigo', 'class' => 'form-control input-sm', 'placeholder' => 'Código')) !!}
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 </div>
             </div>
         <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
-        <a class="btn btn-primary btn-sm m-t-10" href="{{ route('modalidadeEnsino.index') }}">Voltar</a>
+        <a class="btn btn-primary btn-sm m-t-10" href="{{ route('nivelEnsino.index') }}">Voltar</a>
     </div>
 </div>
 

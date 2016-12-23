@@ -122,7 +122,9 @@ class CurriculoDisciplinaController extends Controller
             $resultTotal = $query->get();
 
             #Calculando a paginação
-            $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
+            $pageValue = $pageValue == 1 ? 0 : ($pageValue * 10) - 10;
+
+            # Fazendo a paginação
             $query->skip($pageValue);
             $query->take(10);
 
@@ -140,7 +142,7 @@ class CurriculoDisciplinaController extends Controller
             # Array de retorno
             $resultRetorno = [
                 'data' => $result,
-                'more' => ($pageValue + 5) < count($resultTotal)
+                'more' => ($pageValue + 10) < count($resultTotal)
             ];
 
             #retorno
@@ -171,6 +173,9 @@ class CurriculoDisciplinaController extends Controller
 
             #Percorrendo os id das disciplinas
             foreach($dados['idDisciplinas'] as $id) {
+                # Recuperando o pivot da série e do currículo
+                $pivotCurriculoSerie = $curriculo->series()->find($dados['idSerie'])->pivot;
+
                 #Recuperando a entidade
                 $disciplina = $this->disciplinaRepository->find($id);
 
@@ -179,8 +184,13 @@ class CurriculoDisciplinaController extends Controller
                     return new \Exception("Disciplina não existe");
                 }
 
+                # Verificando se a disciplina já foi cadastrada
+                if($pivotCurriculoSerie->disciplinas()->find($disciplina->id)) {
+                    continue;
+                }
+
                 #Adicionando a entidade principal
-                $curriculo->series()->find($dados['idSerie'])->pivot->disciplinas()->attach($disciplina->id);
+                $pivotCurriculoSerie->disciplinas()->attach($disciplina->id);
             }
 
             # Retorno

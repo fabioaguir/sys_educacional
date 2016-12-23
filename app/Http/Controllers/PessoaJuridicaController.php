@@ -99,19 +99,17 @@ class PessoaJuridicaController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('cgm')
-            ->join('cgm_municipio', 'cgm.cgm_municipio_id', 'cgm_municipio.id')
             ->select([
                 'cgm.id',
                 'cgm.nome',
                 'cgm.cnpj',
-                'cgm.cpf',
-                'cgm_municipio.nome as statusCgm'
-            ]);
+            ])
+            ->where('cpf', '=', null);
         
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a> ';
-            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i>Deletar</a>';
+            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;

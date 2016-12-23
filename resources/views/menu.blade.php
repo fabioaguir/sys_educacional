@@ -125,6 +125,7 @@
                 <ul>
                     <li>
                         <a href="{{ route('instituicao.edit')  }}">Instituição</a>
+                        <a href="{{ route('aluno.index')  }}">Alunos</a>
                         <a href="{{ route('servidor.index')  }}">Servidores</a>
                         <a href="{{ route('curso.index')  }}">Cursos</a>
                         <a href="{{ route('disciplina.index')  }}">Disciplinas</a>
@@ -136,6 +137,10 @@
                 <ul>
                     <li>
                         <a href="{{ route('calendario.index')  }}">Calendário</a>
+                        <a href="{{ route('formaAvaliacao.index')  }}">Formas de Avaliações</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('tipoEvento.index')  }}">Tipo Evento</a>
                     </li>
                 </ul>
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-wrench"></i>Parâmetros</a>

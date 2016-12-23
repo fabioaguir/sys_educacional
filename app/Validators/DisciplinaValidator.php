@@ -22,11 +22,11 @@ class DisciplinaValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|max:100',
+            'nome' => 'required|max:100|unique:disciplinas,nome',
             'codigo' => 'required|max:50|unique:disciplinas,codigo'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|max:100',
+            'nome' => 'required|max:100|unique:disciplinas,nome,:id',
             'codigo' => 'required|max:50|unique:disciplinas,codigo,:id'
         ],
    ];

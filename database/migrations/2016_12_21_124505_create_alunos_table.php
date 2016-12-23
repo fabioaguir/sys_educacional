@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCalendariosTable extends Migration
+class CreateAlunosTable extends Migration
 {
 
 	/**
@@ -13,7 +13,7 @@ class CreateCalendariosTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('calendarios', function(Blueprint $table) {
+		Schema::create('alunos', function(Blueprint $table) {
             $table->increments('id');
 
             $table->timestamps();
@@ -27,7 +27,7 @@ class CreateCalendariosTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('calendarios');
+		Schema::drop('alunos');
 	}
 
 }

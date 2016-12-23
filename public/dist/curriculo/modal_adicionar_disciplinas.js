@@ -112,7 +112,7 @@ $("#select-disciplinas").select2({
             // alter the remote JSON data, except to indicate that infinite
             // scrolling can be used
             params.page = params.page || 1;
-
+            
             return {
                 results: data.data,
                 pagination: {

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDuracaosTable extends Migration
+class CreateTipoEventosTable extends Migration
 {
 
 	/**
@@ -13,7 +13,7 @@ class CreateDuracaosTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('duracaos', function(Blueprint $table) {
+		Schema::create('tipo_eventos', function(Blueprint $table) {
             $table->increments('id');
 
             $table->timestamps();
@@ -27,7 +27,7 @@ class CreateDuracaosTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('duracaos');
+		Schema::drop('tipo_eventos');
 	}
 
 }
