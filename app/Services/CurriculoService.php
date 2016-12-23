@@ -144,6 +144,16 @@ class CurriculoService
             throw new \Exception('Você deve informar uma série final maior que a série inicial');
         }
 
+        # Recuperando a série inicial e final
+        $objSerieInicial = $curriculo->series->first();
+        $objSerieFinal   = $curriculo->series->last();
+
+        # Validando se o ranger existente no banco é o mesmo do informado
+        if(($objSerieFinal && $objSerieInicial) &&
+            ($objSerieInicial->id == $serieInicial && $objSerieFinal->id == $serieFinal)) {
+            return false;
+        }
+
         # Recuperando as séries no banco de dados
         $series = $this->serieRepository->findWhere([['id' , '>=', $serieInicial], ['id', '<=', $serieFinal]]);
 
@@ -160,8 +170,16 @@ class CurriculoService
 
             # Verificando se o ranger de série é diferente
             if(($series->first()->id != $firstSerie->id) || ($series->last()->id != $lastSerie->id)) {
-                # Removendo as disciplinas das séries e séries do curriculo
-                //$curriculo->series->disciplinas->detach();
+                # Removendo as disciplinas das séries
+                $curriculo->series->each(function ($serie) {
+                    # Removendo as disciplinas
+                    $serie->pivot->disciplinas()->detach();
+
+                    # Retorno
+                    return false;
+                });
+
+                # Removendo as séries do curriculo
                 $curriculo->series()->detach();
             }
         }

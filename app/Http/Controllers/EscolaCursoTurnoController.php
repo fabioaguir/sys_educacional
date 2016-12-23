@@ -104,7 +104,7 @@ class EscolaCursoTurnoController extends Controller
             $resultTotal = $query->get();
 
             #Calculando a paginação
-            $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
+            $pageValue = $pageValue == 1 ? 0 : ($pageValue * 10) - 10;
             $query->skip($pageValue);
             $query->take(10);
 
@@ -122,7 +122,7 @@ class EscolaCursoTurnoController extends Controller
             # Array de retorno
             $resultRetorno = [
                 'data' => $result,
-                'more' => ($pageValue + 5) < count($resultTotal)
+                'more' => ($pageValue + 10) < count($resultTotal)
             ];
 
             #retorno
