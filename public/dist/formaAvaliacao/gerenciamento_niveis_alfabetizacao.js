@@ -60,7 +60,7 @@ function TableNivelEdit(id) {
         // Recuperando os dados
         var codigo = $('#codigo_nivel_alfabetizacao').val();
         var nome   = $('#nome_nivel_alfabetizacao').val();
-        var minimo_aprovacao = $('#min_aprovacao_nivel_alfabetizacao').val();
+        var minimo_aprovacao = $('#min_aprovacao_nivel_alfabetizacao').is(':checked') ? 1 : 0;
 
         // Dados para envio
         var dados = {
@@ -86,7 +86,7 @@ function TableNivelEdit(id) {
             // Limpando os campos
             $('#codigo_nivel_alfabetizacao').val("");
             $('#nome_nivel_alfabetizacao').val("");
-            $('#min_aprovacao_nivel_alfabetizacao').val("");
+            $('#min_aprovacao_nivel_alfabetizacao').prop('checked', false);
 
             // Recarregando a grid
             table.ajax.reload();
@@ -119,7 +119,7 @@ function TableNivelCreate() {
         // Recuperando os dados
         var codigo = $('#codigo_nivel_alfabetizacao').val();
         var nome   = $('#nome_nivel_alfabetizacao').val();
-        var min_aprovacao = $('#min_aprovacao_nivel_alfabetizacao').val() == 1 ? "Sim" : "Não" ;
+        var min_aprovacao = $('#min_aprovacao_nivel_alfabetizacao').is(':checked') ? "Sim" : "Não";
 
         // Verificando se foi passado valor válido
         if (!codigo || !nome) {
@@ -130,7 +130,22 @@ function TableNivelCreate() {
         // Limpando os campos
         $('#codigo_nivel_alfabetizacao').val("");
         $('#nome_nivel_alfabetizacao').val("");
-        $('#min_aprovacao_nivel_alfabetizacao').val("");
+        $('#min_aprovacao_nivel_alfabetizacao').prop('checked', false);
+
+        // Regra par manter somente um mínimo para aprovação
+        if(min_aprovacao == "Sim") {
+            // Percorrendo todos os conteudos
+            table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+                // Recuperando os dados da linha atual
+                var data = this.data();
+
+                // Setando a célula
+                data[2] = 'Não';
+
+                // Atualizando na datatables
+                this.data(data);
+            });
+        }
 
         // Adicionando a linha na tabela
         table.row.add(

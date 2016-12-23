@@ -281,5 +281,12 @@
             $('#nivelAlfabetizacao').hide();
             $('#parecer').hide();
         }
+
+        // Evento no click do checkbox de mímino para aprovação
+        $(document).on('click', '#min_aprovacao_nivel_alfabetizacao', function () {
+            if($(this).is(':checked')) {
+                swal("Marcando esse nível como mímino para aprovação, estará automaticamente desativando o mínimo atual.", "Click no botão abaixo!", "warning");
+            }
+        });
     </script>
 @endsection

@@ -77,7 +77,13 @@ class FormaAvaliacaoService
      */
     public function destroy(int $id)
     {
-        #deletando o curso
+        # Recuperando o registro
+        $entity = $this->repository->find($id);
+
+        # Removendo as dependências
+        $entity->niveisAlfabetizacao()->delete();
+
+        #deletando o registro
         $result = $this->repository->delete($id);
 
         # Verificando se a execução foi bem sucessida
@@ -97,7 +103,12 @@ class FormaAvaliacaoService
     public function tratamentoNiveisAlfabetizacao(&$data, FormaAvaliacao $formaAvaliacao)
     {
         # Validando a entrada
-        if(!isset($data['niveis_alfabeizacao']) && empty($data['niveis_alfabeizacao'])) {
+        if(!isset($data['niveis_alfabeizacao'])) {
+            return false;
+        }
+
+        # Validando se tipo de resultado é referente ao nível
+        if($data['tipo_resultado_id'] != 2) {
             return false;
         }
 

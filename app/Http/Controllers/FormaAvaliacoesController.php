@@ -174,6 +174,13 @@ class FormaAvaliacoesController extends Controller
             # Recuperando os dados da requisição
             $dados = $request->all();
 
+            # Regra para só existir um mínimo para aprovação
+            if(isset($dados['minimo_aprovacao']) && $dados['minimo_aprovacao'] == 1) {
+                \DB::table('niveis_alfabetizacao')
+                    ->where('forma_avaliacao_id', $dados['forma_avaliacao_id'])
+                    ->update(['minimo_aprovacao' => 0]);
+            }
+
             #Executando a ação
             $this->nivelAlfabetizacaoRepository->create($dados);
 
