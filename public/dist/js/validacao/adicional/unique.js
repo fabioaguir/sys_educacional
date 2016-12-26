@@ -5,9 +5,7 @@ $.validator.addMethod("unique",
         var isUnique = false;
         if(value == '')
             return isUnique;
-
-        /*console.log(value);
-        console.log(params[1]);*/
+//console.log(value);
 
         id_send= '';
         if(params[1] !='')
