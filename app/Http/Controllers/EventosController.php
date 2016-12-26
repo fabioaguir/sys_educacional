@@ -59,7 +59,7 @@ class EventosController extends Controller
     /**
      * @return mixed
      */
-    public function gridLetivos($id)
+    public function grid($id)
     {
         #Criando a consulta
         $rows = \DB::table('feriados_eventos')
@@ -67,7 +67,6 @@ class EventosController extends Controller
             ->join('tipo_evento', 'tipo_evento.id', '=', 'feriados_eventos.tipo_evento_id')
             ->join('calendarios', 'calendarios.id', '=', 'feriados_eventos.calendarios_id')
             ->where('feriados_eventos.calendarios_id', '=', $id)
-            ->where('feriados_eventos.dia_letivo_id', '=', '1')
             ->select([
                 'feriados_eventos.id as id',
                 'feriados_eventos.nome as nome',
@@ -83,39 +82,6 @@ class EventosController extends Controller
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = '<a style="margin-right: 5%;" title="Editar" id="editarEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             $html .= '<a title="Remover" id="deleteEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-
-            # Retorno
-            return $html;
-        })->make(true);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function gridNLetivos($id)
-    {
-        #Criando a consulta
-        $rows = \DB::table('feriados_eventos')
-            ->join('dia_letivo', 'dia_letivo.id', '=', 'feriados_eventos.dia_letivo_id')
-            ->join('tipo_evento', 'tipo_evento.id', '=', 'feriados_eventos.tipo_evento_id')
-            ->join('calendarios', 'calendarios.id', '=', 'feriados_eventos.calendarios_id')
-            ->where('feriados_eventos.calendarios_id', '=', $id)
-            ->where('feriados_eventos.dia_letivo_id', '=', '2')
-            ->select([
-                'feriados_eventos.id as id',
-                'feriados_eventos.nome as nome',
-                \DB::raw('DATE_FORMAT(feriados_eventos.data_feriado,"%d/%m/%Y") as data_feriado'),
-                'feriados_eventos.dia_semana',
-                'dia_letivo.nome as dia_letivo',
-                'dia_letivo.id as dia_letivo_id',
-                'tipo_evento.nome as tipo_evento',
-                'tipo_evento.id as tipo_evento_id',
-            ]);
-
-        #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html = '<a style="margin-right: 5%;" title="Editar" id="editarEventoNL" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a title="Remover" id="deleteEventoNL" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;

@@ -8,9 +8,9 @@ function loadTableEventos (idCalendario) {
         serverSide: true,
         iDisplayLength: 5,
         bLengthChange: false,
-        bFilter: false,
+        bFilter: true,
         autoWidth: false,
-        ajax: laroute.route('calendario.gridEventoAtivo', {'id' :idCalendario }),
+        ajax: laroute.route('calendario.gridEvento', {'id' :idCalendario }),
         columns: [
             {data: 'nome', name: 'feriados_eventos.nome'},
             {data: 'data_feriado', name: 'feriados_eventos.data_feriado'},
@@ -24,48 +24,15 @@ function loadTableEventos (idCalendario) {
     return tableEventos;
 }
 
-// Carregando a table
-var tableEventosNLetivo;
-function loadTableEventosNLetivos (idCalendario) {
-    // Carregaando a grid
-    tableEventosNLetivo = $('#eventos2-grid').DataTable({
-        retrieve: true,
-        processing: true,
-        serverSide: true,
-        iDisplayLength: 5,
-        bLengthChange: false,
-        bFilter: false,
-        autoWidth: false,
-        ajax: laroute.route('calendario.gridEventoNLetivo', {'id' :idCalendario }),
-        columns: [
-            {data: 'nome', name: 'feriados_eventos.nome'},
-            {data: 'data_feriado', name: 'feriados_eventos.data_feriado'},
-            {data: 'dia_semana', name: 'feriados_eventos.dia_semana'},
-            {data: 'dia_letivo', name: 'dia_letivo.nome'},
-            {data: 'tipo_evento', name: 'tipo_evento.nome'},
-            {data: 'action', name: 'action', orderable: false, searchable: false}
-        ]
-    });
-
-    return tableEventosNLetivo;
-}
-
 
 // Função de execução
 function runModalAdicionarEventos(idCalendario)
 {
     //Carregando as grids de situações
     if(tableEventos) {
-        loadTableEventos(idCalendario).ajax.url(laroute.route('calendario.gridEventoAtivo', {'id' :idCalendario })).load();
+        loadTableEventos(idCalendario).ajax.url(laroute.route('calendario.gridEvento', {'id' :idCalendario })).load();
     } else {
         loadTableEventos(idCalendario);
-    }
-
-    //Carregando as grids de situações
-    if(tableEventosNLetivo) {
-        loadTableEventosNLetivos(idCalendario).ajax.url(laroute.route('calendario.gridEventoNLetivo', {'id' :idCalendario })).load();
-    } else {
-        loadTableEventosNLetivos(idCalendario);
     }
 
     // Desabilitando o botão de editar
@@ -115,7 +82,6 @@ $(document).on('click', '#addEvento', function (event) {
     }).done(function (json) {
         swal("Eventos(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
         tableEventos.ajax.reload();
-        tableEventosNLetivo.ajax.reload();
         table.ajax.reload();
 
         //Limpar os campos do formulário
@@ -158,7 +124,6 @@ $(document).on('click', '#edtEvento', function (event) {
     }).done(function (json) {
         swal("Eventos(s) editado(s) com sucesso!", "Click no botão abaixo!", "success");
         tableEventos.ajax.reload();
-        tableEventosNLetivo.ajax.reload();
         table.ajax.reload();
 
         //Limpar os campos do formulário
@@ -191,36 +156,10 @@ $(document).on('click', '#deleteEvento', function () {
     }).done(function (retorno) {
         swal("Disciplina removida com sucesso!", "Click no botão abaixo!", "success");
         tableEventos.ajax.reload();
-        tableEventosNLetivo.ajax.reload();
         table.ajax.reload();
     });
 });
 
-//Evento de remover a evento não letivos
-$(document).on('click', '#deleteEventoNL', function () {
-
-    var idEventoLetivo = tableEventosNLetivo.row($(this).parents('tr').index()).data().id;
-
-    console.log('sdfdf');
-
-    //Setando o o json para envio
-    var dados = {
-        'idEvento' : idEventoLetivo
-    };
-
-    // Requisição Ajax
-    jQuery.ajax({
-        type: 'POST',
-        url: laroute.route('calendario.removerEvento', {'id' : idEventoLetivo}),
-        data: dados,
-        datatype: 'json'
-    }).done(function (retorno) {
-        swal("Disciplina removida com sucesso!", "Click no botão abaixo!", "success");
-        tableEventos.ajax.reload();
-        tableEventosNLetivo.ajax.reload();
-        table.ajax.reload();
-    });
-});
 
 //Evento para pegar o dia da semana da data de feriado informado
 $(document).on('change', '#dtFeriado', function () {
@@ -258,32 +197,6 @@ $(document).on("click", "#editarEvento", function () {
     var dataFeriado   = tableEventos.row($(this).parents('tr')).data().data_feriado;
     var diaSemana   = tableEventos.row($(this).parents('tr')).data().dia_semana;
     var dLetivo   = tableEventos.row($(this).parents('tr')).data().dia_letivo_id;
-
-    // prenchendo o os campos de evento
-    tipoEvento(tpEvento);
-    diaLetivo(dLetivo);
-    $('#nome').val(nome);
-    $('#dtFeriado').val(dataFeriado);
-    $('#diaSemana').val(diaSemana);
-
-    // Desabilitando o botão de editar
-    $('#edtEvento').prop('disabled', false);
-    $('#edtEvento').show();
-    $('#addEvento').hide();
-
-});
-
-// Evento para editar o evento não letivos
-$(document).on("click", "#editarEventoNL", function () {
-    //Recuperando o id do evento
-    idEvento = tableEventosNLetivo.row($(this).parents('tr')).data().id;
-
-    // Recuperando os dados do evento
-    var tpEvento = tableEventosNLetivo.row($(this).parents('tr')).data().tipo_evento_id;
-    var nome   = tableEventosNLetivo.row($(this).parents('tr')).data().nome;
-    var dataFeriado   = tableEventosNLetivo.row($(this).parents('tr')).data().data_feriado;
-    var diaSemana   = tableEventosNLetivo.row($(this).parents('tr')).data().dia_semana;
-    var dLetivo   = tableEventosNLetivo.row($(this).parents('tr')).data().dia_letivo_id;
 
     // prenchendo o os campos de evento
     tipoEvento(tpEvento);

@@ -43,8 +43,8 @@ function runModalAdicionarPeriodos(idCalendario)
     $('#modal-adicionar-periodos').modal({'show' : true});
 }
 
-// Id do pivot do curriculo e série
-var curriculoSerieId, serieId;
+// Id do periodo
+var idPeriodo;
 
 
 //Evento do click no botão adicionar período
@@ -83,28 +83,108 @@ $(document).on('click', '#addPeriodo', function (event) {
         swal("Período(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
         tablePeriodos.ajax.reload();
         table.ajax.reload();
+
+        // Limpar os campos do formulário
+        limparCamposFormulario();
     });
 });
 
-//Evento de remover a disciplina
-$(document).on('click', '.removerDisciplina', function () {
-    var idCurriculoSerieDisciplina = tableAdicionarDisciplina.row($(this).parents('tr').index()).data().idCurriculoSerieDisciplina;
+// Evento para editar o evento letivos
+$(document).on("click", "#editarPeriodo", function () {
+    //Recuperando o id do evento
+    idPeriodo = tablePeriodos.row($(this).parents('tr')).data().id;
+
+    // Recuperando os dados do evento
+    var periodo         = tablePeriodos.row($(this).parents('tr')).data().periodo_id;
+    var dataInicial     = tablePeriodos.row($(this).parents('tr')).data().data_inicial;
+    var diaFinal        = tablePeriodos.row($(this).parents('tr')).data().data_final;
+    var dLetivo         = tablePeriodos.row($(this).parents('tr')).data().dias_letivos;
+    var sLetivo         = tablePeriodos.row($(this).parents('tr')).data().semanas_letivas;
+    var totalDia        = tablePeriodos.row($(this).parents('tr')).data().total_dias;
+    var totalSemana     = tablePeriodos.row($(this).parents('tr')).data().total_semanas;
+
+    // prenchendo o os campos de evento
+    periodos(periodo);
+    $('#dtInicial').val(dataInicial);
+    $('#dtFinal').val(diaFinal);
+    $('#diasLetivos').val(dLetivo);
+    $('#semanasLetivas').val(sLetivo);
+    $('#totalDias').val(totalDia);
+    $('#totalSemanas').val(totalSemana);
+
+    // Desabilitando o botão de editar
+    $('#edtPeriodo').prop('disabled', false);
+    $('#edtPeriodo').show();
+    $('#addPeriodo').hide();
+
+});
+
+//Evento do click no botão adicionar período
+$(document).on('click', '#edtPeriodo', function (event) {
+
+    //Recuperando os valores dos campos do fomulário
+    var periodo         = $('#periodo').val();
+    var dtInicial       = $('#dtInicial').val();
+    var dtFinal         = $('#dtFinal').val();
+    var diasLetivos     = $('#diasLetivos').val();
+    var semanasLetivas  = $('#semanasLetivas').val();
+
+    // Verificando se os campos de preenchimento obrigatório foram preenchidos
+    if (!periodo || !dtInicial || !dtFinal ) {
+        swal("Oops...", "Você deve selecionar um período e informar data inicial e final!", "error");
+        return false;
+    }
 
     //Setando o o json para envio
     var dados = {
-        'idCurriculoSerieDisciplina' : idCurriculoSerieDisciplina
+        'calendarios_id' : idCalendario,
+        'periodos_id' : periodo,
+        'data_inicial' : dtInicial,
+        'data_final' : dtFinal,
+        'dias_letivos' : diasLetivos,
+        'semanas_letivas' : semanasLetivas
     };
 
     // Requisição Ajax
     jQuery.ajax({
         type: 'POST',
-        url: laroute.route('curriculo.removerDisciplina'),
+        url: laroute.route('calendario.updatePeriodo', {'id' : idPeriodo}),
+        data: dados,
+        datatype: 'json'
+    }).done(function (json) {
+        swal("Período(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
+        tablePeriodos.ajax.reload();
+        table.ajax.reload();
+
+        // Limpar os campos do formulário
+        limparCamposFormulario();
+
+        // Desabilitando o botão de editar
+        $('#addPeriodo').prop('disabled', false);
+        $('#addPeriodo').show();
+        $('#edtPeriodo').hide();
+    });
+});
+
+//Evento de remover a evento não letivos
+$(document).on('click', '#deletePeriodo', function () {
+
+    var idPeriodoAV = tablePeriodos.row($(this).parents('tr').index()).data().id;
+
+    //Setando o o json para envio
+    var dados = {
+        'idPeriodo' : idPeriodoAV
+    };
+
+    // Requisição Ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: laroute.route('calendario.removerPeriodo', {'id' : idPeriodoAV}),
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
-        $('#select-disciplinas').val(null).trigger("change");
-        swal("Disciplina removida com sucesso!", "Click no botão abaixo!", "success");
-        tableAdicionarDisciplina.ajax.reload();
+        swal("Período removido com sucesso!", "Click no botão abaixo!", "success");
+        tablePeriodos.ajax.reload();
         table.ajax.reload();
     });
 });
@@ -161,5 +241,16 @@ function validarDatas(data) {
             $('#addPeriodo').prop('disabled', false);
         }
     });
+}
+
+//Limpar os campos do formulário
+function limparCamposFormulario()
+{
+    periodos("");
+    $('#periodo').val("");
+    $('#dtInicial').val("");
+    $('#dtFinal').val("");
+    $('#diasLetivos').val("");
+    $('#semanasLetivas').val("");
 }
 

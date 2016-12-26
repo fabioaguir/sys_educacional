@@ -62,7 +62,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[logradouro]">Logradouro *</label>
-                                    {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'Logradouro')) !!}
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[numero]">Número *</label>
-                                    {!! Form::text("endereco[numero]", Session::getOldInput("endereco[numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[numero]", Session::getOldInput("endereco[numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[complemento]">Complemento</label>
-                                    {!! Form::text("endereco[complemento]", Session::getOldInput("endereco[complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[complemento]", Session::getOldInput("endereco[complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'Complemento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[cep]">CEP</label>
-                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'E-mail')) !!}
+                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                     </div>
                                 @else
                                     <div class="select">
-                                        {!! Form::select("estado_id", $loadFields['estado'], array('class' => 'form-control', 'id' => 'estado')) !!}
+                                        {!! Form::select("estado_id", $loadFields['estado'], null,array('class' => 'form-control', 'id' => 'estado')) !!}
                                     </div>
                                 @endif
                             </div>

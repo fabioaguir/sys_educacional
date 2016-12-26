@@ -50,7 +50,7 @@
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="dtFeriado">Data feriado *</label>
-                                        {!! Form::text('data_feriado', null, array('class' => 'form-control input-sm', 'id' => 'dtFeriado', 'placeholder' => 'Data feriado')) !!}
+                                        {!! Form::text('data_feriado', null, array('class' => 'form-control input-sm datepicker', 'id' => 'dtFeriado', 'placeholder' => 'Data feriado')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -80,29 +80,6 @@
                             </div>
                         </div>
                         <!-- Fim Adicionar Eventos -->
-
-                        <center>
-                            <p><b>FERIADOS E EVENTOS NÃO LETIVOS</b></p>
-                        </center>
-
-                        <!-- Table de eventos letivos -->
-                        <table id="eventos2-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th style="width: 20%;">Descrição</th>
-                                <th>Data Feriado</th>
-                                <th>Dia da semana</th>
-                                <th>Dia letivo</th>
-                                <th>Tipo do evento</th>
-                                <th style="width: 8%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
-                        <!-- Fim Table de eventos letivos -->
-
-                        <center>
-                            <p><b>FERIADOS E EVENTOS LETIVOS</b></p>
-                        </center>
 
                         <!-- Table de eventos letivos -->
                         <table id="eventos-grid" class="display table table-bordered" cellspacing="0" width="100%">

@@ -106,11 +106,25 @@ class InstituicaoService
      */
     public function update(array $data, int $id) : Instituicao
     {
+        // Busca instituição
+        $findInstituicao = $this->repository->find($id);
+
+        // Busca endereco
+        $findEndereco = \DB::table('endereco')->where('id', '=', $findInstituicao->endereco_id)->first();
+
+        if ($findEndereco) {
+
+            #Buscando e atualizando registro de endereço
+            $endereco = $this->enderecoRepository->update($data['endereco'], $findInstituicao->endereco_id);
+        } else {
+            $endereco = $this->enderecoRepository->create($data['endereco']);
+
+            #criando vinculo
+            $data['endereco_id'] = $endereco->id;
+        }
+
         #Atualizando no banco de dados
         $instituicao = $this->repository->update($data, $id);
-
-        #Buscando e atualizando registro de endereço
-        $endereco = $this->enderecoRepository->update($data['endereco'], $instituicao->endereco_id);
 
         #Verificando se foi atualizado no banco de dados
         if(!$instituicao) {
