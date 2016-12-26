@@ -214,15 +214,17 @@
 <script src="{{ asset('/js/laroute.js') }}"></script>
 <script src="{{ asset('/lib/chosen/chosen.jquery.js') }}"></script>
 <script type="text/javascript" src={{ asset('/dist/js/app.js') }}></script>
+
 <script type="text/javascript">
     $(".chosen").chosen();
     $('.dateTimePicker').datetimepicker({
         format : 'd/m/Y'
     });
-    $.validator.setDefaults({
-        ignore: [],
-    });
 
+    $.validator.setDefaults({
+        ignore: []
+
+    });
 </script>
 
 @yield('javascript')
