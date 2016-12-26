@@ -3,6 +3,9 @@
 </div>
 <div class="card">
     <div class="card-body card-padding">
+
+        <input type="hidden" id="idModalidadeEnsino" value="{{ isset($model->id) ? $model->id : null }}">
+
             <div class="row">
                 <div class="form-group col-md-4">
                     <div class="fg-line">

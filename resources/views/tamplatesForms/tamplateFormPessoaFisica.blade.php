@@ -184,7 +184,7 @@
                             <div class=" fg-line">
                                 <label for="estado_civil_id">Estado Civil *</label>
                                 <div class="select">
-                                    {!! Form::select('estado_civil_id', (["" => "Selecione estado"] + $loadFields['estadocivil']->toArray()), null, array('class' => 'Form::select')) !!}
+                                    {!! Form::select('estado_civil_id', (["" => "Selecione estado"] + $loadFields['estadocivil']->toArray()), null, array('class' => 'Form::select form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                             <div class=" fg-line">
                                 <label for="escolaridade_id">Escolaridade *</label>
                                 <div class="select">
-                                    {!! Form::select('escolaridade_id', (["" => "Selecione grau"] + $loadFields['escolaridade']->toArray()), null, array('class' => 'Form::select')) !!}
+                                    {!! Form::select('escolaridade_id', (["" => "Selecione grau"] + $loadFields['escolaridade']->toArray()), null, array('class' => 'Form::select form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -212,7 +212,7 @@
                             <div class=" fg-line">
                                 <label for="cnh_categoria_id">Categoria CNH</label>
                                 <div class="select">
-                                    {!! Form::select('cnh_categoria_id', (["" => "Selecione categoria"] + $loadFields['categoriacnh']->toArray()), null, array('class' => '')) !!}
+                                    {!! Form::select('cnh_categoria_id', (["" => "Selecione categoria"] + $loadFields['categoriacnh']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -270,7 +270,7 @@
                             <div class=" fg-line">
                                 <label for="endereco['estado_id']">Estado *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione estado"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select', 'id' => 'estado')) !!}
+                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione estado"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select form-control', 'id' => 'estado')) !!}
                                 </div>
                             </div>
                         </div>
@@ -278,7 +278,7 @@
                             <div class=" fg-line">
                                 <label for="endereco['cidade_id']">Cidade *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione cidade"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select', 'id' => 'cidade')) !!}
+                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione cidade"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select form-control', 'id' => 'cidade')) !!}
                                 </div>
                             </div>
                         </div>
@@ -286,7 +286,7 @@
                             <div class=" fg-line">
                                 <label for="endereco[bairro_id]">Bairro *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('class' => 'Form::select', 'id' => 'bairro')) !!}
+                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('class' => 'Form::select form-control', 'id' => 'bairro')) !!}
                                 </div>
                             </div>
                         </div>

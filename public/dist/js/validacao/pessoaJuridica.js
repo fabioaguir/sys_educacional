@@ -15,7 +15,7 @@ $(document).ready(function () {
             },
 
             cnpj: {
-                unique: [laroute.route('pessoaJuridica.searchCnpj'), $('#cnpj')],
+                unique: [laroute.route('pessoaJuridica.searchCnpj'), $('#idPessoaJuridica')],
                 required: true,
                 //cnpj: true
 

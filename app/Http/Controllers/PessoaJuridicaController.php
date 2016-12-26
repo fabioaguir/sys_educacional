@@ -224,17 +224,31 @@ class PessoaJuridicaController extends Controller
             #Declaração de variável de uso
             $result = false;
             #Dados vindo na requisição
-            $contrato = $request->all();
+            $pessoaJuridica = $request->all();
 
-            $cpfCliente = \DB::table('cgm')
-                ->select([
-                    'cgm.id',
-                    'cgm.cnpj'
-                ])
-                ->where('cgm.cnpj', $contrato['value'])
-                ->get();
+            #
+            if (empty($pessoaJuridica['idModel'])) {
+                #Consultando
+                $pessoa = \DB::table('cgm')
+                    ->select([
+                        'cgm.cnpj'
+                    ])
+                    ->where('cgm.cnpj', $pessoaJuridica['value'])
+                    ->get();
 
-            if (count($cpfCliente) > 0 ) {
+            } else {
+                #Consultando
+                $pessoa = \DB::table('cgm')
+                    ->select([
+                        'cgm.id',
+                        'cgm.cnpj'
+                    ])
+                    ->where('cgm.id', '!=' ,$pessoaJuridica['idModel'])
+                    ->where('cgm.cnpj', $pessoaJuridica['value'])
+                    ->get();
+            }
+
+            if (count($pessoa) > 0 ) {
                 $result = true;
             }
 

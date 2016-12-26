@@ -139,6 +139,9 @@ class PessoaFisicaService
      */
     public function update(array $data, int $id) : PessoaFisica
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         #Atualizando no banco de dados
         $pessoaFisica = $this->repository->update($data, $id);
 

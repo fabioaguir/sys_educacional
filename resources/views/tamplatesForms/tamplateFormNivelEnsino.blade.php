@@ -3,6 +3,11 @@
 </div>
 <div class="card">
     <div class="card-body card-padding">
+
+        <!-- Campo que recebe o id do model em questão, possibilitando a edição do cadastro sem que haja conflito com o
+        nível de ensino com seu código -->
+        <input type="hidden" id="idNivelEnsino" value="{{ isset($model->id) ? $model->id : null }}">
+
             <div class="row">
                 <div class="form-group col-md-4">
                     <div class="fg-line">
