@@ -19,6 +19,7 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('/dist/css/datetimepicker/build/jquery.datetimepicker.min.css')}}" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/select2/dist/css/select2.min.css')}}" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/select2-bootstrap-theme/dist/select2-bootstrap.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
 
     {{--<link href="/lib/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">--}}
     {{--<link href="/lib/nouislider/distribute/nouislider.min.css" rel="stylesheet">--}}
@@ -200,6 +201,7 @@
 <script src="{{ asset('/lib/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/lib/select2/dist/js/select2.full.js') }}"></script>
+<script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 
 {{--jquery Validator https://jqueryvalidation.org/ --}}
 <script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
@@ -216,15 +218,20 @@
 <script src="{{ asset('/js/laroute.js') }}"></script>
 <script src="{{ asset('/lib/chosen/chosen.jquery.js') }}"></script>
 <script type="text/javascript" src={{ asset('/dist/js/app.js') }}></script>
+
 <script type="text/javascript">
     $(".chosen").chosen();
-    $('.dateTimePicker').datetimepicker({
-        format : 'd/m/Y'
-    });
-    $.validator.setDefaults({
-        ignore: [],
+    $('.datepicker').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y',
+        mask: false,
+        lang: 'pt-BR'
     });
 
+    $.validator.setDefaults({
+        ignore: []
+
+    });
 </script>
 
 @yield('javascript')

@@ -195,10 +195,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('getPeriodo/{id}', ['as' => 'getPeriodo', 'uses' => 'PeriodoAvaliacaosController@getPeriodo']);
         Route::post('storePeriodo', ['as' => 'storePeriodo', 'uses' => 'PeriodoAvaliacaosController@store']);
         Route::post('validarDataCalendario', ['as' => 'validarDataCalendario', 'uses' => 'PeriodoAvaliacaosController@validarDataCalendario']);
+        Route::post('updatePeriodo/{id}', ['as' => 'updatePeriodo', 'uses' => 'PeriodoAvaliacaosController@update']);
+        Route::post('removerPeriodo/{id}', ['as' => 'removerPeriodo', 'uses' => 'PeriodoAvaliacaosController@destroy']);
 
         # rotas para eventos
-        Route::get('gridEventoAtivo/{id}', ['as' => 'gridEventoAtivo', 'uses' => 'EventosController@gridLetivos']);
-        Route::get('gridEventoNLetivo/{id}', ['as' => 'gridEventoNLetivo', 'uses' => 'EventosController@gridNLetivos']);
+        Route::get('gridEvento/{id}', ['as' => 'gridEvento', 'uses' => 'EventosController@grid']);
         Route::post('getTipoEvento/{id}', ['as' => 'getTipoEvento', 'uses' => 'EventosController@getTipoEvento']);
         Route::post('getDiaLetivo/{id}', ['as' => 'getDiaLetivo', 'uses' => 'EventosController@getDiaLetivo']);
         Route::post('storeEvento', ['as' => 'storeEvento', 'uses' => 'EventosController@store']);

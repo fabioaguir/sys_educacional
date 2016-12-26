@@ -47,7 +47,7 @@
                                 <div class="fg-line">
                                     <label for="data_nascimento">Data de Nascimento *</label>
                                     {{--{!! Form::date('data_nascimento', null, ['class' => 'form-control input-sm', 'placeholder' => 'Data de nascimento']) !!}--}}
-                                    {!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de nascimento')) !!}
+                                    {!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm ', 'placeholder' => 'Data de nascimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_falecimento">Data de Falecimento</label>
-                                    {!! Form::text('data_falecimento', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de falecimento')) !!}
+                                    {!! Form::text('data_falecimento', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm ', 'placeholder' => 'Data de falecimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="naturalidade">Naturalidade</label>
-                                    {!! Form::text('naturalidade', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Cidade onde nasceu')) !!}
+                                    {!! Form::text('naturalidade', Session::getOldInput('naturalidade'), array('class' => 'form-control input-sm', 'placeholder' => 'Cidade onde nasceu')) !!}
                                 </div>
                             </div>
                         </div>
@@ -102,9 +102,9 @@
                                 <div class="fg-line">
                                     <label for="telefone[nome]">Telefone</label>
                                     @if (isset($model))
-                                    {!! Form::text('telefone[nome]', $model->telefone->first()->nome ?? '', array('class' => 'form-control input-sm')) !!}
+                                    {!! Form::text('telefone[nome]', $model->telefone->first()->nome ?? '', array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                     @else
-                                    {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('class' => 'form-control input-sm')) !!}
+                                    {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                     @endif
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_expedicao">Data de expedição *</label>
-                                    {!! Form::text('data_expedicao', Session::getOldInput('data_expedicao'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de expedição')) !!}
+                                    {!! Form::text('data_expedicao', Session::getOldInput('data_expedicao'), array('class' => 'form-control input-sm ', 'placeholder' => 'Data de expedição')) !!}
                                 </div>
                             </div>
                         </div>

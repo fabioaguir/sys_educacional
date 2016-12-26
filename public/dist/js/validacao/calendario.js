@@ -1,20 +1,35 @@
 // Regras de validação
 $(document).ready(function () {
 
-    $("#formDependencia").validate({
+    $("#formCalendario").validate({
         rules: {
-            escola_id: {
-                required: true
-            },
-
             nome: {
                 required: true,
-                maxlength: 100
+                alphaSpace: true,
+                maxlength: 150
             },
-
-            capacidade: {
+            ano: {
                 required: true,
-                maxlength: 100
+                alphaSpace: true,
+                maxlength: 4
+            },
+            duracoes_id: {
+                required: true
+            },
+            data_inicial: {
+                required: true,
+                maxlength: 10
+            },
+            data_final: {
+                required: true,
+                maxlength: 10
+            },
+            data_resultado_final: {
+                required: true,
+                maxlength: 10
+            },
+            status_id: {
+                required: true
             }
         },
         //For custom messages
