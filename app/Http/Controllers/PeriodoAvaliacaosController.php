@@ -68,18 +68,21 @@ class PeriodoAvaliacaosController extends Controller
             ->where('periodos_avaliacao.calendarios_id', '=', $id)
             ->select([
                 'periodos_avaliacao.id as id',
+                'periodos.nome as periodo',
                 \DB::raw('DATE_FORMAT(periodos_avaliacao.data_inicial,"%d/%m/%Y") as data_inicial'),
                 \DB::raw('DATE_FORMAT(periodos_avaliacao.data_final,"%d/%m/%Y") as data_final'),
                 'periodos_avaliacao.dias_letivos',
                 'periodos_avaliacao.semanas_letivas',
-                'periodos.nome as periodo',
+                'calendarios.dias_letivos as total_dias',
+                'calendarios.semanas_letivas as total_semanas',
+                'periodos.id as periodo_id',
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html  = '<a style="margin-right: 5%;" id="editarPeriodo" title="Editar" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html .= '<a title="Remover" id="deletePeriodo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;

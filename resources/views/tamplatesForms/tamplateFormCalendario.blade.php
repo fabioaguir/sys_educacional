@@ -97,18 +97,9 @@
 </div>
 
 @section('javascript')
-    {{--Mensagens personalizadas--}}{{--
+    {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
-    --}}{{--Regras adicionais--}}{{--
-    <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
-    --}}{{--Regras de validação--}}{{--
-    <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
-    <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
-    {{--<script type="text/javascript" src="{{ asset('/dist/js/validacao/calendario.js')  }}"></script>--}}
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-        });
-    </script>
+    --}}{{--Regras de validação--}}{{----}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/calendario.js')  }}"></script>
 @endsection
