@@ -3,58 +3,88 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Repositories\FuncaoRepository;
-use SerEducacional\Services\FuncaoService;
-use SerEducacional\Validators\FuncaoValidator;
+use SerEducacional\Repositories\UserRepository;
+use SerEducacional\Services\UserService;
+use SerEducacional\Validators\UserValidator;
 use Yajra\Datatables\Datatables;
 
-class FuncaoController extends Controller
+
+class UserController extends Controller
 {
+
     /**
-     * @var FuncaoRepository
+     * @var UserRepository
      */
     protected $repository;
+
+    /**
+     * @var UserValidator
+     */
+    protected $validator;
 
     /**
      * @var array
      */
     private $loadFields = [
-
+        'Role|resolvedName'
     ];
 
     /**
-     * @var FuncaoService
+     * @var UserService
      */
     private $service;
 
     /**
-     * @var FuncaoValidator
+     * UserController constructor.
+     * @param UserRepository $repository
+     * @param UserValidator $validator
+     * @param UserService $service
      */
-    private $validator;
-
-    /**
-     * FuncaoController constructor.
-     * @param FuncaoRepository $repository
-     * @param FuncaoService $service
-     */
-    public function __construct(FuncaoRepository $repository,
-                                FuncaoService $service,
-                                FuncaoValidator $validator)
+    public function __construct(UserRepository $repository,
+                                UserValidator $validator,
+                                UserService $service)
     {
         $this->repository = $repository;
+        $this->validator  = $validator;
         $this->service = $service;
-        $this->validator = $validator;
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         # Retorno para view
-        return view('funcao.index');
+        return view('user.index');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function grid()
+    {
+        #Criando a consulta
+        $rows = \DB::table('users')
+            ->select([
+                'users.id',
+                'users.name',
+                'users.email'
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Variáveis de uso
+            $html  = '<a style="margin-right: 5%;" title="Editar usuário" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            //$html .= '<a href="destroy/'.$row->id.'" title="Remover usuário" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
     }
 
     /**
@@ -66,35 +96,11 @@ class FuncaoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('funcao.create', compact('loadFields'));
+        return view('user.create', compact('loadFields'));
     }
 
     /**
-     * @return mixed
-     */
-    public function grid()
-    {
-        #Criando a consulta
-        $rows = \DB::table('funcoes')
-            ->select([
-                'funcoes.id',
-                'funcoes.nome',
-                'funcoes.sigla',
-                'funcoes.funcao_professor',
-            ]);
-
-        #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Curso" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Curso" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-
-            # Retorno
-            return $html;
-        })->make(true);
-    }
-
-    /**
+     * @param Request $request
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -113,7 +119,7 @@ class FuncaoController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -126,17 +132,18 @@ class FuncaoController extends Controller
     {
         try {
             #Recuperando a empresa
-            $model = $this->service->find($id);
+            $model = $this->repository->find($id);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('funcao.edit', compact('model', 'loadFields'));
+            return view('user.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
 
     /**
      * @param Request $request
@@ -149,6 +156,9 @@ class FuncaoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
+            #tratando as rules
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
@@ -158,12 +168,16 @@ class FuncaoController extends Controller
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
         try {
@@ -173,7 +187,6 @@ class FuncaoController extends Controller
             #Retorno para a view
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) {
-            dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

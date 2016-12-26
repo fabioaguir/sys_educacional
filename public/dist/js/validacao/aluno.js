@@ -2,7 +2,6 @@
 $(document).ready(function () {
 
     $("#formAluno").validate({
-        /**/
         rules: {
             'codigo': {
                 required: true,
@@ -29,7 +28,8 @@ $(document).ready(function () {
             },
 
             'cgm[data_nascimento]': {
-                //required: true,
+                dateBr: true,
+                maxlength: 15
 
             },
 
@@ -63,11 +63,12 @@ $(document).ready(function () {
             },
 
             'cgm[email]': {
-                email: true
+                email: true,
+                maxlength: 80
             },
 
             'cgm[nacionalidade_id]': {
-                integer: true,
+                integer: true
             },
 
             'cgm[naturalidade]': {
@@ -79,7 +80,7 @@ $(document).ready(function () {
             'telefone[nome]': {
                 required: true,
                 number: true,
-                maxlength: 18
+                maxlength: 20
             },
 
             'cgm[endereco][logradouro]': {
@@ -130,11 +131,22 @@ $(document).ready(function () {
         highlight: function(element, errorClass) {
             //console.log("Error");
             $(element).parent().parent().addClass("has-error");
+
         },
+
         unhighlight: function(element, errorClass, validClass) {
             //console.log("Sucess");
             $(element).parent().parent().removeClass("has-error");
 
         }
     });
-});
+})
+
+    /*$('#formAluno').validate({
+        ignore: ".ignore",
+        invalidHandler: function(e, validator){
+            console.log(e);
+            if(validator.errorList.length)
+                $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show')
+        }
+    });*/

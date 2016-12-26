@@ -90,8 +90,7 @@ $(document).ready(function () {
             },
 
             data_nascimento: {
-                dateBr: true,
-                maxlength: 15
+                dateBr: true
             },
 
             data_falecimento: {

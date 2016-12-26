@@ -17,8 +17,8 @@ $(document).ready(function () {
             },
 
             modalidade_id: {
-                required: true
-                //integer: true
+                required: true,
+                integer: true
             }
         },
         //For custom messages

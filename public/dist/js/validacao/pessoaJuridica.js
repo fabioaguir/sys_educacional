@@ -23,25 +23,30 @@ $(document).ready(function () {
 
             nome_complemento: {
                 required: true,
-                alphaSpace: true
+                alphaSpace: true,
+                maxlength: 100
             },
 
             nome_fantasia: {
                 required: true,
-                alphaSpace: true
+                alphaSpace: true,
+                maxlength: 100
             },
 
             num_cgm: {
                 required: true,
-                alphaSpace: true
+                alphaSpace: true,
+                maxlength: 60
             },
 
             data_cadastramento: {
-                dateBr: true
+                dateBr: true,
+                maxlength: 20
             },
 
             email: {
-                email: true
+                email: true,
+                maxlength: 80
             },
 
             tipo_empresa_id: {
@@ -50,7 +55,8 @@ $(document).ready(function () {
             },
 
             nire: {
-                number: true
+                number: true,
+                maxlength: 60
             },
 
             tipo_cadastro: {
@@ -58,7 +64,8 @@ $(document).ready(function () {
             },
 
             inscricao_estadual: {
-                number: true
+                number: true,
+                maxlength: 60
             },
 
             endereco_id: {
@@ -67,7 +74,7 @@ $(document).ready(function () {
 
             'telefone[nome]': {
                 number: true,
-                maxlength: 18
+                maxlength: 20
             },
 
             'endereco[logradouro]': {

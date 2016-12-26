@@ -1,21 +1,10 @@
 // Regras de validação
 $(document).ready(function () {
 
-    $("#formFuncao").validate({
+    $("#formUser").validate({
         rules: {
-            nome: {
-                required: true,
-                alphaSpace: true,
-                maxlength: 60
-            },
-
-            sigla: {
-                alphaSpace: true,
-                maxlength: 20
-            },
-
-            funcao_professor: {
-                //required: true,
+            name: {
+                required: true
             }
         },
         //For custom messages

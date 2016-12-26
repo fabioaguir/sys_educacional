@@ -152,6 +152,8 @@
                         <a href="{{ route('modalidadeEnsino.index')  }}">Modalidade de Ensino</a>
                         <a href="{{ route('nivelEnsino.index')  }}">Níveis de Ensino</a>
                         <a href="{{ route('funcao.index')  }}">Funções</a>
+                        <a href="{{ route('user.index')  }}">Usuários</a>
+                        <a href="{{ route('role.index')  }}">Perfís</a>
                     </li>
                 </ul>
             </li>
@@ -216,6 +218,7 @@
 <script src="{{ asset('/js/laroute.js') }}"></script>
 <script src="{{ asset('/lib/chosen/chosen.jquery.js') }}"></script>
 <script type="text/javascript" src={{ asset('/dist/js/app.js') }}></script>
+
 <script type="text/javascript">
     $(".chosen").chosen();
     $('.datepicker').datetimepicker({
@@ -224,10 +227,11 @@
         mask: false,
         lang: 'pt-BR'
     });
-    $.validator.setDefaults({
-        ignore: [],
-    });
 
+    $.validator.setDefaults({
+        ignore: []
+
+    });
 </script>
 
 @yield('javascript')
