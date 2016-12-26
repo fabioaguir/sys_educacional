@@ -51,7 +51,7 @@
     {{--Regras adicionais--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
     {{--Regras de validação--}}
-    {{--<script type="text/javascript" src="{{ asset('/dist/js/validacao/funcao.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/funcao.js')  }}"></script>
 
     <script type="text/javascript">
         //Incio - Retorno de cidades associadas aos estados
