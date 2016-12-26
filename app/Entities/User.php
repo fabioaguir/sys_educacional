@@ -4,10 +4,12 @@ namespace SerEducacional\Entities;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use GeniusTS\Roles\Traits\HasRoleAndPermission;
+use GeniusTS\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasRoleAndPermissionContract
 {
-    use Notifiable;
+    use Notifiable, HasRoleAndPermission;
 
     /**
      * The attributes that are mass assignable.
