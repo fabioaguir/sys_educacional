@@ -151,6 +151,8 @@
                         <a href="{{ route('modalidadeEnsino.index')  }}">Modalidade de Ensino</a>
                         <a href="{{ route('nivelEnsino.index')  }}">Níveis de Ensino</a>
                         <a href="{{ route('funcao.index')  }}">Funções</a>
+                        <a href="{{ route('user.index')  }}">Usuários</a>
+                        <a href="{{ route('role.index')  }}">Perfís</a>
                     </li>
                 </ul>
             </li>

@@ -173,6 +173,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         SerEducacional\Providers\RepositoryServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
+        GeniusTS\Roles\RolesServiceProvider::class,
 
         /*
          * Blade
