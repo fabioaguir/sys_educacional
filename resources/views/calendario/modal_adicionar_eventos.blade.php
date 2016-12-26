@@ -50,7 +50,7 @@
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="dtFeriado">Data feriado *</label>
-                                        {!! Form::text('data_feriado', null, array('class' => 'form-control input-sm', 'id' => 'dtFeriado', 'placeholder' => 'Data feriado')) !!}
+                                        {!! Form::text('data_feriado', null, array('class' => 'form-control input-sm datepicker', 'id' => 'dtFeriado', 'placeholder' => 'Data feriado')) !!}
                                     </div>
                                 </div>
                             </div>

@@ -8,11 +8,13 @@ $(document).ready(function () {
             },
 
             nome: {
-                required: true
+                required: true,
+                maxlength: 100
             },
 
             capacidade: {
-                required: true
+                required: true,
+                maxlength: 100
             }
         },
         //For custom messages

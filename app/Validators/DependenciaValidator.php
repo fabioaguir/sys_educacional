@@ -23,15 +23,15 @@ class DependenciaValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             
             'escola_id' => 'required',
-            'nome' => 'required',
-            'capacidade' => 'required',
+            'nome' => 'required|max:100',
+            'capacidade' => 'required|max:100',
         ],
 
         ValidatorInterface::RULE_UPDATE => [
 
             'escola_id' => 'required',
-            'nome' => 'required',
-            'capacidade' => 'required',
+            'nome' => 'required|max:100',
+            'capacidade' => 'required|max:100',
 
         ],
    ];

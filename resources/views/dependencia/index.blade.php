@@ -43,6 +43,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Capacidade</th>
+                                <th>Escola</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
@@ -50,6 +51,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Capacidade</th>
+                                <th>Escola</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
@@ -70,6 +72,7 @@
             columns: [
                 {data: 'nome', name: 'dependencias.nome'},
                 {data: 'capacidade', name: 'dependencias.capacidade'},
+                {data: 'escola', name: 'escola.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {
