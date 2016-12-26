@@ -42,7 +42,7 @@
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="data_inicial">Data inicial *</label>
-                                        {!! Form::text('data_inicial', null, array('class' => 'form-control input-sm', 'id' => 'dtInicial', 'placeholder' => 'Data inicial')) !!}
+                                        {!! Form::text('data_inicial', null, array('class' => 'form-control input-sm datepicker', 'id' => 'dtInicial', 'placeholder' => 'Data inicial')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="data_final">Data final *</label>
-                                        {!! Form::text('data_final', null, array('class' => 'form-control input-sm', 'id' => 'dtFinal', 'placeholder' => 'Data final')) !!}
+                                        {!! Form::text('data_final', null, array('class' => 'form-control input-sm datepicker', 'id' => 'dtFinal', 'placeholder' => 'Data final')) !!}
                                     </div>
                                 </div>
                             </div>

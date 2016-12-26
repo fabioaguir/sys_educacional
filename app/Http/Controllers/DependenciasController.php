@@ -72,10 +72,12 @@ class DependenciasController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('dependencias')
+            ->join('escola', 'escola.id', '=', 'dependencias.escola_id')
             ->select([
                 'dependencias.id',
                 'dependencias.nome',
-                'dependencias.capacidade'
+                'dependencias.capacidade',
+                'escola.nome as escola'
             ]);
 
         #Editando a grid

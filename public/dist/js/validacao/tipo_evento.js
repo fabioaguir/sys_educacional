@@ -4,10 +4,12 @@ $(document).ready(function () {
     $("#formTipoEvento").validate({
         rules: {
             nome: {
-                required: true
+                required: true,
+                maxlength: 250
             },
             abreviatura: {
-                required: true
+                required: true,
+                maxlength: 45
             },
         },
         //For custom messages

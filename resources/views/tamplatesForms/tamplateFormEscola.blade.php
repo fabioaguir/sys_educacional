@@ -121,7 +121,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="dt_pub_portaria">Data de publicação da portaria</label>
-                                    {!! Form::text("dt_pub_portaria", Session::getOldInput("dt_pub_portaria"), array('class' => 'form-control input-sm', 'placeholder' => 'Data de publicação')) !!}
+                                    {!! Form::text("dt_pub_portaria", Session::getOldInput("dt_pub_portaria"), array('class' => 'form-control input-sm datepicker', 'placeholder' => 'Data de publicação')) !!}
                                 </div>
                             </div>
                         </div>

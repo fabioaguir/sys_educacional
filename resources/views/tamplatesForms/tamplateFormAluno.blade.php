@@ -14,7 +14,7 @@
                 <!-- Painel -->
                 <div role="tabpanel">
                     <!-- Guias -->
-                    <ul class="tab-nav" role="tablist">
+                    <ul id="tabs" class="tab-nav" role="tablist">
                         <li class="active"><a href="#dadosPessoais" aria-controls="dadosPessoais" role="tab" data-toggle="tab">Dados Pessoais</a>
                         </li>
                         <li><a href="#endereco" aria-controls="endereco" role="tab" data-toggle="tab">Endereço</a>
@@ -67,7 +67,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[data_nascimento]">Data de Nascimento *</label>
-                                            {!! Form::text('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Nascimento')) !!}
+                                            {!! Form::text('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), array('class' => 'form-control input-sm ', 'placeholder' => 'Data de Nascimento')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@
                     <!-- Conteúdo -->
                 </div>
                 <!-- Painel -->
-                <button class="btn btn-primary btn-sm m-t-10">Salvar</button>
+                <button class="btn btn-primary btn-sm m-t-10 submit">Salvar</button>
                 <a class="btn btn-primary btn-sm m-t-10" href="{{ route('aluno.index') }}">Voltar</a>
                 </div>
             </div>
@@ -252,11 +252,13 @@
     {{--Regras adicionais--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/cpfBr.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/dateBr.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/aluno.js')  }}"></script>
 
     <script type="text/javascript">
+
         //Incio - Retorno de cidades associadas aos estados
         $(document).on('change', "#estado", function () {
 

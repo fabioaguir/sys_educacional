@@ -5,12 +5,13 @@ $(document).ready(function () {
         rules: {
             nome: {
                 required: true,
-                alphaSpace: true
+                alphaSpace: true,
+                maxlength: 60
             },
 
             sigla: {
                 alphaSpace: true,
-                maxlength: 15
+                maxlength: 20
             },
 
             funcao_professor: {

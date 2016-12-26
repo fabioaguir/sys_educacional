@@ -30,6 +30,11 @@ class FuncaoController extends Controller
     private $service;
 
     /**
+     * @var FuncaoValidator
+     */
+    private $validator;
+
+    /**
      * FuncaoController constructor.
      * @param FuncaoRepository $repository
      * @param FuncaoService $service

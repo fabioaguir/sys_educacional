@@ -195,10 +195,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('getPeriodo/{id}', ['as' => 'getPeriodo', 'uses' => 'PeriodoAvaliacaosController@getPeriodo']);
         Route::post('storePeriodo', ['as' => 'storePeriodo', 'uses' => 'PeriodoAvaliacaosController@store']);
         Route::post('validarDataCalendario', ['as' => 'validarDataCalendario', 'uses' => 'PeriodoAvaliacaosController@validarDataCalendario']);
+        Route::post('updatePeriodo/{id}', ['as' => 'updatePeriodo', 'uses' => 'PeriodoAvaliacaosController@update']);
+        Route::post('removerPeriodo/{id}', ['as' => 'removerPeriodo', 'uses' => 'PeriodoAvaliacaosController@destroy']);
 
         # rotas para eventos
-        Route::get('gridEventoAtivo/{id}', ['as' => 'gridEventoAtivo', 'uses' => 'EventosController@gridLetivos']);
-        Route::get('gridEventoNLetivo/{id}', ['as' => 'gridEventoNLetivo', 'uses' => 'EventosController@gridNLetivos']);
+        Route::get('gridEvento/{id}', ['as' => 'gridEvento', 'uses' => 'EventosController@grid']);
         Route::post('getTipoEvento/{id}', ['as' => 'getTipoEvento', 'uses' => 'EventosController@getTipoEvento']);
         Route::post('getDiaLetivo/{id}', ['as' => 'getDiaLetivo', 'uses' => 'EventosController@getDiaLetivo']);
         Route::post('storeEvento', ['as' => 'storeEvento', 'uses' => 'EventosController@store']);
@@ -246,6 +247,28 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TipoEventosController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'TipoEventosController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TipoEventosController@destroy']);
+    });
+
+    # Rotas dos usuários
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'UserController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'UserController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UserController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'UserController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'UserController@destroy']);
+    });
+
+    # Rotas dos perfís
+    Route::group(['prefix' => 'role', 'as' => 'role.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'RoleController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'RoleController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'RoleController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'RoleController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'RoleController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'RoleController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'RoleController@destroy']);
     });
 });
 
