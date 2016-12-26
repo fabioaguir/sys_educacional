@@ -207,15 +207,31 @@ class NivelEnsinoController extends Controller
             #Dados vindo na requisição
             $nivelEnsino = $request->all();
 
-            $nome = \DB::table('niveis_ensino')
-                ->select([
-                    'niveis_ensino.id',
-                    'niveis_ensino.nome'
-                ])
-                ->where('niveis_ensino.nome', $nivelEnsino['value'])
-                ->get();
+            //dd($modalidadeEnsino);
 
-            if (count($nome) > 0 ) {
+            #
+            if (empty($nivelEnsino['idModel'])) {
+                #Consultando
+                $nivel = \DB::table('niveis_ensino')
+                    ->select([
+                        'niveis_ensino.nome'
+                    ])
+                    ->where('niveis_ensino.nome', $nivelEnsino['value'])
+                    ->get();
+
+            } else {
+                #Consultando
+                $nivel = \DB::table('niveis_ensino')
+                    ->select([
+                        'niveis_ensino.id',
+                        'niveis_ensino.nome'
+                    ])
+                    ->where('niveis_ensino.id', '!=', $nivelEnsino['idModel'])
+                    ->where('niveis_ensino.nome', $nivelEnsino['value'])
+                    ->get();
+            }
+
+            if (count($nivel) > 0 ) {
                 $result = true;
             }
 
@@ -238,15 +254,29 @@ class NivelEnsinoController extends Controller
             #Dados vindo na requisição
             $nivelEnsino = $request->all();
 
-            $codigo = \DB::table('niveis_ensino')
-                ->select([
-                    'niveis_ensino.id',
-                    'niveis_ensino.codigo'
-                ])
-                ->where('niveis_ensino.codigo', $nivelEnsino['value'])
-                ->get();
+            #
+            if (empty($nivelEnsino['idModel'])) {
+                #Consultando
+                $nivel = \DB::table('niveis_ensino')
+                    ->select([
+                        'niveis_ensino.codigo'
+                    ])
+                    ->where('niveis_ensino.codigo', $nivelEnsino['value'])
+                    ->get();
 
-            if (count($codigo) > 0 ) {
+            } else {
+                #Consultando
+                $nivel = \DB::table('niveis_ensino')
+                    ->select([
+                        'niveis_ensino.id',
+                        'niveis_ensino.codigo'
+                    ])
+                    ->where('niveis_ensino.id', '!=', $nivelEnsino['idModel'])
+                    ->where('niveis_ensino.codigo', $nivelEnsino['value'])
+                    ->get();
+            }
+
+            if (count($nivel) > 0 ) {
                 $result = true;
             }
 

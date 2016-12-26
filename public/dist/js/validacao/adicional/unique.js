@@ -6,6 +6,9 @@ $.validator.addMethod("unique",
         if(value == '')
             return isUnique;
 
+        /*console.log(value);
+        console.log(params[1]);*/
+
         id_send= '';
         if(params[1] !='')
             id_send ='id='+params[1]+'&';
@@ -14,7 +17,7 @@ $.validator.addMethod("unique",
             url: params[0],
             type : 'POST',
             async: false,
-            data: { pessoaFisica : params[0], value : value},
+            data: { idModel : params[1].val(), value : value},
             dataType: 'json',
             cache: true,
             /*beforeSend: function () {
@@ -24,7 +27,6 @@ $.validator.addMethod("unique",
                 $body.removeClass("loading");
             },*/
             success: function(data){
-                console.log(data);
                 if (data.success == false) {
                     isUnique = true;
                 }
