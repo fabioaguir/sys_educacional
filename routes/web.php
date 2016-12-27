@@ -282,15 +282,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ProcedimentoAvaliacaoController@destroy']);
 
         # Rotas de procedimentos
-        Route::group(['prefix' => 'procedimento', 'as' => 'procedimento.' , function () {
+        Route::group(['prefix' => 'procedimento', 'as' => 'procedimento.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'ProcedimentoController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'ProcedimentoController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'ProcedimentoController@create']);
+            Route::get('loadFields', ['as' => 'loadFields', 'uses' => 'ProcedimentoController@getLoadFields']);
+            Route::get('grid/{id}', ['as' => 'grid', 'uses' => 'ProcedimentoController@grid']);
             Route::post('store', ['as' => 'store', 'uses' => 'ProcedimentoController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ProcedimentoController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'ProcedimentoController@update']);
-            Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ProcedimentoController@destroy']);
-        }]);
+            Route::post('destroy/{id}', ['as' => 'destroy', 'uses' => 'ProcedimentoController@destroy']);
+        });
     });
 });
 

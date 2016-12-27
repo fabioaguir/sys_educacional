@@ -50,7 +50,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th style="width: 15%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>
@@ -59,9 +59,15 @@
 
         </div>
     </section>
+
+    @include('procedimentoAvaliacao.modal_procedimentos')
+    @include('procedimentoAvaliacao.modal_procedimentos_create')
 @stop
 
 @section('javascript')
+    @parent
+    <script type="text/javascript" src="{{ asset('/dist/procedimentoAvaliacao/modal_procedimentos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/procedimentoAvaliacao/modal_procedimentos_create.js') }}"></script>
     <script type="text/javascript">
         var table = $('#procedimentos-avaliacao-grid').DataTable({
             processing: true,
@@ -72,6 +78,27 @@
                 {data: 'codigo', name: 'procedimentos_avaliacoes.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+
+        // Global idProcedimentoAvaliacao
+        var idProcedimentoAvaliacao;
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#btnModalProcedimento", function () {
+            // Recuperando o id do currículo
+            idProcedimentoAvaliacao = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#pNome').text(nome);
+            $('#pCodigo').text(codigo);
+
+            // Executando o modal
+            runModalProcedimentos(idProcedimentoAvaliacao);
         });
     </script>
 @stop

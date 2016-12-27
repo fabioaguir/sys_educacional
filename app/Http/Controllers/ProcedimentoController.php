@@ -55,21 +55,26 @@ class ProcedimentoController extends Controller
     /**
      * @return mixed
      */
-    public function grid()
+    public function grid($id)
     {
         #Criando a consulta
         $rows = \DB::table('procedimentos')
+            ->join('periodos', 'periodos.id', '=', 'procedimentos.periodo_avaliacao_id')
+            ->join('formas_avaliacoes', 'formas_avaliacoes.id', '=', 'procedimentos.forma_avaliacao_id')
+            ->join('procedimentos_avaliacoes', 'procedimentos_avaliacoes.id', '=', 'procedimentos.procedimento_avaliacao_id')
+            ->where('procedimentos_avaliacoes.id', $id)
             ->select([
                 'procedimentos.id',
-                'procedimentos.nome',
-                'procedimentos.codigo'
+                'formas_avaliacoes.nome as forma_avaliacao',
+                'periodos.nome as periodo',
+                \DB::raw('IF(aparecer_boletim = 1, "Sim", "Não") as boletim')
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
             $html  = '';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Procedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html .= '<a id="btnDestroyProcedimento" title="Remover Procedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
             return $html;
@@ -161,6 +166,22 @@ class ProcedimentoController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => "Remoção realizada com sucesso!"]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     */
+    public function getLoadFields(Request $request)
+    {
+        try {
+            return $this->service->load($request->get("models"), true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }

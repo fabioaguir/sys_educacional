@@ -78,7 +78,11 @@ class ProcedimentoAvaliacaoController extends Controller
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Procedimento" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Procedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Procedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Html de adicionar procedimentois
+            $html .= '<a title="Adicionar procedimento" id="btnModalProcedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+
 
             # Retorno
             return $html;
