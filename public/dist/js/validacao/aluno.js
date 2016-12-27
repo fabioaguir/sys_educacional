@@ -39,26 +39,27 @@ $(document).ready(function () {
             },
 
             'cgm[cpf]': {
-                required: true,
+                //required: true,
                 cpfBr: true,
                 maxlength: 15,
                 unique: [laroute.route('aluno.searchCpf'), $('#idAluno')]
             },
 
             'cgm[rg]': {
+                //required: true,
                 number: true,
                 maxlength: 20
             },
 
             'cgm[pai]': {
                 maxlength: 200,
-                required: true,
+                //required: true,
                 alphaSpace: true
             },
 
             'cgm[mae]': {
                 maxlength: 200,
-                required: true,
+                //required: true,
                 alphaSpace: true
             },
 
@@ -141,12 +142,3 @@ $(document).ready(function () {
         }
     });
 })
-
-    /*$('#formAluno').validate({
-        ignore: ".ignore",
-        invalidHandler: function(e, validator){
-            console.log(e);
-            if(validator.errorList.length)
-                $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show')
-        }
-    });*/

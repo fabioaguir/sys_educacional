@@ -61,10 +61,10 @@ class AlunoValidator extends LaravelValidator
             'cgm.nome' => 'required|serbinario_alpha_space|max:30',
             'cgm.data_nascimento' => '',
             'cgm.sexo_id' => 'integer',
-            'cgm.cpf' => 'required|cpf_br|digits_between:0,20',
+            /*'cgm.cpf' => 'required|cpf_br|digits_between:0,20',
             'cgm.rg' => 'required|numeric|digits_between:0,15',
             'cgm.pai' => 'required|serbinario_alpha_space|max:30',
-            'cgm.mae' => 'required|serbinario_alpha_space|max:30',
+            'cgm.mae' => 'required|serbinario_alpha_space|max:30',*/
             'cgm.email' => 'email',
             'cgm.nacionalidade_id' => 'integer',
             'cgm.naturalidade' => 'serbinario_alpha_space|max:50',
@@ -83,7 +83,7 @@ class AlunoValidator extends LaravelValidator
 
         ValidatorInterface::RULE_UPDATE => [
             //Tabela alunos
-            'codigo' => 'required|numeric|digits_between:0,30',
+            'codigo' => 'numeric|digits_between:0,30',
             'num_nis' => 'required|numeric|digits_between:0,30',
             'num_inep' => 'required|numeric|digits_between:0,30',
 
@@ -91,10 +91,10 @@ class AlunoValidator extends LaravelValidator
             'cgm.nome' => 'required|serbinario_alpha_space|max:30',
             'cgm.data_nascimento' => '',
             'cgm.sexo_id' => 'integer',
-            'cgm.cpf' => 'required|cpf_br|digits_between:0,20',
+            /*'cgm.cpf' => 'required|cpf_br|digits_between:0,20',
             'cgm.rg' => 'required|numeric|digits_between:0,15',
             'cgm.pai' => 'required|serbinario_alpha_space|max:30',
-            'cgm.mae' => 'required|serbinario_alpha_space|max:30',
+            'cgm.mae' => 'required|serbinario_alpha_space|max:30',*/
             'cgm.email' => 'email',
             'cgm.nacionalidade_id' => 'integer',
             'cgm.naturalidade' => 'serbinario_alpha_space|max:50',
