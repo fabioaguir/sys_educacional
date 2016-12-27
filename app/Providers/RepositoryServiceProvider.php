@@ -172,6 +172,14 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\ControleFrequenciaRepository::class,
             \SerEducacional\Repositories\ControleFrequenciaRepositoryEloquent::class);
         
+        $this->app->bind(
+            \SerEducacional\Repositories\ProcedimentoAvaliacaoRepository::class,
+            \SerEducacional\Repositories\ProcedimentoAvaliacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\ProcedimentoRepository::class,
+            \SerEducacional\Repositories\ProcedimentoRepositoryEloquent::class);
+        
         //:end-bindings:
     }
 }

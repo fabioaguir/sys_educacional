@@ -270,6 +270,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'RoleController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'RoleController@destroy']);
     });
+
+    # Rotas de procedimentos de avaliação
+    Route::group(['prefix' => 'procedimentoAvaliacao', 'as' => 'procedimentoAvaliacao.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'ProcedimentoAvaliacaoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'ProcedimentoAvaliacaoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'ProcedimentoAvaliacaoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'ProcedimentoAvaliacaoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ProcedimentoAvaliacaoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'ProcedimentoAvaliacaoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ProcedimentoAvaliacaoController@destroy']);
+    });
 });
 
 # ROtas de autenticação
