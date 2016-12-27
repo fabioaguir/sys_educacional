@@ -31,7 +31,10 @@ class CurriculosController extends Controller
     private $loadFields = [
         'Curso',
         'Turno',
-        'Serie'
+        'Serie',
+        'Disciplina',
+        'Frequencia',
+        'ControleFrequencia'
     ];
 
     /**
