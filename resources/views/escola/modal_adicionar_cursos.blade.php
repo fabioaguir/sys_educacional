@@ -8,15 +8,11 @@
             </div>
 
             <div class="modal-body" style="alignment-baseline: central">
-                <div class="row" style="margin-bottom: 5%;">
+                <div class="row" style="margin-bottom: 5%; background-color: #D3D3D3; border-bottom: #696969 solid;"">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-4">
-                                    <span><strong>Código: </strong><p id="eCodigo"></p></span>
-                                </div>
-
-                                <div class="col-md-2">
+                                <div class="col-md-6">
                                     <span><strong>Nome: </strong><p id="eNome"></p></span>
                                 </div>
                             </div>

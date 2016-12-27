@@ -26,7 +26,7 @@
                     @endif
 
 
-                                <!-- Botão novo -->
+                     <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
@@ -43,7 +43,6 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th>Carga Horária</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
@@ -51,7 +50,6 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th>Carga Horária</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
@@ -72,23 +70,8 @@
             columns: [
                 {data: 'nome', name: 'disciplinas.nome'},
                 {data: 'codigo', name: 'disciplinas.codigo'},
-                {data: 'carga_horaria', name: 'disciplinas.carga_horaria'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ],
-            /*"oLanguage": {
-                "sStripClasses": "",
-                "sSearch": "",
-                "sSearchPlaceholder": "Enter Keywords Here",
-                "sInfo": "_START_ - _END_ de _TOTAL_",
-                "sLengthMenu": '<span>Linhas por Página:</span><select class="browser-default">' +
-                '<option value="10">10</option>' +
-                '<option value="20">20</option>' +
-                '<option value="30">30</option>' +
-                '<option value="40">40</option>' +
-                '<option value="50">50</option>' +
-                '<option value="-1">All</option>' +
-                '</select></div>'
-            },*/
+            ]
         });
     </script>
 @stop
