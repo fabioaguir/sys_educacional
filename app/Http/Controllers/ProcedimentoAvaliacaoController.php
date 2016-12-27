@@ -76,9 +76,16 @@ class ProcedimentoAvaliacaoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando a entidade
+            $procedimentoAvaliacao = $this->repository->find($row->id);
+
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Procedimento" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Procedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Verificando a possibilidade de exclusão
+            if(count($procedimentoAvaliacao->procedimentos) == 0) {
+                $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Procedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Html de adicionar procedimentois
             $html .= '<a title="Adicionar procedimento" id="btnModalProcedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';

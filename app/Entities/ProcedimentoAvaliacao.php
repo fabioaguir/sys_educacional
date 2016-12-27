@@ -18,4 +18,12 @@ class ProcedimentoAvaliacao extends Model implements Transformable
         'frequencia_minima_avaliacao'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function procedimentos()
+    {
+        return $this->hasMany(Procedimento::class, 'procedimento_avaliacao_id');
+    }
+
 }
