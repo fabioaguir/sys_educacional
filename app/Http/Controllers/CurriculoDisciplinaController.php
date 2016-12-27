@@ -63,6 +63,8 @@ class CurriculoDisciplinaController extends Controller
                 'disciplinas.id',
                 'disciplinas.nome',
                 'disciplinas.codigo',
+                'curriculos_series_disciplinas.periodo',
+                \DB::raw('IF(curriculos_series_disciplinas.e_obrigatoria = 1, "Sim", "Não") as e_obrigatoria'),
                 'curriculos_series_disciplinas.id as idCurriculoSerieDisciplina'
             ])
             ->where('curriculos_series.id', $idCurriculoSerie);
@@ -190,7 +192,10 @@ class CurriculoDisciplinaController extends Controller
                 }
 
                 #Adicionando a entidade principal
-                $pivotCurriculoSerie->disciplinas()->attach($disciplina->id);
+                $pivotCurriculoSerie->disciplinas()->attach($disciplina->id, [
+                    'periodo' => $dados['periodo'],
+                    'e_obrigatoria' => $dados['e_obrigatoria']
+                ]);
             }
 
             # Retorno

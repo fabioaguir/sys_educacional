@@ -12,7 +12,7 @@ function loadTableCurriculoSerie (idCurriculo) {
         autoWidth: false,
         ajax: laroute.route('curriculo.gridSerie', {'id' :idCurriculo }),
         columns: [
-            {data: 'nome', name: 'series.nome'}
+            {data: 'nome', name: 'series.nome', orderable: false}
         ]
     });
 
@@ -33,8 +33,10 @@ function loadTableAdicionarDisciplina (curriculoSerieId) {
         autoWidth: false,
         ajax: laroute.route('curriculo.gridAdicionarDisciplina', {'idCurriculoSerie' : curriculoSerieId }),
         columns: [
-            {data: 'codigo', name: 'disciplinas.codigo'},
+            {data: 'codigo', name: 'disciplinas.codigo', orderable: false},
             {data: 'nome', name: 'disciplinas.nome'},
+            {data: 'periodo', name: 'curriculos_series_disciplinas.periodo', orderable: false},
+            {data: 'e_obrigatoria', name: 'e_obrigatoria', orderable: false},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
@@ -42,11 +44,34 @@ function loadTableAdicionarDisciplina (curriculoSerieId) {
     return tableAdicionarDisciplina;
 }
 
+// Desabilitando os campos de inclusão
+function disabledFields() {
+    $('#select-disciplinas').prop('disabled', true);
+    $('#addDisciplina').prop('disabled', true);
+    $('#periodo').prop('disabled', true);
+    $('#obrigatorio').prop('disabled', true);
+}
+
+// Habilitando os campos de inclusão
+function enableFields() {
+    $('#select-disciplinas').prop('disabled', false);
+    $('#addDisciplina').prop('disabled', false);
+    $('#periodo').prop('disabled', false);
+    $('#obrigatorio').prop('disabled', false);
+}
+
+// Limpando os campos de inclusão
+function clearFields() {
+    $('#select-disciplinas').val(null).trigger("change");
+    $('#periodo').val("");
+    $('#obrigatorio option').attr('selected', false);
+}
+
 // Função de execução
 function runModalAdicionarDisciplinas(idCurriculo)
 {
     // Zerando a grid de disciplinas
-    loadTableAdicionarDisciplina(curriculoSerieId).ajax.url(laroute.route('curriculo.gridAdicionarDisciplina', {'idCurriculoSerie' : 0 })).load();
+    loadTableAdicionarDisciplina(0).ajax.url(laroute.route('curriculo.gridAdicionarDisciplina', {'idCurriculoSerie' : 0 })).load();
 
     //Carregando as grids de situações
     if(tableCurriculoSerie) {
@@ -55,9 +80,8 @@ function runModalAdicionarDisciplinas(idCurriculo)
         loadTableCurriculoSerie(idCurriculo);
     }
 
-    // Desabilitando a o select2 e o botão de adicionar
-    $('#select-disciplinas').prop('disabled', true);
-    $('#addDisciplina').prop('disabled', true);
+    // Desabilitando os campos de inclusão
+    disabledFields();
 
     // Exibindo o modal
     $('#modal-adicionar-disciplinas').modal({'show' : true});
@@ -76,9 +100,8 @@ $(document).on("click", "#serie-grid tbody tr", function (event) {
         curriculoSerieId = tableCurriculoSerie.row($(this).index()).data().curriculoSerieId;
         serieId = tableCurriculoSerie.row($(this).index()).data().id;
 
-        // habilitando o select2 e o botão de adicionar
-        $('#select-disciplinas').prop('disabled', false);
-        $('#addDisciplina').prop('disabled', false);
+        // habilitando os campos de inclusão
+        enableFields();
 
         //Carregando as grids de situações
         if(tableAdicionarDisciplina) {
@@ -125,8 +148,10 @@ $("#select-disciplinas").select2({
 
 //Evento do click no botão adicionar disciplina
 $(document).on('click', '#addDisciplina', function (event) {
-    // Recuperando o array do select2
+    // Recuperando o array do select2 e valores do formulário
     var array = $('#select-disciplinas').select2('data');
+    var periodo = $('#periodo').val();
+    var e_obrigatoria = $('#obrigatorio').val();
 
     // Verificando se alguma disciplina foi selecionada
     if (!array.length > 0) {
@@ -146,7 +171,9 @@ $(document).on('click', '#addDisciplina', function (event) {
     var dados = {
         'idCurriculo' : idCurriculo,
         'idDisciplinas' : arrayId,
-        'idSerie' : serieId
+        'idSerie' : serieId,
+        'periodo' : periodo ? periodo : 0,
+        'e_obrigatoria' : e_obrigatoria
     };
 
     // Requisição Ajax
@@ -156,7 +183,7 @@ $(document).on('click', '#addDisciplina', function (event) {
         data: dados,
         datatype: 'json'
     }).done(function (json) {
-        $('#select-disciplinas').val(null).trigger("change");
+        clearFields();
         swal("Disciplina(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
         tableAdicionarDisciplina.ajax.reload();
         table.ajax.reload();
@@ -179,7 +206,7 @@ $(document).on('click', '.removerDisciplina', function () {
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
-        $('#select-disciplinas').val(null).trigger("change");
+        clearFields();
         swal("Disciplina removida com sucesso!", "Click no botão abaixo!", "success");
         tableAdicionarDisciplina.ajax.reload();
         table.ajax.reload();

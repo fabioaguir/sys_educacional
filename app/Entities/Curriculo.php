@@ -24,7 +24,10 @@ class Curriculo extends Model implements Transformable
         'validade_fim',
         'turno_id',
         'observacao',
-        'ativo'
+        'ativo',
+        'disciplina_global_id',
+        'frequencia_id',
+        'controle_frequencia_id'
     ];
 
     /**

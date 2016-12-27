@@ -270,6 +270,28 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'RoleController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'RoleController@destroy']);
     });
+
+    # Rotas de procedimentos de avaliação
+    Route::group(['prefix' => 'procedimentoAvaliacao', 'as' => 'procedimentoAvaliacao.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'ProcedimentoAvaliacaoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'ProcedimentoAvaliacaoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'ProcedimentoAvaliacaoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'ProcedimentoAvaliacaoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ProcedimentoAvaliacaoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'ProcedimentoAvaliacaoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ProcedimentoAvaliacaoController@destroy']);
+
+        # Rotas de procedimentos
+        Route::group(['prefix' => 'procedimento', 'as' => 'procedimento.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ProcedimentoController@index']);
+            Route::get('loadFields', ['as' => 'loadFields', 'uses' => 'ProcedimentoController@getLoadFields']);
+            Route::get('grid/{id}', ['as' => 'grid', 'uses' => 'ProcedimentoController@grid']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ProcedimentoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ProcedimentoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ProcedimentoController@update']);
+            Route::post('destroy/{id}', ['as' => 'destroy', 'uses' => 'ProcedimentoController@destroy']);
+        });
+    });
 });
 
 # ROtas de autenticação
