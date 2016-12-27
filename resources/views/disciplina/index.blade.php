@@ -71,21 +71,7 @@
                 {data: 'nome', name: 'disciplinas.nome'},
                 {data: 'codigo', name: 'disciplinas.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ],
-            /*"oLanguage": {
-                "sStripClasses": "",
-                "sSearch": "",
-                "sSearchPlaceholder": "Enter Keywords Here",
-                "sInfo": "_START_ - _END_ de _TOTAL_",
-                "sLengthMenu": '<span>Linhas por Página:</span><select class="browser-default">' +
-                '<option value="10">10</option>' +
-                '<option value="20">20</option>' +
-                '<option value="30">30</option>' +
-                '<option value="40">40</option>' +
-                '<option value="50">50</option>' +
-                '<option value="-1">All</option>' +
-                '</select></div>'
-            },*/
+            ]
         });
     </script>
 @stop

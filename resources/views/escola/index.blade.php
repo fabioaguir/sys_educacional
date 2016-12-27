@@ -119,9 +119,8 @@
             var codigo = table.row($(this).parents('tr')).data().codigo;
             var nome   = table.row($(this).parents('tr')).data().nome;
 
-            // prenchendo o titulo do nome do aluno
-            $('#eNome').text(codigo);
-            $('#eCodigo').text(nome);
+            // prenchendo o titulo do modal
+            $('#eNome').text(nome);
 
             // Executando o modal
             runModalAdicionarCursos(idEscola);
