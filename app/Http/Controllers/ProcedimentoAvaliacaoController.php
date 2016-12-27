@@ -170,7 +170,7 @@ class ProcedimentoAvaliacaoController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) { 
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
