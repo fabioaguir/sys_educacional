@@ -53,21 +53,21 @@ class AlunoValidator extends LaravelValidator
 
         ValidatorInterface::RULE_CREATE => [
             //Tabela alunos
-            'codigo' => 'numeric|digits_between:0,30',
+            'codigo' => 'required|numeric|digits_between:0,45',
             'num_nis' => 'required|numeric|digits_between:0,30',
             'num_inep' => 'required|numeric|digits_between:0,30',
 
             //Tabela CGM
-            'cgm.nome' => 'required|serbinario_alpha_space|max:30',
-            'cgm.data_nascimento' => '',
-            'cgm.sexo_id' => 'integer',
-            /*'cgm.cpf' => 'required|cpf_br|digits_between:0,20',
-            'cgm.rg' => 'required|numeric|digits_between:0,15',
-            'cgm.pai' => 'required|serbinario_alpha_space|max:30',
-            'cgm.mae' => 'required|serbinario_alpha_space|max:30',*/
-            'cgm.email' => 'email',
+            'cgm.nome' => 'required|serbinario_alpha_space|max:45',
+            'cgm.data_nascimento' => 'digits_between:0,15', //date_br
+            'cgm.sexo_id' => 'required|integer',
+            'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf',
+            'cgm.rg' => 'numeric|digits_between:0,20',
+            'cgm.pai' => 'serbinario_alpha_space|max:45',
+            'cgm.mae' => 'serbinario_alpha_space|max:45',
+            'cgm.email' => 'email|max:45',
             'cgm.nacionalidade_id' => 'integer',
-            'cgm.naturalidade' => 'serbinario_alpha_space|max:50',
+            'cgm.naturalidade' => 'required|serbinario_alpha_space|max:45',
 
             //Tabela telefone
             'telefone.nome' => 'required|numeric|digits_between:0,20',
@@ -83,21 +83,21 @@ class AlunoValidator extends LaravelValidator
 
         ValidatorInterface::RULE_UPDATE => [
             //Tabela alunos
-            'codigo' => 'numeric|digits_between:0,30',
+            'codigo' => 'required|numeric|digits_between:0,45',
             'num_nis' => 'required|numeric|digits_between:0,30',
             'num_inep' => 'required|numeric|digits_between:0,30',
 
             //Tabela CGM
-            'cgm.nome' => 'required|serbinario_alpha_space|max:30',
-            'cgm.data_nascimento' => '',
-            'cgm.sexo_id' => 'integer',
-            /*'cgm.cpf' => 'required|cpf_br|digits_between:0,20',
-            'cgm.rg' => 'required|numeric|digits_between:0,15',
-            'cgm.pai' => 'required|serbinario_alpha_space|max:30',
-            'cgm.mae' => 'required|serbinario_alpha_space|max:30',*/
-            'cgm.email' => 'email',
+            'cgm.nome' => 'required|serbinario_alpha_space|max:45',
+            'cgm.data_nascimento' => 'digits_between:0,15', //date_br
+            'cgm.sexo_id' => 'required|integer',
+            'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf:id',
+            'cgm.rg' => 'numeric|digits_between:0,20',
+            'cgm.pai' => 'serbinario_alpha_space|max:45',
+            'cgm.mae' => 'serbinario_alpha_space|max:45',
+            'cgm.email' => 'email|max:45',
             'cgm.nacionalidade_id' => 'integer',
-            'cgm.naturalidade' => 'serbinario_alpha_space|max:50',
+            'cgm.naturalidade' => 'required|serbinario_alpha_space|max:45',
 
             //Tabela telefone
             'telefone.nome' => 'required|numeric|digits_between:0,20',

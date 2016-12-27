@@ -6,7 +6,7 @@ $(document).ready(function () {
             nome: {
                 required: true,
                 alphaSpace: true,
-                maxlength: 200
+                maxlength: 45
             },
 
             cgm_municipio_id: {
@@ -16,28 +16,27 @@ $(document).ready(function () {
 
             cnpj: {
                 unique: [laroute.route('pessoaJuridica.searchCnpj'), $('#idPessoaJuridica')],
-                required: true,
+                required: true
                 //cnpj: true
-
             },
 
             nome_complemento: {
                 required: true,
                 alphaSpace: true,
-                maxlength: 100
+                maxlength: 45
             },
 
             nome_fantasia: {
                 required: true,
                 alphaSpace: true,
-                maxlength: 100
+                maxlength: 45
             },
 
-            num_cgm: {
+            /*num_cgm: {
                 required: true,
                 alphaSpace: true,
                 maxlength: 60
-            },
+            },*/
 
             data_cadastramento: {
                 dateBr: true,
@@ -46,7 +45,7 @@ $(document).ready(function () {
 
             email: {
                 email: true,
-                maxlength: 80
+                maxlength: 45
             },
 
             tipo_empresa_id: {
@@ -56,16 +55,16 @@ $(document).ready(function () {
 
             nire: {
                 number: true,
-                maxlength: 60
+                maxlength: 45
             },
 
-            tipo_cadastro: {
+            /*tipo_cadastro: {
                 integer: true
-            },
+            },*/
 
             inscricao_estadual: {
                 number: true,
-                maxlength: 60
+                maxlength: 45
             },
 
             endereco_id: {
@@ -73,8 +72,9 @@ $(document).ready(function () {
             },
 
             'telefone[nome]': {
+                required: true,
                 number: true,
-                maxlength: 20
+                maxlength: 18
             },
 
             'endereco[logradouro]': {
@@ -95,11 +95,16 @@ $(document).ready(function () {
             },
 
             'endereco[cep]': {
-                number: true,
+                //number: true,
                 maxlength: 15
             },
 
             'endereco[bairro_id]': {
+                required: true,
+                integer: true
+            },
+
+            'endereco[zona_id]': {
                 required: true,
                 integer: true
             }

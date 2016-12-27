@@ -50,7 +50,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[data_nascimento]">Data de Nascimento *</label>
-                                    {!! Form::date('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), ['class' => 'form-control input-sm', 'placeholder' => 'Data de Nascimento']) !!}
+                                    {!! Form::date('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), ['class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de Nascimento']) !!}
                                     {{--{!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Nascimento')) !!}--}}
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[data_falecimento]">Data de Falecimento</label>
-                                    {!! Form::text('cgm[data_falecimento]', Session::getOldInput('cgm[data_falecimento]'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Falecimento')) !!}
+                                    {!! Form::text('cgm[data_falecimento]', Session::getOldInput('cgm[data_falecimento]'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de Falecimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[data_expedicao]">Data de expedição</label>
-                                    {!! Form::text('cgm[data_expedicao]', Session::getOldInput('cgm[data_expedicao]'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de expedição')) !!}
+                                    {!! Form::text('cgm[data_expedicao]', Session::getOldInput('cgm[data_expedicao]'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de expedição')) !!}
                                 </div>
                             </div>
                         </div>
@@ -204,7 +204,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[data_vencimento_cnh]">Data Vencimento</label>
-                                    {!! Form::text('cgm[data_vencimento_cnh]', Session::getOldInput('cgm[data_vencimento_cnh]'), array('class' => 'form-control input-sm', 'placeholder' => 'Data Vencimento')) !!}
+                                    {!! Form::text('cgm[data_vencimento_cnh]', Session::getOldInput('cgm[data_vencimento_cnh]'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data Vencimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -382,7 +382,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="servidor[data_admicao]">Data de admissão *</label>
-                                    {!! Form::text("data_admicao", Session::getOldInput("data_admicao"), array('class' => 'form-control input-sm', 'placeholder' => 'Data de admissão')) !!}
+                                    {!! Form::text("data_admicao", Session::getOldInput("data_admicao"), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de admissão')) !!}
                                 </div>
                             </div>
                         </div>

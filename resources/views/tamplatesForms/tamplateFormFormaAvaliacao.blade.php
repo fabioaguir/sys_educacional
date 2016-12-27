@@ -193,6 +193,7 @@
 
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/formaAvaliacao.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
 
     {{-- Controler dos formulários de tipos de resultados --}}
     <script type="text/javascript" src="{{ asset('/dist/formaAvaliacao/gerenciamento_niveis_alfabetizacao.js')  }}"></script>

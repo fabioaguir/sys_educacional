@@ -4,27 +4,40 @@ $(document).ready(function () {
     $("#formInstituicao").validate({
         rules: {
             nome: {
-                required: true
+                required: true,
+                maxlength: 100
             },
 
             cnpj: {
-                required: true
+                required: true,
+                maxlength: 35
             },
 
             insc_municipal: {
-                required: true
+                required: true,
+                maxlength: 60
             },
+
             insc_estadual: {
-                required: true
+                required: true,
+                maxlength: 60
             },
+
             'endereco[logradouro]': {
-                required: true
+                required: true,
+                alphaSpace: true,
+                maxlength: 200
             },
+
             'endereco[numero]': {
-                required: true
+                required: true,
+                number: true,
+                maxlength: 10
             },
+
             'endereco[bairro_id]': {
-                required: true
+                required: true,
+                integer: true
             }
         },
         //For custom messages

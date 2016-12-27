@@ -261,16 +261,14 @@ class AlunoController extends Controller
                         'cgm.id',
                         'cgm.cpf'
                     ])
-                    ->where('cgm.id', '!=', $dados['idModel'])
+                    ->where('cgm.id', '!=' ,$dados['idModel'])
                     ->where('cgm.cpf', $dados['value'])
                     ->get();
             }
 
-            if (count($aluno) > 0) {
+            if (count($aluno)) {
                 $result = true;
             }
-
-            //dd($result);
 
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => $result]);

@@ -4,7 +4,21 @@ $(document).ready(function () {
     $("#formUser").validate({
         rules: {
             name: {
-                required: true
+                required: true,
+                alphaSpace: true,
+                maxlanth: 100
+            },
+
+            email: {
+                email: true,
+                required: true,
+                alphaSpace: true,
+                maxlanth: 100
+            },
+
+            password: {
+                required: true,
+                maxlanth: 100
             }
         },
         //For custom messages

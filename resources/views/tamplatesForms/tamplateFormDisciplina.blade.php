@@ -37,6 +37,9 @@
     {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
 
+    {{--Regras de validação personalizadas--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
+
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/disciplina.js')  }}"></script>
 @endsection

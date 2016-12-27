@@ -4,16 +4,19 @@ $(document).ready(function () {
     $("#formDependencia").validate({
         rules: {
             escola_id: {
-                required: true
+                required: true,
+                integer: true
             },
 
             nome: {
                 required: true,
+                alphaSpace: true,
                 maxlength: 100
             },
 
             capacidade: {
                 required: true,
+                alphaSpace: true,
                 maxlength: 100
             }
         },

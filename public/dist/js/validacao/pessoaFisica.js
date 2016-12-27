@@ -6,7 +6,7 @@ $(document).ready(function () {
             nome: {
                 required: true,
                 alphaSpace: true,
-                maxlength: 200
+                maxlength: 45
             },
 
             sexo_id: {
@@ -42,22 +42,22 @@ $(document).ready(function () {
                 integer: true
             },
 
-            num_cgm: {
+            /*num_cgm: {
                 number: true,
                 maxlength: 30
-            },
+            },*/
 
             cpf: {
                 required: true,
                 cpfBR: true,
-                maxlength: 15,
+                maxlength: 20,
                 unique: [laroute.route('pessoaFisica.searchCpf'), $('#idPessoaFisica')]
             },
 
             rg: {
                 required: true,
                 number: true,
-                maxlength: 15
+                maxlength: 20
 
             },
 
@@ -70,18 +70,18 @@ $(document).ready(function () {
             pai: {
                 required: true,
                 alphaSpace: true,
-                maxlength: 200
+                maxlength: 45
             },
 
             mae: {
                 required: true,
                 alphaSpace: true,
-                maxlength: 200
+                maxlength: 45
             },
 
             naturalidade: {
                 alphaSpace: true,
-                maxlength: 100
+                maxlength: 45
             },
 
             inscricao_estadual: {
@@ -90,7 +90,8 @@ $(document).ready(function () {
             },
 
             data_nascimento: {
-                dateBr: true
+                dateBr: true,
+                maxlength: 15
             },
 
             data_falecimento: {
@@ -104,10 +105,10 @@ $(document).ready(function () {
                 maxlength: 15
             },
 
-            data_cadastramento: {
+            /*data_cadastramento: {
                 dateBr: true,
                 maxlength: 15
-            },
+            },*/
 
             data_vencimento_cnh: {
                 dateBr: true,
@@ -116,6 +117,7 @@ $(document).ready(function () {
 
             email: {
                 email: true,
+                maxlength: 45
             },
 
             num_cnh: {
@@ -124,7 +126,8 @@ $(document).ready(function () {
             },
 
             'telefone[nome]': {
-                number: true,
+                required: true,
+                //number: true,
                 maxlength: 18
             },
 
@@ -146,11 +149,16 @@ $(document).ready(function () {
             },
 
             'endereco[cep]': {
-                number: true,
+                //number: true,
                 maxlength: 15
             },
 
             'endereco[bairro_id]': {
+                required: true,
+                integer: true
+            },
+
+            'endereco[zona_id]': {
                 required: true,
                 integer: true
             }
