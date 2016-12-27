@@ -43,7 +43,6 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th>Carga Horária</th>
                                 <th>Açao</th>
                             </tr>
                             </thead>
@@ -51,7 +50,6 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
-                                <th>Carga Horária</th>
                                 <th style="width: 10%;">Açao</th>
                             </tr>
                             </tfoot>
@@ -72,7 +70,6 @@
             columns: [
                 {data: 'nome', name: 'disciplinas.nome'},
                 {data: 'codigo', name: 'disciplinas.codigo'},
-                {data: 'carga_horaria', name: 'disciplinas.carga_horaria'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {
