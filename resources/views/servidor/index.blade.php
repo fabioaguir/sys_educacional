@@ -40,12 +40,21 @@
                     </table>
                 </div>
             </div>
-
         </div>
     </section>
+
+    @include('servidor.modal_adicionar_telefones')
+    @include('servidor.modal_adicionar_relacao_trabalho')
+    @include('servidor.modal_adicionar_formacao')
+    @include('servidor.modal_adicionar_atividade')
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/dist/servidor/loadFields.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_telefones.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_relacao_trabalho.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_formacao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_atividade.js') }}"></script>
     <script type="text/javascript">
         var table = $('#servidor-grid').DataTable({
             processing: true,
@@ -56,20 +65,77 @@
                 {data: 'matricula', name: 'servidor.matricula'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
-            /*"oLanguage": {
-             "sStripClasses": "",
-             "sSearch": "",
-             "sSearchPlaceholder": "Enter Keywords Here",
-             "sInfo": "_START_ - _END_ de _TOTAL_",
-             "sLengthMenu": '<span>Linhas por Página:</span><select class="browser-default">' +
-             '<option value="10">10</option>' +
-             '<option value="20">20</option>' +
-             '<option value="30">30</option>' +
-             '<option value="40">40</option>' +
-             '<option value="50">50</option>' +
-             '<option value="-1">All</option>' +
-             '</select></div>'
-             },*/
+        });
+
+        //Global idCgm, idServidor
+        var idCgm, idServidor;
+
+        // Evento para abrir o modal de telefones
+        $(document).on("click", "#btnModalAdicionarTelefone", function () {
+            // Recuperando o id do cgm
+            idCgm = table.row($(this).parents('tr')).data().cgm_id;
+
+            // Recuperando o nome e matrícula
+            var nome = table.row($(this).parents('tr')).data().nome;
+            var matricula   = table.row($(this).parents('tr')).data().matricula;
+
+            // prenchendo o titulo do nome e matrícula do servidor
+            $('#sNome').text(nome);
+            $('#sMatricula').text(matricula);
+
+            // Executando o modal
+            runModalAdicionarTelefones(idCgm);
+        });
+
+        // Evento para abrir o modal de relações de trabalho
+        $(document).on("click", "#btnModalAdicionarRelacao", function () {
+            // Recuperando o id da relacao
+            idServidor = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e matrícula
+            var nome = table.row($(this).parents('tr')).data().nome;
+            var matricula   = table.row($(this).parents('tr')).data().matricula;
+
+            // prenchendo o titulo do nome e matrícula do servidor
+            $('.sNome').text(nome);
+            $('.sMatricula').text(matricula);
+
+            // Executando o modal
+            runModalAdicionarRelacoes(idServidor);
+        });
+
+        // Evento para abrir o modal de formações
+        $(document).on("click", "#btnModalAdicionarFormacao", function () {
+            // Recuperando o id da formação
+            idServidor = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e matrícula
+            var nome = table.row($(this).parents('tr')).data().nome;
+            var matricula   = table.row($(this).parents('tr')).data().matricula;
+
+            // prenchendo o titulo do nome e matrícula do servidor
+            $('.sNome').text(nome);
+            $('.sMatricula').text(matricula);
+
+            // Executando o modal
+            runModalAdicionarFormacoes(idServidor);
+        });
+
+        // Evento para abrir o modal de formações
+        $(document).on("click", "#btnModalAdicionarAtividade", function () {
+            // Recuperando o id da formação
+            idServidor = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e matrícula
+            var nome = table.row($(this).parents('tr')).data().nome;
+            var matricula   = table.row($(this).parents('tr')).data().matricula;
+
+            // prenchendo o titulo do nome e matrícula do servidor
+            $('.sNome').text(nome);
+            $('.sMatricula').text(matricula);
+
+            // Executando o modal
+            runModalAdicionarAtividades(idServidor);
         });
     </script>
 @stop

@@ -86,13 +86,26 @@ class ServidorController extends Controller
                 'servidor.id',
                 'cgm.nome',
                 'servidor.matricula',
+                'cgm.id as cgm_id',
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Html de adicionar telefones
+            $html .= '<a style="margin-right: 5%;" title="Adicionar Telefones" id="btnModalAdicionarTelefone" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-earphone"></i></a>';
+
+            # Html de adicionar relações de trabalho
+            $html .= '<a style="margin-right: 5%;" title="Adicionar Relação de trabalho" id="btnModalAdicionarRelacao" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-lock"></i></a>';
+
+            # Html de adicionar formação
+            $html .= '<a style="margin-right: 5%;" title="Adicionar Formações" id="btnModalAdicionarFormacao" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-education"></i></a>';
+
+            # Html de adicionar atividade
+            $html .= '<a title="Adicionar Atividades" id="btnModalAdicionarAtividade" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-briefcase"></i></a>';
 
             # Retorno
             return $html;
