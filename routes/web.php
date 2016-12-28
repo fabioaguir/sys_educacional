@@ -81,7 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('store', ['as' => 'store', 'uses' => 'ServidorController@store']);
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServidorController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'ServidorController@update']);
-        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ServidorController@destroy']);
+        //unique cpf
+        Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'ServidorController@searchCpf']);
     });
 
     # ROtas de disciplinas
@@ -247,6 +249,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TipoEventosController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'TipoEventosController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TipoEventosController@destroy']);
+    });
+
+    # Rotas dos perídos de avaliação
+    Route::group(['prefix' => 'periodoAvaliacao', 'as' => 'periodoAvaliacao.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'PeriodoAvaliacaoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'PeriodoAvaliacaoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'PeriodoAvaliacaoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'PeriodoAvaliacaoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PeriodoAvaliacaoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'PeriodoAvaliacaoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'PeriodoAvaliacaoController@destroy']);
     });
 
     # Rotas dos usuários

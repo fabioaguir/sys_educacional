@@ -1,9 +1,11 @@
-{{--{{ dd($loadFields) }}--}}
 <div class="block-header">
     <h2>Cadastro de Servidor</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
+
+        <input type="hidden" id="idServidor" value="{{ isset($model->cgm->id) ? $model->id : null }}">
+
         <!-- Painel -->
         <div role="tabpanel">
             <!-- Guias -->
@@ -465,13 +467,12 @@
 </div>
 
 @section('javascript')
-    {{--Mensagens personalizadas--}}{{--
-     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
-    --}}{{--Regras adicionais--}}{{--
-    <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
-    --}}{{--Regras de validação--}}{{--
-    <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/unique.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/dateBr.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/servidor.js')  }}"></script>
     <script type="text/javascript">
 
