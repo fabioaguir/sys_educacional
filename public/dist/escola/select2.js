@@ -2,7 +2,7 @@
 $("#select-cursos").select2({
     placeholder: 'Selecione:',
     theme: "bootstrap",
-    width: 250,
+    width: "95%",
     ajax: {
         type: 'POST',
         url: laroute.route('escola.curso.select2'),
@@ -38,7 +38,7 @@ $("#select-cursos").select2({
 $("#select-turnos").select2({
     placeholder: 'Selecione:',
     theme: "bootstrap",
-    width: 650,
+    width: "95%",
     ajax: {
         type: 'POST',
         url: laroute.route('escola.turno.select2'),

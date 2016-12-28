@@ -21,25 +21,26 @@ class CurriculoValidator extends LaravelValidator
     protected $messages = [
         'required' => ':attribute é requerido',
         'max' => ':attribute só pode ter no máximo :max caracteres',
-        'unique' => ':attribute já está cadastrado'
+        'unique' => ':attribute já está cadastrado',
+        'serbinario_alpha_space' => ' :attribute deve conter apenas letras e espaços entre palavras',
     ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|max:100',
+            'nome' => 'required|serbinario_alpha_space|max:100',
             'codigo' => 'required|max:50|unique:curriculos,codigo',
-            'curso_id' => 'required',
-            'observacao' => 'max:500',
-            'serie_inicial_id' => 'required',
-            'serie_final_id' => 'required'
+            'curso_id' => 'integer|required',
+            'observacao' => 'serbinario_alpha_space|max:500',
+            'serie_inicial_id' => 'integer|required',
+            'serie_final_id' => 'integer|required'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|max:100',
+            'nome' => 'required|serbinario_alpha_space|max:100',
             'codigo' => 'required|max:50|unique:curriculos,codigo,:id',
-            'curso_id' => 'required',
-            'observacao' => 'max:500',
-            'serie_inicial_id' => 'required',
-            'serie_final_id' => 'required'
+            'curso_id' => 'integer|required',
+            'observacao' => 'serbinario_alpha_space|max:500',
+            'serie_inicial_id' => 'integer|required',
+            'serie_final_id' => 'integer|required'
         ],
     ];
 }

@@ -121,7 +121,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="dt_pub_portaria">Data de publicação da portaria</label>
-                                    {!! Form::text("dt_pub_portaria", Session::getOldInput("dt_pub_portaria"), array('class' => 'form-control input-sm datepicker', 'placeholder' => 'Data de publicação')) !!}
+                                    {!! Form::text("dt_pub_portaria", Session::getOldInput("dt_pub_portaria"), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de publicação')) !!}
                                 </div>
                             </div>
                         </div>
@@ -253,13 +253,10 @@
 </div>
 
 @section('javascript')
-    {{--Mensagens personalizadas--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
-    --}}{{--Regras adicionais--}}{{--
     <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
-    --}}{{--Regras de validação--}}{{--
-    <script type="text/javascript" src="{{ asset('/dist/js/validacao/convenio.js')  }}"></script>--}}
-    <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/dateBr.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/escola.js')  }}"></script>
 
     <script type="text/javascript">

@@ -31,7 +31,7 @@
     "summernote": "^0.8.2",
     "typeahead.js": "^0.11.1",
     "Waves": "fians/Waves#^0.7.5",
-    "moment": "^2.15.1",
+    "moment": "^2.17.1",
     "chosen": "^1.6.2",
     "bootstrap": "^3.3.7",
     "jqvmap": "manifestinteractive/jqvmap#^1.5.1",

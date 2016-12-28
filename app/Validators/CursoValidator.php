@@ -27,6 +27,7 @@ class CursoValidator extends LaravelValidator
             'codigo' => 'required|max:50|unique:cursos,codigo',
             'nivel_ensino_id' => 'required'
         ],
+
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:100',
             'codigo' => 'required|max:50|unique:cursos,codigo,:id',

@@ -16,10 +16,10 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/material-design-iconic-font/dist/css/material-design-iconic-font.min.css') }}"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css') }}"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/datatables.net-dt/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="{{ asset('/dist/css/datetimepicker/build/jquery.datetimepicker.min.css')}}" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/select2/dist/css/select2.min.css')}}" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/select2-bootstrap-theme/dist/select2-bootstrap.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
+    <!-- Datepicker -->
+    <link type="text/css" rel="stylesheet" href="{{ asset('lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet"/>
 
     {{--<link href="/lib/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">--}}
     {{--<link href="/lib/nouislider/distribute/nouislider.min.css" rel="stylesheet">--}}
@@ -139,6 +139,8 @@
                     <li>
                         <a href="{{ route('calendario.index')  }}">Calendário</a>
                         <a href="{{ route('formaAvaliacao.index')  }}">Formas de Avaliações</a>
+                        <a href="{{ route('procedimentoAvaliacao.index')  }}">Procedimentos de avaliação</a>
+                        <a href="{{ route('turma.index')  }}">Turmas</a>
                     </li>
                     <li>
                         <a href="{{ route('tipoEvento.index')  }}">Tipo Evento</a>
@@ -196,12 +198,15 @@
 <script src="{{ asset('/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script src="{{ asset('/lib/Waves/dist/waves.min.js') }}"></script>
-<script src="{{ asset('/dist/jquery.datetimepicker.js') }}"></script>
 <script src="{{ asset('/lib/bootstrap-growl/jquery.bootstrap-growl.min.js') }}"></script>
 <script src="{{ asset('/lib/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/lib/select2/dist/js/select2.full.js') }}"></script>
-<script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
+
+<!-- Datepicker e suas dependencias. Sempre importa-lo nessa ordem -->
+<script src="{{ asset('/lib/flot/jquery.flot.js') }}"></script>
+<script src="{{ asset('/lib/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 {{--jquery Validator https://jqueryvalidation.org/ --}}
 <script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>

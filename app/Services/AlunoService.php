@@ -60,7 +60,7 @@ class AlunoService
 
         #Salvando registro
         $endereco = $this->enderecoRepository->create($dados);
-
+        dd($endereco);
         #Retorno
         return $endereco;
     }

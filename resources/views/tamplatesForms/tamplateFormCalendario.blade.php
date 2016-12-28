@@ -36,7 +36,7 @@
                         <div class="fg-line">
                             <div class="fg-line">
                                 <label for="data_inicial">Data inicial *</label>
-                                {!! Form::text('data_inicial', Session::getOldInput('data_inicial'), array('class' => 'form-control input-sm datepicker date', 'placeholder' => 'Data inicial')) !!}
+                                {!! Form::text('data_inicial', Session::getOldInput('data_inicial'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data inicial')) !!}
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <div class="fg-line">
                             <div class="fg-line">
                                 <label for="data_final">Data final *</label>
-                                {!! Form::text('data_final', Session::getOldInput('data_final'), array('class' => 'form-control input-sm datepicker', 'placeholder' => 'Data final')) !!}
+                                {!! Form::text('data_final', Session::getOldInput('data_final'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data final')) !!}
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         <div class="fg-line">
                             <div class="fg-line">
                                 <label for="data_resultado_final">Data de resultado final *</label>
-                                {!! Form::text('data_resultado_final', Session::getOldInput('data_resultado_final'), array('class' => 'form-control input-sm datepicker', 'placeholder' => 'Data de resultado final')) !!}
+                                {!! Form::text('data_resultado_final', Session::getOldInput('data_resultado_final'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de resultado final')) !!}
                             </div>
                         </div>
                     </div>
@@ -100,6 +100,11 @@
     {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
 
-    --}}{{--Regras de validação--}}{{----}}
+    {{----}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/dateBr.js')  }}"></script>
+
+    {{--Regras de validação--}}{{----}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/calendario.js')  }}"></script>
 @endsection

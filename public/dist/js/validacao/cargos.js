@@ -4,11 +4,21 @@ $(document).ready(function () {
     $("#formCargo").validate({
         rules: {
             nome: {
-                required: true
+                required: true,
+                alphaSpace: true,
+                maxlangth:100
             },
+
             codigo: {
-                required: true
+                required: true,
+                maxlangth:30
             },
+
+            cargo_professor: {
+                required: true,
+                integer: true
+            }
+
         },
         //For custom messages
         /*messages: {

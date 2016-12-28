@@ -15,6 +15,15 @@
                         </div>
                     </div>
 
+                    <div class="form-group col-md-4">
+                        <div class=" fg-line">
+                            <label for="curso_id">Curso *</label>
+                            <div class="select">
+                                {!! Form::select("curso_id", ["" => "Selecione um curso"] + $loadFields['curso']->toArray(), null, array('class'=> 'form-control')) !!}
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group col-md-2">
                         <div class="fg-line">
                             <div class="fg-line">
@@ -23,12 +32,36 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <div class="fg-line">
+                            <div class="fg-line">
+                                <label for="disciplina_global_id">Disciplina Global</label>
+                                <div class="select">
+                                    {!! Form::select("disciplina_global_id", ["" => "Selecione uma disciplina"] + $loadFields['disciplina']->toArray(), null, array('class'=> 'form-control')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <div class="fg-line">
+                            <div class="fg-line">
+                                <label for="frequencia_id">Frequência</label>
+                                <div class="select">
+                                    {!! Form::select("frequencia_id", ["" => "Selecione uma frequência"] + $loadFields['frequencia']->toArray(), null, array('class'=> 'form-control')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group col-md-4">
                         <div class=" fg-line">
-                            <label for="curso_id">Curso *</label>
+                            <label for="controle_frequencia_id">Controle de Frequência</label>
                             <div class="select">
-                                {!! Form::select("curso_id", ["" => "Selecione um curso"] + $loadFields['curso']->toArray(), null, array('class'=> 'form-control')) !!}
+                                {!! Form::select("controle_frequencia_id", ["" => "Selecione um controle de frequência"] + $loadFields['controlefrequencia']->toArray(), null, array('class'=> 'form-control')) !!}
                             </div>
                         </div>
                     </div>
@@ -88,6 +121,10 @@
 @section('javascript')
     {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
+
+    {{-- --}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
 
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/curriculo.js')  }}"></script>

@@ -3,8 +3,10 @@ $(document).ready(function () {
 
     $("#formCurriculo").validate({
         rules: {
+
             nome: {
                 required: true,
+                alphaSpace: true,
                 maxlength: 100
             },
 
@@ -14,18 +16,22 @@ $(document).ready(function () {
             },
 
             curso_id: {
-                required: true
+                required: true,
+                integer: true
             },
 
             serie_inicial_id: {
-                required: true
+                required: true,
+                integer: true
             },
 
             serie_final_id: {
-                required: true
+                required: true,
+                integer: true
             },
 
             observacao: {
+                alphaSpace: true,
                 maxlength: 500
             }
         },

@@ -14,21 +14,26 @@ $(document).ready(function () {
                 maxlength: 4
             },
             duracoes_id: {
+                integer:true,
                 required: true
             },
             data_inicial: {
+                dateBr: true,
                 required: true,
                 maxlength: 10
             },
             data_final: {
+                dateBr: true,
                 required: true,
                 maxlength: 10
             },
             data_resultado_final: {
+                dateBr: true,
                 required: true,
                 maxlength: 10
             },
             status_id: {
+                integer: true,
                 required: true
             }
         },

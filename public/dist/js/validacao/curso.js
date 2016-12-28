@@ -4,15 +4,19 @@ $(document).ready(function () {
     $("#formCurso").validate({
         rules: {
             nome: {
-                required: true
+                required: true,
+                maxlength: 100
             },
 
             codigo: {
                 required: true,
+                maxlength: 50
             },
 
             nivel_ensino_id: {
                 required: true,
+                integer: true
+
             }
         },
         //For custom messages

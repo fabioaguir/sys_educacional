@@ -46,7 +46,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="nome_complemento">Nome complemento *</label>
-                                    {!! Form::text('nome_complemento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome complemento')) !!}
+                                    {!! Form::text('nome_complemento', Session::getOldInput('nome_complemento'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome complemento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <div class="fg-line">
                                 <label for="tipo_empresa_id">Tipo empresa *</label>
                                 <div class="select">
-                                {!! Form::select("tipo_empresa_id", (["" => "Selecione tipo"] + $loadFields['tipoempresa']->toArray()), null, array()) !!}
+                                {!! Form::select("tipo_empresa_id", (["" => "Selecione tipo"] + $loadFields['tipoempresa']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                             <div class=" fg-line">
                                 <label for="cgm_municipio_id">CGM do município *</label>
                                 <div class="select">
-                                    {!! Form::select('cgm_municipio_id', ["" => "Selecion"] + $loadFields['cgmmunicipio']->toArray(), null, array()) !!}
+                                    {!! Form::select('cgm_municipio_id', ["" => "Selecion"] + $loadFields['cgmmunicipio']->toArray(), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -93,9 +93,9 @@
                                 <div class="fg-line">
                                     <label for="telefone[nome]">Telefone</label>
                                     @if (isset($model))
-                                        {!! Form::text('telefone[nome]', $model->telefone->first()->nome ?? '', array('class' => 'form-control input-sm')) !!}
+                                        {!! Form::text('telefone[nome]', $model->telefone->first()->nome ?? '', array('id' => 'telefone', 'class' => 'form-control input-sm')) !!}
                                     @else
-                                        {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('class' => 'form-control input-sm')) !!}
+                                        {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('id' => 'telefone', 'class' => 'form-control input-sm')) !!}
                                     @endif
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[cep]">CEP</label>
-                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
+                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('id' => 'cep', 'class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
                                 </div>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                             <div class=" fg-line">
                                 <label for="endereco['estado_id']">Estado *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione estado"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select', 'id' => 'estado')) !!}
+                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione estado"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select form-control', 'id' => 'estado')) !!}
                                 </div>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                             <div class=" fg-line">
                                 <label for="endereco['cidade_id']">Cidade *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione cidade"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select', 'id' => 'cidade')) !!}
+                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione cidade"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select form-control', 'id' => 'cidade')) !!}
                                 </div>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
                             <div class=" fg-line">
                                 <label for="endereco[bairro_id]">Bairro *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('class' => 'Form::select', 'id' => 'bairro')) !!}
+                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('class' => 'Form::select form-control', 'id' => 'bairro')) !!}
                                 </div>
                             </div>
                         </div>
@@ -200,6 +200,21 @@
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/pessoaJuridica.js')  }}"></script>
+
+    {{-- MASCARAS --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //$('#cpf').mask('000.000.000-00', {reverse: true});
+            $('#telefone').mask('(00) 00000-0000');
+            $('#cep').mask('00.000-000');
+        });
+
+        $( "#formPessoaJuridica" ).submit(function() {
+            //$('#cpf').unmask();
+            $('#telefone').unmask();
+            $('#cep').unmask();
+        });
+    </script>
 
     <script type="text/javascript">
         //Incio - Retorno de cidades associadas aos estados

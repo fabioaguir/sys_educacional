@@ -28,22 +28,23 @@ class PessoaJuridicaValidator extends LaravelValidator
         'max' => ':attribute só pode ter no máximo :max caracteres',
         'serbinario_alpha_space' => ' :attribute deve conter apenas letras e espaços entre palavras',
         'numeric' => ':attribute deve conter apenas números',
-        'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com'
+        'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com',
+        'digits_between' => ':attribute deve ter entre :min e :max caracteres',
     ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|serbinario_alpha_space|max:200',
-            'num_cgm' => 'numeric',
-            'data_cadastramento' => '', //serbinario_date_format
-            'cnpj' => 'required|numeric',
-            'email' => 'email|max:90',
+            //'num_cgm' => 'numeric',
+            'data_cadastramento' => 'digits_between:0,20', //serbinario_date_format
+            'cnpj' => 'required|numeric|unique:cgm,cnpj',
+            'email' => 'email|max:45',
             'tipo_empresa_id' => 'required|integer',
-            'nire' => 'numeric',
-            'nome_complemento' => 'required|serbinario_alpha_space|max:200',
-            'nome_fantasia' => 'required|serbinario_alpha_space|max:200',
+            'nire' => 'numeric|digits_between:0,45',
+            'nome_complemento' => 'required|serbinario_alpha_space|max:45',
+            'nome_fantasia' => 'required|serbinario_alpha_space|max:45',
             //'tipo_cadastro' => '',
-            'inscricao_estadual' => 'numeric',
+            'inscricao_estadual' => 'numeric|digits_between:0,45',
             'endereco_id' => 'integer',
             'cgm_municipio_id' => 'required|integer',
             //Endereço
@@ -54,19 +55,26 @@ class PessoaJuridicaValidator extends LaravelValidator
             'endereco.bairro_id' => 'integer'
         ],
 
-        ValidatorInterface::RULE_UPDATE => ['nome' => 'required|serbinario_alpha_space|max:200',
-            'num_cgm' => 'numeric',
-            'data_cadastramento' => '', //serbinario_date_format
-            'cnpj' => 'numeric',
-            'email' => 'email|max:90',
-            'tipo_empresa_id' => 'integer',
-            'nire' => 'numeric',
-            'nome_complemento' => 'serbinario_alpha_space|max:200',
-            'nome_fantasia' => 'serbinario_alpha_space|max:200',
+        ValidatorInterface::RULE_UPDATE => [
+            'nome' => 'required|serbinario_alpha_space|max:200',
+            //'num_cgm' => 'numeric',
+            'data_cadastramento' => 'digits_between:0,20', //serbinario_date_format
+            'cnpj' => 'required|numeric|unique:cgm,cnpj:id',
+            'email' => 'email|max:45',
+            'tipo_empresa_id' => 'required|integer',
+            'nire' => 'numeric|digits_between:0,45',
+            'nome_complemento' => 'required|serbinario_alpha_space|max:45',
+            'nome_fantasia' => 'required|serbinario_alpha_space|max:45',
             //'tipo_cadastro' => '',
-            'inscricao_estadual' => 'numeric',
+            'inscricao_estadual' => 'numeric|digits_between:0,45',
             'endereco_id' => 'integer',
-            'cgm_municipio_id' => 'integer'
+            'cgm_municipio_id' => 'required|integer',
+            //Endereço
+            'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
+            'endereco.numero' => 'required|numeric',
+            'endereco.complemento' => 'serbinario_alpha_space|max:120',
+            'endereco.cep' => 'numeric',
+            'endereco.bairro_id' => 'integer'
         ],
    ];
 }

@@ -232,6 +232,10 @@ class AlunoController extends Controller
         return response()->json($cidades);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function searchCpf(Request $request)
     {
         try {
@@ -240,31 +244,29 @@ class AlunoController extends Controller
             #Dados vindo na requisição
             $dados = $request->all();
 
-            //dd($modalidadeEnsino);
-
             #
             if (empty($dados['idModel'])) {
                 #Consultando
-                $aluno = \DB::table('alunos')
+                $aluno = \DB::table('cgm')
                     ->select([
-                        'alunos.nome'
+                        'cgm.cpf'
                     ])
-                    ->where('alunos.nome', $dados['value'])
+                    ->where('cgm.cpf', $dados['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $aluno = \DB::table('alunos')
+                $aluno = \DB::table('cgm')
                     ->select([
-                        'alunos.id',
-                        'alunos.nome'
+                        'cgm.id',
+                        'cgm.cpf'
                     ])
-                    ->where('alunos.id', '!=', $dados['idModel'])
-                    ->where('alunos.nome', $dados['value'])
+                    ->where('cgm.id', '!=' ,$dados['idModel'])
+                    ->where('cgm.cpf', $dados['value'])
                     ->get();
             }
 
-            if (count($aluno) > 0 ) {
+            if (count($aluno)) {
                 $result = true;
             }
 
