@@ -292,6 +292,17 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('destroy/{id}', ['as' => 'destroy', 'uses' => 'ProcedimentoController@destroy']);
         });
     });
+
+    # Rotas das turmas
+    Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'TurmaController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'TurmaController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'TurmaController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'TurmaController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TurmaController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'TurmaController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TurmaController@destroy']);
+    });
 });
 
 # ROtas de autenticação

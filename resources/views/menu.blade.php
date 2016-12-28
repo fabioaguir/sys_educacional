@@ -140,6 +140,7 @@
                         <a href="{{ route('calendario.index')  }}">Calendário</a>
                         <a href="{{ route('formaAvaliacao.index')  }}">Formas de Avaliações</a>
                         <a href="{{ route('procedimentoAvaliacao.index')  }}">Procedimentos de avaliação</a>
+                        <a href="{{ route('turma.index')  }}">Turmas</a>
                     </li>
                     <li>
                         <a href="{{ route('tipoEvento.index')  }}">Tipo Evento</a>
