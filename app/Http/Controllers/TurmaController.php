@@ -111,8 +111,8 @@ class TurmaController extends Controller
                 $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
-            # Html de adicionar disciplina
-            # $html .= '<a title="Adicionar Disciplina" id="btnModalAdicionarDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # Html de disciplinas
+            $html .= '<a title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
             
             # Retorno
             return $html;

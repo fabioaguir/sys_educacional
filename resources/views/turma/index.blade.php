@@ -58,18 +58,21 @@
                                 <th>Curso</th>
                                 <th>Currículo</th>
                                 <th>Turno</th>
-                                <th style="width: 10%;">Açao</th>
+                                <th style="width: 15%;">Açao</th>
                             </tr>
                             </tfoot>
                     </table>
                 </div>
             </div>
-
         </div>
     </section>
+
+    @include('turma.modal_disciplinas')
 @stop
 
 @section('javascript')
+    @parent
+    <script type="text/javascript" src="{{ asset('/dist/turma/modal_disciplinas.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -84,6 +87,26 @@
                 {data: 'turno', name: 'turnos.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Global idTurma
+        var idTurma;
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#btnModalDisciplinas", function () {
+            // Recuperando o id do currículo
+            idTurma = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#dNome').text(nome);
+            $('#dCodigo').text(codigo);
+
+            // Executando o modal
+            runModalDisciplinas(idTurma);
         });
     </script>
 @stop
