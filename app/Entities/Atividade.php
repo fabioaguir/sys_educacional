@@ -6,34 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Telefone extends Model implements Transformable
+class Atividade extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'telefones';
+    protected $table    = 'atividades';
 
     protected $fillable = [
-        'nome',
-        'cgm_id',
-        'tipo_telefones_id',
-        'ramal',
-        'observacao'
+        'horas_manha',
+        'horas_tarde',
+        'horas_noite',
+        'funcoes_id',
+        'servidor_id'
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function pessoaFisica()
+    public function funcao()
     {
-        return $this->belongsTo(PessoaFisica::class, 'cgm_id');
+        return $this->belongsTo(Funcao::class, 'funcoes_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tipoTelefone()
+    public function servidor()
     {
-        return $this->belongsTo(TipoTelefone::class, 'tipo_telefones_id');
+        return $this->belongsTo(Servidor::class, 'servidor_id');
     }
 
 }
