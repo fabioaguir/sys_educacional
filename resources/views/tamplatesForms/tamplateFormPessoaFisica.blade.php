@@ -46,8 +46,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_nascimento">Data de Nascimento *</label>
-                                    {{--{!! Form::date('data_nascimento', null, ['class' => 'form-control input-sm', 'placeholder' => 'Data de nascimento']) !!}--}}
-                                    {!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm ', 'placeholder' => 'Data de nascimento')) !!}
+                                    {!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de nascimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -55,7 +54,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_falecimento">Data de Falecimento</label>
-                                    {!! Form::text('data_falecimento', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm ', 'placeholder' => 'Data de falecimento')) !!}
+                                    {!! Form::text('data_falecimento', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de falecimento')) !!}
                                 </div>
                             </div>
                         </div>
@@ -102,9 +101,9 @@
                                 <div class="fg-line">
                                     <label for="telefone[nome]">Telefone</label>
                                     @if (isset($model))
-                                    {!! Form::text('telefone[nome]', $model->telefone->first()->nome ?? '', array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
+                                    {!! Form::text('telefone[nome]', $model->telefone->first()->nome ?? '', array('id' => 'telefone', 'class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                     @else
-                                    {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
+                                    {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('id' => 'telefone', 'class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                     @endif
                                 </div>
                             </div>
@@ -174,7 +173,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_expedicao">Data de expedição *</label>
-                                    {!! Form::text('data_expedicao', Session::getOldInput('data_expedicao'), array('class' => 'form-control input-sm ', 'placeholder' => 'Data de expedição')) !!}
+                                    {!! Form::text('data_expedicao', Session::getOldInput('data_expedicao'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de expedição')) !!}
                                 </div>
                             </div>
                         </div>
@@ -220,7 +219,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="data_vencimento_cnh">Data Vencimento</label>
-                                    {!! Form::text('data_vencimento_cnh', Session::getOldInput('data_vencimento_cnh'), array('class' => 'form-control input-sm', 'placeholder' => 'Data vencimento CNH')) !!}
+                                    {!! Form::text('data_vencimento_cnh', Session::getOldInput('data_vencimento_cnh'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data vencimento CNH')) !!}
                                 </div>
                             </div>
                         </div>
@@ -260,7 +259,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="endereco[cep]">CEP</label>
-                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
+                                    {!! Form::text("endereco[cep]", Session::getOldInput("endereco[cep]"), array('id' => 'cep', 'class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
                                 </div>
                             </div>
                         </div>
@@ -314,6 +313,21 @@
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js')  }}"></script>
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/pessoaFisica.js')  }}"></script>
+
+    {{-- MASCARAS --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //$('#cpf').mask('000.000.000-00', {reverse: true});
+            $('#telefone').mask('(00) 00000-0000');
+            $('#cep').mask('00.000-000');
+        });
+
+        $( "#formPessoaFisica" ).submit(function() {
+            //$('#cpf').unmask();
+            $('#telefone').unmask();
+            $('#cep').unmask();
+        });
+    </script>
 
     <script type="text/javascript">
         //Incio - Retorno de cidades associadas aos estados

@@ -180,6 +180,15 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\ProcedimentoRepository::class,
             \SerEducacional\Repositories\ProcedimentoRepositoryEloquent::class);
         
+        $this->app->bind(
+            \SerEducacional\Repositories\TurmaRepository::class,
+            \SerEducacional\Repositories\TurmaRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\TipoAtendimentoRepository::class,
+            \SerEducacional\Repositories\TipoAtendimentoRepositoryEloquent::class);
+        
+        
         //:end-bindings:
     }
 }

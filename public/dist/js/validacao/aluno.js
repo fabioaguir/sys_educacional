@@ -6,7 +6,7 @@ $(document).ready(function () {
             'codigo': {
                 required: true,
                 number: true,
-                maxlength: 30
+                maxlength: 45
             },
 
             'num_nis': {
@@ -23,7 +23,7 @@ $(document).ready(function () {
 
             'cgm[nome]': {
                 required: true,
-                maxlength: 200,
+                maxlength: 45,
                 alphaSpace: true
             },
 
@@ -40,8 +40,8 @@ $(document).ready(function () {
 
             'cgm[cpf]': {
                 //required: true,
-                cpfBr: true,
-                maxlength: 15,
+                // cpfBr: true,
+                // maxlength: 15,
                 unique: [laroute.route('aluno.searchCpf'), $('#idAluno')]
             },
 
@@ -52,20 +52,20 @@ $(document).ready(function () {
             },
 
             'cgm[pai]': {
-                maxlength: 200,
+                maxlength: 45,
                 //required: true,
                 alphaSpace: true
             },
 
             'cgm[mae]': {
-                maxlength: 200,
+                maxlength: 45,
                 //required: true,
                 alphaSpace: true
             },
 
             'cgm[email]': {
                 email: true,
-                maxlength: 80
+                maxlength: 45
             },
 
             'cgm[nacionalidade_id]': {
@@ -75,23 +75,19 @@ $(document).ready(function () {
             'cgm[naturalidade]': {
                 required: true,
                 alphaSpace: true,
-                maxlength: 200
+                maxlength: 45
             },
 
             'telefone[nome]': {
                 required: true,
                 number: true,
-                maxlength: 20
+                maxlength: 18
             },
 
             'cgm[endereco][logradouro]': {
                 required: true,
                 alphaSpace: true,
                 maxlength: 200
-            },
-
-            'cgm[endereco][zona_id]': {
-                integer: true
             },
 
             'cgm[endereco][numero]': {
@@ -106,12 +102,16 @@ $(document).ready(function () {
             },
 
             'cgm[endereco][cep]': {
-                required: true,
-                number: true,
+                //number: true,
                 maxlength: 15
             },
 
             'cgm[endereco][bairro_id]': {
+                required: true,
+                integer: true
+            },
+
+            'cgm[endereco][zona_id]': {
                 required: true,
                 integer: true
             }

@@ -1,12 +1,10 @@
-{{--{{ dd($model) }}--}}
-
 <div class="block-header">
     <h2>Cadastro de Alunos</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
 
-        <input type="hidden" id="idAluno" value="{{ isset($model->id) ? $model->id : null }}">
+        <input type="hidden" id="idAluno" value="{{ isset($model->cgm->id) ? $model->cgm->id : null }}">
 
         <div class="row">
             <div class="col-md-12">
@@ -67,7 +65,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[data_nascimento]">Data de Nascimento *</label>
-                                            {!! Form::text('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Nascimento')) !!}
+                                            {!! Form::text('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de Nascimento')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -122,9 +120,9 @@
                                         <div class="fg-line">
                                             <label for="telefone[nome]">Telefone</label>
                                             @if (isset($model))
-                                                {!! Form::text('telefone[nome]', $model->cgm->telefone->first()->nome ?? '', array('class' => 'form-control input-sm', 'placeholder' => 'Telefone do responsável')) !!}
+                                                {!! Form::text('telefone[nome]', $model->cgm->telefone->first()->nome ?? '', array('id' => 'telefone', 'class' => 'form-control input-sm', 'placeholder' => 'Telefone do responsável')) !!}
                                             @else
-                                                {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('class' => 'form-control input-sm', 'placeholder' => 'Telefone do responsável')) !!}
+                                                {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('id' => 'telefone', 'class' => 'form-control input-sm', 'placeholder' => 'Telefone do responsável')) !!}
                                             @endif
                                         </div>
                                     </div>
@@ -191,7 +189,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[endereco][cep]">CEP</label>
-                                            {!! Form::text("cgm[endereco][cep]", Session::getOldInput("cgm[endereco][cep]"), array('class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
+                                            {!! Form::text("cgm[endereco][cep]", Session::getOldInput("cgm[endereco][cep]"), array('id' => 'cep', 'class' => 'form-control input-sm', 'placeholder' => 'CEP')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -276,6 +274,19 @@
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/aluno.js')  }}"></script>
 
     <script type="text/javascript">
+        {{-- MASCARAS --}}
+        $(document).ready(function() {
+            //$('#cpf').mask('000.000.000-00', {reverse: true});
+            $('#telefone').mask('(00) 00000-0000');
+            $('#cep').mask('00.000-000');
+        });
+
+        $( "#formPessoaJuridica" ).submit(function() {
+            //$('#cpf').unmask();
+            $('#telefone').unmask();
+            $('#cep').unmask();
+        });
+        {{-- MASCARAS --}}
 
         //Incio - Retorno de cidades associadas aos estados
         $(document).on('change', "#estado", function () {

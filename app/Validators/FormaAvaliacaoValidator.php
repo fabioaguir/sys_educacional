@@ -25,11 +25,12 @@ class FormaAvaliacaoValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|max:100|unique:formas_avaliacoes,nome',
             'codigo' => 'required|max:50|unique:formas_avaliacoes,codigo',
-            'tipo_resultado_id' => 'required'
+            'tipo_resultado_id' => 'required|integer'
         ],
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:100|unique:formas_avaliacoes,nome,:id',
-            'codigo' => 'required|max:50|unique:formas_avaliacoes,codigo,:id'
+            'codigo' => 'required|max:50|unique:formas_avaliacoes,codigo,:id',
+            'tipo_resultado_id' => 'required|integer'
         ],
     ];
 }

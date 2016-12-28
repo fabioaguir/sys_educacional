@@ -10,23 +10,32 @@ class UserValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
 
     protected $attributes = [
+        'nome' => 'Nome',
         'email' => 'E-mail',
         'password' => 'Senha'
     ];
 
     protected $messages = [
         'required' => ':attribute é requerido',
+        'integer' => ':attribute deve ser um número interio (combinações 0-9)',
         'max' => ':attribute só pode ter no máximo :max caracteres',
-        'unique' => ':attribute já está cadastrado'
+        'serbinario_alpha_space' => ' :attribute deve conter apenas letras e espaços entre palavras',
+        'numeric' => ':attribute deve conter apenas números',
+        'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com',
+        'digits_between' => ':attribute deve ter entre :min e :max caracteres',
+        'unique' => ':attribute valor já cadastrado'
     ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'email' => 'required|max:100|unique:users,email',
+            'nome' => 'required|serbinario_alpha_space|max:100',
+            'email' => 'required|email|max:100|unique:users,email',
             'password' => 'required|max:100',
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'email' => 'required|max:100|unique:users,email,:id'
+            'nome' => 'required|serbinario_alpha_space|max:100',
+            'email' => 'required|max:100|unique:users,email,:id',
+            'password' => 'required|max:100',
         ],
    ];
 }

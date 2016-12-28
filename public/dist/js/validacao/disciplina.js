@@ -4,12 +4,17 @@ $(document).ready(function () {
     $("#formDisciplina").validate({
         rules: {
             nome: {
-                required: true
+                required: true,
+                alphaSpace: true,
+                maxlength: 100
             },
 
             codigo: {
                 required: true,
+                alphaSpace: true,
+                maxlength: 50
             }
+
         },
         //For custom messages
         /*messages: {

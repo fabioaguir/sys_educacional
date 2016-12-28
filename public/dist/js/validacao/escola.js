@@ -4,29 +4,39 @@ $(document).ready(function () {
     $("#formEscola").validate({
         rules: {
             codigo: {
-                required: true
+                required: true,
+                maxlength: 50
             },
 
             inep: {
-                required: true
+                required: true,
+                maxlength: 20
             },
 
             nome: {
-                required: true
+                required: true,
+                alphaSpace: true,
+                maxlength: 100
             },
             portaria: {
-                required: true
+                required: true,
+                number: true,
+                maxlength: 45
             },
             dt_pub_portaria: {
-                required: true
+                required: true,
+                dateBr: true
             },
             'endereco[logradouro]': {
+                maxlength: 150,
                 required: true
             },
             'endereco[numero]': {
+                maxlength: 10,
                 required: true
             },
             'endereco[bairro_id]': {
+                integer: true,
                 required: true
             }
         },
