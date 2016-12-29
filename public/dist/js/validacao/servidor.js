@@ -16,7 +16,7 @@ $(document).ready(function () {
             },
 
             'cgm[data_nascimento]': {
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 15
             },
 
