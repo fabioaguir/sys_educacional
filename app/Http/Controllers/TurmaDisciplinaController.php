@@ -10,9 +10,9 @@ use Yajra\Datatables\Datatables;
 class TurmaDisciplinaController extends Controller
 {
     /**
-     * @var CurriculoRepository
+     * @var TurmaRepository
      */
-    private $curriculoRepository;
+    private $turmaRepository;
 
     /**
      * @var DisciplinaRepository
@@ -20,13 +20,13 @@ class TurmaDisciplinaController extends Controller
     private $disciplinaRepository;
 
     /**
-     * CurriculoDisciplinaController constructor.
-     * @param TurmaRepository $curriculoRepository
+     * TurmaDisciplinaController constructor.
+     * @param TurmaRepository $turmaRepository
      * @param DisciplinaRepository $disciplinaRepository
      */
-    public function __construct(TurmaRepository $curriculoRepository, DisciplinaRepository $disciplinaRepository)
+    public function __construct(TurmaRepository $turmaRepository, DisciplinaRepository $disciplinaRepository)
     {
-        $this->curriculoRepository = $curriculoRepository;
+        $this->turmaRepository = $turmaRepository;
         $this->disciplinaRepository = $disciplinaRepository;
     }
 
@@ -35,14 +35,17 @@ class TurmaDisciplinaController extends Controller
      */
     public function grid($idTurma)
     {
+        # Recuperando a turma
+        $turma = $this->turmaRepository->find($idTurma);
+
         #Criando a consulta
         $rows = \DB::table('disciplinas')
             ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
             ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
             ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
             ->join('turmas', 'turmas.curriculo_id', '=', 'curriculos.id')
-            ->where('turmas.id', $idTurma)
-            ->where('curriculos_series.serie_id', '=', 'turmas.serie_id')
+            ->where('turmas.id', $turma->id)
+            ->where('curriculos_series.serie_id', $turma->serie_id)
             ->select([
                 'disciplinas.id',
                 'disciplinas.nome',
@@ -50,22 +53,10 @@ class TurmaDisciplinaController extends Controller
                 'curriculos_series_disciplinas.periodo',
                 \DB::raw('IF(curriculos_series_disciplinas.e_obrigatoria = 1, "Sim", "Não") as e_obrigatoria'),
                 'curriculos_series_disciplinas.id as idCurriculoSerieDisciplina'
-            ])
-            ->where('curriculos_series.id', $idTurma);
+            ]);
 
         #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            # variáveis de uso
-            $html = '';
-
-            # Verifica a se a condição é válida
-            if(true) {
-            #    $html .= '<a href="#" class="removerDisciplina btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
-            }
-
-            # retorno
-            return $html;
-        })->make(true);
+        return Datatables::of($rows)->make(true);
     }
 
 

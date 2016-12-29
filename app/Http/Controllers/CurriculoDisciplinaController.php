@@ -199,10 +199,10 @@ class CurriculoDisciplinaController extends Controller
             }
 
             # Retorno
-            return \Illuminate\Support\Facades\Response::json(['success' => true]);
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
-        }
+        return \Illuminate\Support\Facades\Response::json(['success' => true]);
+    } catch (\Throwable $e) {
+return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+}
     }
 
     /**

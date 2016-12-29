@@ -77,17 +77,19 @@
                         <!-- Fim Adicionar relacoes -->
 
                         <!-- Table de relacoes -->
-                        <table id="relacoes-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>Regime</th>
-                                <th>Área</th>
-                                <th>Ensino</th>
-                                <th>Disciplina</th>
-                                <th style="width: 8%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="relacoes-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Regime</th>
+                                    <th>Área</th>
+                                    <th>Ensino</th>
+                                    <th>Disciplina</th>
+                                    <th style="width: 8%;">Acão</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                         <!-- Fim Table de relacoes -->
                     </div>
                     <!-- Fim do Gerendiamento dos relacoes -->
