@@ -29,4 +29,27 @@ class Turma extends Model implements Transformable
         'observacao'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function curriculo()
+    {
+        return $this->belongsTo(Curriculo::class, 'curriculo_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function serie()
+    {
+        return $this->belongsTo(Serie::class, 'serie_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class, 'curso_id');
+    }
 }

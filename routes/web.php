@@ -352,6 +352,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TurmaController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'TurmaController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TurmaController@destroy']);
+        Route::get('searchCurriculosByCurso/{idCurso}', ['as' => 'searchCurriculosByCurso', 'uses' => 'TurmaController@searchCurriculosByCurso']);
+        Route::get('searchSeriesByCurriculo/{idCurriculo}', ['as' => 'searchSeriesByCurriculo', 'uses' => 'TurmaController@searchSeriesByCurriculo']);
 
         # Modal de disciplinas
         Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {

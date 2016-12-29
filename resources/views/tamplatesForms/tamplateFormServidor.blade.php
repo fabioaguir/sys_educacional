@@ -478,7 +478,6 @@
 
         //Incio - Retorno de cidades associadas aos estados
         $(document).on('change', "#estado", function () {
-
             //Removendo as cidades
             $('#cidade option').remove();
 
@@ -515,7 +514,6 @@
 
         //Incio - Retorno de cidades associadas aos estados
         $(document).on('change', "#cidade", function () {
-
             //Removendo as cidades
             $('#bairro option').remove();
 

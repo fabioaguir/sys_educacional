@@ -222,4 +222,53 @@ class TurmaController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
+    /**
+     * @param $idCurso
+     * @return mixed
+     */
+    public function searchCurriculosByCurso($idCurso)
+    {
+        try {
+            # Consulta ao banco de dados
+            $result = \DB::table('curriculos')
+                ->join('cursos', 'cursos.id', '=', 'curriculos.curso_id')
+                ->where('cursos.id', $idCurso)
+                ->select([
+                    'curriculos.id',
+                    'curriculos.nome'
+                ])
+                ->get();
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json($result);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idCurriculo
+     * @return mixed
+     */
+    public function searchSeriesByCurriculo($idCurriculo)
+    {
+        try {
+            # Consulta ao banco de dados
+            $result = \DB::table('series')
+                ->join('curriculos_series', 'curriculos_series.serie_id', '=', 'series.id')
+                ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
+                ->where('curriculos.id', $idCurriculo)
+                ->select([
+                    'series.id',
+                    'series.nome'
+                ])
+                ->get();
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json($result);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
+    }
 }
