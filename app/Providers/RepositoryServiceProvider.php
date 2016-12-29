@@ -189,6 +189,47 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\TipoAtendimentoRepositoryEloquent::class);
         
         
+        $this->app->bind(
+            \SerEducacional\Repositories\RelacaoTrabalhoRepository::class,
+            \SerEducacional\Repositories\RelacaoTrabalhoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\RegimeTrabalhoRepository::class,
+            \SerEducacional\Repositories\RegimeTrabalhoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\AreaTrabalhoRepository::class, 
+            \SerEducacional\Repositories\AreaTrabalhoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\FormacaoRepository::class,
+            \SerEducacional\Repositories\FormacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\CursoFormacaoRepository::class,
+            \SerEducacional\Repositories\CursoFormacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\InstituicaoFormacaoRepository::class,
+            \SerEducacional\Repositories\InstituicaoFormacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\LicenciaturaRepository::class,
+            \SerEducacional\Repositories\LicenciaturaRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\SituacaoFormacaoRepository::class,
+            \SerEducacional\Repositories\SituacaoFormacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\PosGraduacaoRepository::class,
+            \SerEducacional\Repositories\PosGraduacaoRepositoryEloquent::class);
+        
+        $this->app->bind(
+            \SerEducacional\Repositories\OutroCursoRepository::class,
+            \SerEducacional\Repositories\OutroCursoRepositoryEloquent::class);
+        
+        $this->app->bind(\SerEducacional\Repositories\AtividadeRepository::class, \SerEducacional\Repositories\AtividadeRepositoryEloquent::class);
         //:end-bindings:
     }
 }

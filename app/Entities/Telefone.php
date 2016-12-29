@@ -14,7 +14,10 @@ class Telefone extends Model implements Transformable
 
     protected $fillable = [
         'nome',
-        'cgm_id'
+        'cgm_id',
+        'tipo_telefones_id',
+        'ramal',
+        'observacao'
     ];
 
     /**
@@ -23,6 +26,14 @@ class Telefone extends Model implements Transformable
     public function pessoaFisica()
     {
         return $this->belongsTo(PessoaFisica::class, 'cgm_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipoTelefone()
+    {
+        return $this->belongsTo(TipoTelefone::class, 'tipo_telefones_id');
     }
 
 }

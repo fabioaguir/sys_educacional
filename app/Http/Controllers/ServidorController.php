@@ -86,13 +86,26 @@ class ServidorController extends Controller
                 'servidor.id',
                 'cgm.nome',
                 'servidor.matricula',
+                'cgm.id as cgm_id',
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Html de adicionar telefones
+            $html .= '<a style="margin-right: 5%;" title="Adicionar Telefones" id="btnModalAdicionarTelefone" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-earphone"></i></a>';
+
+            # Html de adicionar relações de trabalho
+            $html .= '<a style="margin-right: 5%;" title="Adicionar Relação de trabalho" id="btnModalAdicionarRelacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-lock"></i></a>';
+
+            # Html de adicionar formação
+            $html .= '<a style="margin-right: 5%;" title="Adicionar Formações" id="btnModalAdicionarFormacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-education"></i></a>';
+
+            # Html de adicionar atividade
+            $html .= '<a title="Adicionar Atividades" id="btnModalAdicionarAtividade" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
 
             # Retorno
             return $html;
@@ -208,5 +221,50 @@ class ServidorController extends Controller
         }
 
         return redirect()->back()->with('message', 'Servidor deleted.');
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function searchCpf(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $dados = $request->all();
+
+            #
+            if (empty($dados['idModel'])) {
+                #Consultando
+                $servidor = \DB::table('cgm')
+                    ->select([
+                        'cgm.cpf'
+                    ])
+                    ->where('cgm.cpf', $dados['value'])
+                    ->get();
+
+            } else {
+                #Consultando
+                $servidor = \DB::table('cgm')
+                    ->select([
+                        'cgm.id',
+                        'cgm.cpf'
+                    ])
+                    ->where('cgm.id', '!=' ,$dados['idModel'])
+                    ->where('cgm.cpf', $dados['value'])
+                    ->get();
+            }
+
+            if (count($servidor) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
     }
 }

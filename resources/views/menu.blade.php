@@ -132,6 +132,7 @@
                         <a href="{{ route('disciplina.index')  }}">Disciplinas</a>
                         <a href="{{ route('curriculo.index')  }}">Currículos</a>
                         <a href="{{ route('escola.index')  }}">Escolas</a>
+                        <a href="{{ route('periodoAvaliacao.index')  }}">Períodos de Avaliação</a>
                     </li>
                 </ul>
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-home"></i>Escolas</a>
@@ -198,7 +199,7 @@
 <script src="{{ asset('/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script src="{{ asset('/lib/Waves/dist/waves.min.js') }}"></script>
-<script src="{{ asset('/lib/bootstrap-growl/jquery.bootstrap-growl.min.js') }}"></script>
+<script src="{{ asset('/dist/js/bootstrap-growl/bootstrap-growl.min.js') }}"></script>
 <script src="{{ asset('/lib/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/lib/select2/dist/js/select2.full.js') }}"></script>

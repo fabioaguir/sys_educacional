@@ -5,57 +5,94 @@ $(document).ready(function () {
     $("#formServidor").validate({
         rules: {
             'cgm[nome]': {
-                required: true
+                required: true,
+                alphaSpace: true,
+                maxlength: 45
             },
 
             'cgm[sexo_id]': {
-                required: true
+                required: true,
+                integer: true
             },
+
             'cgm[data_nascimento]': {
-                required: true
+                dateBr: true,
+                maxlength: 15
             },
+
             'cgm[nacionalidade_id]': {
-                required: true
+                required: true,
+                integer: true
             },
+
             'cgm[cgm_municipio_id]': {
-                required: true
+                required: true,
+                integer: true
             },
+
             'cgm[estado_civil_id]': {
-                required: true
+                required: true,
+                integer: true
             },
+
             'cgm[escolaridade_id]': {
-                required: true
+                required: true,
+                integer: true
             },
+
             'cgm[cpf]': {
-                required: true
+                required: true,
+                cpfBR: true,
+                maxlength: 20,
+                unique: [laroute.route('servidor.searchCpf'), $('#idServidor')]
             },
+
             'cgm[rg]': {
-                required: true
+                required: true,
+                number: true,
+                maxlength: 20
             },
             'cgm[endereco][logradouro]': {
-                required: true
+                required: true,
+                alphaSpace: true,
+                maxlength: 200
             },
+
             'cgm[endereco][numero]': {
-                required: true
+                required: true,
+                number: true,
+                maxlength: 10
             },
+
             'cgm[endereco][bairro_id]': {
-                required: true
+                required: true,
+                integer: true
             },
+
             data_admicao: {
+                dateBr: true,
                 required: true
             },
+
             carga_horaria: {
+                number: true,
                 required: true
             },
+
             tipo_vinculo_servidor_id: {
+                integer: true,
                 required: true
             },
+
             cargos_id: {
+                integer:true,
                 required: true
             },
+
             funcoes_id: {
-                //required: true
-            },
+                required: true,
+                integer: true
+            }
             
         },
         //For custom messages

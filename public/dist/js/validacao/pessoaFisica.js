@@ -153,11 +153,6 @@ $(document).ready(function () {
                 maxlength: 15
             },
 
-            'endereco[bairro_id]': {
-                required: true,
-                integer: true
-            },
-
             'endereco[zona_id]': {
                 required: true,
                 integer: true

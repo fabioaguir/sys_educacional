@@ -81,7 +81,46 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('store', ['as' => 'store', 'uses' => 'ServidorController@store']);
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServidorController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'ServidorController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ServidorController@destroy']);
+        //unique cpf
+        Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'ServidorController@searchCpf']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
+
+        # rotas para telefones
+        Route::get('gridTelefone/{id}', ['as' => 'gridTelefone', 'uses' => 'TelefonesController@grid']);
+        Route::post('getTipoTelefone', ['as' => 'getTipoTelefone', 'uses' => 'TelefonesController@getTipoTelefone']);
+        Route::post('storeTelefone', ['as' => 'storeTelefone', 'uses' => 'TelefonesController@store']);
+        Route::post('updateTelefone/{id}', ['as' => 'updateTelefone', 'uses' => 'TelefonesController@update']);
+        Route::post('removerTelefone/{id}', ['as' => 'removerTelefone', 'uses' => 'TelefonesController@destroy']);
+
+        # rotas para relação de trabalho
+        Route::get('gridRelacao/{id}', ['as' => 'gridRelacao', 'uses' => 'RelacaoTrabalhosController@grid']);
+        Route::post('storeRelacao', ['as' => 'storeRelacao', 'uses' => 'RelacaoTrabalhosController@store']);
+        Route::post('updateRelacao/{id}', ['as' => 'updateRelacao', 'uses' => 'RelacaoTrabalhosController@update']);
+        Route::post('removerRelacao/{id}', ['as' => 'removerRelacao', 'uses' => 'RelacaoTrabalhosController@destroy']);
+        Route::post('getRegimes', ['as' => 'getRegimes', 'uses' => 'RelacaoTrabalhosController@getRegimes']);
+        Route::post('getAreas', ['as' => 'getAreas', 'uses' => 'RelacaoTrabalhosController@getAreas']);
+        Route::post('getEnsinos', ['as' => 'getEnsinos', 'uses' => 'RelacaoTrabalhosController@getEnsinos']);
+        Route::post('getDisciplinas', ['as' => 'getDisciplinas', 'uses' => 'RelacaoTrabalhosController@getDisciplinas']);
+
+        # rotas para formações
+        Route::get('gridFormacao/{id}', ['as' => 'gridFormacao', 'uses' => 'FormacaosController@grid']);
+        Route::post('storeFormacao', ['as' => 'storeFormacao', 'uses' => 'FormacaosController@store']);
+        Route::post('updateFormacao/{id}', ['as' => 'updateFormacao', 'uses' => 'FormacaosController@update']);
+        Route::post('removerFormacao/{id}', ['as' => 'removerFormacao', 'uses' => 'FormacaosController@destroy']);
+        Route::post('getCursos', ['as' => 'getCursos', 'uses' => 'FormacaosController@getCursos']);
+        Route::post('getInstituicoes', ['as' => 'getInstituicoes', 'uses' => 'FormacaosController@getInstituicoes']);
+        Route::post('getSituacoes', ['as' => 'getSituacoes', 'uses' => 'FormacaosController@getSituacoes']);
+        Route::post('getLicenciaturas', ['as' => 'getLicenciaturas', 'uses' => 'FormacaosController@getLicenciaturas']);
+        Route::post('getPos', ['as' => 'getPos', 'uses' => 'FormacaosController@getPos']);
+        Route::post('getOutrosCursos', ['as' => 'getOutrosCursos', 'uses' => 'FormacaosController@getOutrosCursos']);
+
+        # rotas para atividades
+        Route::get('gridAtividade/{id}', ['as' => 'gridAtividade', 'uses' => 'AtividadesController@grid']);
+        Route::post('storeAtividade', ['as' => 'storeAtividade', 'uses' => 'AtividadesController@store']);
+        Route::post('updateAtividade/{id}', ['as' => 'updateAtividade', 'uses' => 'AtividadesController@update']);
+        Route::post('removerAtividade/{id}', ['as' => 'removerAtividade', 'uses' => 'AtividadesController@destroy']);
+        Route::post('getFuncoes', ['as' => 'getFuncoes', 'uses' => 'AtividadesController@getFuncoes']);
     });
 
     # ROtas de disciplinas
@@ -249,6 +288,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TipoEventosController@destroy']);
     });
 
+    # Rotas dos perídos de avaliação
+    Route::group(['prefix' => 'periodoAvaliacao', 'as' => 'periodoAvaliacao.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'PeriodoAvaliacaoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'PeriodoAvaliacaoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'PeriodoAvaliacaoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'PeriodoAvaliacaoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PeriodoAvaliacaoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'PeriodoAvaliacaoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'PeriodoAvaliacaoController@destroy']);
+    });
+
     # Rotas dos usuários
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
@@ -302,6 +352,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TurmaController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'TurmaController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TurmaController@destroy']);
+        Route::get('searchCurriculosByCurso/{idCurso}', ['as' => 'searchCurriculosByCurso', 'uses' => 'TurmaController@searchCurriculosByCurso']);
+        Route::get('searchSeriesByCurriculo/{idCurriculo}', ['as' => 'searchSeriesByCurriculo', 'uses' => 'TurmaController@searchSeriesByCurriculo']);
+
+        # Modal de disciplinas
+        Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
+            Route::get('grid/{id}', ['as' => 'grid', 'uses' => 'TurmaDisciplinaController@grid']);
+            Route::post('select2', ['as' => 'select2', 'uses' => 'TurmaDisciplinaController@disciplinasSelect2']);
+        });
     });
 });
 

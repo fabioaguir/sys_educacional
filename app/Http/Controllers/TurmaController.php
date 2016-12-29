@@ -111,8 +111,8 @@ class TurmaController extends Controller
                 $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
-            # Html de adicionar disciplina
-            # $html .= '<a title="Adicionar Disciplina" id="btnModalAdicionarDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # Html de disciplinas
+            $html .= '<a title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
             
             # Retorno
             return $html;
@@ -220,6 +220,55 @@ class TurmaController extends Controller
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $idCurso
+     * @return mixed
+     */
+    public function searchCurriculosByCurso($idCurso)
+    {
+        try {
+            # Consulta ao banco de dados
+            $result = \DB::table('curriculos')
+                ->join('cursos', 'cursos.id', '=', 'curriculos.curso_id')
+                ->where('cursos.id', $idCurso)
+                ->select([
+                    'curriculos.id',
+                    'curriculos.nome'
+                ])
+                ->get();
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json($result);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idCurriculo
+     * @return mixed
+     */
+    public function searchSeriesByCurriculo($idCurriculo)
+    {
+        try {
+            # Consulta ao banco de dados
+            $result = \DB::table('series')
+                ->join('curriculos_series', 'curriculos_series.serie_id', '=', 'series.id')
+                ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
+                ->where('curriculos.id', $idCurriculo)
+                ->select([
+                    'series.id',
+                    'series.nome'
+                ])
+                ->get();
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json($result);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
         }
     }
 }
