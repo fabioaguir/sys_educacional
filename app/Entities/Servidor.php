@@ -57,4 +57,22 @@ class Servidor extends Model implements Transformable
     {
         return $this->belongsTo(PessoaFisica::class, 'id_cgm');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function posgraduacao()
+    {
+        return $this->belongsToMany(Serie::class, 'servidor_pos_graduacao', 'servidor_id', 'pos_graduacao_id')
+            ->withPivot(['id']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function outroscursos()
+    {
+        return $this->belongsToMany(Serie::class, 'outros_cursos_servidor', 'servidor_id', 'outros_cursos_id')
+            ->withPivot(['id']);
+    }
 }

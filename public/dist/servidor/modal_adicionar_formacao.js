@@ -188,6 +188,50 @@ $(document).on("click", "#editarFormacao", function () {
 });
 
 
+//Adicionar pos-graduação e outros cursos
+$(document).on('click', '#edtOutrosCursos', function () {
+
+    var arrayPos    = $('#select-posgraduacao').select2('data');
+    var arrayOutros = $('#select-outroscursos').select2('data');
+
+    // Verificando se alguma opção selecionada
+    if (!arrayPos.length > 0 || !arrayOutros.length > 0) {
+        swal("Oops...", "Você deve selecionar uma pos-graduação ou outros cursos !", "error");
+        return false;
+    }
+
+    // Array de ids
+    var arrayIdPos = [];
+    var arrayIdOutros = [];
+
+    // Percorrendo o array de dados
+    for (var i = 0; i < arrayPos.length; i++) {
+        arrayIdPos[i] = arrayPos[i].id
+    }
+    for (var j = 0; j < arrayOutros.length; i++) {
+        arrayIdOutros[j] = arrayOutros[j].id
+    }
+
+    //Setando o o json para envio
+    var dados = {
+        'idPos' : arrayIdPos,
+        'idOutros' : arrayIdOutros,
+        'servidor_id' : idServidor
+    };
+
+    // Requisição Ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: laroute.route('servidor.edtOutrosCursos'),
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        swal("Formação de trabalho removido com sucesso!", "Click no botão abaixo!", "success");
+        tableFormacoes.ajax.reload();
+        table.ajax.reload();
+    });
+});
+
 //Limpar os campos do formulário
 function limparCamposFormacao()
 {

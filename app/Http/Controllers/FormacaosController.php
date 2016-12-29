@@ -10,6 +10,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Http\Requests\FormacaoCreateRequest;
 use SerEducacional\Http\Requests\FormacaoUpdateRequest;
 use SerEducacional\Repositories\FormacaoRepository;
+use SerEducacional\Repositories\ServidorRepository;
 use SerEducacional\Validators\FormacaoValidator;
 use SerEducacional\Services\FormacaoService;
 use Yajra\Datatables\Datatables;
@@ -22,6 +23,11 @@ class FormacaosController extends Controller
      * @var FormacaoRepository
      */
     protected $repository;
+
+    /**
+     * @var FormacaoRepository
+     */
+    protected $servidorRepository;
 
     /**
      * @var FormacaoService
@@ -47,9 +53,11 @@ class FormacaosController extends Controller
      */
     public function __construct(FormacaoRepository $repository,
                                 FormacaoService $service,
-                                FormacaoValidator $validator)
+                                FormacaoValidator $validator,
+                                ServidorRepository $servidorRepository)
     {
         $this->repository = $repository;
+        $this->servidorRepository = $servidorRepository;
         $this->service = $service;
         $this->validator = $validator;
     }
@@ -146,6 +154,36 @@ class FormacaosController extends Controller
         try {
             #Executando a ação
             $this->service->destroy($id);
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Exception
+     */
+    public function getOutrosCursos(Request $request)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+
+            #Validando os parametros de entrada
+            if(!isset($dados['idPos']) && !isset($dados['idOutros'])
+                && !isset($dados['servidor_id'])) {
+                return new \Exception("Parâmetros inválidos");
+            }
+
+            dd($dados['idPos']);
+
+            #Recuperando a entidade
+            $servidor = $this->servidorRepository->find($dados['servidor_id']);
+            $servidor->posgraduacao()->attach($dados['idPos']);
+
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

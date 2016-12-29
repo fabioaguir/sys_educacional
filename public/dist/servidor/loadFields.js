@@ -278,6 +278,7 @@ posgraduacoes("");
 
 $("#select-posgraduacao").select2({
     theme: "bootstrap",
+    width: "100%"
 });
 
 //Função para listar as funções
@@ -306,4 +307,5 @@ outroscursos("");
 
 $("#select-outroscursos").select2({
     theme: "bootstrap",
+    width: "100%"
 });
