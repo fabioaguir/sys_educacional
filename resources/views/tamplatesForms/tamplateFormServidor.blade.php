@@ -52,7 +52,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[data_nascimento]">Data de Nascimento *</label>
-                                    {!! Form::date('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), ['class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de Nascimento']) !!}
+                                    {!! Form::text('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), ['class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de Nascimento']) !!}
                                     {{--{!! Form::text('data_nascimento', Session::getOldInput('data_nascimento'), array('class' => 'form-control input-sm', 'placeholder' => 'Data de Nascimento')) !!}--}}
                                 </div>
                             </div>
