@@ -50,7 +50,8 @@ class ServidorValidator extends LaravelValidator
            //Tabela CGM
             'cgm.nome' => 'required|serbinario_alpha_space|max:45',
             'cgm.sexo_id' => 'required|integer',
-            'cgm.data_nascimento' => 'required|digits_between:0,15',
+            'cgm.data_nascimento' => 'required|max:15',
+            'cgm.data_falecimento' => 'required|max:15',
             'cgm.nacionalidade_id' => 'required|integer',
             'cgm.cgm_municipio_id' => 'required|integer',
             'cgm.estado_civil_id' => 'required|integer',
@@ -77,6 +78,7 @@ class ServidorValidator extends LaravelValidator
             'cgm.nome' => 'required',
             'cgm.sexo_id' => 'required',
             'cgm.data_nascimento' => 'required',
+            'cgm.data_falecimento' => 'required|max:15',
             'cgm.nacionalidade_id' => 'required',
             'cgm.cgm_municipio_id' => 'required',
             'cgm.estado_civil_id' => 'required',
