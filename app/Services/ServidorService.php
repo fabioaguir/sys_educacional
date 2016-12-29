@@ -62,6 +62,9 @@ class ServidorService
      */
     public function store(array $data) : Servidor
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         #Retorno de endereço
         $endereco = $this->tratamentoEndereco($data['cgm']['endereco']);
 
@@ -80,7 +83,7 @@ class ServidorService
 
         #Salvando o registro principal
         $servidor =  $this->repository->create($data);
-
+        //dd($servidor);
         #Verificando se foi criado no banco de dados
         if(!$servidor) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
