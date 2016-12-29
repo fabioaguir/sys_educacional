@@ -225,4 +225,49 @@ class ServidorController extends Controller
 
         return redirect()->back()->with('message', 'Servidor deleted.');
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function searchCpf(Request $request)
+    {
+        try {
+            #Declaração de variável de uso
+            $result = false;
+            #Dados vindo na requisição
+            $dados = $request->all();
+
+            #
+            if (empty($dados['idModel'])) {
+                #Consultando
+                $servidor = \DB::table('cgm')
+                    ->select([
+                        'cgm.cpf'
+                    ])
+                    ->where('cgm.cpf', $dados['value'])
+                    ->get();
+
+            } else {
+                #Consultando
+                $servidor = \DB::table('cgm')
+                    ->select([
+                        'cgm.id',
+                        'cgm.cpf'
+                    ])
+                    ->where('cgm.id', '!=' ,$dados['idModel'])
+                    ->where('cgm.cpf', $dados['value'])
+                    ->get();
+            }
+
+            if (count($servidor) > 0 ) {
+                $result = true;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

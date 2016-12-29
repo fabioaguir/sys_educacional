@@ -3,16 +3,16 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
-use SerEducacional\Repositories\CurriculoRepository;
+use SerEducacional\Repositories\TurmaRepository;
 use SerEducacional\Repositories\DisciplinaRepository;
 use Yajra\Datatables\Datatables;
 
-class CurriculoDisciplinaController extends Controller
+class TurmaDisciplinaController extends Controller
 {
     /**
-     * @var CurriculoRepository
+     * @var TurmaRepository
      */
-    private $curriculoRepository;
+    private $turmaRepository;
 
     /**
      * @var DisciplinaRepository
@@ -20,45 +20,32 @@ class CurriculoDisciplinaController extends Controller
     private $disciplinaRepository;
 
     /**
-     * CurriculoDisciplinaController constructor.
-     * @param CurriculoRepository $curriculoRepository
+     * TurmaDisciplinaController constructor.
+     * @param TurmaRepository $turmaRepository
      * @param DisciplinaRepository $disciplinaRepository
      */
-    public function __construct(CurriculoRepository $curriculoRepository, DisciplinaRepository $disciplinaRepository)
+    public function __construct(TurmaRepository $turmaRepository, DisciplinaRepository $disciplinaRepository)
     {
-        $this->curriculoRepository = $curriculoRepository;
+        $this->turmaRepository = $turmaRepository;
         $this->disciplinaRepository = $disciplinaRepository;
     }
 
     /**
      * @return mixed
      */
-    public function gridSerie($id)
+    public function grid($idTurma)
     {
-        #Criando a consulta
-        $rows = \DB::table('series')
-            ->join('curriculos_series', 'curriculos_series.serie_id', '=', 'series.id')
-            ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
-            ->select([
-                 'series.id',
-                 'series.nome',
-                 'curriculos_series.id as curriculoSerieId'
-            ])
-            ->where('curriculos.id', $id);
+        # Recuperando a turma
+        $turma = $this->turmaRepository->find($idTurma);
 
-        #Editando a grid
-        return Datatables::of($rows)->make(true);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function grid($idCurriculoSerie)
-    {
         #Criando a consulta
         $rows = \DB::table('disciplinas')
             ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
             ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
+            ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
+            ->join('turmas', 'turmas.curriculo_id', '=', 'curriculos.id')
+            ->where('turmas.id', $turma->id)
+            ->where('curriculos_series.serie_id', $turma->serie_id)
             ->select([
                 'disciplinas.id',
                 'disciplinas.nome',
@@ -66,22 +53,10 @@ class CurriculoDisciplinaController extends Controller
                 'curriculos_series_disciplinas.periodo',
                 \DB::raw('IF(curriculos_series_disciplinas.e_obrigatoria = 1, "Sim", "Não") as e_obrigatoria'),
                 'curriculos_series_disciplinas.id as idCurriculoSerieDisciplina'
-            ])
-            ->where('curriculos_series.id', $idCurriculoSerie);
+            ]);
 
         #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            # variáveis de uso
-            $html = '';
-
-            # Verifica a se a condição é válida
-            if(true) {
-                $html .= '<a href="#" class="removerDisciplina btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
-            }
-
-            # retorno
-            return $html;
-        })->make(true);
+        return Datatables::of($rows)->make(true);
     }
 
 
@@ -97,18 +72,21 @@ class CurriculoDisciplinaController extends Controller
             $result = [];
 
             # Dados individuais
-            $idCurriculoSerie = $dados['idCurriculoSerie'];
+            $idTurma     = $dados['idTurma'];
             $valueSearch = $dados['search'] ?? "";
             $pageValue   = $dados['page'];
 
             # QUery Principal
             $query = \DB::table('disciplinas')
-                ->whereNotIn('disciplinas.id', function ($where) use ($idCurriculoSerie) {
+                ->whereNotIn('disciplinas.id', function ($where) use ($idTurma) {
                    $where->from('disciplinas')
                        ->select('disciplinas.id')
                        ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
                        ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
-                       ->where('curriculos_series.id', $idCurriculoSerie);
+                       ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
+                       ->join('turmas', 'turmas.curriculo_id', '=', 'curriculos.id')
+                       ->where('curriculos_series.serie_id', '=', 'turmas.serie_id')
+                       ->where('turmas.id', $idTurma);
                 })
                 ->select([
                     'disciplinas.id',
@@ -199,10 +177,10 @@ class CurriculoDisciplinaController extends Controller
             }
 
             # Retorno
-        return \Illuminate\Support\Facades\Response::json(['success' => true]);
-    } catch (\Throwable $e) {
-return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
-}
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
     }
 
     /**

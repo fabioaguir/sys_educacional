@@ -37,14 +37,16 @@
                         </div>
                         <!-- Fim Adicionar Turnos -->
 
-                        <table id="cursos-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>Curso</th>
-                                <th style="width: 5%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="cursos-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Curso</th>
+                                    <th style="width: 5%;">Acão</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                     <!-- Fim grid das séries -->
 
@@ -64,14 +66,16 @@
                         <!-- Fim Adicionar Turnos -->
 
                         <!-- Table de disciplinas -->
-                        <table id="turnos-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th style="width: 5%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="turnos-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th style="width: 5%;">Acão</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                         <!-- Fim Table de disciplinas -->
                     </div>
                     <!-- Fim do Gerendiamento das Disciplinas da Séries -->

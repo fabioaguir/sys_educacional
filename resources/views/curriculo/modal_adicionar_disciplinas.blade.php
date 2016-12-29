@@ -27,13 +27,15 @@
                 <div class="row" style="margin-top: 2%;">
                     <!-- Grid das Séries -->
                     <div class="col-md-4">
-                        <table id="serie-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>Série</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="serie-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Série</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                     <!-- Fim grid das séries -->
 
@@ -67,17 +69,19 @@
                         <!-- Fim Adicionar Disciplina -->
 
                         <!-- Table de disciplinas -->
-                        <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th style="width: 10%;">Código</th>
-                                <th>Nome</th>
-                                <th style="width: 10%;">Período</th>
-                                <th style="width: 10%;">Obrigatório</th>
-                                <th style="width: 5%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th style="width: 10%;">Código</th>
+                                    <th>Nome</th>
+                                    <th style="width: 10%;">Período</th>
+                                    <th style="width: 10%;">Obrigatório</th>
+                                    <th style="width: 5%;">Acão</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                         <!-- Fim Table de disciplinas -->
                     </div>
                     <!-- Fim do Gerendiamento das Disciplinas da Séries -->

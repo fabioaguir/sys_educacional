@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Turmas</h2>
+                <h2>Listar Turmas Complementares</h2>
             </div>
 
             <div class="card material-table">
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('turma.create') }}">Nova Turma</a>
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('turmaComplementar.create') }}">Nova Turma Complementar</a>
                             </div>
                         </div>
                     </div>
@@ -38,14 +38,12 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="turma-grid" class="table table-hover">
+                    <table id="turmaComplementar-grid" class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Nome</th>
                                 <th>Codigo</th>
                                 <th>Escola</th>
-                                <th>Curso</th>
-                                <th>Currículo</th>
                                 <th>Turno</th>
                                 <th>Açao</th>
                             </tr>
@@ -55,8 +53,6 @@
                                 <th>Nome</th>
                                 <th>Codigo</th>
                                 <th>Escola</th>
-                                <th>Curso</th>
-                                <th>Currículo</th>
                                 <th>Turno</th>
                                 <th style="width: 15%;">Açao</th>
                             </tr>
@@ -67,23 +63,21 @@
         </div>
     </section>
 
-    @include('turma.modal_disciplinas')
+    @include('turmaComplementar.modal_atividades')
 @stop
 
 @section('javascript')
     @parent
-    <script type="text/javascript" src="{{ asset('/dist/turma/modal_disciplinas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turmaComplementar/modal_atividades.js') }}"></script>
     <script type="text/javascript">
-        var table = $('#turma-grid').DataTable({
+        var table = $('#turmaComplementar-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('turma.grid') }}",
+            ajax: "{{ route('turmaComplementar.grid') }}",
             columns: [
                 {data: 'nome', name: 'turmas.nome'},
                 {data: 'codigo', name: 'turmas.codigo'},
                 {data: 'escola', name: 'escola.codigo'},
-                {data: 'curso', name: 'cursos.codigo'},
-                {data: 'curriculo', name: 'curriculos.codigo'},
                 {data: 'turno', name: 'turnos.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

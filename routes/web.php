@@ -81,6 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('store', ['as' => 'store', 'uses' => 'ServidorController@store']);
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServidorController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'ServidorController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ServidorController@destroy']);
+        //unique cpf
+        Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'ServidorController@searchCpf']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
 
         # rotas para telefones
@@ -293,6 +296,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TipoEventosController@destroy']);
     });
 
+    # Rotas dos perídos de avaliação
+    Route::group(['prefix' => 'periodo', 'as' => 'periodo.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'PeriodoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'PeriodoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'PeriodoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'PeriodoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PeriodoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'PeriodoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'PeriodoController@destroy']);
+    });
+
     # Rotas dos usuários
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
@@ -346,6 +360,25 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TurmaController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'TurmaController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TurmaController@destroy']);
+        Route::get('searchCurriculosByCurso/{idCurso}', ['as' => 'searchCurriculosByCurso', 'uses' => 'TurmaController@searchCurriculosByCurso']);
+        Route::get('searchSeriesByCurriculo/{idCurriculo}', ['as' => 'searchSeriesByCurriculo', 'uses' => 'TurmaController@searchSeriesByCurriculo']);
+
+        # Modal de disciplinas
+        Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
+            Route::get('grid/{id}', ['as' => 'grid', 'uses' => 'TurmaDisciplinaController@grid']);
+            Route::post('select2', ['as' => 'select2', 'uses' => 'TurmaDisciplinaController@disciplinasSelect2']);
+        });
+    });
+
+    # Rotas das turmas complementares
+    Route::group(['prefix' => 'turmaComplementar', 'as' => 'turmaComplementar.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'TurmaComplementarController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'TurmaComplementarController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'TurmaComplementarController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'TurmaComplementarController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TurmaComplementarController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'TurmaComplementarController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TurmaComplementarController@destroy']);
     });
 });
 

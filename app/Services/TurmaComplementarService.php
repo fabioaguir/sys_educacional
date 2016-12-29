@@ -2,38 +2,38 @@
 
 namespace SerEducacional\Services;
 
-use SerEducacional\Repositories\TurmaRepository;
-use SerEducacional\Entities\Turma;
+use SerEducacional\Repositories\TurmaComplementarRepository;
+use SerEducacional\Entities\TurmaComplementar;
 
-class TurmaService
+class TurmaComplementarService
 {
     use TraitService;
     
     /**
-     * @var TurmaRepository
+     * @var TurmaComplementarRepository
      */
     private $repository;
 
     /**
-     * @param TurmaRepository $repository
+     * @param TurmaComplementarRepository $repository
      */
-    public function __construct(TurmaRepository $repository)
+    public function __construct(TurmaComplementarRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
      * @param array $data
-     * @return Turma
+     * @return TurmaComplementar
      * @throws \Exception
      */
-    public function store(array $data) : Turma
+    public function store(array $data) : TurmaComplementar
     {
         # Regras de negócios
         $this->tratamentoCampos($data);
 
         # Definindo o tipo da turma
-        $data['tipo_turma_id'] = 1;
+        $data['tipo_turma_id'] = 2;
 
         #Salvando o registro pincipal
         $turma =  $this->repository->create($data);
@@ -50,16 +50,16 @@ class TurmaService
     /**
      * @param array $data
      * @param int $id
-     * @return Turma
+     * @return TurmaComplementar
      * @throws \Exception
      */
-    public function update(array $data, int $id) : Turma
+    public function update(array $data, int $id) : TurmaComplementar
     {
         # Regras de negócios
         $this->tratamentoCampos($data);
 
         # Definindo o tipo da turma
-        $data['tipo_turma_id'] = 1;
+        $data['tipo_turma_id'] = 2;
         
         #Atualizando no banco de dados
         $turma = $this->repository->update($data, $id);

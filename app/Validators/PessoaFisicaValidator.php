@@ -34,17 +34,18 @@ class PessoaFisicaValidator extends LaravelValidator
     ];
 
     protected $messages = [
-        'required' => ':attribute é requerido',
-        'max' => ':attribute só pode ter no máximo :max caracteres',
+        'required' => ':attribute é obrigatório',
+        'max' => ':attribute deve conter no máximo :max caracteres',
         'serbinario_alpha_space' => ' :attribute deve conter apenas letras e espaços entre palavras',
         'numeric' => ':attribute deve conter apenas números',
         'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com',
         'digits_between' => ':attribute deve ter entre :min e :max caracteres',
+        'unique' => ':attribute valor já cadastrado'
     ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            /*'estado_civil_id' => 'required|integer',
+            'estado_civil_id' => 'required|integer',
             'sexo_id' => 'required|integer',
             'nacionalidade_id' => 'required|integer',
             'cgm_municipio_id' => 'integer|required',
@@ -76,7 +77,7 @@ class PessoaFisicaValidator extends LaravelValidator
             'endereco.numero' => 'required|numeric|digits_between:0,10',
             'endereco.complemento' => 'serbinario_alpha_space|max:120',
             'endereco.cep' => 'numeric|digits_between:0,15',
-            'endereco.bairro_id' => 'integer'*/
+            'endereco.bairro_id' => 'integer'
         ],
 
         ValidatorInterface::RULE_UPDATE => [
