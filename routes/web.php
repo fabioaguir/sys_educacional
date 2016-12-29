@@ -114,6 +114,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('getLicenciaturas', ['as' => 'getLicenciaturas', 'uses' => 'FormacaosController@getLicenciaturas']);
         Route::post('getPos', ['as' => 'getPos', 'uses' => 'FormacaosController@getPos']);
         Route::post('getOutrosCursos', ['as' => 'getOutrosCursos', 'uses' => 'FormacaosController@getOutrosCursos']);
+        Route::post('edtOutrosCursos', ['as' => 'edtOutrosCursos', 'uses' => 'FormacaosController@edtOutrosCursos']);
+        Route::post('getPosOutrosCursos', ['as' => 'getPosOutrosCursos', 'uses' => 'FormacaosController@getPosOutrosCursos']);
 
         # rotas para atividades
         Route::get('gridAtividade/{id}', ['as' => 'gridAtividade', 'uses' => 'AtividadesController@grid']);
@@ -121,6 +123,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('updateAtividade/{id}', ['as' => 'updateAtividade', 'uses' => 'AtividadesController@update']);
         Route::post('removerAtividade/{id}', ['as' => 'removerAtividade', 'uses' => 'AtividadesController@destroy']);
         Route::post('getFuncoes', ['as' => 'getFuncoes', 'uses' => 'AtividadesController@getFuncoes']);
+
+        # rotas para alocações
+        Route::get('gridAlocacao/{id}', ['as' => 'gridAlocacao', 'uses' => 'AlocacaosController@grid']);
+        Route::post('storeAlocacao', ['as' => 'storeAlocacao', 'uses' => 'AlocacaosController@store']);
+        Route::post('removerAlocacao/{id}', ['as' => 'removerAlocacao', 'uses' => 'AlocacaosController@destroy']);
+        Route::post('getEscolas', ['as' => 'getEscolas', 'uses' => 'AlocacaosController@getEscolas']);
     });
 
     # ROtas de disciplinas

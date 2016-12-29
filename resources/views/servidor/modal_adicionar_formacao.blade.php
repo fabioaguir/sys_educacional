@@ -32,7 +32,6 @@
                             <div class="col-md-8">
                                 <fieldset>
                                     <legend>Cusrso superior</legend>
-
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         <div class=" fg-line">
@@ -91,28 +90,26 @@
                                 <fieldset>
                                     <legend> Pós-graduação</legend>
                                     <div class="row">
-                                        <div class=" col-md-6">
-                                            <label for="select-posgraduacao">
-                                                Pós - Graduação
-                                                <select class="js-example-basic-single js-states form-control" multiple id="select-posgraduacao">
-                                                </select>
-                                            </label>
-                                        </div>
+                                        <label for="select-posgraduacao">
+                                            Pós - Graduação
+                                            <select class="js-example-basic-single js-states form-control" multiple
+                                                    id="select-posgraduacao">
+                                            </select>
+                                        </label>
                                     </div>
                                     <div class="row">
-                                        <div class=" col-md-6">
-                                            <label for="select-outroscursos">
-                                                Outros Cursos
-                                                <select class="js-example-basic-single js-states form-control" multiple id="select-outroscursos">
-                                                </select>
-                                            </label>
-                                        </div>
+                                        <label for="select-outroscursos">
+                                            Outros Cursos
+                                            <select class="js-example-basic-single js-states form-control" multiple
+                                                    id="select-outroscursos">
+                                            </select>
+                                        </label>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <div class="fg-line">
                                                 <div class="fg-line">
-                                                    <button type="button" id="addPos" class="btn btn-primary btn-sm m-t-10">Alterar</button>
+                                                    <button type="button" id="edtOutrosCursos" class="btn btn-primary btn-sm m-t-10">Alterar</button>
                                                 </div>
                                             </div>
                                         </div>
