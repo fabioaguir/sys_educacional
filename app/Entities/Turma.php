@@ -26,7 +26,8 @@ class Turma extends Model implements Transformable
         'dependencia_id',
         'vagas',
         'aprovacao_automatica',
-        'observacao'
+        'observacao',
+        'tipo_turma_id'
     ];
 
     /**

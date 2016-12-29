@@ -1,42 +1,60 @@
 // Regras de validação
 $(document).ready(function () {
-
-    $("#formPeriodoAvaliacao").validate({
+    $("#formTurmaComplementar").validate({
         rules: {
-            data_inicial: {
+            nome: {
                 required: true,
-                dateBr: true,
-                maxlength: 15
+                maxlength: 100
             },
 
-            data_final: {
+            codigo: {
                 required: true,
-                dateBr: true,
-                maxlength: 15
+                maxlength: 50
             },
 
-            dias_letivos: {
+            escola_id: {
                 required: true,
-                integer: true,
-                maxlength: 15
+                integer: true
             },
 
-            semanas_letivas: {
+            tipo_atendimento_id: {
                 required: true,
-                integer: true,
-                maxlength: 15
+                integer: true
             },
 
-            total_dias_letivos: {
+            calendario_id: {
                 required: true,
-                integer: true,
-                maxlength: 15
+                integer: true
             },
 
-            total_semanas_letivas: {
+            dependencia_id: {
                 required: true,
-                integer: true,
-                maxlength: 15
+                integer: true
+            },
+
+            vagas: {
+                required: true,
+                integer: true
+            },
+
+            aprovacao_automatica: {
+                required: true,
+                integer: true
+            },
+
+            turno_id: {
+                required: true,
+                integer: true
+            },
+
+            quantidade_atividade_id: {
+                required: true,
+                integer: true
+            },
+
+            observacao: {
+                alphaSpace: true,
+                maxlength: 500
             }
         },
         //For custom messages

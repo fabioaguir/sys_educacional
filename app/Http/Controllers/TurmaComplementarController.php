@@ -7,21 +7,21 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Repositories\TurmaRepository;
-use SerEducacional\Services\TurmaService;
-use SerEducacional\Validators\TurmaValidator;
+use SerEducacional\Repositories\TurmaComplementarRepository;
+use SerEducacional\Services\TurmaComplementarService;
+use SerEducacional\Validators\TurmaComplementarValidator;
 use Yajra\Datatables\Datatables;
 
 
-class TurmaController extends Controller
+class TurmaComplementarController extends Controller
 {
     /**
-     * @var TurmaRepository
+     * @var TurmaComplementarRepository
      */
     protected $repository;
 
     /**
-     * @var TurmaValidator
+     * @var TurmaComplementarValidator
      */
     protected $validator;
 
@@ -29,11 +29,8 @@ class TurmaController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Curso',
-        'Turno',
-        'Serie',
-        'Curriculo',
-        'ProcedimentoAvaliacao',
+        'QuantidadeAtividade',
+        'Turno',       
         'Calendario',
         'TipoAtendimento',
         'Dependencia',
@@ -41,19 +38,19 @@ class TurmaController extends Controller
     ];
 
     /**
-     * @var TurmaService
+     * @var TurmaComplementarService
      */
     private $service;
 
     /**
-     * TurmaController constructor.
-     * @param TurmaRepository $repository
-     * @param TurmaValidator $validator
-     * @param TurmaService $service
+     * TurmaComplementarController constructor.
+     * @param TurmaComplementarRepository $repository
+     * @param TurmaComplementarValidator $validator
+     * @param TurmaComplementarService $service
      */
-    public function __construct(TurmaRepository $repository,
-                                TurmaValidator $validator,
-                                TurmaService $service)
+    public function __construct(TurmaComplementarRepository $repository,
+                                TurmaComplementarValidator $validator,
+                                TurmaComplementarService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -68,7 +65,7 @@ class TurmaController extends Controller
     public function index()
     {
         # Retorno para view
-        return view('turma.index');
+        return view('turmaComplementar.index');
     }
 
     /**
@@ -81,20 +78,14 @@ class TurmaController extends Controller
             ->join('escola', 'escola.id', '=', 'turmas.escola_id')
             ->join('tipos_atendimentos', 'tipos_atendimentos.id', '=', 'turmas.tipo_atendimento_id')
             ->join('calendarios', 'calendarios.id', '=', 'turmas.calendario_id')
-            ->join('cursos', 'cursos.id', '=', 'turmas.curso_id')
-            ->join('curriculos', 'curriculos.id', '=', 'turmas.curriculo_id')
-            ->join('series', 'series.id', '=', 'turmas.serie_id')
-            ->join('procedimentos_avaliacoes', 'procedimentos_avaliacoes.id', '=', 'turmas.procedimento_avaliacao_id')
             ->join('dependencias', 'dependencias.id', '=', 'turmas.dependencia_id')
             ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
-            ->where('turmas.tipo_turma_id', 1)
+            ->where('turmas.tipo_turma_id', 2)
             ->select([
                 'turmas.id',
                 'turmas.nome',
                 'turmas.codigo',
                 'escola.codigo as escola',
-                'cursos.codigo as curso',
-                'curriculos.codigo as curriculo',
                 'turnos.nome as turno'
             ]);
 
@@ -113,7 +104,7 @@ class TurmaController extends Controller
             }
 
             # Html de disciplinas
-            $html .= '<a title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # $html .= '<a title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
             
             # Retorno
             return $html;
@@ -129,7 +120,7 @@ class TurmaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('turma.create', compact('loadFields'));
+        return view('turmaComplementar.create', compact('loadFields'));
     }
 
     /**
@@ -171,7 +162,7 @@ class TurmaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('turma.edit', compact('model', 'loadFields'));
+            return view('turmaComplementar.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -221,55 +212,6 @@ class TurmaController extends Controller
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
-        }
-    }
-
-    /**
-     * @param $idCurso
-     * @return mixed
-     */
-    public function searchCurriculosByCurso($idCurso)
-    {
-        try {
-            # Consulta ao banco de dados
-            $result = \DB::table('curriculos')
-                ->join('cursos', 'cursos.id', '=', 'curriculos.curso_id')
-                ->where('cursos.id', $idCurso)
-                ->select([
-                    'curriculos.id',
-                    'curriculos.nome'
-                ])
-                ->get();
-
-            # Retorno
-            return \Illuminate\Support\Facades\Response::json($result);
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
-        }
-    }
-
-    /**
-     * @param $idCurriculo
-     * @return mixed
-     */
-    public function searchSeriesByCurriculo($idCurriculo)
-    {
-        try {
-            # Consulta ao banco de dados
-            $result = \DB::table('series')
-                ->join('curriculos_series', 'curriculos_series.serie_id', '=', 'series.id')
-                ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
-                ->where('curriculos.id', $idCurriculo)
-                ->select([
-                    'series.id',
-                    'series.nome'
-                ])
-                ->get();
-
-            # Retorno
-            return \Illuminate\Support\Facades\Response::json($result);
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
         }
     }
 }
