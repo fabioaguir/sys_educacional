@@ -55,16 +55,18 @@
                         <!-- Fim Adicionar Disciplina -->
 
                         <!-- Table de disciplinas -->
-                        <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th style="width: 10%;">Código</th>
-                                <th>Nome</th>
-                                <th style="width: 10%;">Período</th>
-                                <th style="width: 10%;">Obrigatório</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th style="width: 10%;">Código</th>
+                                    <th>Nome</th>
+                                    <th style="width: 10%;">Período</th>
+                                    <th style="width: 10%;">Obrigatório</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                         <!-- Fim Table de disciplinas -->
                     </div>
                     <!-- Fim do Gerendiamento das Disciplinas da Séries -->
