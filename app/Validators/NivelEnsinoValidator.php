@@ -15,10 +15,13 @@ class NivelEnsinoValidator extends LaravelValidator
     ];
 
     protected $messages = [
-        'required' => ':attribute é requerido',
-        'max' => ':attribute só pode ter no máximo :max caracteres',
+        'required' => ':attribute é obrigatório',
+        'max' => ':attribute deve conter no máximo :max caracteres',
         'serbinario_alpha_space' => ' :attribute deve conter apenas letras e espaços entre palavras',
-        'unique' => ':attribute já existe'
+        'numeric' => ':attribute deve conter apenas números',
+        'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com',
+        'digits_between' => ':attribute deve ter entre :min e :max caracteres',
+        'unique' => ':attribute valor já cadastrado'
     ];
 
     protected $rules = [

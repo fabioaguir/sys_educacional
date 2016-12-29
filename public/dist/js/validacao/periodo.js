@@ -1,40 +1,32 @@
 // Regras de validação
 $(document).ready(function () {
 
-    $("#formPeriodoAvaliacao").validate({
+    $("#formPeriodo").validate({
         rules: {
-            data_inicial: {
+            nome: {
                 required: true,
-                dateBr: true,
+                alphaSpace: true,
+                maxlength: 45
+            },
+
+            abreviatura: {
+                required: true,
+                alphaSpace: true,
+                maxlength: 30
+            },
+
+            soma_carga_horaria: {
+                integer: true,
                 maxlength: 15
             },
 
-            data_final: {
-                required: true,
-                dateBr: true,
-                maxlength: 15
-            },
-
-            dias_letivos: {
+            controle_frequencia: {
                 required: true,
                 integer: true,
                 maxlength: 15
             },
 
-            semanas_letivas: {
-                required: true,
-                integer: true,
-                maxlength: 15
-            },
-
-            total_dias_letivos: {
-                required: true,
-                integer: true,
-                maxlength: 15
-            },
-
-            total_semanas_letivas: {
-                required: true,
+            ordenacao: {
                 integer: true,
                 maxlength: 15
             }

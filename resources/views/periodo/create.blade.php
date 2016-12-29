@@ -23,8 +23,8 @@
             </div>
             {{-- Fim mensagem de alerta --}}
             {{--Formulario--}}
-            {!! Form::open(['route'=>'periodoAvaliacao.store', 'id' => 'formPeriodoAvaliacao', 'method' => "POST" ]) !!}
-            @include('tamplatesForms.tamplateFormPeriodoAvaliacao')
+            {!! Form::open(['route'=>'periodo.store', 'id' => 'formPeriodo', 'method' => "POST" ]) !!}
+            @include('tamplatesForms.tamplateFormPeriodo')
             {!! Form::close() !!}
             {{--Fim formulario--}}
         </section>

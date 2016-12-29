@@ -289,14 +289,14 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     # Rotas dos perídos de avaliação
-    Route::group(['prefix' => 'periodoAvaliacao', 'as' => 'periodoAvaliacao.'], function () {
-        Route::get('index', ['as' => 'index', 'uses' => 'PeriodoAvaliacaoController@index']);
-        Route::get('grid', ['as' => 'grid', 'uses' => 'PeriodoAvaliacaoController@grid']);
-        Route::get('create', ['as' => 'create', 'uses' => 'PeriodoAvaliacaoController@create']);
-        Route::post('store', ['as' => 'store', 'uses' => 'PeriodoAvaliacaoController@store']);
-        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PeriodoAvaliacaoController@edit']);
-        Route::post('update/{id}', ['as' => 'update', 'uses' => 'PeriodoAvaliacaoController@update']);
-        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'PeriodoAvaliacaoController@destroy']);
+    Route::group(['prefix' => 'periodo', 'as' => 'periodo.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'PeriodoController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'PeriodoController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'PeriodoController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'PeriodoController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PeriodoController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'PeriodoController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'PeriodoController@destroy']);
     });
 
     # Rotas dos usuários
