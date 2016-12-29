@@ -274,11 +274,12 @@ function posgraduacoes(id) {
     });
 }
 
-posgraduacoes("");
+//posgraduacoes("");
 
 $("#select-posgraduacao").select2({
     theme: "bootstrap",
-    width: "100%"
+    width: "100%",
+    data: posgraduacoes("")
 });
 
 //Função para listar as funções
@@ -303,9 +304,35 @@ function outroscursos(id) {
     });
 }
 
-outroscursos("");
+//outroscursos("");
 
 $("#select-outroscursos").select2({
     theme: "bootstrap",
-    width: "100%"
+    width: "100%",
+    data: outroscursos("")
 });
+
+//Função para listar as escolas
+function escolas(id) {
+    jQuery.ajax({
+        type: 'POST',
+        url: laroute.route('servidor.getEscolas'),
+        datatype: 'json',
+    }).done(function (json) {
+        var option = '';
+
+        option += '<option value="">Selecione uma escola</option>';
+        for (var i = 0; i < json.length; i++) {
+            if (json[i]['id'] == id) {
+                option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            } else {
+                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            }
+        }
+
+        $('#escola option').remove();
+        $('#escola').append(option);
+    });
+}
+
+escolas("");

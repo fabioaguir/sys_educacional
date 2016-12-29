@@ -105,7 +105,10 @@ class ServidorController extends Controller
             $html .= '<a style="margin-right: 5%;" title="Adicionar Formações" id="btnModalAdicionarFormacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-education"></i></a>';
 
             # Html de adicionar atividade
-            $html .= '<a title="Adicionar Atividades" id="btnModalAdicionarAtividade" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+            $html .= '<a style="margin-right: 5%;" title="Adicionar Atividades" id="btnModalAdicionarAtividade" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+
+            # Html de adicionar alocação
+            $html .= '<a title="Adicionar Alocações" id="btnModalAdicionarAlocacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
 
             # Retorno
             return $html;

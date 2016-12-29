@@ -26,7 +26,7 @@ function loadTableFormacoes (idServidor) {
 
 
 // Função de execução
-function runModalAdicionarFormacoes(idServidor)
+function runModalAdicionarFormacoes(idServidor, pos)
 {
     //Carregando as grids de situações
     if(tableFormacoes) {
@@ -34,6 +34,8 @@ function runModalAdicionarFormacoes(idServidor)
     } else {
         loadTableFormacoes(idServidor);
     }
+
+    posOutrosCursos();
 
     // Desabilitando o botão de editar
     $('#edtFormacao').prop('disabled', true);
@@ -194,23 +196,25 @@ $(document).on('click', '#edtOutrosCursos', function () {
     var arrayPos    = $('#select-posgraduacao').select2('data');
     var arrayOutros = $('#select-outroscursos').select2('data');
 
-    // Verificando se alguma opção selecionada
-    if (!arrayPos.length > 0 || !arrayOutros.length > 0) {
+    //Verificando se alguma opção selecionada
+    if (!arrayPos.length > 0 && !arrayOutros.length > 0) {
         swal("Oops...", "Você deve selecionar uma pos-graduação ou outros cursos !", "error");
         return false;
     }
 
-    // Array de ids
+    //Array de ids
     var arrayIdPos = [];
     var arrayIdOutros = [];
 
-    // Percorrendo o array de dados
+    //Percorrendo o array de dados
     for (var i = 0; i < arrayPos.length; i++) {
         arrayIdPos[i] = arrayPos[i].id
     }
-    for (var j = 0; j < arrayOutros.length; i++) {
+    for (var j = 0; j < arrayOutros.length; j++) {
         arrayIdOutros[j] = arrayOutros[j].id
     }
+
+    console.log(arrayIdPos);
 
     //Setando o o json para envio
     var dados = {
@@ -240,6 +244,27 @@ function limparCamposFormacao()
     situacoes("");
     licenciaturas("");
     $('#ano').val("");
+}
+
+function posOutrosCursos()
+{
+
+    //Setando o o json para envio
+    var dados = {
+        'servidor_id' : idServidor
+    };
+
+    // Requisição Ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: laroute.route('servidor.getPosOutrosCursos'),
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        
+        return retorno;
+
+    });
 }
 
 
