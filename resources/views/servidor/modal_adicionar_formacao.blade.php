@@ -125,18 +125,20 @@
                         <!-- Table de relacoes -->
                         <div class="row">
                             <div class="col-md-12">
-                                <table id="formacoes-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Curso</th>
-                                        <th>Instituição</th>
-                                        <th>Licenciatura</th>
-                                        <th>Situação</th>
-                                        <th>Ano de conclusão</th>
-                                        <th style="width: 8%;">Acão</th>
-                                    </tr>
-                                    </thead>
-                                </table>
+                                <div class="table-responsive">
+                                    <table id="formacoes-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Curso</th>
+                                            <th>Instituição</th>
+                                            <th>Licenciatura</th>
+                                            <th>Situação</th>
+                                            <th>Ano de conclusão</th>
+                                            <th style="width: 8%;">Acão</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <!-- Fim Table de formações -->

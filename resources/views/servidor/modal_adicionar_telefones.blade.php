@@ -74,16 +74,18 @@
                         <!-- Fim Adicionar Telefones -->
 
                         <!-- Table de telefones -->
-                        <table id="telefones-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th style="width: 20%;">Número</th>
-                                <th>Tipo</th>
-                                <th>Ramal</th>
-                                <th style="width: 8%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="telefones-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Número</th>
+                                    <th>Tipo</th>
+                                    <th>Ramal</th>
+                                    <th style="width: 8%;">Acão</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                         <!-- Fim Table de telefones -->
                     </div>
                     <!-- Fim do Gerendiamento dos telefones -->
