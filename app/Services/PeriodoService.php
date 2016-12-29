@@ -2,32 +2,32 @@
 
 namespace SerEducacional\Services;
 
-use SerEducacional\Repositories\PeriodoAvaliacaoRepository;
-use SerEducacional\Entities\PeriodoAvaliacao;
+use SerEducacional\Repositories\PeriodoRepository;
+use SerEducacional\Entities\Periodo;
 
-class PeriodoAvaliacaoService
+class PeriodoService
 {
     use TraitService;
 
     /**
-     * @var PeriodoAvaliacaoRepository
+     * @var PeriodoRepository
      */
     private $repository;
 
     /**
-     * @param PeriodoAvaliacaoRepository $repository
+     * @param PeriodoRepository $repository
      */
-    public function __construct(PeriodoAvaliacaoRepository $repository)
+    public function __construct(PeriodoRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
      * @param array $data
-     * @return PeriodoAvaliacao
+     * @return Periodo
      * @throws \Exception
      */
-    public function store(array $data) : PeriodoAvaliacao
+    public function store(array $data) : Periodo
     {
         # Regras de negócios
         $this->tratamentoCampos($data);
@@ -47,10 +47,10 @@ class PeriodoAvaliacaoService
     /**
      * @param array $data
      * @param int $id
-     * @return PeriodoAvaliacao
+     * @return Periodo
      * @throws \Exception
      */
-    public function update(array $data, int $id) : PeriodoAvaliacao
+    public function update(array $data, int $id) : Periodo
     {
         # Regras de negócios
         $this->tratamentoCampos($data);

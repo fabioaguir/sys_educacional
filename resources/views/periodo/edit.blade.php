@@ -22,8 +22,8 @@
                     </div>
                 @endif
 
-                {!! Form::model($model, ['route'=> ['periodoAvaliacao.update', $model->id], 'id' => 'formPeriodoAvaliacao', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormPeriodoAvaliacao')
+                {!! Form::model($model, ['route'=> ['periodo.update', $model->id], 'id' => 'formPeriodo', 'method' => "POST" ]) !!}
+                @include('tamplatesForms.tamplateFormPeriodo')
                 {!! Form::close() !!}
             </section>
         </div>

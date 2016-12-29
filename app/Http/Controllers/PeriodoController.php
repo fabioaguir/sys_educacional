@@ -7,16 +7,15 @@ use Illuminate\Http\Request;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-/*use SerEducacional\Http\Requests\PeriodoAvaliacaoCreateRequest;
-use SerEducacional\Http\Requests\PeriodoAvaliacaoUpdateRequest;*/
+/*use SerEducacional\Http\Requests\PeriodoCreateRequest;
+use SerEducacional\Http\Requests\PeriodoUpdateRequest;*/
 use SerEducacional\Repositories\CalendarioRepository;
 use SerEducacional\Repositories\PeriodoRepository;
-use SerEducacional\Repositories\PeriodoAvaliacaoRepository;
-use SerEducacional\Validators\PeriodoAvaliacaoValidator;
-use SerEducacional\Services\PeriodoAvaliacaoService;
+use SerEducacional\Validators\PeriodoValidator;
+use SerEducacional\Services\PeriodoService;
 use Yajra\Datatables\Datatables;
 
-class PeriodoAvaliacaoController extends Controller
+class PeriodoController extends Controller
 {
     /**
      * @var
@@ -24,7 +23,7 @@ class PeriodoAvaliacaoController extends Controller
     private $service;
 
     /**
-     * @var PeriodoAvaliacaoRepository
+     * @var PeriodoRepository
      */
     protected $repository;
 
@@ -39,7 +38,7 @@ class PeriodoAvaliacaoController extends Controller
     protected $calendarioRepository;
 
     /**
-     * @var PeriodoAvaliacaoValidator
+     * @var PeriodoValidator
      */
     protected $validator;
 
@@ -47,20 +46,20 @@ class PeriodoAvaliacaoController extends Controller
      * @var array
      */
     private $loadFields = [
-
+        'ControleFrequencia'
     ];
 
     /**
-     * PeriodoAvaliacaoController constructor.
-     * @param PeriodoAvaliacaoService $service
-     * @param PeriodoAvaliacaoRepository $repository
-     * @param PeriodoAvaliacaoValidator $validator
+     * PeriodoController constructor.
+     * @param PeriodoService $service
+     * @param PeriodoRepository $repository
+     * @param PeriodoValidator $validator
      * @param CalendarioRepository $calendarioRepository
      * @param PeriodoRepository $periodoRepository
      */
-    public function __construct(PeriodoAvaliacaoService $service,
-                                PeriodoAvaliacaoRepository $repository,
-                                PeriodoAvaliacaoValidator $validator,
+    public function __construct(PeriodoService $service,
+                                PeriodoRepository $repository,
+                                PeriodoValidator $validator,
                                 CalendarioRepository $calendarioRepository,
                                 PeriodoRepository $periodoRepository)
     {
@@ -76,7 +75,7 @@ class PeriodoAvaliacaoController extends Controller
      */
     public function index()
     {
-        return view('periodoAvaliacao.index');
+        return view('periodo.index');
     }
 
     /**
@@ -88,7 +87,7 @@ class PeriodoAvaliacaoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('periodoAvaliacao.create', compact('loadFields'));
+        return view('periodo.create', compact('loadFields'));
     }
 
     /**
@@ -97,31 +96,33 @@ class PeriodoAvaliacaoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('periodos_avaliacao')
-            ->join('periodos', 'periodos.id', '=', 'periodos_avaliacao.periodos_id')
-            ->join('calendarios', 'calendarios.id', '=', 'periodos_avaliacao.calendarios_id')
+        $rows = \DB::table('periodos')
             ->select([
-                'periodos_avaliacao.id',
-                'periodos_avaliacao.data_inicial',
-                'periodos_avaliacao.data_final',
-                'periodos.nome as periodo',
-                'calendarios.nome as calendario',
+                'id',
+                'nome',
+                'abreviatura',
+                'soma_carga_horaria',
+                'controle_frequencia',
+                'ordenacao',
             ]);
+
+
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 
             #verificando se existe vinculo com outra tabela (calendario e periodo)
-            $periodo    = $this->periodoRepository->findWhere(['id' => $row->periodo]);
-            $calendario = $this->calendarioRepository->findWhere(['id' => $row->calendario]);
+//            $periodo    = $this->periodoRepository->findWhere(['id' => $row->periodo]);
+//            $calendario = $this->calendarioRepository->findWhere(['id' => $row->calendario]);
             //dd($periodo);
             #botão editar
             $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             #condição para que habilite a opção de remover
-            if (count($periodo) == 0 && count($calendario) == 0) {
+            /*if (count($periodo) == 0 && count($calendario) == 0) {
                 $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-            }
+            }*/
 
             # Retorno
             return $html;
@@ -167,7 +168,7 @@ class PeriodoAvaliacaoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('periodoAvaliacao.edit', compact('model', 'loadFields'));
+            return view('periodo.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
