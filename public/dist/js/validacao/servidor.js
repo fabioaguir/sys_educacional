@@ -40,12 +40,12 @@ $(document).ready(function () {
                 integer: true
             },
 
-            'cgm[cpf]': {
+            /*'cgm[cpf]': {
                 required: true,
                 cpfBR: true,
                 maxlength: 20,
                 unique: [laroute.route('servidor.searchCpf'), $('#idServidor')]
-            },
+            },*/
 
             'cgm[rg]': {
                 required: true,
@@ -81,7 +81,7 @@ $(document).ready(function () {
 
             tipo_vinculo_servidor_id: {
                 integer: true,
-                required: true
+                //required: true
             },
 
             cargos_id: {
@@ -90,7 +90,7 @@ $(document).ready(function () {
             },
 
             funcoes_id: {
-                required: true,
+                //required: true,
                 integer: true
             }
             
