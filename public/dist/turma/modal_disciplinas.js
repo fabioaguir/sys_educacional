@@ -11,13 +11,12 @@ function loadTableDisciplina (idTurma) {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: laroute.route('turma.disciplina.grid', {'idTurma' : idTurma }),
+        ajax: laroute.route('turma.disciplina.grid', {'id' : idTurma }),
         columns: [
             {data: 'codigo', name: 'disciplinas.codigo', orderable: false},
             {data: 'nome', name: 'disciplinas.nome'},
             {data: 'periodo', name: 'curriculos_series_disciplinas.periodo', orderable: false},
-            {data: 'e_obrigatoria', name: 'e_obrigatoria', orderable: false},
-            {data: 'action', name: 'action', orderable: false, searchable: false}
+            {data: 'e_obrigatoria', name: 'e_obrigatoria', orderable: false}
         ]
     });
 
@@ -29,7 +28,7 @@ function runModalDisciplinas(idTurma)
 {
     //Carregando as grids de situações
     if(tableDisciplina) {
-        loadTableDisciplina(idTurma).ajax.url(laroute.route('turma.disciplina.grid', {'idTurma' : idTurma })).load();
+        loadTableDisciplina(idTurma).ajax.url(laroute.route('turma.disciplina.grid', {'id' : idTurma })).load();
     } else {
         loadTableDisciplina(idTurma);
     }

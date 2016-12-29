@@ -50,8 +50,8 @@
                             <label for="curso_id">Curso *</label>
                             <div class="select">
                                 @if(isset($model->curso))
-                                    {!! Form::select("curso_id", ["" => "Selecione um curso"] + $loadFields['curso']->toArray(),
-                                    null, ['disabled' => 'disabeld', 'class'=> 'form-control', 'id' => 'curso']) !!}
+                                    {!! Form::select("curso_id", [$model->curso->id => $model->curso->nome],
+                                    null, ['readonly' => 'readonly', 'class'=> 'form-control', 'id' => 'curso']) !!}
                                 @else
                                     {!! Form::select("curso_id", ["" => "Selecione um curso"] + $loadFields['curso']->toArray(),
                                     null, ['class'=> 'form-control', 'id' => 'curso']) !!}
@@ -66,7 +66,7 @@
                             <div class="select">
                                 @if(isset($model->curriculo))
                                     {!! Form::select("curriculo_id", [$model->curriculo->id => $model->curriculo->nome], null,
-                                    ['disabled' => 'disabled', 'class'=> 'form-control', 'id' => 'curriculo']) !!}
+                                    ['readonly' => 'readonly', 'class'=> 'form-control', 'id' => 'curriculo']) !!}
                                 @else
                                     {!! Form::select("curriculo_id", [], null, ['class'=> 'form-control', 'id' => 'curriculo']) !!}
                                 @endif
@@ -80,7 +80,7 @@
                             <div class="select">
                                 @if(isset($model->serie))
                                     {!! Form::select("serie_id", [$model->serie->id => $model->serie->nome], null,
-                                    ['disabled' => 'disabled', 'class'=> 'form-control', 'id' => 'serie']) !!}
+                                    ['readonly' => 'readonly', 'class'=> 'form-control', 'id' => 'serie']) !!}
                                 @else
                                     {!! Form::select("serie_id", [], null, ['class'=> 'form-control', 'id' => 'serie']) !!}
                                 @endif
