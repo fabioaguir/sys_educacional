@@ -261,11 +261,20 @@ class FormacaosController extends Controller
     public function getPos(Request $request)
     {
 
+        $dados = $request->request->all();
+
+        $pos = \DB::table('servidor_pos_graduacao')
+            ->join('pos_graduacao', 'pos_graduacao.id', '=', 'servidor_pos_graduacao.pos_graduacao_id')
+            ->join('servidor', 'servidor.id', '=', 'servidor_pos_graduacao.servidor_id')
+            ->where('servidor_pos_graduacao.servidor_id', '=', $dados['servidor_id'])
+            ->select(['pos_graduacao.id'])
+            ->get();
+        
         $query = \DB::table('pos_graduacao')
             ->select('pos_graduacao.id', 'pos_graduacao.nome')
             ->get();
 
-        return response()->json($query);
+        return response()->json(['pos' => $pos, 'query' => $query]);
 
     }
 
@@ -276,11 +285,20 @@ class FormacaosController extends Controller
     public function getOutrosCursos(Request $request)
     {
 
+        $dados = $request->request->all();
+        
+        $outrosCursos = \DB::table('outros_cursos_servidor')
+            ->join('outros_cursos', 'outros_cursos.id', '=', 'outros_cursos_servidor.outros_cursos_id')
+            ->join('servidor', 'servidor.id', '=', 'outros_cursos_servidor.servidor_id')
+            ->where('outros_cursos_servidor.servidor_id', '=', $dados['servidor_id'])
+            ->select(['outros_cursos.id'])
+            ->get();
+        
         $query = \DB::table('outros_cursos')
             ->select('outros_cursos.id', 'outros_cursos.nome')
             ->get();
 
-        return response()->json($query);
+        return response()->json(['outros' => $outrosCursos, 'query' => $query]);
 
     }
 

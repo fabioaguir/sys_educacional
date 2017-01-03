@@ -51,12 +51,12 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/dist/servidor/loadFields.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_telefones.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_relacao_trabalho.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_formacao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_atividade.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/servidor/modal_adicionar_alocacao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/servidor/loadFields.js') }}"></script>
     <script type="text/javascript">
         var table = $('#servidor-grid').DataTable({
             processing: true,
@@ -110,7 +110,6 @@
         $(document).on("click", "#btnModalAdicionarFormacao", function () {
             // Recuperando o id da formação
             idServidor = table.row($(this).parents('tr')).data().id;
-            var pos = table.row($(this).parents('tr')).data().pos;
 
             // Recuperando o nome e matrícula
             var nome = table.row($(this).parents('tr')).data().nome;
@@ -121,7 +120,7 @@
             $('.sMatricula').text(matricula);
 
             // Executando o modal
-            runModalAdicionarFormacoes(idServidor, pos);
+            runModalAdicionarFormacoes(idServidor);
         });
 
         // Evento para abrir o modal de formações
