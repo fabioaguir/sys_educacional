@@ -60,11 +60,11 @@ class PessoaFisicaValidator extends LaravelValidator
             'mae' => 'required|serbinario_alpha_space|max:45',
             'naturalidade' => 'serbinario_alpha_space|max:45',
             'inscricao_estadual' => 'numeric|digits_between:0,30',
-            'data_nascimento' => 'required|digits_between:0,15', //|serbinario_date_format
-            'data_falecimento' => 'digits_between:0,15', //|serbinario_date_format
-            'data_expedicao' => 'required|digits_between:0,15', //|serbinario_date_format
+            'data_nascimento' => 'required|max:15', //|serbinario_date_format
+            'data_falecimento' => 'max:15', //|serbinario_date_format
+            'data_expedicao' => 'required|max:15', //|serbinario_date_format
             //'data_cadastramento',
-            'data_vencimento_cnh' => 'digits_between:0,15', //|serbinario_date_format
+            'data_vencimento_cnh' => 'max:15', //|serbinario_date_format
             'email' => 'email|max:45',
             'num_cnh' => 'numeric|digits_between:0,30',
             'cnh_categoria_id' => 'integer',
@@ -96,11 +96,11 @@ class PessoaFisicaValidator extends LaravelValidator
             'mae' => 'required|serbinario_alpha_space|max:45',
             'naturalidade' => 'serbinario_alpha_space|max:45',
             'inscricao_estadual' => 'numeric|digits_between:0,30',
-            'data_nascimento' => 'required|digits_between:0,15', //|serbinario_date_format
-            'data_falecimento' => 'digits_between:0,15', //|serbinario_date_format
-            'data_expedicao' => 'required|digits_between:0,15', //|serbinario_date_format
+            'data_nascimento' => 'required|max:15', //|serbinario_date_format
+            'data_falecimento' => 'max:15', //|serbinario_date_format
+            'data_expedicao' => 'required|max:15', //|serbinario_date_format
             //'data_cadastramento',
-            'data_vencimento_cnh' => 'digits_between:0,15', //|serbinario_date_format
+            'data_vencimento_cnh' => 'max:15', //|serbinario_date_format
             'email' => 'email|max:45',
             'num_cnh' => 'numeric|digits_between:0,30',
             'cnh_categoria_id' => 'integer',

@@ -80,7 +80,7 @@
         <div class="s-profile">
             <a href="" data-ma-action="profile-menu-toggle">
                 <div class="sp-pic">
-                    <img src="/dist/img/demo/profile-pics/1.jpg" alt="">
+                    <img src="{{ asset ('/dist/img/demo/profile-pics/1.jpg') }}" alt="">
                     {{--{{dd(Auth::user())}}--}}
                     {{--{{Auth::user()->operador()->get()->first()->nome_operadores}}--}}
                 </div>

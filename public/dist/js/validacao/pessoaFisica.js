@@ -165,20 +165,23 @@ $(document).ready(function () {
              minlength: "Enter at least 5 characters"
          }
          },*/
-        //Define qual elemento será adicionado
+        invalidHandler: function(e, validator) {
+            if(validator.errorList.length) {
+                $('#tabs').attr('data-tab-color', 'red');
+                $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+            }
+        },
+
         errorElement : 'small',
         errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         },
 
         highlight: function(element, errorClass) {
-            //console.log("Error");
             $(element).parent().parent().addClass("has-error");
         },
         unhighlight: function(element, errorClass, validClass) {
-            //console.log("Sucess");
             $(element).parent().parent().removeClass("has-error");
-
         }
     });
 });

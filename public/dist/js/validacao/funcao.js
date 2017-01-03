@@ -39,6 +39,7 @@ $(document).ready(function () {
             //console.log("Sucess");
             $(element).parent().parent().removeClass("has-error");
 
-        }
+        },
+        //debug: true
     });
 });

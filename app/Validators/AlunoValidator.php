@@ -59,7 +59,7 @@ class AlunoValidator extends LaravelValidator
 
             //Tabela CGM
             'cgm.nome' => 'required|serbinario_alpha_space|max:45',
-            'cgm.data_nascimento' => 'digits_between:0,15', //date_br
+            'cgm.data_nascimento' => 'max:15', //date_br
             'cgm.sexo_id' => 'required|integer',
             'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf',
             'cgm.rg' => 'numeric|digits_between:0,20',
@@ -89,7 +89,7 @@ class AlunoValidator extends LaravelValidator
 
             //Tabela CGM
             'cgm.nome' => 'required|serbinario_alpha_space|max:45',
-            'cgm.data_nascimento' => 'digits_between:0,15', //date_br
+            'cgm.data_nascimento' => 'max:15', //date_br
             'cgm.sexo_id' => 'required|integer',
             'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf:id',
             'cgm.rg' => 'numeric|digits_between:0,20',
