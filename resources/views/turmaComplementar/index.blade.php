@@ -83,24 +83,24 @@
             ]
         });
 
-        // Global idTurma
-        var idTurma;
+        // Global idTurmaComplementar
+        var idTurmaComplementar;
 
         // Evento para abrir o modal de cursos/turmas
-        $(document).on("click", "#btnModalDisciplinas", function () {
+        $(document).on("click", "#btnModalAtividades", function () {
             // Recuperando o id do currículo
-            idTurma = table.row($(this).parents('tr')).data().id;
+            idTurmaComplementar = table.row($(this).parents('tr')).data().id;
 
             // Recuperando o nome e o código
             var codigo = table.row($(this).parents('tr')).data().codigo;
             var nome   = table.row($(this).parents('tr')).data().nome;
 
             // prenchendo o titulo do nome do aluno
-            $('#dNome').text(nome);
-            $('#dCodigo').text(codigo);
+            $('#aNome').text(nome);
+            $('#aCodigo').text(codigo);
 
             // Executando o modal
-            runModalDisciplinas(idTurma);
+            runModalAtividades(idTurmaComplementar);
         });
     </script>
 @stop
