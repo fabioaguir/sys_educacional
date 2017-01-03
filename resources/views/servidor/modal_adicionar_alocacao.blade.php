@@ -50,14 +50,17 @@
                         <!-- Fim Adicionar Alocações -->
 
                         <!-- Table de Alocações -->
-                        <table id="alocacoes-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>Escola</th>
-                                <th style="width: 8%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="alocacoes-grid" class="display table table-bordered" cellspacing="0"
+                                   width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Escola</th>
+                                    <th style="width: 8%;">Acão</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                         <!-- Fim Table de alocações -->
                     </div>
                     <!-- Fim do Gerendiamento dos alocações -->

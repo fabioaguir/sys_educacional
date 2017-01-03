@@ -24,9 +24,8 @@ function loadTableFormacoes (idServidor) {
     return tableFormacoes;
 }
 
-
 // Função de execução
-function runModalAdicionarFormacoes(idServidor, pos)
+function runModalAdicionarFormacoes(idServidor)
 {
     //Carregando as grids de situações
     if(tableFormacoes) {
@@ -35,7 +34,19 @@ function runModalAdicionarFormacoes(idServidor, pos)
         loadTableFormacoes(idServidor);
     }
 
-    posOutrosCursos();
+    //Carregando as pos graduações
+    $("#select-posgraduacao").select2({
+        theme: "bootstrap",
+        width: "100%",
+        data: posgraduacoes(idServidor)
+    });
+
+    //Carregando os outros cursos
+    $("#select-outroscursos").select2({
+        theme: "bootstrap",
+        width: "100%",
+        data: outroscursos(idServidor)
+    });
 
     // Desabilitando o botão de editar
     $('#edtFormacao').prop('disabled', true);
@@ -214,8 +225,6 @@ $(document).on('click', '#edtOutrosCursos', function () {
         arrayIdOutros[j] = arrayOutros[j].id
     }
 
-    console.log(arrayIdPos);
-
     //Setando o o json para envio
     var dados = {
         'idPos' : arrayIdPos,
@@ -233,6 +242,20 @@ $(document).on('click', '#edtOutrosCursos', function () {
         swal("Formação de trabalho removido com sucesso!", "Click no botão abaixo!", "success");
         tableFormacoes.ajax.reload();
         table.ajax.reload();
+
+        //Carregando as pos graduações
+        $("#select-posgraduacao").select2({
+            theme: "bootstrap",
+            width: "100%",
+            data: posgraduacoes(idServidor)
+        });
+
+        //Carregando os outros cursos
+        $("#select-outroscursos").select2({
+            theme: "bootstrap",
+            width: "100%",
+            data: outroscursos(idServidor)
+        });
     });
 });
 
@@ -246,26 +269,6 @@ function limparCamposFormacao()
     $('#ano').val("");
 }
 
-function posOutrosCursos()
-{
-
-    //Setando o o json para envio
-    var dados = {
-        'servidor_id' : idServidor
-    };
-
-    // Requisição Ajax
-    jQuery.ajax({
-        type: 'POST',
-        url: laroute.route('servidor.getPosOutrosCursos'),
-        data: dados,
-        datatype: 'json'
-    }).done(function (retorno) {
-        
-        return retorno;
-
-    });
-}
 
 
 

@@ -82,18 +82,20 @@
                         <!-- Fim Adicionar Eventos -->
 
                         <!-- Table de eventos letivos -->
-                        <table id="eventos-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th style="width: 20%;">Descrição</th>
-                                <th>Data Feriado</th>
-                                <th>Dia da semana</th>
-                                <th>Dia letivo</th>
-                                <th>Tipo do evento</th>
-                                <th style="width: 8%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="eventos-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Descrição</th>
+                                    <th>Data Feriado</th>
+                                    <th>Dia da semana</th>
+                                    <th>Dia letivo</th>
+                                    <th>Tipo do evento</th>
+                                    <th style="width: 8%;">Acão</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                         <!-- Fim Table de eventos letivos -->
                     </div>
                     <!-- Fim do Gerendiamento das Disciplinas da Séries -->
