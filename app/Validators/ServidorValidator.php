@@ -81,15 +81,15 @@ class ServidorValidator extends LaravelValidator
             'cgm.cgm_municipio_id' => 'required',
             'cgm.estado_civil_id' => 'required',
             'cgm.escolaridade_id' => 'required',
-            'cgm.cpf' => 'required',
+            'cgm.cpf' => '',
             'cgm.rg' => 'required',
 
             //Tabela Servidor
             'data_admicao' => 'required',
             'carga_horaria' => 'required',
-            'tipo_vinculo_servidor_id' => 'required',
+            'tipo_vinculo_servidor_id' => '',
             'cargos_id' => 'required',
-            'funcoes_id' => 'required',
+            'funcoes_id' => '',
 
             //Tabela Endereço
             'cgm.endereco.logradouro' => 'required',

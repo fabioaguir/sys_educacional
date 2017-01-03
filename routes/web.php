@@ -271,6 +271,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('nivelAlfabetizacao/destroy/{id}', ['as' => 'nivelAlfabetizacao.destroy', 'uses' => 'FormaAvaliacoesController@destroyNivel']);
     });
 
+    # Rotas do aluno
     Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'AlunoController@index']);
         Route::get('grid', ['as' => 'grid', 'uses' => 'AlunoController@grid']);
@@ -379,6 +380,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TurmaComplementarController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'TurmaComplementarController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'TurmaComplementarController@destroy']);
+
+        # Modal de atividades
+        Route::group(['prefix' => 'atividade', 'as' => 'atividade.'], function () {
+            Route::get('grid/{idTurmaComplementar}', ['as' => 'grid', 'uses' => 'TurmaComplementarAtividadeController@grid']);
+            Route::post('select2', ['as' => 'select2', 'uses' => 'TurmaComplementarAtividadeController@atividadeSelect2']);
+            Route::post('adicionarAtividade', ['as' => 'adicionarAtividade', 'uses' => 'TurmaComplementarAtividadeController@adicionarAtividade']);
+            Route::post('removerAtividade', ['as' => 'removerAtividade', 'uses' => 'TurmaComplementarAtividadeController@removerAtividade']);
+        });
     });
 });
 
