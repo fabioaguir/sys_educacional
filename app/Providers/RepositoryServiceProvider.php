@@ -249,6 +249,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\AtividadeComplementarRepository::class,
             \SerEducacional\Repositories\AtividadeComplementarRepositoryEloquent::class);
         
+        $this->app->bind(
+            \SerEducacional\Repositories\AlunoTurmaRepository::class,
+            \SerEducacional\Repositories\AlunoTurmaRepositoryEloquent::class);
+        
+        
         //:end-bindings:
     }
 }

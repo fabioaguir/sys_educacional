@@ -284,6 +284,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'AlunoController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'AlunoController@findCidade']);
         Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'AlunoController@searchCpf']);
+
+        # rotas para alunos turmas
+        Route::get('gridAlunoTurma/{id}', ['as' => 'gridAlunoTurma', 'uses' => 'AlunoTurmasController@grid']);
+        Route::post('getTurma', ['as' => 'getTurma', 'uses' => 'AlunoTurmasController@getTurma']);
+        Route::post('storeAlunoTurma', ['as' => 'storeAlunoTurma', 'uses' => 'AlunoTurmasController@store']);
+        Route::post('getDadosTurma', ['as' => 'getDadosTurma', 'uses' => 'AlunoTurmasController@getDadosTurma']);
+       // Route::post('updateTelefone/{id}', ['as' => 'updateTelefone', 'uses' => 'TelefonesController@update']);
+       // Route::post('removerTelefone/{id}', ['as' => 'removerTelefone', 'uses' => 'TelefonesController@destroy']);
     });
 
     # Rotas dos tipos de eventos

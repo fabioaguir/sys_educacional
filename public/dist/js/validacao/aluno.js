@@ -80,7 +80,6 @@ $(document).ready(function () {
 
             'telefone[nome]': {
                 required: true,
-                number: true,
                 maxlength: 18
             },
 

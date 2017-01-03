@@ -100,18 +100,20 @@
                         <!-- Fim Adicionar Disciplina -->
 
                         <!-- Table de disciplinas -->
-                        <table id="periodos-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th style="width: 20%;">Período</th>
-                                <th>Data inicial</th>
-                                <th>Data Final</th>
-                                <th>Dias letivos</th>
-                                <th>Semanas letivas</th>
-                                <th style="width: 8%;">Acão</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="periodos-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Período</th>
+                                    <th>Data inicial</th>
+                                    <th>Data Final</th>
+                                    <th>Dias letivos</th>
+                                    <th>Semanas letivas</th>
+                                    <th style="width: 8%;">Acão</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                         <!-- Fim Table de disciplinas -->
                     </div>
                     <!-- Fim do Gerendiamento das Disciplinas da Séries -->
