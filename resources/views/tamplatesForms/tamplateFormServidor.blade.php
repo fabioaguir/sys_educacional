@@ -9,7 +9,7 @@
         <!-- Painel -->
         <div role="tabpanel">
             <!-- Guias -->
-            <ul class="tab-nav" role="tablist">
+            <ul id="tabs" class="tab-nav" role="tablist" data-tab-color="cyan">
                 <li class="active"><a href="#infoBasicas" aria-controls="infoBasicas" role="tab" data-toggle="tab">Informações Básicas</a>
                 </li>
                 <li><a href="#documentacao" aria-controls="documentacao" role="tab" data-toggle="tab">Documentação</a>
