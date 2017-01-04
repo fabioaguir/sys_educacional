@@ -9,7 +9,7 @@
                 <!-- Painel -->
                 <div role="tabpanel">
                     <!-- Guias -->
-                    <ul class="tab-nav" role="tablist">
+                    <ul id="tabs" class="tab-nav" role="tablist" data-tab-color="cyan">
                         <li class="active"><a href="#dadosGerais" aria-controls="dadosGerais" role="tab" data-toggle="tab">Dados Gerais</a></li>
                         <li><a href="#roles" aria-controls="roles" role="tab" data-toggle="tab">Perfís</a></li>
                     </ul>

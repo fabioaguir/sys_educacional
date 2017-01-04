@@ -6,7 +6,7 @@
         <!-- Painel -->
         <div role="tabpanel">
             <!-- Guias -->
-            <ul class="tab-nav" role="tablist">
+            <ul id="tabs" class="tab-nav" role="tablist" data-tab-color="cyan">
                 <li class="active"><a href="#infoBasicas" aria-controls="infoBasicas" role="tab" data-toggle="tab">Dados Gerais</a>
                 </li>
                 <li><a href="#endereco" aria-controls="endereco" role="tab" data-toggle="tab">Endereço</a>

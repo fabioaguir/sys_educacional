@@ -37,7 +37,7 @@ class PessoaJuridicaValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|serbinario_alpha_space|max:200',
             //'num_cgm' => 'numeric',
-            'data_cadastramento' => 'digits_between:0,20', //serbinario_date_format
+            'data_cadastramento' => 'max:20', //serbinario_date_format
             'cnpj' => 'required|numeric|unique:cgm,cnpj',
             'email' => 'email|max:45',
             'tipo_empresa_id' => 'required|integer',
@@ -59,7 +59,7 @@ class PessoaJuridicaValidator extends LaravelValidator
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|serbinario_alpha_space|max:200',
             //'num_cgm' => 'numeric',
-            'data_cadastramento' => 'digits_between:0,20', //serbinario_date_format
+            'data_cadastramento' => 'max:20', //serbinario_date_format
             'cnpj' => 'required|numeric|unique:cgm,cnpj:id',
             'email' => 'email|max:45',
             'tipo_empresa_id' => 'required|integer',

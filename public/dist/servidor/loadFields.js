@@ -253,20 +253,32 @@ function funcoes(id) {
 funcoes("");
 
 //Função para listar as funções
-function posgraduacoes(id) {
+function posgraduacoes(idServidor) {
+
+    //Setando o o json para envio
+    var dados = {
+        'servidor_id' : idServidor
+    };
+
     jQuery.ajax({
         type: 'POST',
+        data: dados,
         url: laroute.route('servidor.getPos'),
         datatype: 'json',
     }).done(function (json) {
+
+        var selects = '';
         var option = '';
 
-        for (var i = 0; i < json.length; i++) {
-            if (json[i]['id'] == id) {
-                option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-            } else {
-                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+        for (var i = 0; i < json['query'].length; i++) {
+
+            for (var j = 0; j < json['pos'].length; j++) {
+                if(json['query'][i]['id'] == json['pos'][j]['id']) {
+                    selects = "selected";
+                }
             }
+            option += '<option '+selects+' value="' + json['query'][i]['id'] + '">' + json['query'][i]['nome'] + '</option>';
+            selects = "";
         }
 
         $('#select-posgraduacao option').remove();
@@ -274,29 +286,33 @@ function posgraduacoes(id) {
     });
 }
 
-//posgraduacoes("");
-
-$("#select-posgraduacao").select2({
-    theme: "bootstrap",
-    width: "100%",
-    data: posgraduacoes("")
-});
 
 //Função para listar as funções
 function outroscursos(id) {
+
+    //Setando o o json para envio
+    var dados = {
+        'servidor_id' : idServidor
+    };
+
     jQuery.ajax({
         type: 'POST',
+        data: dados,
         url: laroute.route('servidor.getOutrosCursos'),
         datatype: 'json',
     }).done(function (json) {
+        var selects = '';
         var option = '';
 
-        for (var i = 0; i < json.length; i++) {
-            if (json[i]['id'] == id) {
-                option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-            } else {
-                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+        for (var i = 0; i < json['query'].length; i++) {
+
+            for (var j = 0; j < json['outros'].length; j++) {
+                if(json['query'][i]['id'] == json['outros'][j]['id']) {
+                    selects = "selected";
+                }
             }
+            option += '<option '+selects+' value="' + json['query'][i]['id'] + '">' + json['query'][i]['nome'] + '</option>';
+            selects = "";
         }
 
         $('#select-outroscursos option').remove();
@@ -304,13 +320,6 @@ function outroscursos(id) {
     });
 }
 
-//outroscursos("");
-
-$("#select-outroscursos").select2({
-    theme: "bootstrap",
-    width: "100%",
-    data: outroscursos("")
-});
 
 //Função para listar as escolas
 function escolas(id) {

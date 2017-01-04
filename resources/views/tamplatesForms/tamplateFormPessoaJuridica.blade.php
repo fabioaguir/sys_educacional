@@ -11,11 +11,9 @@
         <!-- Painel -->
         <div role="tabpanel">
             <!-- Guias -->
-            <ul class="tab-nav" role="tablist">
-                <li class="active"><a href="#infoBasicas" aria-controls="infoBasicas" role="tab" data-toggle="tab">Informações Básicas</a>
-                </li>
-                <li><a href="#endereco" aria-controls="endereco" role="tab" data-toggle="tab">Endereço</a>
-                </li>
+            <ul id="tabs" class="tab-nav" role="tablist" data-tab-color="cyan">
+                <li class="active"><a href="#infoBasicas" aria-controls="infoBasicas" role="tab" data-toggle="tab">Informações Básicas</a></li>
+                <li><a href="#endereco" aria-controls="endereco" role="tab" data-toggle="tab">Endereço</a></li>
             </ul>
             <!-- Fim Guias -->
 

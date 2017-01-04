@@ -41,7 +41,6 @@ $(document).ready(function () {
         unhighlight: function(element, errorClass, validClass) {
             //console.log("Sucess");
             $(element).parent().parent().removeClass("has-error");
-
         }
     });
 });

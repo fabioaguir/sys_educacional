@@ -59,7 +59,7 @@ class ServidorValidator extends LaravelValidator
             'cgm.rg' => 'required|numeric|digits_between:0,20',
 
             //Tabela Servidor
-            'data_admicao' => 'required',
+            'data_admicao' => 'required|max:15',
             'carga_horaria' => 'required|numeric',
             'tipo_vinculo_servidor_id' => 'integer',
             'cargos_id' => 'required|integer',
@@ -76,7 +76,7 @@ class ServidorValidator extends LaravelValidator
             //Tabela CGM
             'cgm.nome' => 'required',
             'cgm.sexo_id' => 'required',
-            'cgm.data_nascimento' => 'required',
+            'cgm.data_nascimento' => 'required|max:15',
             'cgm.nacionalidade_id' => 'required',
             'cgm.cgm_municipio_id' => 'required',
             'cgm.estado_civil_id' => 'required',
@@ -85,7 +85,7 @@ class ServidorValidator extends LaravelValidator
             'cgm.rg' => 'required',
 
             //Tabela Servidor
-            'data_admicao' => 'required',
+            'data_admicao' => 'required|max:15',
             'carga_horaria' => 'required',
             'tipo_vinculo_servidor_id' => '',
             'cargos_id' => 'required',

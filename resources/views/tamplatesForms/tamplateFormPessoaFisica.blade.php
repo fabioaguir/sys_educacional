@@ -10,7 +10,7 @@
         <div role="tabpanel">
             <!-- Guias -->
             <ul class="tab-nav" role="tablist">
-                <li id="informacoesBasicas" class="active"><a href="#infoBasicas" aria-controls="infoBasicas" role="tab" data-toggle="tab">Informações Básicas</a>
+                <li class="active"><a href="#infoBasicas" aria-controls="infoBasicas" role="tab" data-toggle="tab">Informações Básicas</a>
                 </li>
                 <li><a href="#documentacao" aria-controls="documentacao" role="tab" data-toggle="tab">Documentação</a>
                 </li>
