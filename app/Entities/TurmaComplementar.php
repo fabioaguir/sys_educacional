@@ -35,4 +35,13 @@ class TurmaComplementar extends Model implements Transformable
         return $this->belongsToMany(Serie::class, 'turmas_atividades', 'turma_id', 'atividade_id')
             ->withPivot(['id']);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function alunos()
+    {
+        return $this->belongsToMany(Aluno::class, 'alunos_turmas_complementares', 'turma_complementar_id', 'aluno_id')
+            ->withPivot(['id', 'data_inclusao']);
+    }
 }

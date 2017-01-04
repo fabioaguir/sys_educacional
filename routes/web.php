@@ -396,6 +396,15 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('adicionarAtividade', ['as' => 'adicionarAtividade', 'uses' => 'TurmaComplementarAtividadeController@adicionarAtividade']);
             Route::post('removerAtividade', ['as' => 'removerAtividade', 'uses' => 'TurmaComplementarAtividadeController@removerAtividade']);
         });
+
+        # Modal de alunos
+        Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+            Route::get('grid/{idTurmaComplementar}', ['as' => 'grid', 'uses' => 'TurmaComplementarAlunoController@grid']);
+            Route::post('select2', ['as' => 'select2', 'uses' => 'TurmaComplementarAlunoController@alunosSelect2']);
+            Route::post('findNumAlunosMatriculados/{idTurmaComplementar}', ['as' => 'findNumAlunosMatriculados', 'uses' => 'TurmaComplementarAlunoController@findNumAlunosMatriculados']);
+            Route::post('adicionarAtividade', ['as' => 'adicionarAluno', 'uses' => 'TurmaComplementarAlunoController@adicionarAluno']);
+            Route::post('removerAtividade', ['as' => 'removerAluno', 'uses' => 'TurmaComplementarAlunoController@removerAluno']);
+        });
     });
 });
 
