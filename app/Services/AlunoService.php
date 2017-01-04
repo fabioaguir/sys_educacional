@@ -60,14 +60,14 @@ class AlunoService
 
         #Salvando registro
         $endereco = $this->enderecoRepository->create($dados);
-        dd($endereco);
+
         #Retorno
         return $endereco;
     }
 
     /**
      * @param $data
-     * @param $idPessoa
+     * @param $pessoaFisica
      */
     public function tratamentoTelefone($data, $pessoaFisica)
     {
@@ -199,7 +199,7 @@ class AlunoService
 
         #Recuperando o registro no banco de dados
         $aluno = $this->repository->with($relacao)->find($id);
-//dd($aluno);
+
         #Verificando se o registro foi encontrado
         if(!$aluno) {
             throw new \Exception('Aluno não encontrado!');

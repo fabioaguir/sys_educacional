@@ -61,7 +61,7 @@ class AlunoValidator extends LaravelValidator
             'cgm.nome' => 'required|serbinario_alpha_space|max:45',
             'cgm.data_nascimento' => 'max:15', //date_br
             'cgm.sexo_id' => 'required|integer',
-            'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf',
+            //'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf',
             'cgm.rg' => 'numeric|digits_between:0,20',
             'cgm.pai' => 'serbinario_alpha_space|max:45',
             'cgm.mae' => 'serbinario_alpha_space|max:45',
@@ -70,7 +70,7 @@ class AlunoValidator extends LaravelValidator
             'cgm.naturalidade' => 'required|serbinario_alpha_space|max:45',
 
             //Tabela telefone
-            'telefone.nome' => 'required|numeric|digits_between:0,20',
+            //'telefone.nome' => 'required|numeric|digits_between:0,20',
 
             //Tabela endereco
             'cgm.endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
