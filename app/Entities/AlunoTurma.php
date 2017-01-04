@@ -16,7 +16,8 @@ class AlunoTurma extends Model implements Transformable
     protected $fillable = [
         'alunos_id',
         'turmas_id',
-        'data_matricula'
+        'data_matricula',
+        'matricula'
     ];
 
     /**

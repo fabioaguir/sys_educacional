@@ -32,6 +32,11 @@ class AlunoTurmaService
         # Regras de negócios
         $this->tratamentoCampos($data);
 
+        # gerando o número de matrícula
+        $date = new \DateTime('now');
+        $numMatricula = $date->format('YmdHis');
+        $data['matricula'] = $numMatricula;
+
         #Salvando o registro pincipal
         $matricula =  $this->repository->create($data);
 

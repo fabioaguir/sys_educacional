@@ -1,5 +1,13 @@
 @extends('menu')
 
+@section('css')
+    <style>
+        table#dados-turma tbody tr, table#dados-turma  thead tr {
+            font-size: 11px;
+        }
+    </style>
+@endsection
+
 @section('content')
     <section id="content">
         <div class="container">
@@ -84,10 +92,10 @@
             ]
         });
 
-        //Global idCalendario
+        //Global idAluno
         var idAluno;
 
-        // Evento para abrir o modal de períodos de avaliação
+        // Evento para abrir o modal de matrícula
         $(document).on("click", "#btnModalAdicionarAlunoTurma", function () {
             // Recuperando o id do calendário
             idAluno = table.row($(this).parents('tr')).data().id;

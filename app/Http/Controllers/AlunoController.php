@@ -89,7 +89,7 @@ class AlunoController extends Controller
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Html de adicionar alunos em turma
             $html .= '<a title="Matricular" id="btnModalAdicionarAlunoTurma" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';

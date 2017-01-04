@@ -12,17 +12,16 @@
                         <div class="row">
                             <div class="col-md-12" style="background-color: #e6e9dc">
                                 <div class="col-md-4" style="margin-top: 17px">
-                                    <span><strong>Nome: </strong><p class="aNome"></p></span>
+                                    <span><strong>Nome: </strong><p id="aNome"></p></span>
                                 </div>
 
                                 <div class="col-md-2" style="margin-top: 17px">
-                                    <span><strong>Código: </strong><p class="aCodigo"></p></span>
+                                    <span><strong>Código: </strong><p id="aCodigo"></p></span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="row" style="margin-top: 2%;">
 
@@ -39,6 +38,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group col-md-4">
                                     <div class="fg-line">
                                         <div class="fg-line">
@@ -61,12 +61,11 @@
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table id="dados-turma" class="display table table-bordered" cellspacing="0"
+                            <table id="dados-turma" class=" table table-bordered" cellspacing="0"
                                    width="100%">
                                 <thead>
-                                <tr>
+                                <tr style="background-color: #f1f3f2">
                                     <th>Escola</th>
-                                    <th>Aluno</th>
                                     <th>Curso</th>
                                     <th>Base curricular</th>
                                     <th>Calendário</th>
@@ -78,10 +77,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td style="width: 25%;">Escola</td>
-                                    <td>Teste</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -93,7 +89,14 @@
                                    width="100%">
                                 <thead>
                                 <tr>
+                                    <th>Matrícula</th>
                                     <th>Turma</th>
+                                    <th>Escola</th>
+                                    <th>Curso</th>
+                                    <th>Base Curricular</th>
+                                    <th>Calendário</th>
+                                    <th>Série/Ano</th>
+                                    <th>Turno</th>
                                     <th style="width: 8%;">Acão</th>
                                 </tr>
                                 </thead>

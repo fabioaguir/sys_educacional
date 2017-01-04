@@ -12,7 +12,14 @@ function loadTableAlunoTurmas (idAluno) {
         autoWidth: false,
         ajax: laroute.route('aluno.gridAlunoTurma', {'id' :idAluno }),
         columns: [
+            {data: 'matricula', name: 'alunos_turmas.matricula'},
             {data: 'turma', name: 'turmas.nome'},
+            {data: 'escola', name: 'escola.nome'},
+            {data: 'curso', name: 'cursos.nome'},
+            {data: 'curriculo', name: 'curriculos.nome'},
+            {data: 'calendario_ano', name: 'calendarios.ano'},
+            {data: 'serie', name: 'series.nome'},
+            {data: 'turno', name: 'turnos.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
@@ -94,7 +101,22 @@ $(document).on('change', '#turma', function () {
         datatype: 'json'
     }).done(function (retorno) {
 
-        //$('#diaSemana').val(retorno);
+        console.log(retorno);
+
+        var html = '<tr>';
+        html += '<td>'+retorno['dados']['escola']+'</td>';
+        html += '<td>'+retorno['dados']['curso']+'</td>';
+        html += '<td>'+retorno['dados']['curriculo']+'</td>';
+        html += '<td>'+retorno['dados']['calendario_nome'] +' '+ retorno['dados']['calendario_ano']+'</td>';
+        html += '<td>'+retorno['dados']['serie']+'</td>';
+        html += '<td>'+retorno['dados']['turno']+'</td>';
+        html += '<td>'+retorno['dados']['vagas']+'</td>';
+        html += '<td>'+retorno['qtdAlunos']['qtd']+'</td>';
+        html += '<td>'+retorno['vRestantes']+'</td>';
+        html += '</tr>';
+
+        $('#dados-turma tbody tr').remove();
+        $('#dados-turma tbody').append(html);
 
     });
 

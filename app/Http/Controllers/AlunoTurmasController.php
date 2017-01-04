@@ -62,10 +62,23 @@ class AlunoTurmasController extends Controller
         $rows = \DB::table('alunos_turmas')
             ->join('alunos', 'alunos.id', '=', 'alunos_turmas.alunos_id')
             ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
+            ->join('escola', 'escola.id', '=', 'turmas.escola_id')
+            ->join('cursos', 'cursos.id', '=', 'turmas.curso_id')
+            ->join('curriculos', 'curriculos.id', '=', 'turmas.curriculo_id')
+            ->join('calendarios', 'calendarios.id', '=', 'turmas.calendario_id')
+            ->join('series', 'series.id', '=', 'turmas.serie_id')
+            ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
             ->where('alunos_turmas.alunos_id', '=', $id)
             ->select([
                 'alunos_turmas.id as id',
+                'alunos_turmas.matricula',
                 'turmas.nome as turma',
+                'escola.nome as escola',
+                'cursos.nome as curso',
+                'curriculos.nome as curriculo',
+                'calendarios.ano as calendario_ano',
+                'series.nome as serie',
+                'turnos.nome as turno',
             ]);
 
         #Editando a grid
@@ -145,6 +158,8 @@ class AlunoTurmasController extends Controller
     {
 
         $tipos = \DB::table('turmas')
+            ->join('tipo_turmas', 'tipo_turmas.id', '=', 'turmas.tipo_turma_id')
+            ->where('tipo_turmas.id', '=', '1')
             ->select('turmas.id', 'turmas.nome')
             ->get();
 
@@ -159,12 +174,51 @@ class AlunoTurmasController extends Controller
     public function getDadosTurma(Request $request)
     {
         $dados = $request->request->all();
+        
+        try {
 
-        $tipos = \DB::table('turmas')
-            ->select('turmas.id', 'turmas.nome')
-            ->get();
+            # recuper os dados da turma
+            $turma = \DB::table('turmas')
+                ->join('escola', 'escola.id', '=', 'turmas.escola_id')
+                ->join('cursos', 'cursos.id', '=', 'turmas.curso_id')
+                ->join('curriculos', 'curriculos.id', '=', 'turmas.curriculo_id')
+                ->join('calendarios', 'calendarios.id', '=', 'turmas.calendario_id')
+                ->join('series', 'series.id', '=', 'turmas.serie_id')
+                ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
+                ->where('turmas.id', '=', $dados['turma'])
+                ->select([
+                    'turmas.vagas',
+                    'escola.nome as escola',
+                    'cursos.nome as curso',
+                    'curriculos.nome as curriculo',
+                    'calendarios.nome as calendario_nome',
+                    'calendarios.ano as calendario_ano',
+                    'series.nome as serie',
+                    'turnos.nome as turno',
+                ])
+                ->first();
 
-        return response()->json($tipos);
+            # pega a quantidade de alunos matrículados nessa turma
+            $alunoTurma = \DB::table('alunos_turmas')
+                ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
+                ->groupBy('turmas.id')
+                ->where('turmas.id', '=', $dados['turma'])
+                ->select([
+                    \DB::raw('count(alunos_turmas.id) as qtd'),
+                ])->first();
+
+            # calculas a quantidade de vagas restantes
+            if ($alunoTurma) {
+                $vagasRestantes = $turma->vagas - $alunoTurma->qtd;
+            } else {
+                $vagasRestantes = "";
+            }
+
+            return response()->json(['dados' => $turma, 'qtdAlunos' => $alunoTurma, 'vRestantes' => $vagasRestantes]);
+
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
 
     }
 
