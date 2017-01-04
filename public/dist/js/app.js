@@ -367,11 +367,11 @@ $(document).ready(function () {
 
 
 
-$(window).load(function(){
+/*$(window).load(function(){
 
-    /*-------------------------------------------
+    -------------------------------------------
         Welcome Message
-     ---------------------------------------------*/
+     ---------------------------------------------
     function notify(message, type){
         $.growl({
             message: message
@@ -401,7 +401,7 @@ $(window).load(function(){
             notify('Welcome back Mallinda Hollaway', 'inverse');
         }
     }, 1000)
-});
+});*/
 $(document).ready(function(){
 
     /*----------------------------------------------

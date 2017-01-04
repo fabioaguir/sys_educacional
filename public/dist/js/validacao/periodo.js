@@ -43,7 +43,6 @@ $(document).ready(function () {
         errorPlacement: function(error, element) {
             error.insertAfter(element.parent());
         },
-
         highlight: function(element, errorClass) {
             //console.log("Error");
             $(element).parent().parent().addClass("has-error");

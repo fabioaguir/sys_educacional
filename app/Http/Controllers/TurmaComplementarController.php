@@ -86,7 +86,8 @@ class TurmaComplementarController extends Controller
                 'turmas.nome',
                 'turmas.codigo',
                 'escola.codigo as escola',
-                'turnos.nome as turno'
+                'turnos.nome as turno',
+                'turmas.vagas'
             ]);
 
         #Editando a grid
@@ -104,8 +105,11 @@ class TurmaComplementarController extends Controller
             }
 
             # Html de atividades
-            $html .= '<a title="Atividades" id="btnModalAtividades" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
-            
+            $html .= '<a style="margin-right: 5%;" title="Atividades" id="btnModalAtividades" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+
+            # Html de alunos
+            $html .= '<a title="Alunos" id="btnModalAlunos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+
             # Retorno
             return $html;
         })->make(true);

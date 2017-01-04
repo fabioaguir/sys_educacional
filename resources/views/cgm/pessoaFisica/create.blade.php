@@ -24,7 +24,7 @@
             {{-- Fim mensagem de alerta --}}
             {{--Formulario--}}
             {!! Form::open(['route'=>'pessoaFisica.store', 'id' => 'formPessoaFisica', 'method' => "POST" ]) !!}
-            @include('tamplatesForms.tamplateFormPessoaFisica')
+            @include('tamplatesForms.tamplateForm_PessoaFisica')
             {!! Form::close() !!}
             {{--Fim formulario--}}
         </section>

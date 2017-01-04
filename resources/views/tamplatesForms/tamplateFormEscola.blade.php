@@ -6,7 +6,7 @@
         <!-- Painel -->
         <div role="tabpanel">
             <!-- Guias -->
-            <ul class="tab-nav" role="tablist">
+            <ul id="tabs" class="tab-nav" role="tablist" data-tab-color="cyan">
                 <li class="active"><a href="#infoBasicas" aria-controls="infoBasicas" role="tab" data-toggle="tab">Dados Gerais</a>
                 </li>
                 <li><a href="#endereco" aria-controls="endereco" role="tab" data-toggle="tab">Endereço</a>
@@ -254,7 +254,7 @@
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/dist/js/adicional/alphaSpace.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/dateBr.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/escola.js')  }}"></script>

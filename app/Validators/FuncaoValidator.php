@@ -26,14 +26,14 @@ class FuncaoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|serbinario_alpha_space|digits_between:0,60',
-            'sigla' => 'serbinario_alpha_space|digits_between:0,20',
+            'nome' => 'required|serbinario_alpha_space|max:60',
+            'sigla' => 'serbinario_alpha_space|max:20',
             'funcao_professor' => 'integer'
         ],
 
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|serbinario_alpha_space|digits_between:0,60',
-            'sigla' => 'serbinario_alpha_space|digits_between:0,20',
+            'nome' => 'required|serbinario_alpha_space|max:60',
+            'sigla' => 'serbinario_alpha_space|max:20',
             'funcao_professor' => 'integer'
         ],
    ];

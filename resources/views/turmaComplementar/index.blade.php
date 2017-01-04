@@ -64,11 +64,13 @@
     </section>
 
     @include('turmaComplementar.modal_atividades')
+    @include('turmaComplementar.modal_alunos')
 @stop
 
 @section('javascript')
     @parent
     <script type="text/javascript" src="{{ asset('/dist/turmaComplementar/modal_atividades.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turmaComplementar/modal_alunos.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turmaComplementar-grid').DataTable({
             processing: true,
@@ -86,21 +88,41 @@
         // Global idTurmaComplementar
         var idTurmaComplementar;
 
-        // Evento para abrir o modal de cursos/turmas
+        // Evento para abrir o modal de atividades
         $(document).on("click", "#btnModalAtividades", function () {
-            // Recuperando o id do currículo
+            // Recuperando o id da atividade
             idTurmaComplementar = table.row($(this).parents('tr')).data().id;
 
             // Recuperando o nome e o código
             var codigo = table.row($(this).parents('tr')).data().codigo;
             var nome   = table.row($(this).parents('tr')).data().nome;
 
-            // prenchendo o titulo do nome do aluno
+            // prenchendo o titulo do modal de atividades
             $('#aNome').text(nome);
             $('#aCodigo').text(codigo);
 
             // Executando o modal
             runModalAtividades(idTurmaComplementar);
+        });
+
+        // Evento para abrir o modal de alunos
+        $(document).on("click", "#btnModalAlunos", function () {
+            // Recuperando o id da turma
+            idTurmaComplementar = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+            var vagas  = table.row($(this).parents('tr')).data().vagas;
+
+            // prenchendo o titulo do nome do aluno
+            $('#alNome').text(nome);
+            $('#alCodigo').text(codigo);
+            $('#numMaxVagas').val(vagas);
+            numAlunosMatriculados();
+
+            // Executando o modal
+            runModalAluno(idTurmaComplementar);
         });
     </script>
 @stop

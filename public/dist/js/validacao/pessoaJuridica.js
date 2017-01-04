@@ -73,7 +73,7 @@ $(document).ready(function () {
 
             'telefone[nome]': {
                 required: true,
-                number: true,
+                //number: true,
                 maxlength: 18
             },
 
@@ -116,6 +116,12 @@ $(document).ready(function () {
              minlength: "Enter at least 5 characters"
          }
          },*/
+        invalidHandler: function(e, validator) {
+            if(validator.errorList.length) {
+                $('#tabs').attr('data-tab-color', 'red');
+                $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+            }
+        },
         //Define qual elemento será adicionado
         errorElement : 'small',
         errorPlacement: function(error, element) {
