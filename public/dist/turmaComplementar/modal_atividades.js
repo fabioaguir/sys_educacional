@@ -21,11 +21,6 @@ function loadTableAtividade (idTurmaComplementar) {
     return tableAtividade;
 }
 
-// Limpando os campos de inclusão
-function clearFields() {
-    $('#select-atividades').val(null).trigger("change");
-}
-
 // Função de execução
 function runModalAtividades(idTurmaComplementar)
 {
@@ -76,6 +71,12 @@ $("#select-atividades").select2({
     }
 });
 
+// Limpando os campos de inclusão
+function clearFieldsAtividades() {
+    $('#select-atividades').val(null).trigger("change");
+}
+
+
 //Evento do click no botão adicionar atividade
 $(document).on('click', '#addAtividade', function (event) {
     // Recuperando o array do select2 e valores do formulário
@@ -108,7 +109,7 @@ $(document).on('click', '#addAtividade', function (event) {
         data: dados,
         datatype: 'json'
     }).done(function (json) {
-        clearFields();
+        clearFieldsAtividades();
         swal("Atividade(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
         tableAtividade.ajax.reload();
         table.ajax.reload();
@@ -131,7 +132,7 @@ $(document).on('click', '#destroyAtividade', function () {
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
-        clearFields();
+        clearFieldsAtividades();
         swal("Atividade removida com sucesso!", "Click no botão abaixo!", "success");
         tableAtividade.ajax.reload();
         table.ajax.reload();
