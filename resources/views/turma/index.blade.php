@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('turma.create') }}">Nova Turma</a>
+                                <a class="btn btn-primary btn-sm m-t-10" href="{{ route('turma.create') }}">Nova Turma</a>
                             </div>
                         </div>
                     </div>
@@ -68,11 +68,13 @@
     </section>
 
     @include('turma.modal_disciplinas')
+    @include('turma.modal_alunos')
 @stop
 
 @section('javascript')
     @parent
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_disciplinas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turma/modal_alunos.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -107,6 +109,23 @@
 
             // Executando o modal
             runModalDisciplinas(idTurma);
+        });
+
+        // Evento para abrir o modal de alunos/turmas
+        $(document).on("click", "#btnModalAlunos", function () {
+            // Recuperando o id do currículo
+            idTurma = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#alNome').text(nome);
+            $('#alCodigo').text(codigo);
+
+            // Executando o modal
+            runModalAluno(idTurma);
         });
     </script>
 @stop

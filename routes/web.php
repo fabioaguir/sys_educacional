@@ -377,6 +377,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('grid/{id}', ['as' => 'grid', 'uses' => 'TurmaDisciplinaController@grid']);
             Route::post('select2', ['as' => 'select2', 'uses' => 'TurmaDisciplinaController@disciplinasSelect2']);
         });
+
+        # Modal de alunos
+        Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+            Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'TurmaAlunoController@grid']);
+        });
     });
 
     # Rotas das turmas complementares
