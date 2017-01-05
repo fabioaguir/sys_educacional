@@ -25,7 +25,6 @@ $(document).ready(function () {
 
             'endereco[logradouro]': {
                 required: true,
-                alphaSpace: true,
                 maxlength: 200
             },
 
@@ -36,8 +35,7 @@ $(document).ready(function () {
             },
 
             'endereco[bairro_id]': {
-                required: true,
-                integer: true
+                required: true
             }
         },
         //For custom messages
