@@ -17,4 +17,11 @@ class TipoEvento extends Model implements Transformable
         'abreviatura',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function eventos()
+    {
+        return $this->hasMany(Evento::class, 'tipo_evento_id');
+    }
 }
