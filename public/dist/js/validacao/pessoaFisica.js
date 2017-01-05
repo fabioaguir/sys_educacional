@@ -90,7 +90,8 @@ $(document).ready(function () {
             },
 
             data_nascimento: {
-                dateBr: true,
+                required: true,
+                //dateBr: true,
                 maxlength: 15
             },
 
@@ -151,6 +152,21 @@ $(document).ready(function () {
             'endereco[cep]': {
                 //number: true,
                 maxlength: 15
+            },
+
+            'endereco[estado_id]': {
+                required: true,
+                integer: true
+            },
+
+            'endereco[cidade_id]': {
+                required: true,
+                integer: true
+            },
+
+            'endereco[bairro_id]': {
+                required: true,
+                integer: true
             },
 
             'endereco[zona_id]': {

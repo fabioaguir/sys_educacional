@@ -153,17 +153,33 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
-                                <label for="endereco['estado_id']">Estado *</label>
+                                <label for="endereco[estado_id]">Estado *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[estado_id]", (["" => "Selecione estado"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select form-control', 'id' => 'estado')) !!}
+                                    @if(isset($model->endereco->bairro->cidade->estado->id))
+                                        <div class="select">
+                                            {!! Form::select("endereco[estado_id]", (["" => "Selecione"] + $loadFields['estado']->toArray()), $model->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
+                                        </div>
+                                    @else
+                                        <div class="select">
+                                            {!! Form::select("endereco[estado_id]", (["" => "Selecione"] + $loadFields['estado']->toArray()), null,array('class' => 'form-control', 'id' => 'estado')) !!}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-4">
                             <div class=" fg-line">
-                                <label for="endereco['cidade_id']">Cidade *</label>
+                                <label for="endereco[cidade_id]">Cidade *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[cidade_id]", (["" => "Selecione cidade"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select form-control', 'id' => 'cidade')) !!}
+                                    @if(isset($model->endereco->bairro->cidade->id))
+                                        <div class="select">
+                                            {!! Form::select("endereco[cidade_id]", array($model->endereco->bairro->cidade->id => $model->endereco->bairro->cidade->nome), $model->endereco->bairro->cidade->id, array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                        </div>
+                                    @else
+                                        <div class="select">
+                                            {!! Form::select('endereco[cidade_id]', array(), Session::getOldInput('cidade_id'), array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -171,7 +187,15 @@
                             <div class=" fg-line">
                                 <label for="endereco[bairro_id]">Bairro *</label>
                                 <div class="select">
-                                    {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('class' => 'Form::select form-control', 'id' => 'bairro')) !!}
+                                    @if(isset($model->endereco->bairro->id))
+                                        <div class="select">
+                                            {!! Form::select("endereco[bairro_id]", array($model->endereco->bairro->id => $model->endereco->bairro->nome), $model->endereco->bairro->id, array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                        </div>
+                                    @else
+                                        <div class="select">
+                                            {!! Form::select("endereco[bairro_id]", array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
