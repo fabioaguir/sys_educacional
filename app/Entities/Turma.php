@@ -53,4 +53,12 @@ class Turma extends Model implements Transformable
     {
         return $this->belongsTo(Curso::class, 'curso_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function pareceres()
+    {
+        return $this->belongsToMany(Parecer::class, 'turmas_pareceres', 'turma_id', 'parecer_id');
+    }
 }

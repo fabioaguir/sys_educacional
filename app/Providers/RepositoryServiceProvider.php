@@ -254,6 +254,7 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\AlunoTurmaRepositoryEloquent::class);
         
         
+        $this->app->bind(\SerEducacional\Repositories\ParecerRepository::class, \SerEducacional\Repositories\ParecerRepositoryEloquent::class);
         //:end-bindings:
     }
 }
