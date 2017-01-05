@@ -107,14 +107,20 @@ class TurmaController extends Controller
             $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
 
             # Verificando se o currículo possui disciplinas
-            if(true) {
+            if(count($turma->pareceres) == 0) {
                 # Html de delete
                 $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
             # Html de disciplinas
-            $html .= '<a title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
-            
+            $html .= '<a style="margin-right: 5%;" title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+
+            # Html de alunos
+            $html .= '<a style="margin-right: 5%;" title="Alunos" id="btnModalAlunos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+
+            # Html de pareceres
+            $html .= '<a title="Pareceres" id="btnModalPareceres" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+
             # Retorno
             return $html;
         })->make(true);

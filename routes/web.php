@@ -377,6 +377,19 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('grid/{id}', ['as' => 'grid', 'uses' => 'TurmaDisciplinaController@grid']);
             Route::post('select2', ['as' => 'select2', 'uses' => 'TurmaDisciplinaController@disciplinasSelect2']);
         });
+
+        # Modal de alunos
+        Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+            Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'TurmaAlunoController@grid']);
+        });
+
+        # Modal de pareceres
+        Route::group(['prefix' => 'parecer', 'as' => 'parecer.'], function () {
+            Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'TurmaParecerController@grid']);
+            Route::post('select2', ['as' => 'select2', 'uses' => 'TurmaParecerController@parecerSelect2']);
+            Route::post('adicionarParecer', ['as' => 'adicionarParecer', 'uses' => 'TurmaParecerController@adicionarParecer']);
+            Route::post('removerParecer', ['as' => 'removerParecer', 'uses' => 'TurmaParecerController@removerParecer']);
+        });
     });
 
     # Rotas das turmas complementares
@@ -405,6 +418,17 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('adicionarAtividade', ['as' => 'adicionarAluno', 'uses' => 'TurmaComplementarAlunoController@adicionarAluno']);
             Route::post('removerAtividade', ['as' => 'removerAluno', 'uses' => 'TurmaComplementarAlunoController@removerAluno']);
         });
+    });
+
+    # Rotas de pareceres
+    Route::group(['prefix' => 'parecer', 'as' => 'parecer.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'ParecerController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'ParecerController@grid']);
+        Route::get('create', ['as' => 'create', 'uses' => 'ParecerController@create']);
+        Route::post('store', ['as' => 'store', 'uses' => 'ParecerController@store']);
+        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParecerController@edit']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParecerController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ParecerController@destroy']);
     });
 });
 
