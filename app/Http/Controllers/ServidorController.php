@@ -91,9 +91,17 @@ class ServidorController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+
+            # Recuperando a calendario
+            $servidor = $this->repository->find($row->id);
+            
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            if(count($servidor->cgm->telefones) == 0 || count($servidor->relacaoTrabalho) == 0
+                || count($servidor->formacoes) == 0 || count($servidor->atividades) == 0 || count($servidor->alocacoes) == 0) {
+                $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Html de adicionar telefones
             $html .= '<a style="margin-right: 5%;" title="Adicionar Telefones" id="btnModalAdicionarTelefone" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-earphone"></i></a>';

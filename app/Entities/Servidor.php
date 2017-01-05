@@ -57,6 +57,39 @@ class Servidor extends Model implements Transformable
     {
         return $this->belongsTo(PessoaFisica::class, 'id_cgm');
     }
+    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function relacaoTrabalho()
+    {
+        return $this->hasMany(RelacaoTrabalho::class, 'servidor_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function formacoes()
+    {
+        return $this->hasMany(Formacao::class, 'servidor_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function atividades()
+    {
+        return $this->hasMany(Atividade::class, 'servidor_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function alocacoes()
+    {
+        return $this->hasMany(Alocacao::class, 'servidor_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

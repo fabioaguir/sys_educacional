@@ -99,7 +99,7 @@ class TurmaComplementarController extends Controller
             $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
 
             # Verificando se o currículo possui disciplinas
-            if(count($turma->atividades) == 0) {
+            if(count($turma->atividades) == 0 && count($turma->alunos) == 0) {
                 # Html de delete
                 $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }

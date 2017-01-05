@@ -1,8 +1,8 @@
 // Carregando a table
-var tableAtividade;
-function loadTableAtividade (idTurmaComplementar) {
+var tableParecer;
+function loadTableParecer (idTurma) {
     // Carregaando a grid
-    tableAtividade = $('#atividades-grid').DataTable({
+    tableParecer = $('#pareceres-grid').DataTable({
         retrieve: true,
         processing: true,
         serverSide: true,
@@ -10,40 +10,40 @@ function loadTableAtividade (idTurmaComplementar) {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: laroute.route('turmaComplementar.atividade.grid', {'idTurmaComplementar' : idTurmaComplementar }),
+        ajax: laroute.route('turma.parecer.grid', {'idTurma' : idTurma }),
         columns: [
-            {data: 'codigo', name: 'atividades_complementares.codigo'},
-            {data: 'nome', name: 'atividades_complementares.nome'},
+            {data: 'codigo', name: 'pareceres.codigo'},
+            {data: 'nome', name: 'pareceres.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
-    return tableAtividade;
+    return tableParecer;
 }
 
 // Função de execução
-function runModalAtividades(idTurmaComplementar)
+function runModalParecer(idTurma)
 {
     //Carregando as grids de situações
-    if(tableAtividade) {
-        loadTableAtividade(idTurmaComplementar).ajax.url(laroute.route('turmaComplementar.atividade.grid', {'idTurmaComplementar' :idTurmaComplementar })).load();
+    if(tableParecer) {
+        loadTableParecer(idTurma).ajax.url(laroute.route('turma.parecer.grid', {'idTurma' :idTurma })).load();
     } else {
-        loadTableAtividade(idTurmaComplementar);
+        loadTableParecer(idTurma);
     }
     
     // Exibindo o modal
-    $('#modal-atividades').modal({'show' : true});
+    $('#modal-pareceres').modal({'show' : true});
 }
 
 
 //consulta via select2
-$("#select-atividades").select2({
+$("#select-pareceres").select2({
     placeholder: 'Selecione:',
     theme: "bootstrap",
     width: "100%",
     ajax: {
         type: 'POST',
-        url: laroute.route('turmaComplementar.atividade.select2'),
+        url: laroute.route('turma.parecer.select2'),
         dataType: 'json',
         delay: 250,
         crossDomain: true,
@@ -51,7 +51,7 @@ $("#select-atividades").select2({
             return {
                 'search': params.term,
                 'page': params.page || 1,
-                'idTurmaComplementar':  idTurmaComplementar
+                'idTurma':  idTurma
             };
         },
         processResults: function (data, params) {
@@ -72,19 +72,19 @@ $("#select-atividades").select2({
 });
 
 // Limpando os campos de inclusão
-function clearFieldsAtividades() {
-    $('#select-atividades').val(null).trigger("change");
+function clearFieldsPareceres() {
+    $('#select-pareceres').val(null).trigger("change");
 }
 
 
-//Evento do click no botão adicionar atividade
-$(document).on('click', '#addAtividade', function (event) {
+//Evento do click no botão adicionar parecer
+$(document).on('click', '#addParecer', function (event) {
     // Recuperando o array do select2 e valores do formulário
-    var array = $('#select-atividades').select2('data');
+    var array = $('#select-pareceres').select2('data');
    
     // Verificando se alguma disciplina foi selecionada
     if (!array.length > 0) {
-        swal("Oops...", "Você deve selecionar uma atividade!", "error");
+        swal("Oops...", "Você deve selecionar uma parecer!", "error");
         return false;
     }
 
@@ -98,43 +98,43 @@ $(document).on('click', '#addAtividade', function (event) {
 
     //Setando o o json para envio
     var dados = {
-        'idTurmaComplementar' : idTurmaComplementar,
-        'idAtividades' : arrayId
+        'idTurma' : idTurma,
+        'idPareceres' : arrayId
     };
 
     // Requisição Ajax
     jQuery.ajax({
         type: 'POST',
-        url: laroute.route('turmaComplementar.atividade.adicionarAtividade'),
+        url: laroute.route('turma.parecer.adicionarParecer'),
         data: dados,
         datatype: 'json'
     }).done(function (json) {
-        clearFieldsAtividades();
-        swal("Atividade(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
-        tableAtividade.ajax.reload();
+        clearFieldsPareceres();
+        swal("Parecer(es) adicionado(s) com sucesso!", "Click no botão abaixo!", "success");
+        tableParecer.ajax.reload();
         table.ajax.reload();
     });
 });
 
-//Evento de remover a atividade
-$(document).on('click', '#destroyAtividade', function () {
-    var idTurmaAtividade = tableAtividade.row($(this).parents('tr').index()).data().idTurmaAtividade;
+//Evento de remover a parecer
+$(document).on('click', '#destroyParecer', function () {
+    var idTurmaParecer = tableParecer.row($(this).parents('tr').index()).data().idTurmaParecer;
 
     //Setando o o json para envio
     var dados = {
-        'idTurmaAtividade' : idTurmaAtividade
+        'idTurmaParecer' : idTurmaParecer
     };
 
     // Requisição Ajax
     jQuery.ajax({
         type: 'POST',
-        url: laroute.route('turmaComplementar.atividade.removerAtividade'),
+        url: laroute.route('turma.parecer.removerParecer'),
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
-        clearFieldsAtividades();
-        swal("Atividade removida com sucesso!", "Click no botão abaixo!", "success");
-        tableAtividade.ajax.reload();
+        clearFieldsPareceres();
+        swal("Parecer removida com sucesso!", "Click no botão abaixo!", "success");
+        tableParecer.ajax.reload();
         table.ajax.reload();
     });
 });

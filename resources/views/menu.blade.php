@@ -153,6 +153,7 @@
                 <ul>
                     <li>
                         <a href="{{ route('dependencia.index')  }}"> Dependências</a>
+                        <a href="{{ route('parecer.index')  }}"> Pareceres</a>
                         <a href="{{ route('cargo.index')  }}"> Cargos</a>
                         <a href="{{ route('modalidadeEnsino.index')  }}">Modalidade de Ensino</a>
                         <a href="{{ route('nivelEnsino.index')  }}">Níveis de Ensino</a>

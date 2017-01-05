@@ -1,39 +1,18 @@
 // Regras de validação
 $(document).ready(function () {
 
-    $("#formCalendario").validate({
+    $("#formParecer").validate({
         rules: {
             nome: {
                 required: true,
-                maxlength: 150
+                maxlength: 100
             },
-            ano: {
+
+            codigo: {
                 required: true,
-                maxlength: 4
-            },
-            duracoes_id: {
-                integer:true,
-                required: true
-            },
-            data_inicial: {
-                dateBr: true,
-                required: true,
-                maxlength: 10
-            },
-            data_final: {
-                dateBr: true,
-                required: true,
-                maxlength: 10
-            },
-            data_resultado_final: {
-                dateBr: true,
-                required: true,
-                maxlength: 10
-            },
-            status_id: {
-                integer: true,
-                required: true
+                maxlength: 50
             }
+
         },
         //For custom messages
         /*messages: {

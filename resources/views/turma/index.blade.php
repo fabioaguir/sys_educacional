@@ -69,12 +69,14 @@
 
     @include('turma.modal_disciplinas')
     @include('turma.modal_alunos')
+    @include('turma.modal_pareceres')
 @stop
 
 @section('javascript')
     @parent
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_disciplinas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_alunos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turma/modal_pareceres.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -126,6 +128,23 @@
 
             // Executando o modal
             runModalAluno(idTurma);
+        });
+
+        // Evento para abrir o modal de pareceres
+        $(document).on("click", "#btnModalPareceres", function () {
+            // Recuperando o id do currículo
+            idTurma = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#paNome').text(nome);
+            $('#paCodigo').text(codigo);
+
+            // Executando o modal
+            runModalParecer(idTurma);
         });
     </script>
 @stop

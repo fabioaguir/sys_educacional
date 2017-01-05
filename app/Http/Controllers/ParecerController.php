@@ -3,28 +3,25 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SerEducacional\Http\Requests\TipoEventoCreateRequest;
-use SerEducacional\Http\Requests\TipoEventoUpdateRequest;
-use SerEducacional\Repositories\TipoEventoRepository;
-use SerEducacional\Validators\TipoEventoValidator;
-use SerEducacional\Services\TipoEventoService;
+use SerEducacional\Repositories\ParecerRepository;
+use SerEducacional\Services\ParecerService;
+use SerEducacional\Validators\ParecerValidator;
 use Yajra\Datatables\Datatables;
 
 
-class TipoEventosController extends Controller
+class ParecerController extends Controller
 {
 
     /**
-     * @var TipoEventoRepository
+     * @var ParecerRepository
      */
     protected $repository;
 
     /**
-     * @var TipoEventoValidator
+     * @var ParecerValidator
      */
     protected $validator;
 
@@ -34,25 +31,23 @@ class TipoEventosController extends Controller
     private $loadFields = [];
 
     /**
-     * @var TipoEventoService
+     * @var ParecerService
      */
     private $service;
 
     /**
-     * TipoEventosController constructor.
-     * @param TipoEventoRepository $repository
-     * @param TipoEventoValidator $validator
-     * @param TipoEventoService $service
+     * ParecersController constructor.
+     * @param ParecerRepository $repository
+     * @param ParecerValidator $validator
      */
-    public function __construct(TipoEventoRepository $repository,
-                                TipoEventoValidator $validator,
-                                TipoEventoService $service)
+    public function __construct(ParecerRepository $repository,
+                                ParecerValidator $validator,
+                                ParecerService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
-        $this->service  = $service;
+        $this->service = $service;
     }
-
 
     /**
      * Display a listing of the resource.
@@ -62,7 +57,7 @@ class TipoEventosController extends Controller
     public function index()
     {
         # Retorno para view
-        return view('tipoEvento.index');
+        return view('parecer.index');
     }
 
     /**
@@ -71,24 +66,24 @@ class TipoEventosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('tipo_evento')
+        $rows = \DB::table('pareceres')
             ->select([
-                'tipo_evento.id',
-                'tipo_evento.nome',
-                'tipo_evento.abreviatura',
+                'pareceres.id',
+                'pareceres.nome',
+                'pareceres.codigo'
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recupernado a entidade
+            $parecer = $this->repository->find($row->id);
 
-            # Recuperando o tipo de evento
-            $tipo = $this->repository->find($row->id);
-            
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html  = '<a style="margin-right: 5%;" title="Editar Parecer" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
 
-            if(count($tipo->eventos) == 0){
-                $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            # Verificando a possibilidade de exclusão
+            if(count($parecer->turmas) == 0) {
+                $html .= '<a href="destroy/'.$row->id.'" title="Remover Parecer" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
             # Retorno
@@ -105,7 +100,7 @@ class TipoEventosController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('tipoEvento.create', compact('loadFields'));
+        return view('parecer.create', compact('loadFields'));
     }
 
     /**
@@ -150,11 +145,12 @@ class TipoEventosController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('tipoEvento.edit', compact('model', 'loadFields'));
+            return view('parecer.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
 
     /**
      * @param Request $request
