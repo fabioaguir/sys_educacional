@@ -18,4 +18,11 @@ class Cargo extends Model implements Transformable
         'cargo_professor',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function servidores()
+    {
+        return $this->hasMany(Servidor::class, 'cargos_id');
+    }
 }

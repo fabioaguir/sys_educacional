@@ -100,9 +100,16 @@ class CalendariosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+
+            # Recuperando a calendario
+            $calendario = $this->repository->find($row->id);
+
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            if(count($calendario->periodoAvaliacao) == 0 || count($calendario->evento) == 0) {
+                $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Html de adicionar período de avaliação
             $html .= '<a style="margin-right: 5%;" title="Adicionar Período de Avaliação" id="btnModalAdicionarPeriodo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';

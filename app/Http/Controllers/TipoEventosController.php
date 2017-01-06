@@ -80,9 +80,16 @@ class TipoEventosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+
+            # Recuperando o tipo de evento
+            $tipo = $this->repository->find($row->id);
+            
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            if(count($tipo->eventos) == 0){
+                $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Retorno
             return $html;

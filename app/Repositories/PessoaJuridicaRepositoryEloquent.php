@@ -25,18 +25,6 @@ class PessoaJuridicaRepositoryEloquent extends BaseRepository implements PessoaJ
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-        return PessoaJuridicaValidator::class;
-    }
-
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

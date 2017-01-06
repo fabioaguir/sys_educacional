@@ -161,5 +161,13 @@
             // Executando o modal
             runModalAdicionarEventos(idCalendario);
         });
+
+        // Máscaras
+        $(document).ready(function() {
+            $('#dtInicial').mask('00/00/0000');
+            $('#dtFinal').mask('00/00/0000');
+            $('#dtFeriado').mask('00/00/0000');
+        });
+
     </script>
 @stop

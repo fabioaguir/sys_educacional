@@ -5,12 +5,10 @@ $(document).ready(function () {
         rules: {
             nome: {
                 required: true,
-                alphaSpace: true,
                 maxlength: 150
             },
             ano: {
                 required: true,
-                alphaSpace: true,
                 maxlength: 4
             },
             duracoes_id: {

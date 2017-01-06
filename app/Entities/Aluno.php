@@ -26,4 +26,12 @@ class Aluno extends Model implements Transformable
     {
         return $this->belongsTo(PessoaFisica::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function matricula()
+    {
+        return $this->hasMany(AlunoTurma::class, 'alunos_id');
+    }
 }

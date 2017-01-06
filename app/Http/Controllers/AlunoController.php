@@ -86,10 +86,16 @@ class AlunoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+
+            # Recuperando a aluno
+            $aluno = $this->repository->find($row->id);
+
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            
-            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            if(count($aluno->matricula) == 0){
+                $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Html de adicionar alunos em turma
             $html .= '<a title="Matricular" id="btnModalAdicionarAlunoTurma" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';

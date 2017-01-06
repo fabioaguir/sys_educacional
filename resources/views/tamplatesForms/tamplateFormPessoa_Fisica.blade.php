@@ -52,6 +52,7 @@
                                         {!! Form::text('data_falecimento', Session::getOldInput('data_falecimento'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de falecimento')) !!}
                                     </div>
                                 </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -228,7 +229,9 @@
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="endereco[logradouro]">Logradouro *</label>
+                                        @if(isset($model->cgm->endereco->bairro->cidade->estado->id))
                                         {!! Form::text("endereco[logradouro]", Session::getOldInput("endereco['logradouro']"), array('class' => 'form-control input-sm', 'placeholder' => 'Logradouro')) !!}
+                                        @else
                                     </div>
                                 </div>
                             </div>
@@ -262,17 +265,33 @@
                         <div class="row">
                             <div class="form-group col-sm-4">
                                 <div class=" fg-line">
-                                    <label for="endereco['estado_id']">Estado *</label>
+                                    <label for="endereco[estado_id]">Estado *</label>
                                     <div class="select">
-                                        {!! Form::select("endereco[estado_id]", (["" => "Selecione estado"] + $loadFields['estado']->toArray()), null, array('class' => 'Form::select form-control', 'id' => 'estado')) !!}
+                                        @if(isset($model->endereco->bairro->cidade->estado->id))
+                                            <div class="select">
+                                                {!! Form::select("endereco[estado_id]", (["" => "Selecione"] + $loadFields['estado']->toArray()), $model->cgm->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
+                                            </div>
+                                        @else
+                                            <div class="select">
+                                                {!! Form::select("endereco[estado_id]", (["" => "Selecione"] + $loadFields['estado']->toArray()), null,array('class' => 'form-control', 'id' => 'estado')) !!}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-sm-4">
                                 <div class=" fg-line">
-                                    <label for="endereco['cidade_id']">Cidade *</label>
+                                    <label for="endereco[cidade_id]">Cidade *</label>
                                     <div class="select">
-                                        {!! Form::select("endereco[cidade_id]", (["" => "Selecione cidade"] + $loadFields['cidade']->toArray()), null, array('class' => 'Form::select form-control', 'id' => 'cidade')) !!}
+                                        @if(isset($model->endereco->bairro->cidade->id))
+                                            <div class="select">
+                                                {!! Form::select("endereco[cidade_id]", array($model->cgm->endereco->bairro->cidade->id => $model->cgm->endereco->bairro->cidade->nome), $model->cgm->endereco->bairro->cidade->id, array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                            </div>
+                                        @else
+                                            <div class="select">
+                                                {!! Form::select('endereco[cidade_id]', array(), Session::getOldInput('cidade_id'), array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -280,7 +299,15 @@
                                 <div class=" fg-line">
                                     <label for="endereco[bairro_id]">Bairro *</label>
                                     <div class="select">
-                                        {!! Form::select("endereco[bairro_id]", ["" => "Selecione bairro"], null, array('class' => 'Form::select form-control', 'id' => 'bairro')) !!}
+                                        @if(isset($model->endereco->bairro->id))
+                                            <div class="select">
+                                                {!! Form::select("endereco[bairro_id]", array($model->cgm->endereco->bairro->id => $model->cgm->endereco->bairro->nome), $model->cgm->endereco->bairro->id, array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                            </div>
+                                        @else
+                                            <div class="select">
+                                                {!! Form::select("endereco[bairro_id]", array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -308,8 +335,7 @@
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js')  }}"></script>
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/pessoaFisica.js')  }}"></script>
-
-    {{-- MASCARAS --}}
+    {{--Mascaras--}}
     <script type="text/javascript">
         $(document).ready(function() {
             //$('#cpf').mask('000.000.000-00', {reverse: true});
@@ -346,7 +372,7 @@
                     datatype: 'json',
                     headers: {
                         'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                    },
+                    }
                 }).done(function (json) {
                     var option = "";
 
@@ -383,7 +409,7 @@
                     datatype: 'json',
                     headers: {
                         'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                    },
+                    }
                 }).done(function (json) {
                     var option = "";
 
@@ -399,5 +425,4 @@
         });
         //Fim - Retorno de cidades associadas ao estados
     </script>
-
 @endsection
