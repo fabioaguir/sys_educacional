@@ -1,11 +1,11 @@
-{{--{{dd($model->cgm->id)}}--}}
+{{--{{dd($model)}}--}}
 <div class="block-header">
     <h2>Cadastro de Servidor</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
 
-        <input type="hidden" id="idServidor" value="{{ isset($model->cgm->id) ? $model->id : null }}">
+        <input type="hidden" id="idServidor" value="{{ isset($model->cgm->id) ? $model->cgm->id : null }}">
 
         <!-- Painel -->
         <div role="tabpanel">

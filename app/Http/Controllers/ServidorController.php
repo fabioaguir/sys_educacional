@@ -268,7 +268,7 @@ class ServidorController extends Controller
                     ->get();
             }
 
-            if (count($servidor) > 0 ) {
+            if (count($servidor)) {
                 $result = true;
             }
 
