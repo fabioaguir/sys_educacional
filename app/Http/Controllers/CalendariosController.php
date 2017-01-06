@@ -107,7 +107,7 @@ class CalendariosController extends Controller
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
 
-            if(count($calendario->periodoAvaliacao) == 0 || count($calendario->evento) == 0) {
+            if(count($calendario->periodoAvaliacao) == 0 && count($calendario->evento) == 0) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
