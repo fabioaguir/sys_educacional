@@ -221,6 +221,7 @@ class ServidorController extends Controller
      */
     public function destroy($id)
     {
+
         $deleted = $this->repository->delete($id);
 
         if (request()->wantsJson()) {
