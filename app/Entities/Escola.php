@@ -59,6 +59,14 @@ class Escola extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function alocacoes()
+    {
+        return $this->hasMany(Alocacao::class, 'escola_id');
+    }
+
+    /**
      * @return $this
      */
     public function cursos()
