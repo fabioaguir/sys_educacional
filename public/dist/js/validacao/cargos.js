@@ -5,7 +5,6 @@ $(document).ready(function () {
         rules: {
             nome: {
                 required: true,
-                alphaSpace: true,
                 maxlangth:100
             },
 
@@ -15,8 +14,7 @@ $(document).ready(function () {
             },
 
             cargo_professor: {
-                required: true,
-                integer: true
+                required: true
             }
 
         },
