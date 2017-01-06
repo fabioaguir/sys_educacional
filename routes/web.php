@@ -82,9 +82,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServidorController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'ServidorController@update']);
         Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'ServidorController@destroy']);
+        
         //unique cpf
         Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'ServidorController@searchCpf']);
-        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
+        //Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
 
         # rotas para telefones
         Route::get('gridTelefone/{id}', ['as' => 'gridTelefone', 'uses' => 'TelefonesController@grid']);
