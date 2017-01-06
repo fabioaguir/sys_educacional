@@ -90,6 +90,7 @@
                                 <thead>
                                 <tr>
                                     <th>Matrícula</th>
+                                    <th>Data</th>
                                     <th>Turma</th>
                                     <th>Escola</th>
                                     <th>Curso</th>

@@ -79,12 +79,15 @@ class AlunoTurmasController extends Controller
                 'calendarios.ano as calendario_ano',
                 'series.nome as serie',
                 'turnos.nome as turno',
+                \DB::raw('DATE_FORMAT(alunos_turmas.data_matricula,"%d/%m/%Y") as data_matricula'),
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             //$html = '<a style="margin-right: 5%;" title="Editar" id="editarTelefone" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html = '<a title="Remover" id="deleteAlunoTurma" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            //$html = '<a title="Remover" id="deleteAlunoTurma" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            $html = " ";
 
             # Retorno
             return $html;
