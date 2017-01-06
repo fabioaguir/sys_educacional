@@ -5,13 +5,11 @@ $(document).ready(function () {
         rules: {
             nome: {
                 required: true,
-                alphaSpace: true,
                 maxlength: 45
             },
 
             abreviatura: {
                 required: true,
-                alphaSpace: true,
                 maxlength: 30
             },
 
