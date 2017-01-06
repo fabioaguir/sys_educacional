@@ -1,3 +1,4 @@
+{{--{{dd($model->cgm->id)}}--}}
 <div class="block-header">
     <h2>Cadastro de Servidor</h2>
 </div>

@@ -16,7 +16,7 @@ $(document).ready(function () {
             },
 
             'cgm[data_nascimento]': {
-                //dateBr: true,
+                required: true,
                 maxlength: 15
             },
 
@@ -65,6 +65,16 @@ $(document).ready(function () {
             },
 
             'cgm[endereco][bairro_id]': {
+                required: true,
+                integer: true
+            },
+
+            cidade: {
+                required: true,
+                integer: true
+            },
+
+            estado: {
                 required: true,
                 integer: true
             },

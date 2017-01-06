@@ -228,7 +228,7 @@
                                             </div>
                                         @else
                                             <div class="select">
-                                                {!! Form::select('cidade', array(), Session::getOldInput('cidade_id'), array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                                {!! Form::select("cidade", array(), Session::getOldInput('cidade'), array('class' => 'form-control', 'id' => 'cidade')) !!}
                                             </div>
                                         @endif
                                     </div>
