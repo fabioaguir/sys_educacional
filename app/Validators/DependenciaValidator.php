@@ -12,8 +12,8 @@ class DependenciaValidator extends LaravelValidator
 
     protected $attributes = [
         'escola_id' => 'Escola',
-        'nome' => 'required|serbinario_alpha_space|max:100',
-        'capacidade' => 'required|serbinario_alpha_space|max:100',
+        'nome' => 'required|max:100',
+        'capacidade' => 'required|max:100',
     ];
 
     protected $messages = [
@@ -31,14 +31,14 @@ class DependenciaValidator extends LaravelValidator
 
         ValidatorInterface::RULE_CREATE => [
             'escola_id' => 'required|integer',
-            'nome' => 'required|serbinario_alpha_space|max:100',
-            'capacidade' => 'required|serbinario_alpha_space|max:100',
+            'nome' => 'required|max:100',
+            'capacidade' => 'required|max:100',
         ],
 
         ValidatorInterface::RULE_UPDATE => [
             'escola_id' => 'required|integer',
-            'nome' => 'required|serbinario_alpha_space|max:100',
-            'capacidade' => 'required|serbinario_alpha_space|max:100',
+            'nome' => 'required|max:100',
+            'capacidade' => 'required|max:100',
         ],
    ];
 }
