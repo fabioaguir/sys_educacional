@@ -71,9 +71,8 @@ class AlocacaosController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             //$html = '<a style="margin-right: 5%;" title="Editar" id="editarTelefone" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            //$html = '<a title="Remover" id="deleteAlocacao" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-
-            $html = "";
+            $html = '<a title="Remover" id="deleteAlocacao" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            
 
             # Retorno
             return $html;
