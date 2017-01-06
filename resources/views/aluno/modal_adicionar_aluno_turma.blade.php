@@ -43,7 +43,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="data">Data da matrícula *</label>
-                                            {!! Form::text('data', null, array('class' => 'form-control input-sm', 'id' => 'data', 'placeholder' => 'Data da matrícula')) !!}
+                                            {!! Form::text('data', null, array('class' => 'form-control input-sm date-picker', 'id' => 'data', 'placeholder' => 'Data da matrícula')) !!}
                                         </div>
                                     </div>
                                 </div>
