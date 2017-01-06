@@ -91,7 +91,7 @@ class EscolaController extends Controller
             $html  = '<a style="margin-right: 1%;" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
 
             # Verificando a possibilidade de exclusão
-            if(count($escola->cursos) == 0 || count($escola->alocacoes) == 0) {
+            if(count($escola->cursos) == 0 && count($escola->alocacoes) == 0) {
                 $html .= '<a style="margin-right: 3%;" href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
