@@ -98,8 +98,8 @@ class ServidorController extends Controller
             # Variáveis de uso
             $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
 
-            if(count($servidor->cgm->telefones) == 0 || count($servidor->relacaoTrabalho) == 0
-                || count($servidor->formacoes) == 0 || count($servidor->atividades) == 0 || count($servidor->alocacoes) == 0) {
+            if(count($servidor->cgm->telefones) == 0 && count($servidor->relacaoTrabalho) == 0
+                && count($servidor->formacoes) == 0 && count($servidor->atividades) == 0 && count($servidor->alocacoes) == 0) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
