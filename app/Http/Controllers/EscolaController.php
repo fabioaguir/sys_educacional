@@ -212,7 +212,7 @@ class EscolaController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('message', 'Servidor deleted.');
+        return redirect()->back()->with('message', 'Escola deletada.');
     }
     
 
