@@ -30,16 +30,16 @@ class PeriodoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|serbinario_alpha_space|max:45',
-            'abreviatura' => 'required|serbinario_alpha_space|max:30',
+            'nome' => 'required|max:45',
+            'abreviatura' => 'required|max:30',
             'soma_carga_horaria' => 'numeric|digits_between:0,30',
             'controle_frequencia' => 'required|numeric|digits_between:0,20',
             'ordenacao' => 'numeric|digits_between:0,20',
         ],
 
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|serbinario_alpha_space|max:45',
-            'abreviatura' => 'required|serbinario_alpha_space|max:30',
+            'nome' => 'required|max:45',
+            'abreviatura' => 'required|max:30',
             'soma_carga_horaria' => 'numeric|digits_between:0,30',
             'controle_frequencia' => 'required|numeric|digits_between:0,20',
             'ordenacao' => 'numeric|digits_between:0,20',

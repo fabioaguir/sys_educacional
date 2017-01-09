@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('destroy/{id}', ['middleware' => 'permission:servidor.destroy', 'as' => 'destroy', 'uses' => 'ServidorController@destroy']);
         //unique cpf
         Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'ServidorController@searchCpf']);
-        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
+        //Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'DisciplinasController@destroy']);
 
         # rotas para telefones
         Route::get('gridTelefone/{id}', ['middleware' => 'permission:servidor.add.telefone', 'as' => 'gridTelefone', 'uses' => 'TelefonesController@grid']);

@@ -84,6 +84,9 @@ class TipoEventosController extends Controller
             # Recuperando o usuário
             $user = Auth::user();
 
+            # Recuperando o tipo de evento
+            $tipo = $this->repository->find($row->id);
+            
             # Variáveis de uso
             $html  = '';
 
@@ -93,7 +96,7 @@ class TipoEventosController extends Controller
             }
 
             # Verifiando a permissão de remorção
-            if($user->can('tipo.evento.destroy')) {
+            if(count($tipo->eventos) == 0 && $user->can('tipo.evento.destroy')){
                 $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 

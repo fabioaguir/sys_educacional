@@ -100,13 +100,13 @@ class EscolaController extends Controller
             }
 
             # Verificando a possibilidade de exclusão
-            if(count($escola->cursos) == 0 && $user->can('escola.destroy')) {
+            if(count($escola->cursos) == 0 && count($escola->alocacoes) == 0 && $user->can('escola.destroy')) {
                 $html .= '<a style="margin-right: 3%;" href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
             # Verificando a permissão de adicionar cursos
             if($user->can('escola.add.curso')) {
-                # Html de adicionar disciplina
+                # Html de adicionar cursos
                 $html .= '<a title="Adicionar Cursos" id="btnModalAdicionarCursos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
             }
             

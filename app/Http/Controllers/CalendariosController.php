@@ -104,6 +104,10 @@ class CalendariosController extends Controller
             # Recuperando o usuário
             $user = Auth::user();
 
+
+            # Recuperando a calendario
+            $calendario = $this->repository->find($row->id);
+
             # Variáveis de uso
             $html  = '';
 
@@ -112,8 +116,8 @@ class CalendariosController extends Controller
                 $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             }
 
-            # Verificando a permissão de remorção
-            if($user->can('calendario.destroy')) {
+            # Verificando a permissão e possibilidade de exclusão
+            if(count($calendario->periodoAvaliacao) == 0 && count($calendario->evento) == 0 && $user->can('calendario.destroy')) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 

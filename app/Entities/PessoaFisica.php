@@ -160,4 +160,12 @@ class PessoaFisica extends Model implements Transformable
     {
         $this->attributes['data_vencimento_cnh'] = SerbinarioDateFormat::toUsa($value);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function telefones()
+    {
+        return $this->hasMany(Telefone::class, 'cgm_id');
+    }
 }

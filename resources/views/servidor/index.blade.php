@@ -9,6 +9,21 @@
 
             <div class="card material-table">
                 <div class="card-header">
+                    @if(Session::has('message'))
+                        <div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <em> {!! session('message') !!}</em>
+                        </div>
+                    @endif
+
+                    @if(Session::has('errors'))
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @foreach($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
 
                     @permission('servidor.store')
                     <!-- Botão novo -->
@@ -157,6 +172,11 @@
 
             // Executando o modal
             runModalAdicionarAlocacoes(idServidor);
+        });
+
+        // Máscaras
+        $(document).ready(function() {
+            $('#numero').mask('(00) 00000-0000');
         });
     </script>
 @stop

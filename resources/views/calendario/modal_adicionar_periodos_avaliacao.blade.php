@@ -42,7 +42,7 @@
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="data_inicial">Data inicial *</label>
-                                        {!! Form::text('data_inicial', null, array('class' => 'form-control input-sm ', 'id' => 'dtInicial', 'placeholder' => 'Data inicial')) !!}
+                                        {!! Form::text('data_inicial', null, array('class' => 'form-control input-sm', 'id' => 'dtInicial', 'placeholder' => 'Data inicial')) !!}
                                     </div>
                                 </div>
                             </div>

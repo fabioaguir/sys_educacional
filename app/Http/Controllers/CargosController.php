@@ -77,6 +77,9 @@ class CargosController extends Controller
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Recuperando o usuário
             $user = Auth::user();
+            
+            # Recuperando o cargo
+            $cargo = $this->repository->find($row->id);
 
             # Variáveis de uso
             $html  = '';
@@ -85,9 +88,9 @@ class CargosController extends Controller
             if($user->can('cargo.update')) {
                 $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             }
-
-            # Verificando a permissão de remorção
-            if($user->can('cargo.destroy')) {
+           
+            # Verificando a possibilidade e permissão de remorção
+            if(count($cargo->servidores) == 0 && $user->can('cargo.destroy')){
                 $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 

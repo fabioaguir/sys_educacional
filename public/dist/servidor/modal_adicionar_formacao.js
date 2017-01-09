@@ -34,6 +34,12 @@ function runModalAdicionarFormacoes(idServidor)
         loadTableFormacoes(idServidor);
     }
 
+    // Carregando os campos selects
+    cursos("");
+    instituicoes("");
+    situacoes("");
+    licenciaturas("");
+
     //Carregando as pos graduações
     $("#select-posgraduacao").select2({
         theme: "bootstrap",

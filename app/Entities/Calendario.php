@@ -91,4 +91,20 @@ class Calendario extends Model implements Transformable
     {
         return $this->belongsTo(PessoaFisica::class, 'duracoes_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function periodoAvaliacao()
+    {
+        return $this->hasMany(PeriodoAvaliacao::class, 'calendarios_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function evento()
+    {
+        return $this->hasMany(Evento::class, 'calendarios_id');
+    }
 }

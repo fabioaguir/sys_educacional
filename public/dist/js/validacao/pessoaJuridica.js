@@ -94,6 +94,16 @@ $(document).ready(function () {
                 maxlength: 100
             },
 
+            'endereco[estado_id]': {
+                required: true,
+                integer: true
+            },
+
+            'endereco[cidade_id]': {
+                required: true,
+                integer: true
+            },
+
             'endereco[cep]': {
                 //number: true,
                 maxlength: 15

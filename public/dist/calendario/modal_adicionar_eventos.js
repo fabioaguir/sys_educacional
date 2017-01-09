@@ -35,6 +35,9 @@ function runModalAdicionarEventos(idCalendario)
         loadTableEventos(idCalendario);
     }
 
+    // Carregando os selects
+    diaLetivo("");
+    
     // Desabilitando o botão de editar
     $('#edtEvento').prop('disabled', true);
     $('#edtEvento').hide();

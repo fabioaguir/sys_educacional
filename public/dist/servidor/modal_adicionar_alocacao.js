@@ -31,6 +31,9 @@ function runModalAdicionarAlocacoes(idServidor)
         loadTableAlocacoes(idServidor);
     }
 
+    // Carregando os campos selects
+    escolas("");
+
     // Exibindo o modal
     $('#modal-adicionar-alocacoes').modal({'show' : true});
 }

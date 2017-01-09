@@ -95,6 +95,9 @@ class ServidorController extends Controller
             # Recuperando o usuário
             $user = Auth::user();
 
+            # Recuperando a calendario
+            $servidor = $this->repository->find($row->id);
+            
             # Variáveis de uso
             $html  = '';
 
@@ -104,7 +107,8 @@ class ServidorController extends Controller
             }
 
             # Verificando a permissão de remorção
-            if($user->can('servidor.destroy')) {
+            if(count($servidor->cgm->telefones) == 0 && count($servidor->relacaoTrabalho) == 0 && $user->can('servidor.destroy') 
+                && count($servidor->formacoes) == 0 && count($servidor->atividades) == 0 && count($servidor->alocacoes) == 0) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
@@ -241,6 +245,7 @@ class ServidorController extends Controller
      */
     public function destroy($id)
     {
+
         $deleted = $this->repository->delete($id);
 
         if (request()->wantsJson()) {

@@ -90,16 +90,19 @@ class AlunoController extends Controller
             # Recupernado o usuário
             $user = Auth::user();
 
+            # Recuperando a aluno
+            $aluno = $this->repository->find($row->id);
+
             # Variáveis de uso
             $html  = '';
 
             # Verificando a permissão de edição
             if($user->can('aluno.update')) {
-                $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html  = '<a style="margin-right: 5%;" title="Editar Aluno" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             }
 
             # Verificando a permissão de remorção
-            if($user->can('aluno.destroy')) {
+            if(count($aluno->matricula) == 0 && $user->can('aluno.destroy')) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 

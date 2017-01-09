@@ -32,6 +32,9 @@ function runModalAdicionarTelefones(idCgm)
     } else {
         loadTableTelefones(idCgm);
     }
+    
+    // Carregando os campos selects
+    tipoTelefone("");
 
     // Desabilitando o botão de editar
     $('#edtTelefone').prop('disabled', true);

@@ -34,6 +34,12 @@ function runModalAdicionarRelacoes(idServidor)
         loadTableRelacoes(idServidor);
     }
 
+    // Carregando os campos selects
+    regimes("");
+    areas("");
+    ensinos("");
+    disciplinas("");
+
     // Desabilitando o botão de editar
     $('#edtRelacao').prop('disabled', true);
     $('#edtRelacao').hide();

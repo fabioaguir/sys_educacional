@@ -68,6 +68,7 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
+                                <th>Ano</th>
                                 <th>Data inicial</th>
                                 <th>Data final</th>
                                 <th>Data de r. final</th>
@@ -81,6 +82,7 @@
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
+                                <th>Ano</th>
                                 <th>Data inicial</th>
                                 <th>Data final</th>
                                 <th>Data de r. final</th>
@@ -114,6 +116,7 @@
             ajax: laroute.route('calendario.grid'),
             columns: [
                 {data: 'nome', name: 'calendarios.nome'},
+                {data: 'ano', name: 'calendarios.ano'},
                 {data: 'data_inicial', name: 'calendarios.data_inicial'},
                 {data: 'data_final', name: 'calendarios.data_final'},
                 {data: 'data_resultado_final', name: 'calendarios.data_resultado_final'},
@@ -162,5 +165,13 @@
             // Executando o modal
             runModalAdicionarEventos(idCalendario);
         });
+
+        // Máscaras
+        $(document).ready(function() {
+            $('#dtInicial').mask('00/00/0000');
+            $('#dtFinal').mask('00/00/0000');
+            $('#dtFeriado').mask('00/00/0000');
+        });
+
     </script>
 @stop
