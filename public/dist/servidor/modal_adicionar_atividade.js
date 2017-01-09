@@ -35,6 +35,9 @@ function runModalAdicionarAtividades(idServidor)
         loadTableAtividades(idServidor);
     }
 
+    // Carregando os campos selects
+    funcoes("");
+
     // Desabilitando o botão de editar
     $('#edtAtividade').prop('disabled', true);
     $('#edtAtividade').hide();
