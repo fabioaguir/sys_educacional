@@ -3,6 +3,7 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\EscolaRepository;
@@ -84,19 +85,30 @@ class EscolaController extends Controller
        
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
+
             # Recuperando a escola
             $escola = $this->repository->find($row->id);
 
             # Variáveis de uso
-            $html  = '<a style="margin-right: 1%;" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+            $html  = '';
+
+            # Verificando a permissão de edição
+            if($user->can('escola.update')) {
+                $html  = '<a style="margin-right: 1%;" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+            }
 
             # Verificando a possibilidade de exclusão
-            if(count($escola->cursos) == 0) {
+            if(count($escola->cursos) == 0 && $user->can('escola.destroy')) {
                 $html .= '<a style="margin-right: 3%;" href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
-            # Html de adicionar disciplina
-            $html .= '<a title="Adicionar Cursos" id="btnModalAdicionarCursos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # Verificando a permissão de adicionar cursos
+            if($user->can('escola.add.curso')) {
+                # Html de adicionar disciplina
+                $html .= '<a title="Adicionar Cursos" id="btnModalAdicionarCursos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            }
             
             # Retorno
             return $html;

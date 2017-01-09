@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -100,26 +101,44 @@ class TurmaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
+
             # recuperando o curriculo
             $turma = $this->repository->find($row->id);
 
-            # Html do edit
-            $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            # Variável de uso
+            $html = '';
+
+            # Verificando a permissão de editar
+            if($user->can('turma.update')) {
+                # Html do edit
+                $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            }
 
             # Verificando se o currículo possui disciplinas
-            if(count($turma->pareceres) == 0) {
+            if(count($turma->pareceres) == 0 && $user->can('turma.destroy')) {
                 # Html de delete
                 $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
-            # Html de disciplinas
-            $html .= '<a style="margin-right: 5%;" title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # Verificando a permissão das disciplinas
+            if($user->can('turma.disciplina')) {
+                # Html de disciplinas
+                $html .= '<a style="margin-right: 5%;" title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            }
 
-            # Html de alunos
-            $html .= '<a style="margin-right: 5%;" title="Alunos" id="btnModalAlunos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # Verificando a permissão dos alunos
+            if($user->can('turma.aluno')) {
+                # Html de alunos
+                $html .= '<a style="margin-right: 5%;" title="Alunos" id="btnModalAlunos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            }
 
-            # Html de pareceres
-            $html .= '<a title="Pareceres" id="btnModalPareceres" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # Verificando a permissão dos pareceres
+            if($user->can('turma.parecer')) {
+                # Html de pareceres
+                $html .= '<a title="Pareceres" id="btnModalPareceres" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            }
 
             # Retorno
             return $html;

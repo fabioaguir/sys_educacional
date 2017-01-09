@@ -9,6 +9,8 @@
 
             <div class="card material-table">
                 <div class="card-header">
+
+                    @permission('periodo.store')
                     <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
@@ -18,6 +20,7 @@
                         </div>
                     </div>
                     <!-- Botão novo -->
+                    @endpermission
                 </div>
 
                 <div class="table-responsive">

@@ -3,6 +3,7 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\ModalidadeEnsinoRepository;
@@ -80,15 +81,23 @@ class ModalidadeEnsinoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
 
             #verificando se existe vinculo com outra tabela (servidores)
             $nivelEnsino = $this->nivelEnsinoRepository->findWhere(['modalidade_id' => $row->id]);
 
-            #botão editar
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+            # Variável de uso
+            $html = '';
+
+            # Verificando a permissão de editar
+            if($user->can('modalidade.update')) {
+                #botão editar
+                $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+            }
 
             #condição para que habilite a opção de remover
-            if (count($nivelEnsino) == 0) {
+            if (count($nivelEnsino) == 0 && $user->can('modalidade.destroy')) {
                 $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 

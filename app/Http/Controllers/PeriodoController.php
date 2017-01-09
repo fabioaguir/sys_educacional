@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -106,23 +107,23 @@ class PeriodoController extends Controller
                 'ordenacao',
             ]);
 
-
-
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
 
-            #verificando se existe vinculo com outra tabela (calendario e periodo)
-//            $periodo    = $this->periodoRepository->findWhere(['id' => $row->periodo]);
-//            $calendario = $this->calendarioRepository->findWhere(['id' => $row->calendario]);
-            //dd($periodo);
-            #botão editar
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
-            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-
-            #condição para que habilite a opção de remover
-            /*if (count($periodo) == 0 && count($calendario) == 0) {
+            # Variável de uso (html)
+            $html  = '';
+            
+            # Verificando a permissão de edição
+            if($user->can('periodo.update')) {
+                $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> '; 
+            }
+            
+            # Verificando a permissão de remorção
+            if($user->can('periodo.destroy')) {
                 $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-            }*/
+            }            
 
             # Retorno
             return $html;

@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -80,14 +81,23 @@ class CursosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperndo o usuário
+            $user = Auth::user();
+
+            # Html de retorno
+            $html = '';
+
             # Recuperando o curso
             $curso = $this->repository->find($row->id);
 
-            # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Curso" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            # Verificando a permissão
+            if($user->can('curso.store')) {
+                # Variáveis de uso
+                $html  = '<a style="margin-right: 5%;" title="Editar Curso" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            }
 
             # Validando a possibilidade de remoção
-            if(count($curso->curriculos) == 0) {
+            if(count($curso->curriculos) == 0 && $user->can('curso.destroy')) {
                 $html .= '<a href="destroy/'.$row->id.'" title="Remover Curso" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 

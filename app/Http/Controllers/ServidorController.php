@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -91,24 +92,51 @@ class ServidorController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
+
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html  = '';
 
-            # Html de adicionar telefones
-            $html .= '<a style="margin-right: 5%;" title="Adicionar Telefones" id="btnModalAdicionarTelefone" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-earphone"></i></a>';
+            # Verificando a permissão de edição
+            if($user->can('servidor.update')) {
+                $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            }
 
-            # Html de adicionar relações de trabalho
-            $html .= '<a style="margin-right: 5%;" title="Adicionar Relação de trabalho" id="btnModalAdicionarRelacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-lock"></i></a>';
+            # Verificando a permissão de remorção
+            if($user->can('servidor.destroy')) {
+                $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
-            # Html de adicionar formação
-            $html .= '<a style="margin-right: 5%;" title="Adicionar Formações" id="btnModalAdicionarFormacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-education"></i></a>';
+            # Verificando a permissão de adicionar telefone
+            if($user->can('servidor.add.telefone')) {
+                # Html de adicionar telefones
+                $html .= '<a style="margin-right: 5%;" title="Adicionar Telefones" id="btnModalAdicionarTelefone" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-earphone"></i></a>';
+            }
 
-            # Html de adicionar atividade
-            $html .= '<a style="margin-right: 5%;" title="Adicionar Atividades" id="btnModalAdicionarAtividade" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+            # Verificando a permissão de adicionar relações de trabalho
+            if($user->can('servidor.add.relacao.trabalho')) {
+                # Html de adicionar relações de trabalho
+                $html .= '<a style="margin-right: 5%;" title="Adicionar Relação de trabalho" id="btnModalAdicionarRelacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-lock"></i></a>';
+            }
 
-            # Html de adicionar alocação
-            $html .= '<a title="Adicionar Alocações" id="btnModalAdicionarAlocacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+            # Verificando a permissão de adicionar formação
+            if($user->can('servidor.add.formacao')) {
+                # Html de adicionar formação
+                $html .= '<a style="margin-right: 5%;" title="Adicionar Formações" id="btnModalAdicionarFormacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-education"></i></a>';
+            }
+
+            # Verificando a permissão de adicionar formação
+            if($user->can('servidor.add.atividade')) {
+                # Html de adicionar atividade
+                $html .= '<a style="margin-right: 5%;" title="Adicionar Atividades" id="btnModalAdicionarAtividade" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+            }
+
+            # Verificando a permissão de adicionar alocações
+            if($user->can('servidor.add.alocacao')) {
+                # Html de adicionar alocação
+                $html .= '<a title="Adicionar Alocações" id="btnModalAdicionarAlocacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+            }
 
             # Retorno
             return $html;

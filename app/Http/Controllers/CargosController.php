@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -74,9 +75,21 @@ class CargosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
+
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            $html  = '';
+
+            # Verificando a permissão de editar
+            if($user->can('cargo.update')) {
+                $html  = '<a style="margin-right: 5%;" title="Editar Cargo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            }
+
+            # Verificando a permissão de remorção
+            if($user->can('cargo.destroy')) {
+                $html .= '<a href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Retorno
             return $html;
