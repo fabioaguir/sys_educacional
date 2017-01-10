@@ -4,6 +4,7 @@ $(document).ready(function () {
     $("#formCurso").validate({
         rules: {
             nome: {
+                alphaSpace: true,
                 required: true,
                 maxlength: 100
             },

@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -86,11 +87,19 @@ class CurriculosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
+
             # recuperando o curriculo
             $curriculo = $this->repository->find($row->id);
 
-            # Html do edit
-            $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            # Html de retorno
+            $html = "";
+
+            if($user->can('curriculo.update')) {
+                # Html do edit
+                $html  .= '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            }
 
             # Recuperando as disciplinas
             $disciplinas = \DB::table('disciplinas')
@@ -101,14 +110,17 @@ class CurriculosController extends Controller
                 ->select(['disciplinas.id'])->get();
 
             # Verificando se o currículo possui disciplinas
-            if(count($disciplinas) == 0) {
+            if(count($disciplinas) == 0 && $user->can('curriculo.destroy')) {
                 # Html de delete
                 $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
-            # Html de adicionar disciplina
-            $html .= '<a title="Adicionar Disciplina" id="btnModalAdicionarDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
-            
+            # Validando a permissão
+            if($user->can('curriculo.add.disciplina')) {
+                # Html de adicionar disciplina
+                $html .= '<a title="Adicionar Disciplina" id="btnModalAdicionarDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            }
+
             # Retorno
             return $html;
         })->make(true);

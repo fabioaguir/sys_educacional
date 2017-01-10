@@ -26,15 +26,17 @@
                     @endif
 
 
+                    @permission('dependecia.store')
                     <!-- Botão novo -->
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="text-right">
-                                    <a class="btn btn-primary btn-sm m-t-10", href="{{ route('dependencia.create') }}">Nova Dependência</a>
-                                </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="text-right">
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('dependencia.create') }}">Nova Dependência</a>
                             </div>
                         </div>
+                    </div>
                     <!-- Botão novo -->
+                    @endpermission
                 </div>
 
                 <div class="table-responsive">

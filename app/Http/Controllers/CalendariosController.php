@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -100,22 +101,37 @@ class CalendariosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
+
 
             # Recuperando a calendario
             $calendario = $this->repository->find($row->id);
 
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html  = '';
 
-            if(count($calendario->periodoAvaliacao) == 0 && count($calendario->evento) == 0) {
+            # Verificando a permissão de editar
+            if($user->can('calendario.update')) {
+                $html  = '<a style="margin-right: 5%;" title="Editar" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            }
+
+            # Verificando a permissão e possibilidade de exclusão
+            if(count($calendario->periodoAvaliacao) == 0 && count($calendario->evento) == 0 && $user->can('calendario.destroy')) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
-            # Html de adicionar período de avaliação
-            $html .= '<a style="margin-right: 5%;" title="Adicionar Período de Avaliação" id="btnModalAdicionarPeriodo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # Verificando a permissão de adicionar período de avaliação
+            if($user->can('calendario.add.periodo')) {
+                # Html de adicionar período de avaliação
+                $html .= '<a style="margin-right: 5%;" title="Adicionar Período de Avaliação" id="btnModalAdicionarPeriodo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            }
 
-            # Html de adicionar eventos
-            $html .= '<a title="Adicionar Evento" id="btnModalAdicionarEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            # Verificando a permissão de adicionar evento
+            if($user->can('calendario.add.evento')) {
+                # Html de adicionar eventos
+                $html .= '<a title="Adicionar Evento" id="btnModalAdicionarEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            }
             
             # Retorno
             return $html;

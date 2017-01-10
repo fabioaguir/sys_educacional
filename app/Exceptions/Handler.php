@@ -3,8 +3,10 @@
 namespace SerEducacional\Exceptions;
 
 use Exception;
+use GeniusTS\Roles\Exceptions\PermissionDeniedException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -20,6 +22,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
+        \GeniusTS\Roles\Exceptions\PermissionDeniedException::class
     ];
 
     /**
@@ -44,6 +47,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof PermissionDeniedException) {
+            throw new HttpException(503);
+        }
+
         return parent::render($request, $exception);
     }
 

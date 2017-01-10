@@ -9,7 +9,6 @@
 
             <div class="card material-table">
                 <div class="card-header">
-
                     @if(Session::has('message'))
                         <div class="alert alert-success">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -24,8 +23,9 @@
                                 <div>{{ $error }}</div>
                             @endforeach
                         </div>
-                @endif
+                    @endif
 
+                    @permission('servidor.store')
                     <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
@@ -35,6 +35,7 @@
                         </div>
                     </div>
                     <!-- Botão novo -->
+                    @endpermission
                 </div>
 
                 <div class="table-responsive">

@@ -10,6 +10,7 @@
             <div class="card material-table">
                 <div class="card-header">
 
+                    @permission('pessoa.fisica.store')
                     <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
@@ -17,13 +18,9 @@
                                 <a class="btn btn-primary btn-sm m-t-10" href="{{ route('pessoaFisica.create') }}">Nova pessoa física</a>
                             </div>
                         </div>
-                        {{--<div class="col-xs-12">
-                            <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10" href="">Nava pessoa jurídica</a>
-                            </div>
-                        </div>--}}
                     </div>
                     <!-- Botão novo -->
+                    @endpermission
                 </div>
 
                 <div class="table-responsive">

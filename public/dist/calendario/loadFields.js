@@ -25,8 +25,6 @@ function periodos(id) {
     });
 }
 
-periodos("");
-
 function tipoEvento(id) {
     jQuery.ajax({
         type: 'POST',
@@ -72,5 +70,3 @@ function diaLetivo(id) {
         $('#diaLetivo').append(option);
     });
 }
-
-diaLetivo("");

@@ -34,6 +34,9 @@ function runModalAdicionarPeriodos(idCalendario)
     } else {
         loadTablePeriodos(idCalendario);
     }
+    
+    // Carregando os selects
+    periodos("");
 
     // Desabilitando o botão de editar
     $('#edtPeriodo').prop('disabled', true);

@@ -25,8 +25,6 @@ function tipoTelefone(id) {
     });
 }
 
-tipoTelefone("");
-
 //Função para listar os regimes
 function regimes(id) {
     jQuery.ajax({
@@ -49,8 +47,6 @@ function regimes(id) {
         $('#regime').append(option);
     });
 }
-
-regimes("");
 
 //Função para listar as áreas
 function areas(id) {
@@ -75,8 +71,6 @@ function areas(id) {
     });
 }
 
-areas("");
-
 //Função para listar os ensinos
 function ensinos(id) {
     jQuery.ajax({
@@ -99,8 +93,6 @@ function ensinos(id) {
         $('#ensino').append(option);
     });
 }
-
-ensinos("");
 
 //Função para listar as disciplinas
 function disciplinas(id) {
@@ -125,8 +117,6 @@ function disciplinas(id) {
     });
 }
 
-disciplinas("");
-
 //Função para listar as cursos formação
 function cursos(id) {
     jQuery.ajax({
@@ -149,8 +139,6 @@ function cursos(id) {
         $('#curso').append(option);
     });
 }
-
-cursos("");
 
 //Função para listar as instituicoes formação
 function instituicoes(id) {
@@ -175,8 +163,6 @@ function instituicoes(id) {
     });
 }
 
-instituicoes("");
-
 //Função para listar as situacoes formação
 function situacoes(id) {
     jQuery.ajax({
@@ -199,8 +185,6 @@ function situacoes(id) {
         $('#situacao').append(option);
     });
 }
-
-situacoes("");
 
 //Função para listar as licenciaturas formação
 function licenciaturas(id) {
@@ -225,8 +209,6 @@ function licenciaturas(id) {
     });
 }
 
-licenciaturas("");
-
 //Função para listar as funções
 function funcoes(id) {
     jQuery.ajax({
@@ -250,7 +232,6 @@ function funcoes(id) {
     });
 }
 
-funcoes("");
 
 //Função para listar as funções
 function posgraduacoes(idServidor) {
@@ -343,5 +324,3 @@ function escolas(id) {
         $('#escola').append(option);
     });
 }
-
-escolas("");

@@ -3,6 +3,7 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -76,20 +77,31 @@ class ProcedimentoAvaliacaoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recupernando o usuário
+            $user = Auth::user();
+
             # Recuperando a entidade
             $procedimentoAvaliacao = $this->repository->find($row->id);
 
-            # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Procedimento" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            # Variável de uso
+            $html = '';
+
+            # Verificando a permissão de editar
+            if($user->can('procedimento.avaliacao.update')) {
+                # Variáveis de uso
+                $html  = '<a style="margin-right: 5%;" title="Editar Procedimento" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            }
 
             # Verificando a possibilidade de exclusão
-            if(count($procedimentoAvaliacao->procedimentos) == 0) {
+            if(count($procedimentoAvaliacao->procedimentos) == 0 && $user->can('procedimento.avaliacao.destroy')) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Procedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
-            # Html de adicionar procedimentois
-            $html .= '<a title="Adicionar procedimento" id="btnModalProcedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
-
+            # Verificando a permissão de adicionar procedimento
+            if($user->can('procedimento.avaliacao.add.procedimento')) {
+                # Html de adicionar procedimentois
+                $html .= '<a title="Adicionar procedimento" id="btnModalProcedimento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            }
 
             # Retorno
             return $html;

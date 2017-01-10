@@ -115,9 +115,12 @@
                     <li class="sub-menu">
                         <a href="" data-ma-action="submenu-toggle">CGM</a>
                         <ul>
+                            @permission('pessoa.fisica.select|pessoa.fisica.store|pessoa.fisica.update|pessoa.fisica.destroy')
                             <li>
                                 <a href="{{ route('pessoaFisica.index') }}">Pessoa Física</a>
                             </li>
+                            @endpermission
+
                             <li>
                                 <a href="{{ route('pessoaJuridica.index') }}">Pessoa Jurídica</a>
                             </li>
@@ -126,40 +129,101 @@
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-home"></i>Instituição</a>
                 <ul>
                     <li>
+                        @permission('instituicao.update')
                         <a href="{{ route('instituicao.edit')  }}">Instituição</a>
+                        @endpermission
+
+                        @permission('aluno.select|aluno.store|aluno.update|aluno.destroy')
                         <a href="{{ route('aluno.index')  }}">Alunos</a>
+                        @endpermission
+
+                        @permission('servidor.select|servidor.store|servidor.update|servidor.destroy')
                         <a href="{{ route('servidor.index')  }}">Servidores</a>
+                        @endpermission
+
+                        @permission('curso.select|curso.store|curso.update|curso.destroy')
                         <a href="{{ route('curso.index')  }}">Cursos</a>
+                        @endpermission
+
+                        @permission('disciplina.select|disciplina.store|disciplina.update|disciplina.destroy')
                         <a href="{{ route('disciplina.index')  }}">Disciplinas</a>
+                        @endpermission
+
+                        @permission('curriculo.select|curriculo.store|curriculo.update|curriculo.destroy')
                         <a href="{{ route('curriculo.index')  }}">Currículos</a>
+                        @endpermission
+
+                        @permission('escola.select|escola.store|escola.update|escola.destroy')
                         <a href="{{ route('escola.index')  }}">Escolas</a>
+                        @endpermission
+
+                        @permission('periodo.select|periodo.store|periodo.update|periodo.destroy')
                         <a href="{{ route('periodo.index')  }}">Períodos</a>
+                        @endpermission
                     </li>
                 </ul>
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-home"></i>Escolas</a>
                 <ul>
                     <li>
+                        @permission('calendario.select|calendario.store|calendario.update|calendario.destroy')
                         <a href="{{ route('calendario.index')  }}">Calendário</a>
+                        @endpermission
+
+                        @permission('forma.avaliacao.select|forma.avaliacao.store|forma.avaliacao.update|forma.avaliacao.destroy')
                         <a href="{{ route('formaAvaliacao.index')  }}">Formas de Avaliações</a>
+                        @endpermission
+
+                        @permission('procedimento.avaliacao.select|procedimento.avaliacao.store|procedimento.avaliacao.update|procedimento.avaliacao.destroy')
                         <a href="{{ route('procedimentoAvaliacao.index')  }}">Procedimentos de avaliação</a>
+                        @endpermission
+
+                        @permission('turma.select|turma.store|turma.update|turma.destroy')
                         <a href="{{ route('turma.index')  }}">Turmas</a>
+                        @endpermission
+
+                        @permission('turma.complementar.select|turma.complementa.store|turma.complementa.update|turma.complementa.destroy')
                         <a href="{{ route('turmaComplementar.index')  }}">Turmas Complementares</a>
-                    </li>
-                    <li>
+                        @endpermission
+
+                        @permission('tipo.evento.select|tipo.evento.store|tipo.evento.update|tipo.evento.destroy')
                         <a href="{{ route('tipoEvento.index')  }}">Tipo Evento</a>
+                        @endpermission
                     </li>
                 </ul>
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-wrench"></i>Parâmetros</a>
                 <ul>
                     <li>
+                        @permission('dependencia.select|dependencia.store|dependencia.update|dependencia.destroy')
                         <a href="{{ route('dependencia.index')  }}"> Dependências</a>
+                        @endpermission
+
+                        @permission('parecer.select|parecer.store|parecer.update|parecer.destroy')
                         <a href="{{ route('parecer.index')  }}"> Pareceres</a>
+                        @endpermission
+
+                        @permission('cargo.select|cargo.store|cargo.update|cargo.destroy')
                         <a href="{{ route('cargo.index')  }}"> Cargos</a>
+                        @endpermission
+
+                        @permission('modalidade.select|modalidade.store|modalidade.update|modalidade.destroy')
                         <a href="{{ route('modalidadeEnsino.index')  }}">Modalidade de Ensino</a>
+                        @endpermission
+
+                        @permission('nivel.select|nivel.store|nivel.update|nivel.destroy')
                         <a href="{{ route('nivelEnsino.index')  }}">Níveis de Ensino</a>
+                        @endpermission
+
+                        @permission('funcao.select|funcao.store|funcao.update|funcao.destroy')
                         <a href="{{ route('funcao.index')  }}">Funções</a>
+                        @endpermission
+
+                        @permission('user.select|user.store|user.update|user.destroy')
                         <a href="{{ route('user.index')  }}">Usuários</a>
+                        @endpermission
+
+                        @permission('role.select|role.store|role.update|role.destroy')
                         <a href="{{ route('role.index')  }}">Perfís</a>
+                        @endpermission
                     </li>
                 </ul>
             </li>

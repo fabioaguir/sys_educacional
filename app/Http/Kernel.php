@@ -52,5 +52,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \SerEducacional\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'role' => \GeniusTS\Roles\Middleware\VerifyRole::class,
+        'permission' => \GeniusTS\Roles\Middleware\VerifyPermission::class,
+        'level' => \GeniusTS\Roles\Middleware\VerifyLevel::class,
     ];
 }
