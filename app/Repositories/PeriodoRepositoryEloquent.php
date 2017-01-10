@@ -29,11 +29,11 @@ class PeriodoRepositoryEloquent extends BaseRepository implements PeriodoReposit
     *
     * @return mixed
     */
-    public function validator()
+    /*public function validator()
     {
 
         return PeriodoValidator::class;
-    }
+    }*/
 
 
     /**

@@ -35,10 +35,10 @@ class EscolaValidator extends LaravelValidator
 
         ValidatorInterface::RULE_CREATE => [
             'codigo' => 'required|max:50',
-            'nome' => 'required|digits_between:0,20|serbinario_alpha_space',
+            'nome' => 'required|max:100|serbinario_alpha_space',
             'inep' => 'required|numeric|digits_between:0,20',
             'portaria' => 'required|numeric|digits_between:0,45',
-            'dt_pub_portaria' => 'required|digits_between:0,15',
+            'dt_pub_portaria' => 'required|max:15',
 
             //endereço
             'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
@@ -48,10 +48,10 @@ class EscolaValidator extends LaravelValidator
 
         ValidatorInterface::RULE_UPDATE => [
             'codigo' => 'required|max:50',
-            'nome' => 'required|digits_between:0,20|serbinario_alpha_space',
+            'nome' => 'required|max:100|serbinario_alpha_space',
             'inep' => 'required|numeric|digits_between:0,20',
             'portaria' => 'required|numeric|digits_between:0,45',
-            'dt_pub_portaria' => 'required|digits_between:0,15',
+            'dt_pub_portaria' => 'required|max:15',
 
             //endereço
             'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',

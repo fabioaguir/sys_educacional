@@ -46,7 +46,8 @@ class AlunoValidator extends LaravelValidator
         'numeric' => ':attribute deve conter apenas números',
         'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com',
         'digits_between' => ':attribute deve ter entre :min - :max.',
-        'cpf_br' => ':attribute deve ser um número de CPF válido'
+        'cpf_br' => ':attribute deve ser um número de CPF válido',
+        'unique' => ':attribute já se encontra cadastrado'
     ];
 
     protected $rules = [

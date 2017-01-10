@@ -17,11 +17,45 @@ $(document).ready(function () {
             tipo_resultado_id: {
                 required: true,
                 integer: true
-            }
+            },
 
-            /*'nome' => 'required|max:100|unique:formas_avaliacoes,nome',
-             'codigo' => 'required|max:50|unique:formas_avaliacoes,codigo',
-             'tipo_resultado_id' => 'required'*/
+            menor_nota: {
+                number: true,
+                maxlength: 5
+            },
+
+            maior_nota: {
+                number: true,
+                maxlength: 5
+            },
+
+            variacao: {
+                number: true,
+                maxlength: 5
+            },
+
+            minimo_aprovacao: {
+                number: true,
+                maxlength: 5
+            },
+
+            niveis_alfabeizacao: {
+                alphaSpace: true,
+                maxlength: 60
+            },
+
+            nome_nivel_alfabetizacao: {
+                alphaSpace: true,
+                maxlength: 100
+            },
+
+            min_aprovacao_nivel_alfabetizacao: {
+                integer: true
+            },
+
+            parecer: {
+                integer: true
+            }
         },
         //For custom messages
         /*messages: {
