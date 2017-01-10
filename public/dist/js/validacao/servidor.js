@@ -40,12 +40,12 @@ $(document).ready(function () {
                 integer: true
             },
 
-            /*'cgm[cpf]': {
+            'cgm[cpf]': {
                 required: true,
                 cpfBR: true,
                 maxlength: 20,
                 unique: [laroute.route('servidor.searchCpf'), $('#idServidor')]
-            },*/
+            },
 
             'cgm[rg]': {
                 required: true,

@@ -38,6 +38,16 @@ $(document).ready(function () {
             'endereco[bairro_id]': {
                 integer: true,
                 required: true
+            },
+
+            estado: {
+                integer: true,
+                required: true
+            },
+
+            'endereco[cidade_id]': {
+                integer: true,
+                required: true
             }
         },
         //For custom messages

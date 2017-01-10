@@ -18,7 +18,7 @@ class EscolaValidator extends LaravelValidator
 
         //endereço
         'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
-        'endereco.numero' => 'required|numeric',
+        'endereco.numero' => 'required|numeric|digits_between:0,10',
         'endereco.bairro_id' => 'required|integer'
     ];
 
@@ -35,10 +35,10 @@ class EscolaValidator extends LaravelValidator
 
         ValidatorInterface::RULE_CREATE => [
             'codigo' => 'required|max:50',
-            'nome' => 'required|serbinario_alpha_space',
-            'inep' => 'required|numeric',
-            'portaria' => 'required|numeric',
-            'dt_pub_portaria' => 'required',
+            'nome' => 'required|max:100|serbinario_alpha_space',
+            'inep' => 'required|numeric|digits_between:0,20',
+            'portaria' => 'required|numeric|digits_between:0,45',
+            'dt_pub_portaria' => 'required|max:15',
 
             //endereço
             'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
@@ -48,14 +48,14 @@ class EscolaValidator extends LaravelValidator
 
         ValidatorInterface::RULE_UPDATE => [
             'codigo' => 'required|max:50',
-            'nome' => 'required|serbinario_alpha_space',
-            'inep' => 'required|numeric',
-            'portaria' => 'required|numeric',
-            'dt_pub_portaria' => 'required',
+            'nome' => 'required|max:100|serbinario_alpha_space',
+            'inep' => 'required|numeric|digits_between:0,20',
+            'portaria' => 'required|numeric|digits_between:0,45',
+            'dt_pub_portaria' => 'required|max:15',
 
             //endereço
             'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
-            'endereco.numero' => 'required|numeric',
+            'endereco.numero' => 'required|numeric|digits_between:0,10',
             'endereco.bairro_id' => 'required|integer'
         ],
    ];

@@ -191,9 +191,12 @@
     {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
 
+    {{--Regras personalizadas--}}
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
+
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/formaAvaliacao.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
 
     {{-- Controler dos formulários de tipos de resultados --}}
     <script type="text/javascript" src="{{ asset('/dist/formaAvaliacao/gerenciamento_niveis_alfabetizacao.js')  }}"></script>
