@@ -112,7 +112,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="portaria">Portaria</label>
+                                    <label for="portaria">Portaria *</label>
                                     {!! Form::text("portaria", Session::getOldInput("portaria"), array('class' => 'form-control input-sm', 'placeholder' => 'Portaria')) !!}
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                         <div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
-                                    <label for="dt_pub_portaria">Data de publicação da portaria</label>
+                                    <label for="dt_pub_portaria">Data de publicação da portaria *</label>
                                     {!! Form::text("dt_pub_portaria", Session::getOldInput("dt_pub_portaria"), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de publicação')) !!}
                                 </div>
                             </div>

@@ -126,6 +126,7 @@ class ServidorService
      */
     public function destroy(int $id)
     {
+
         #deletando o curso
         $result = $this->repository->delete($id);
 

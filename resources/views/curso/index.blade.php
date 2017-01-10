@@ -26,7 +26,8 @@
                     @endif
 
 
-                                <!-- Botão novo -->
+                    @permission('curso.store')
+                    <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
@@ -35,6 +36,7 @@
                         </div>
                     </div>
                     <!-- Botão novo -->
+                    @endpermission
                 </div>
 
                 <div class="table-responsive">

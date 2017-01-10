@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -114,17 +115,25 @@ class PessoaFisicaController extends Controller
         
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
+
+            # Variáveis de uso
+            $html = '';
 
             #verificando se existe vinculo com outra tabela (servidores e alunos)
             $servidor = $this->servidorRepository->findWhere(['id_cgm' => $row->id]);
             $aluno = $this->alunoRepository->findWhere(['cgm_id' => $row->id]);
 
-            //dd(count($aluno));
-            #botão editar
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+
+            # Verificando a permissão de editar
+            if($user->can('pessoa.fisica.update')) {
+                #botão editar
+                $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a> ';
+            }
 
             #condição para que habilite a opção de remover
-            if (count($servidor) == 0 && count($aluno) == 0) {
+            if (count($servidor) == 0 && count($aluno) == 0 && $user->can('pessoa.fisica.destroy')) {
                 $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 

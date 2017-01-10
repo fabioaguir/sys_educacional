@@ -49,6 +49,7 @@
                         </div>
                     @endif
 
+                    @permission('curriculo.store')
                     <!-- Botão novo -->
                     <div class="row">
                         <div class="col-xs-12">
@@ -58,6 +59,7 @@
                         </div>
                     </div>
                     <!-- Botão novo -->
+                    @endpermission
                 </div>
 
                 <div class="table-responsive">

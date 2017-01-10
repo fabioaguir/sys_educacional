@@ -3,6 +3,7 @@
 namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -75,14 +76,22 @@ class ParecerController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o usuário
+            $user = Auth::user();
+
             # Recupernado a entidade
             $parecer = $this->repository->find($row->id);
 
             # Variáveis de uso
-            $html  = '<a style="margin-right: 5%;" title="Editar Parecer" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html  = '';
+
+            # Verificando a permissão de editar
+            if($user->can('parecer.update')) {
+                $html  = '<a style="margin-right: 5%;" title="Editar Parecer" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            }
 
             # Verificando a possibilidade de exclusão
-            if(count($parecer->turmas) == 0) {
+            if(count($parecer->turmas) == 0 && $user->can('parecer.destroy')) {
                 $html .= '<a href="destroy/'.$row->id.'" title="Remover Parecer" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
