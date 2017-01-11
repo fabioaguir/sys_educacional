@@ -125,9 +125,9 @@
                         <a href="{{ route('procedimentoAvaliacao.index')  }}">Procedimentos de avaliação</a>
                         @endpermission
 
-                        @permission('dependencia.select|dependencia.store|dependencia.update|dependencia.destroy')
+                        {{--@permission('dependencia.select|dependencia.store|dependencia.update|dependencia.destroy')
                         <a href="{{ route('dependencia.index')  }}"> Dependências</a>
-                        @endpermission
+                        @endpermission--}}
 
                         @permission('periodo.select|periodo.store|periodo.update|periodo.destroy')
                         <a href="{{ route('periodo.index')  }}">Períodos</a>

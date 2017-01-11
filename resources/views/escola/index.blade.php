@@ -88,10 +88,12 @@
     </section>
 
     @include('escola.modal_adicionar_cursos')
+    @include('escola.modal_adicionar_dependencias')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/dist/escola/modal_adicionar_cursos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/escola/modal_adicionar_dependencias.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/escola/controller_cursos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/escola/controller_turnos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/escola/select2.js') }}"></script>
@@ -126,6 +128,23 @@
 
             // Executando o modal
             runModalAdicionarCursos(idEscola);
+        });
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#btnModalAdicionarDependencias", function () {
+            // Recuperando o id do currículo
+            idEscola = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do modal
+            $('.eNome').text(nome);
+            $('.eCodigo').text(codigo);
+
+            // Executando o modal
+            runModalAdicionarDependencias(idEscola);
         });
     </script>
 @stop
