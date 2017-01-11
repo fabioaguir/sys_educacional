@@ -24,7 +24,7 @@
             {{-- Fim mensagem de alerta --}}
             {{--Formulario--}}
             {!! Form::open(['route'=>'user.store', 'id' => 'formUser', 'method' => "POST" ]) !!}
-            @include('tamplatesForms.tamplateFormUser')
+                @include('tamplatesForms.tamplateFormUser')
             {!! Form::close() !!}
             {{--Fim formulario--}}
         </section>

@@ -29,6 +29,6 @@ class PivotCurriculoSerie extends Pivot implements Transformable
     public function disciplinas()
     {
         return $this->belongsToMany(Disciplina::class, "curriculos_series_disciplinas", "curriculo_serie_id", "disciplina_id")
-            ->withPivot(['id', 'periodo', 'e_obrigatoria']);
+            ->withPivot(['id', 'curriculo_serie_id', 'disciplina_id', 'periodo', 'e_obrigatoria']);
     }
 }

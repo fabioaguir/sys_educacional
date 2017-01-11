@@ -27,18 +27,18 @@ class CurriculoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|serbinario_alpha_space|max:100',
+            'nome' => 'required|max:100',
             'codigo' => 'required|max:50|unique:curriculos,codigo',
             'curso_id' => 'integer|required',
-            'observacao' => 'serbinario_alpha_space|max:500',
+            'observacao' => 'max:500',
             'serie_inicial_id' => 'integer|required',
             'serie_final_id' => 'integer|required'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|serbinario_alpha_space|max:100',
+            'nome' => 'required|max:100',
             'codigo' => 'required|max:50|unique:curriculos,codigo,:id',
             'curso_id' => 'integer|required',
-            'observacao' => 'serbinario_alpha_space|max:500',
+            'observacao' => 'max:500',
             'serie_inicial_id' => 'integer|required',
             'serie_final_id' => 'integer|required'
         ],
