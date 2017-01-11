@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Cursos</h2>
+                <h2>Listar Funções</h2>
             </div>
 
             <div class="card material-table">

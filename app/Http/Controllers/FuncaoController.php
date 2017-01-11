@@ -81,7 +81,8 @@ class FuncaoController extends Controller
                 'funcoes.id',
                 'funcoes.nome',
                 'funcoes.sigla',
-                'funcoes.funcao_professor',
+                //sobscrevendo um valor que vem do banco (somente exibição)
+                \DB::raw('IF(funcoes.funcao_professor = 1, "Sim", "Não") as funcao_professor')
             ]);
 
         #Editando a grid

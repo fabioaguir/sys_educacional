@@ -1,5 +1,5 @@
 <div class="block-header">
-    <h2>Cadastro de Período</h2>
+    <h2>Cadastro de Período de Avaliação</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
@@ -27,25 +27,16 @@
                 <div class="fg-line">
                     <div class="fg-line">
                         <label for="soma_carga_horaria">Soma Carga Horária</label>
-                        {!! Form::text('soma_carga_horaria', Session::getOldInput('soma_carga_horaria'), array('class' => 'form-control input-sm', 'placeholder' => 'Soma Carga Horária')) !!}
+                        {!! Form::select('soma_carga_horaria', (["" => "Selecione", "1" => "Sim", "2" => "Não"]), null, array('class'=> 'form-control')) !!}
+                        {{--{!! Form::text('soma_carga_horaria', Session::getOldInput('soma_carga_horaria'), array('class' => 'form-control input-sm', 'placeholder' => 'Soma Carga Horária')) !!}--}}
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-4">
-                <div class="fg-line">
-                    <div class="fg-line">
-                        <label for="ordenacao">Ordenação</label>
-                        {!! Form::text('ordenacao', Session::getOldInput('ordenacao'), array('class' => 'form-control input-sm', 'placeholder' => 'Ordenação')) !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="form-group col-md-3">
                 <div class=" fg-line">
                     <label for="controle_frequencia">Controle de Frequência *</label>
                     <div class="select">
-                        {!! Form::select('controle_frequencia', (["" => "Selecione gênero"] + $loadFields['controlefrequencia']->toArray()), null, array('class'=> 'form-control', 'placeholder' => 'Controle de Frequência')) !!}
+                        {!! Form::select('controle_frequencia', (["" => "Selecione", "1" => "Sim", "2" => "Não"]), null, array('class'=> 'form-control')) !!}
                     </div>
                 </div>
             </div>
