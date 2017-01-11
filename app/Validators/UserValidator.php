@@ -10,7 +10,7 @@ class UserValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
 
     protected $attributes = [
-        'nome' => 'Nome',
+        'name' => 'Nome',
         'email' => 'E-mail',
         'password' => 'Senha'
     ];
@@ -28,14 +28,13 @@ class UserValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|serbinario_alpha_space|max:100',
+            'name' => 'required|max:100',
             'email' => 'required|email|max:100|unique:users,email',
             'password' => 'required|max:100',
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|serbinario_alpha_space|max:100',
-            'email' => 'required|max:100|unique:users,email,:id',
-            'password' => 'required|max:100',
+            'name' => 'required|max:100',
+            'email' => 'required|max:100|unique:users,email,:id'
         ],
    ];
 }

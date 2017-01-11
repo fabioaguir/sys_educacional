@@ -4,6 +4,7 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -116,6 +117,9 @@ class DisciplinasController extends Controller
      */
     public function store(Request $request)
     {
+        # Recuperando o usuário autenticado
+        $user = Auth::user();
+
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
@@ -127,13 +131,24 @@ class DisciplinasController extends Controller
             $this->service->tratamentoCampos($data);
 
             #Executando a ação
-            $this->service->store($data);
+            $result = $this->service->store($data);
+
+            # Log do sistema
+            Log::info("Disciplina cadastrada com sucesso! {id: {$result->id}, nome: {$result->nome}} {'id': $user->id, 'email': $user->email}");
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
+            # Log do sistema
+            Log::error("Ocorreu um erro: {$e->getMessage()}. Usuário {id: {$user->id} - email: {$user->email}}");
+
+            # Retorno para view
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
         } catch (\Throwable $e) {
+            # Log do sistema
+            Log::error("Ocorreu um erro: {$e->getMessage()}. Usuário {id: {$user->id} - email: {$user->email}}");
+
+            # Retorno para view
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
