@@ -5,14 +5,12 @@ $(document).ready(function () {
         rules: {
             name: {
                 required: true,
-                alphaSpace: true,
                 maxlanth: 100
             },
 
             email: {
                 email: true,
                 required: true,
-                alphaSpace: true,
                 maxlanth: 100
             },
 
