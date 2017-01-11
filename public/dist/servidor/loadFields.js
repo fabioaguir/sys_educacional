@@ -292,6 +292,7 @@ function outroscursos(id) {
                     selects = "selected";
                 }
             }
+            
             option += '<option '+selects+' value="' + json['query'][i]['id'] + '">' + json['query'][i]['nome'] + '</option>';
             selects = "";
         }

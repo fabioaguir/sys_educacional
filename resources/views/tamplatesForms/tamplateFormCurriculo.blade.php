@@ -129,11 +129,11 @@
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/curriculo.js')  }}"></script>
 
-    <script type="text/javascript">
+    {{--<script type="text/javascript">
         $(document).on('click', '#ativo', function () {
             if($(this).is(':checked')) {
                 swal("Marcando esse currículo como ativo, estará automaticamente desativando o atual ativo.", "Click no botão abaixo!", "warning");
             }
         });
-    </script>
+    </script>--}}
 @endsection
