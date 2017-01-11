@@ -6,7 +6,6 @@ $(document).ready(function () {
 
             nome: {
                 required: true,
-                alphaSpace: true,
                 maxlength: 100
             },
 
@@ -31,7 +30,6 @@ $(document).ready(function () {
             },
 
             observacao: {
-                alphaSpace: true,
                 maxlength: 500
             }
         },

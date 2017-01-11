@@ -41,7 +41,7 @@ class CurriculoService
     {
         # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoAtivo($data);
+        //$this->tratamentoAtivo($data);
 
         #Salvando o registro pincipal
         $curriculo =  $this->repository->create($data);
@@ -68,7 +68,7 @@ class CurriculoService
     {
         # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoAtivo($data);
+        //$this->tratamentoAtivo($data);
         
         #Atualizando no banco de dados
         $curriculo = $this->repository->update($data, $id);
@@ -174,9 +174,6 @@ class CurriculoService
                 $curriculo->series->each(function ($serie) {
                     # Removendo as disciplinas
                     $serie->pivot->disciplinas()->detach();
-
-                    # Retorno
-                    return false;
                 });
 
                 # Removendo as séries do curriculo
