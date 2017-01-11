@@ -32,7 +32,7 @@ class CalendarioValidator extends LaravelValidator
     protected $rules = [
         
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|serbinario_alpha_space|max:150',
+            'nome' => 'required|max:150',
             'ano' => 'required|max:4', //serbinario_alpha_space
             'data_inicial' => 'required|max:10', //serbinario_alpha_space
             'data_final' => 'required|max:10', //serbinario_alpha_space
@@ -42,7 +42,7 @@ class CalendarioValidator extends LaravelValidator
         ],
         
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|serbinario_alpha_space|max:150',
+            'nome' => 'required|max:150',
             'ano' => 'required|max:4', //serbinario_alpha_space
             'data_inicial' => 'required|max:10', //serbinario_alpha_space
             'data_final' => 'required|max:10', //serbinario_alpha_space
