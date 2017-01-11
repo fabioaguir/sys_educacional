@@ -5,27 +5,19 @@ $(document).ready(function () {
         rules: {
             name: {
                 required: true,
-                maxlanth: 100
+                maxlength: 100
             },
 
             email: {
                 email: true,
                 required: true,
-                maxlanth: 100
+                maxlength: 100
             },
 
             password: {
-                required: true,
-                maxlanth: 100
+                maxlength: 100
             }
         },
-        //For custom messages
-        /*messages: {
-             nome_operadores:{
-             required: "Enter a username",
-             minlength: "Enter at least 5 characters"
-         }
-         },*/
         //Reponsavel por indicar em que guia do formulário existe preenchimento incorreto
         invalidHandler: function(e, validator) {
             if(validator.errorList.length) {

@@ -5,12 +5,12 @@ $(document).ready(function () {
         rules: {
             nome: {
                 required: true,
-                maxlangth:100
+                maxlength:100
             },
 
             codigo: {
                 required: true,
-                maxlangth:30
+                maxlength:30
             },
 
             cargo_professor: {
