@@ -215,8 +215,6 @@ class NivelEnsinoController extends Controller
             #Dados vindo na requisição
             $nivelEnsino = $request->all();
 
-            //dd($modalidadeEnsino);
-
             #
             if (empty($nivelEnsino['idModel'])) {
                 #Consultando

@@ -69,11 +69,12 @@ class DependenciasController extends Controller
     /**
      * @return mixed
      */
-    public function grid()
+    public function grid($id)
     {
         #Criando a consulta
         $rows = \DB::table('dependencias')
             ->join('escola', 'escola.id', '=', 'dependencias.escola_id')
+            ->where('escola.id', '=', $id)
             ->select([
                 'dependencias.id',
                 'dependencias.nome',
@@ -91,12 +92,12 @@ class DependenciasController extends Controller
 
             # Verificando a permissão de editar
             if($user->can('dependencia.update')) {
-                $html  = '<a style="margin-right: 5%;" title="Editar Disciplina" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html  = '<a style="margin-right: 5%;" id="editarDependencia" title="Editar Dependência" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             }
 
             # Verificando a permissão de remorção
             if($user->can('dependencia.destroy')) {
-                $html .= '<a href="destroy/'.$row->id.'" title="Remover Disciplina" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+                $html .= '<a title="Remover Dependência" id="deleteDependencia" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
             
             # Retorno
@@ -196,7 +197,7 @@ class DependenciasController extends Controller
 
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -207,6 +208,7 @@ class DependenciasController extends Controller
             #Retorno para a view
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) {
+            dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

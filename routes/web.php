@@ -167,12 +167,12 @@ Route::group(['middleware' => 'auth'], function () {
     # ROtas do série
     Route::group(['prefix' => 'dependencia', 'as' => 'dependencia.'], function () {
         Route::get('index', ['middleware' => 'permission:dependencia.select', 'as' => 'index', 'uses' => 'DependenciasController@index']);
-        Route::get('grid', ['middleware' => 'permission:dependencia.select', 'as' => 'grid', 'uses' => 'DependenciasController@grid']);
+        Route::get('grid/{id}', ['middleware' => 'permission:dependencia.select', 'as' => 'grid', 'uses' => 'DependenciasController@grid']);
         Route::get('create', ['middleware' => 'permission:dependencia.store', 'as' => 'create', 'uses' => 'DependenciasController@create']);
         Route::post('store', ['middleware' => 'permission:dependencia.store', 'as' => 'store', 'uses' => 'DependenciasController@store']);
         Route::get('edit/{id}', ['middleware' => 'permission:dependencia.update', 'as' => 'edit', 'uses' => 'DependenciasController@edit']);
         Route::post('update/{id}', ['middleware' => 'permission:dependencia.update', 'as' => 'update', 'uses' => 'DependenciasController@update']);
-        Route::get('destroy/{id}', ['middleware' => 'permission:dependencia.destroy', 'as' => 'destroy', 'uses' => 'DependenciasController@destroy']);
+        Route::post('destroy/{id}', ['middleware' => 'permission:dependencia.destroy', 'as' => 'destroy', 'uses' => 'DependenciasController@destroy']);
     });
 
     # ROtas do série

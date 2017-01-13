@@ -15,13 +15,13 @@ $(document).ready(function () {
 
             soma_carga_horaria: {
                 integer: true,
-                maxlength: 15
+                maxlength: 1
             },
 
             controle_frequencia: {
                 required: true,
                 integer: true,
-                maxlength: 15
+                maxlength: 1
             },
 
             ordenacao: {
