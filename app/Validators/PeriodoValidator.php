@@ -32,16 +32,16 @@ class PeriodoValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|max:45',
             'abreviatura' => 'required|max:30',
-            'soma_carga_horaria' => 'numeric|digits_between:0,30',
-            'controle_frequencia' => 'required|numeric|digits_between:0,20',
+            'soma_carga_horaria' => 'integer|max:2',
+            'controle_frequencia' => 'required|integer|max:2',
             'ordenacao' => 'numeric|digits_between:0,20',
         ],
 
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:45',
             'abreviatura' => 'required|max:30',
-            'soma_carga_horaria' => 'numeric|digits_between:0,30',
-            'controle_frequencia' => 'required|numeric|digits_between:0,20',
+            'soma_carga_horaria' => 'integer|max:2',
+            'controle_frequencia' => 'required|integer|max:2',
             'ordenacao' => 'numeric|digits_between:0,20',
         ],
     ];

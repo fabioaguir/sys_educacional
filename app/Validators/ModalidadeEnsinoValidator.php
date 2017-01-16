@@ -29,8 +29,8 @@ class ModalidadeEnsinoValidator extends LaravelValidator
         ],
 
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|serbinario_alpha_space|max:30|unique:modalidades,nome',
-            'codigo' => 'required|max:15|unique:modalidades,codigo'
+            'nome' => 'required|serbinario_alpha_space|max:30', //|unique:modalidades,nome
+            'codigo' => 'required|max:15' //|unique:modalidades,codigo
         ],
    ];
 }
