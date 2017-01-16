@@ -129,6 +129,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('storeAlocacao', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'storeAlocacao', 'uses' => 'AlocacaosController@store']);
         Route::post('removerAlocacao/{id}', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'removerAlocacao', 'uses' => 'AlocacaosController@destroy']);
         Route::post('getEscolas', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'getEscolas', 'uses' => 'AlocacaosController@getEscolas']);
+
+        # rotas para disponibilidades
+        Route::get('gridDisponibilidade/{id}', ['as' => 'gridDisponibilidade', 'uses' => 'DisponibilidadesController@grid']);
+        Route::post('storeDisponibilidade', ['as' => 'storeDisponibilidade', 'uses' => 'DisponibilidadesController@store']);
+        Route::post('updateDisponibilidade/{id}', ['as' => 'updateDisponibilidade', 'uses' => 'DisponibilidadesController@update']);
+        Route::post('removerDisponibilidade/{id}', ['as' => 'removerDisponibilidade', 'uses' => 'DisponibilidadesController@destroy']);
+        Route::post('getDias', ['as' => 'getDias', 'uses' => 'DisponibilidadesController@getDias']);
+        Route::post('getHoras', ['as' => 'getHoras', 'uses' => 'DisponibilidadesController@getHoras']);
+        Route::post('getTurnos', ['as' => 'getTurnos', 'uses' => 'DisponibilidadesController@getTurnos']);
     });
 
     # ROtas de disciplinas
