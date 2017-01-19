@@ -350,13 +350,13 @@ Route::group(['middleware' => 'auth'], function () {
 
         # Rotas de procedimentos
         Route::group(['prefix' => 'procedimento', 'as' => 'procedimento.'], function () {
-            Route::get('index', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'index', 'uses' => 'ProcedimentoController@index']);
-            Route::get('loadFields', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'loadFields', 'uses' => 'ProcedimentoController@getLoadFields']);
-            Route::get('grid/{id}', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'grid', 'uses' => 'ProcedimentoController@grid']);
-            Route::post('store', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'store', 'uses' => 'ProcedimentoController@store']);
-            Route::get('edit/{id}', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'edit', 'uses' => 'ProcedimentoController@edit']);
-            Route::post('update/{id}', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'update', 'uses' => 'ProcedimentoController@update']);
-            Route::post('destroy/{id}', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'destroy', 'uses' => 'ProcedimentoController@destroy']);
+            Route::get('index', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'index', 'uses' => 'ProcedimentoController@index']);
+            Route::get('loadFields', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'loadFields', 'uses' => 'ProcedimentoController@getLoadFields']);
+            Route::get('grid/{id}', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'grid', 'uses' => 'ProcedimentoController@grid']);
+            Route::post('store', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'store', 'uses' => 'ProcedimentoController@store']);
+            Route::get('edit/{id}', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'edit', 'uses' => 'ProcedimentoController@edit']);
+            Route::post('update/{id}', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'update', 'uses' => 'ProcedimentoController@update']);
+            Route::post('destroy/{id}', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'destroy', 'uses' => 'ProcedimentoController@destroy']);
         });
     });
 
