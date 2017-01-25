@@ -161,6 +161,10 @@ class PeriodoAvaliacaosController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         try {
@@ -218,8 +222,6 @@ class PeriodoAvaliacaosController extends Controller
         } else {
             $retorno = 2;
         }
-
-
         
         return response()->json($retorno);
 

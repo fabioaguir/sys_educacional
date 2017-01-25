@@ -129,6 +129,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('storeAlocacao', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'storeAlocacao', 'uses' => 'AlocacaosController@store']);
         Route::post('removerAlocacao/{id}', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'removerAlocacao', 'uses' => 'AlocacaosController@destroy']);
         Route::post('getEscolas', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'getEscolas', 'uses' => 'AlocacaosController@getEscolas']);
+
+        # rotas para disponibilidades
+        Route::get('gridDisponibilidade/{id}', ['as' => 'gridDisponibilidade', 'uses' => 'DisponibilidadesController@grid']);
+        Route::post('storeDisponibilidade', ['as' => 'storeDisponibilidade', 'uses' => 'DisponibilidadesController@store']);
+        Route::post('updateDisponibilidade/{id}', ['as' => 'updateDisponibilidade', 'uses' => 'DisponibilidadesController@update']);
+        Route::post('removerDisponibilidade/{id}', ['as' => 'removerDisponibilidade', 'uses' => 'DisponibilidadesController@destroy']);
+        Route::post('getDias', ['as' => 'getDias', 'uses' => 'DisponibilidadesController@getDias']);
+        Route::post('getHoras', ['as' => 'getHoras', 'uses' => 'DisponibilidadesController@getHoras']);
+        Route::post('getTurnos', ['as' => 'getTurnos', 'uses' => 'DisponibilidadesController@getTurnos']);
     });
 
     # ROtas de disciplinas
@@ -350,13 +359,13 @@ Route::group(['middleware' => 'auth'], function () {
 
         # Rotas de procedimentos
         Route::group(['prefix' => 'procedimento', 'as' => 'procedimento.'], function () {
-            Route::get('index', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'index', 'uses' => 'ProcedimentoController@index']);
-            Route::get('loadFields', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'loadFields', 'uses' => 'ProcedimentoController@getLoadFields']);
-            Route::get('grid/{id}', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'grid', 'uses' => 'ProcedimentoController@grid']);
-            Route::post('store', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'store', 'uses' => 'ProcedimentoController@store']);
-            Route::get('edit/{id}', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'edit', 'uses' => 'ProcedimentoController@edit']);
-            Route::post('update/{id}', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'update', 'uses' => 'ProcedimentoController@update']);
-            Route::post('destroy/{id}', ['middleware' => 'procedimento.avaliacao.add.procedimento', 'as' => 'destroy', 'uses' => 'ProcedimentoController@destroy']);
+            Route::get('index', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'index', 'uses' => 'ProcedimentoController@index']);
+            Route::get('loadFields', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'loadFields', 'uses' => 'ProcedimentoController@getLoadFields']);
+            Route::get('grid/{id}', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'grid', 'uses' => 'ProcedimentoController@grid']);
+            Route::post('store', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'store', 'uses' => 'ProcedimentoController@store']);
+            Route::get('edit/{id}', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'edit', 'uses' => 'ProcedimentoController@edit']);
+            Route::post('update/{id}', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'update', 'uses' => 'ProcedimentoController@update']);
+            Route::post('destroy/{id}', ['middleware' => 'permission:procedimento.avaliacao.add.procedimento', 'as' => 'destroy', 'uses' => 'ProcedimentoController@destroy']);
         });
     });
 

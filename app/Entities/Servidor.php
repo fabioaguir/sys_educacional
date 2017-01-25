@@ -92,6 +92,14 @@ class Servidor extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function disponibilidades()
+    {
+        return $this->hasMany(Disponibilidade::class, 'servidor_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function posgraduacao()

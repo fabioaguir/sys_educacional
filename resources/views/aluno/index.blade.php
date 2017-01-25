@@ -78,6 +78,7 @@
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/dist/alunoTurma/loadFields.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_controller_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_adicionar_aluno_turma.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
@@ -91,26 +92,6 @@
                 {data: 'mae', name: 'cgm.mae'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
-        });
-
-        //Global idAluno
-        var idAluno;
-
-        // Evento para abrir o modal de matrícula
-        $(document).on("click", "#btnModalAdicionarAlunoTurma", function () {
-            // Recuperando o id do calendário
-            idAluno = table.row($(this).parents('tr')).data().id;
-
-            // Recuperando o nome e o código
-            var nome = table.row($(this).parents('tr')).data().nome;
-            var codigo   = table.row($(this).parents('tr')).data().codigo;
-
-            // prenchendo o titulo do nome do aluno
-            $('#aNome').text(nome);
-            $('#aCodigo').text(codigo);
-
-            // Executando o modal
-            runModalAdicionarAlunosTurmas(idAluno);
         });
 
     </script>

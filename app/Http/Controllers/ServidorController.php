@@ -108,7 +108,8 @@ class ServidorController extends Controller
 
             # Verificando a permissão de remorção
             if(count($servidor->cgm->telefones) == 0 && count($servidor->relacaoTrabalho) == 0 && $user->can('servidor.destroy') 
-                && count($servidor->formacoes) == 0 && count($servidor->atividades) == 0 && count($servidor->alocacoes) == 0) {
+                && count($servidor->formacoes) == 0 && count($servidor->atividades) == 0 && count($servidor->alocacoes) == 0
+                && count($servidor->disponibilidades) == 0) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
@@ -141,6 +142,10 @@ class ServidorController extends Controller
                 # Html de adicionar alocação
                 $html .= '<a title="Adicionar Alocações" id="btnModalAdicionarAlocacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
             }
+
+           
+            # Html de adicionar disponibilidades
+            $html .= '<a title="Adicionar Disponibilidades" id="btnModalAdicionarDisponibilidade" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
 
             # Retorno
             return $html;
