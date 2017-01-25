@@ -5,7 +5,7 @@ $(document).ready(function () {
         rules: {
             nome: {
                 required: true,
-                alphaSpace: true,
+                //alphaSpace: true,
                 maxlength: 100
             },
 
@@ -39,13 +39,16 @@ $(document).ready(function () {
                 maxlength: 5
             },
 
-            niveis_alfabeizacao: {
+            /*niveis_alfabeizacao: {
                 alphaSpace: true,
+                maxlength: 60
+            },*/
+
+            codigo_nivel_alfabetizacao: {
                 maxlength: 60
             },
 
             nome_nivel_alfabetizacao: {
-                alphaSpace: true,
                 maxlength: 100
             },
 

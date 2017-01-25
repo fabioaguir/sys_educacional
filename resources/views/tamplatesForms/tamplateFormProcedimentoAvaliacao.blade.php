@@ -46,6 +46,10 @@
     {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
 
+    {{-- regras adicionais --}}
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/js/validacao/adicional/alphaSpace.js')  }}"></script>
+
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/procedimentoAvaliacao.js')  }}"></script>
 @endsection

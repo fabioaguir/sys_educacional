@@ -311,7 +311,6 @@
 
     $.validator.setDefaults({
         ignore: []
-
     });
 </script>
 

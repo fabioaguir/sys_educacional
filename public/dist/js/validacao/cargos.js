@@ -5,6 +5,7 @@ $(document).ready(function () {
         rules: {
             nome: {
                 required: true,
+                alphaSpace: true,
                 maxlength:100
             },
 

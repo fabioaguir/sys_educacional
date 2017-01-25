@@ -27,13 +27,13 @@ class FuncaoValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|serbinario_alpha_space|max:60',
-            'sigla' => 'serbinario_alpha_space|max:20',
+            'sigla' => 'max:20',
             'funcao_professor' => 'integer'
         ],
 
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|serbinario_alpha_space|max:60',
-            'sigla' => 'serbinario_alpha_space|max:20',
+            'sigla' => 'max:20',
             'funcao_professor' => 'integer'
         ],
    ];

@@ -4,15 +4,18 @@ $(document).ready(function () {
     $("#formProcedimentoAvaliacao").validate({
         rules: {
             nome: {
-                required: true
+                required: true,
+                maxlength: 50
             },
 
             codigo: {
-                required: true
+                required: true,
+                maxlength: 50
             },
 
             frequencia_minima_avaliacao: {
-                required: true
+                required: true,
+                integer: true
             }
         },
         //For custom messages

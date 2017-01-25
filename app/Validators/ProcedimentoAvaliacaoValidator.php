@@ -18,19 +18,20 @@ class ProcedimentoAvaliacaoValidator extends LaravelValidator
     protected $messages = [
         'required' => ':attribute é requerido',
         'max' => ':attribute só pode ter no máximo :max caracteres',
-        'unique' => ':attribute já está cadastrado'
+        'unique' => ':attribute já está cadastrado',
+        'numeric' => ':attribute precisa ser um número'
     ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|max:100|unique:procedimentos_avaliacoes,nome',
             'codigo' => 'required|max:50|unique:procedimentos_avaliacoes,codigo',
-            'frequencia_minima_avaliacao' => 'required'
+            'frequencia_minima_avaliacao' => 'required|numeric'
         ],
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:100|unique:procedimentos_avaliacoes,nome,:id',
             'codigo' => 'required|max:50|unique:procedimentos_avaliacoes,codigo,:id',
-            'frequencia_minima_avaliacao' => 'required'
+            'frequencia_minima_avaliacao' => 'required|numeric'
         ],
     ];
 }
