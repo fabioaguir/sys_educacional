@@ -48,6 +48,7 @@ class UserService
     {
         #tratando a senha
         $data['password'] = bcrypt($data['password']);
+        $data['active'] = 1;
 
         #tratando a imagem
 //        if(isset($data['img'])) {
