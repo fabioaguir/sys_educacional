@@ -97,7 +97,7 @@ $(document).ready(function () {
             },
 
             'cgm[endereco][complemento]': {
-                alphaSpace: true,
+                //alphaSpace: true,
                 maxlength: 100
             },
 

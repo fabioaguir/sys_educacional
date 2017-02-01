@@ -281,7 +281,7 @@
             $('#cep').mask('00.000-000');
         });
 
-        $( "#formPessoaJuridica" ).submit(function() {
+        $( "#formAluno" ).submit(function() {
             //$('#cpf').unmask();
             $('#telefone').unmask();
             $('#cep').unmask();
