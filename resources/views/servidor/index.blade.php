@@ -82,7 +82,7 @@
         var table = $('#servidor-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: laroute.route('servidor.grid'),
+            ajax: "{{ route ('servidor.grid') }}",
             columns: [
                 {data: 'nome', name: 'cgm.nome'},
                 {data: 'matricula', name: 'servidor.matricula'},

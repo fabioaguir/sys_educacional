@@ -102,9 +102,11 @@ class PeriodoController extends Controller
                 'id',
                 'nome',
                 'abreviatura',
-                'soma_carga_horaria',
-                'controle_frequencia',
-                'ordenacao',
+                //'soma_carga_horaria',
+                //'controle_frequencia',
+                //'ordenacao',
+                \DB::raw('IF(soma_carga_horaria = 0, "Sim", "Não") as soma_carga_horaria'),
+                \DB::raw('IF(controle_frequencia = 0, "Sim", "Não") as controle_frequencia'),
             ]);
 
         #Editando a grid
@@ -123,7 +125,7 @@ class PeriodoController extends Controller
             # Verificando a permissão de remorção
             if($user->can('periodo.destroy')) {
                 $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
-            }            
+            }
 
             # Retorno
             return $html;
@@ -139,7 +141,7 @@ class PeriodoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-//dd($data);
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 

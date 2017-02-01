@@ -199,9 +199,9 @@ class ServidorController extends Controller
     public function edit($id)
     {
         try {
-            #Recuperando a empresa
+            #Recuperando o servidor
             $model = $this->repository->with('cgm.endereco.bairro.cidade.estado')->find($id);
-
+            dd($model);
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 

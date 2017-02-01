@@ -318,6 +318,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'periodo', 'as' => 'periodo.'], function () {
         Route::get('index', ['middleware' => 'permission:periodo.select', 'as' => 'index', 'uses' => 'PeriodoController@index']);
         Route::get('grid', ['middleware' => 'permission:periodo.select', 'as' => 'grid', 'uses' => 'PeriodoController@grid']);
+        //Route::get('grid', ['middleware' => 'permission:periodo.select', 'as' => 'grid', 'uses' => 'PeriodoController@grid']);
         Route::get('create', ['middleware' => 'permission:periodo.store', 'as' => 'create', 'uses' => 'PeriodoController@create']);
         Route::post('store', ['middleware' => 'permission:periodo.store', 'as' => 'store', 'uses' => 'PeriodoController@store']);
         Route::get('edit/{id}', ['middleware' => 'permission:periodo.update', 'as' => 'edit', 'uses' => 'PeriodoController@edit']);
