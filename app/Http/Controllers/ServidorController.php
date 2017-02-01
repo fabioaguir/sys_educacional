@@ -201,7 +201,7 @@ class ServidorController extends Controller
         try {
             #Recuperando o servidor
             $model = $this->repository->with('cgm.endereco.bairro.cidade.estado')->find($id);
-            dd($model);
+
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
