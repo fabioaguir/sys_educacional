@@ -4,12 +4,14 @@ namespace SerEducacional\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Repositories\UserRepository;
 use SerEducacional\Services\UserService;
 use SerEducacional\Validators\UserValidator;
+use SerEducacional\Validators\UserAlterarSenhaValidator;
 use Yajra\Datatables\Datatables;
 
 
@@ -46,10 +48,12 @@ class UserController extends Controller
      */
     public function __construct(UserRepository $repository,
                                 UserValidator $validator,
+                                UserAlterarSenhaValidator $alterarSenha,
                                 UserService $service)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
+        $this->alterarSenha = $alterarSenha;
         $this->service = $service;
     }
 
@@ -199,6 +203,68 @@ class UserController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function alterarSenha()
+    {
+        return view('user.alterarSenha');
+    }
+
+    /**
+     * Metrodo que faz a checagem da senha do usuário antes de alterar em 'alterar senha'
+     */
+    public function searchSenha(Request $request)
+    {
+        try{
+            #Declaração de variável de uso
+            $result = true;
+
+            #Dados vindo na requisição
+            $dados = $request->all();
+
+            #Comparando senha inserida no formulário com a senha salva no banco
+            if (Hash::check($dados['value'], Auth::user()->password)) {
+                $result = false;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => $result]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function novaSenha(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #tratando as rules
+            $this->alterarSenha->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $data['idUsuario']);
+
+            #Validando a requisição
+            $this->alterarSenha->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            #Executando a ação
+            $this->service->atualizarSenha($data);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }

@@ -335,6 +335,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['middleware' => 'permission:user.update', 'as' => 'edit', 'uses' => 'UserController@edit']);
         Route::post('update/{id}', ['middleware' => 'permission:user.update', 'as' => 'update', 'uses' => 'UserController@update']);
         Route::get('destroy/{id}', ['middleware' => 'permission:user.destroy', 'as' => 'destroy', 'uses' => 'UserController@destroy']);
+
+            # Rotas usuários > alterar senha
+            Route::get('alterarSenha', ['as' => 'alterarSenha', 'uses' => 'UserController@alterarSenha']);
+            Route::post('searchSenha', ['as' => 'searchSenha', 'uses' => 'UserController@searchSenha']);
+            Route::post('novaSenha', ['as' => 'novaSenha', 'uses' => 'UserController@novaSenha']);
+            Route::post('atualizarSenha', ['as' => 'atualizarSenha', 'uses' => 'UserController@atualizarSenha']);
     });
 
     # Rotas dos perfís
