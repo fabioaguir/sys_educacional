@@ -53,6 +53,8 @@ return [
      * Appends a prefix to URLs. By default the prefix is an empty string.
     *
     */
-    'prefix' => '',
+    //Para usar local
+    //'prefix' => '',
+    'prefix' => '/sereducacional/public/index.php',
 
 ];
