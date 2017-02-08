@@ -259,7 +259,7 @@ class UserController extends Controller
             $this->alterarSenha->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
-            $this->service->atualizarSenha($data);
+            
 
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
