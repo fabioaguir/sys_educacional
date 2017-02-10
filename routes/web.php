@@ -406,6 +406,18 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('adicionarParecer', ['middleware' => 'permission:turma.parecer', 'as' => 'adicionarParecer', 'uses' => 'TurmaParecerController@adicionarParecer']);
             Route::post('removerParecer', ['middleware' => 'permission:turma.parecer', 'as' => 'removerParecer', 'uses' => 'TurmaParecerController@removerParecer']);
         });
+
+        # Modal de horários
+        Route::group(['prefix' => 'horario', 'as' => 'horario.'], function () {
+            Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'HorariosController@grid']);
+            Route::post('store', ['as' => 'store', 'uses' => 'HorariosController@store']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'HorariosController@update']);
+            Route::post('remover/{id}', ['as' => 'remover', 'uses' => 'HorariosController@destroy']);
+            Route::post('getDisciplinas', ['as' => 'getDisciplinas', 'uses' => 'HorariosController@getDisciplinas']);
+            Route::post('getProfessores', ['as' => 'getProfessores', 'uses' => 'HorariosController@getProfessores']);
+            Route::post('getDias', ['as' => 'getDias', 'uses' => 'HorariosController@getDias']);
+            Route::post('getHoras', ['as' => 'getHoras', 'uses' => 'HorariosController@getHoras']);
+        });
     });
 
     # Rotas das turmas complementares

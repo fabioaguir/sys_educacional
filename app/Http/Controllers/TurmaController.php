@@ -94,9 +94,12 @@ class TurmaController extends Controller
                 'turmas.nome',
                 'turmas.codigo',
                 'escola.codigo as escola',
+                'escola.id as escola_id',
                 'cursos.codigo as curso',
                 'curriculos.codigo as curriculo',
-                'turnos.nome as turno'
+                'turnos.nome as turno',
+                'turnos.id as turno_id',
+                'series.id as serie_id'
             ]);
 
         #Editando a grid
@@ -139,6 +142,12 @@ class TurmaController extends Controller
                 # Html de pareceres
                 $html .= '<a title="Pareceres" id="btnModalPareceres" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
             }
+
+            # Verificando a permissão dos pareceres
+            
+            # Html de horários
+            $html .= '<a title="Horários" id="btnModalHorarios" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+            
 
             # Retorno
             return $html;

@@ -71,6 +71,7 @@
     @include('turma.modal_disciplinas')
     @include('turma.modal_alunos')
     @include('turma.modal_pareceres')
+    @include('turma.modal_horarios')
 @stop
 
 @section('javascript')
@@ -78,6 +79,8 @@
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_disciplinas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_alunos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_pareceres.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turma/modal_horarios.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turma/loadFieldsHorarios.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -95,7 +98,7 @@
         });
 
         // Global idTurma
-        var idTurma;
+        var idTurma, idEscola, idSerie, idTurno;
 
         // Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#btnModalDisciplinas", function () {
@@ -146,6 +149,26 @@
 
             // Executando o modal
             runModalParecer(idTurma);
+        });
+
+        // Evento para abrir o modal de horários
+        $(document).on("click", "#btnModalHorarios", function () {
+            // Recuperando o id do turma
+            idTurma = table.row($(this).parents('tr')).data().id;
+            idEscola = table.row($(this).parents('tr')).data().escola_id;
+            idSerie = table.row($(this).parents('tr')).data().serie_id;
+            idTurno = table.row($(this).parents('tr')).data().turno_id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#hoNome').text(nome);
+            $('#hoCodigo').text(codigo);
+
+            // Executando o modal
+            runModalHorarios(idTurma, idEscola, idSerie, idTurno);
         });
     </script>
 @stop
