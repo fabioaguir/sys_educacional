@@ -2,7 +2,7 @@
  * Created by Fabio Aguiar on 22/12/2016.
  */
 
-//Função para listar as escolas
+//Função para listar as disciplinas
 function disciplinasHorario(id, idTurma, idSerie) {
     
     var dados = {
@@ -34,7 +34,7 @@ function disciplinasHorario(id, idTurma, idSerie) {
     });
 }
 
-//Função para listar as escolas
+//Função para listar os professores
 function professores(id, idEscola) {
 
     var dados = {
@@ -66,7 +66,7 @@ function professores(id, idEscola) {
 }
 
 //Função para listar os dias da semana
-function dias(id) {
+/*function dias(id) {
     
     jQuery.ajax({
         type: 'POST',
@@ -87,10 +87,10 @@ function dias(id) {
         $('#dia option').remove();
         $('#dia').append(option);
     });
-}
+}*/
 
 //Função para listar os horários
-function horas(id, idTurno) {
+/*function horas(id, idTurno) {
 
     if (idTurno) {
 
@@ -123,9 +123,9 @@ function horas(id, idTurno) {
     } else {
         $('#hora option').remove();
     }
-}
+}*/
 
-// Pegando os horários de acordo com o turno
+// Pegando os dias disponíveis para um determinado professor
 $(document).on('change', '#professor', function(){
 
     var idProfessor = $(this).val();
@@ -161,7 +161,7 @@ $(document).on('change', '#professor', function(){
 
 });
 
-// Pegando os horários de acordo com o turno
+// Pegando os horários disponíveis para um determinado professor
 $(document).on('change', '#dia', function(){
 
     var idDia = $(this).val();

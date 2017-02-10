@@ -38,10 +38,7 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
     // Carregando os campos selects
     disciplinasHorario("", idTurma, idSerie);
     professores("", idEscola);
-    //dias("");
-    //horas("", idTurno);
     
-
     // Desabilitando o botão de editar
     //$('#edtDisponibilidade').prop('disabled', true);
     //$('#edtDisponibilidade').hide();
