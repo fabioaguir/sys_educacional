@@ -4,7 +4,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Consultar Períodos</h2>
+                <h2>Consultar Períodos de Avaliação</h2>
             </div>
 
             <div class="card material-table">
@@ -31,7 +31,6 @@
                                 <th>Abreviatura</th>
                                 <th>Soma Carga Horária</th>
                                 <th>Controle Frequência</th>
-                                <th>Ordenação</th>
                                 <th>Ação</th>
                             </tr>
                             </thead>
@@ -41,7 +40,6 @@
                                 <th>Abreviatura</th>
                                 <th>Soma Carga Horária</th>
                                 <th>Controle Frequência</th>
-                                <th>Ordenação</th>
                                 <th>Ação</th>
                             </tr>
                             </tfoot>
@@ -64,7 +62,6 @@
                 {data: 'abreviatura',           name: 'periodos.abreviatura'},
                 {data: 'soma_carga_horaria',    name: 'periodos.soma_carga_horaria'},
                 {data: 'controle_frequencia',  name: 'periodos.controle_frequencia'},
-                {data: 'ordenacao',             name: 'periodos.ordenacao'},
                 {data: 'action',                name: 'action', orderable: false, searchable: false}
             ]
         });

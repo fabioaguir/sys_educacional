@@ -104,7 +104,6 @@ class PeriodoController extends Controller
                 'abreviatura',
                 'soma_carga_horaria',
                 'controle_frequencia',
-                'ordenacao',
             ]);
 
         #Editando a grid

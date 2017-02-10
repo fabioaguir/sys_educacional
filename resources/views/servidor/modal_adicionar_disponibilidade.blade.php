@@ -40,6 +40,14 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <div class=" fg-line">
+                                    <label for="area">Dia *</label>
+                                    <div class="select">
+                                        {!! Form::select("dia", array(), null, array('class'=> 'form-control', 'id' => 'dia')) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class=" fg-line">
                                     <label for="ensino">Turno *</label>
                                     <div class="select">
                                         {!! Form::select("turno", array(), null, array('class'=> 'form-control', 'id' => 'turno')) !!}
@@ -51,14 +59,6 @@
                                     <label for="ensino">Horário *</label>
                                     <div class="select">
                                         {!! Form::select("hora", array(), null, array('class'=> 'form-control', 'id' => 'hora')) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <div class=" fg-line">
-                                    <label for="area">Dia *</label>
-                                    <div class="select">
-                                        {!! Form::select("dia", array(), null, array('class'=> 'form-control', 'id' => 'dia')) !!}
                                     </div>
                                 </div>
                             </div>

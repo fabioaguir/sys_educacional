@@ -110,14 +110,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-sm-4">
+                        {{--<div class="form-group col-sm-4">
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="cgm[telefones]">Telefones</label>
                                     {!! Form::text('cgm[telefones]', Session::getOldInput('cgm[telefones]'), array('class' => 'form-control input-sm')) !!}
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
 

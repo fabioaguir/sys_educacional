@@ -130,7 +130,7 @@
                         @endpermission--}}
 
                         @permission('periodo.select|periodo.store|periodo.update|periodo.destroy')
-                        <a href="{{ route('periodo.index')  }}">Períodos</a>
+                        <a href="{{ route('periodo.index')  }}">Períodos de avaliação</a>
                         @endpermission
 
                         @permission('tipo.evento.select|tipo.evento.store|tipo.evento.update|tipo.evento.destroy')
