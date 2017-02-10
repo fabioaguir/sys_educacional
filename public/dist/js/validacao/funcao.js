@@ -10,7 +10,6 @@ $(document).ready(function () {
             },
 
             sigla: {
-                alphaSpace: true,
                 maxlength: 20
             },
 

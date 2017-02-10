@@ -2,6 +2,9 @@
 
 namespace SerEducacional\Services;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use SerEducacional\Repositories\PermissionRepository;
 use SerEducacional\Repositories\RoleRepository;
 use SerEducacional\Repositories\UserRepository;
@@ -48,6 +51,7 @@ class UserService
     {
         #tratando a senha
         $data['password'] = bcrypt($data['password']);
+        $data['active'] = 1;
 
         #tratando a imagem
 //        if(isset($data['img'])) {
@@ -136,28 +140,6 @@ class UserService
             ])->save();
         }
 
-        #tratando a imagem
-//        if(isset($data['img'])) {
-//            $file     = $data['img'];
-//            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
-//
-//            #removendo a imagem antiga
-//            if($user->path_image != null) {
-//                unlink(__DIR__ . "/../../public/" . $this->destinationPath . $user->path_image);
-//            }
-//
-//            #Movendo a imagem
-//            $file->move($this->destinationPath, $fileName);
-//
-//            #setando o nome da imagem no model
-//            $user->path_image = $fileName;
-//            $user->save();
-//
-//            #destruindo o img do array
-//            unset($data['img']);
-//        }
-
-
         #Verificando se foi criado no banco de dados
         if(!$user) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -220,5 +202,43 @@ class UserService
 
         #retorno
         return true;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function atualizarSenha($data)
+    {
+        #
+        if (!Hash::check($data['senha_atual'], Auth::user()->password)) {
+            throw new \Exception('A senha inserida nao coeicide');
+        }
+
+        # Variável que armazenará a nova senha
+        $novaSenha = "";
+
+        #tratando a senha
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $novaSenha = \bcrypt($data['password']);
+        }
+
+        # Salvando o registro principal
+        $user = $this->repository->update($data, $data['idUsuario']);
+
+        # Alterando a senha do usuário
+        if($novaSenha) {
+            $user->fill([
+                'password' => $novaSenha
+            ])->save();
+        }
+
+        #Verificando se foi criado no banco de dados
+        if(!$user) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
     }
 }

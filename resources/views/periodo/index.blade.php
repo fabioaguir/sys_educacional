@@ -31,6 +31,7 @@
                                 <th>Abreviatura</th>
                                 <th>Soma Carga Horária</th>
                                 <th>Controle Frequência</th>
+                                {{--<th>Ordenação</th>--}}
                                 <th>Ação</th>
                             </tr>
                             </thead>
@@ -40,6 +41,7 @@
                                 <th>Abreviatura</th>
                                 <th>Soma Carga Horária</th>
                                 <th>Controle Frequência</th>
+                                {{--<th>Ordenação</th>--}}
                                 <th>Ação</th>
                             </tr>
                             </tfoot>
@@ -56,12 +58,13 @@
         var table = $('#periodo-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: laroute.route('periodo.grid'),
+            ajax: "{{ route ('periodo.grid') }}",
             columns: [
                 {data: 'nome',                  name: 'periodos.nome'},
                 {data: 'abreviatura',           name: 'periodos.abreviatura'},
                 {data: 'soma_carga_horaria',    name: 'periodos.soma_carga_horaria'},
-                {data: 'controle_frequencia',  name: 'periodos.controle_frequencia'},
+                {data: 'controle_frequencia',   name: 'periodos.controle_frequencia'},
+//                {data: 'ordenacao',             name: 'periodos.ordenacao'},
                 {data: 'action',                name: 'action', orderable: false, searchable: false}
             ]
         });

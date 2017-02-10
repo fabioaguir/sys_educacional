@@ -102,8 +102,11 @@ class PeriodoController extends Controller
                 'id',
                 'nome',
                 'abreviatura',
-                'soma_carga_horaria',
-                'controle_frequencia',
+                //'soma_carga_horaria',
+                //'controle_frequencia',
+                //'ordenacao',
+                \DB::raw('IF(soma_carga_horaria = 0, "Sim", "Não") as soma_carga_horaria'),
+                \DB::raw('IF(controle_frequencia = 0, "Sim", "Não") as controle_frequencia'),
             ]);
 
         #Editando a grid

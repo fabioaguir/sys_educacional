@@ -22,11 +22,11 @@
                 @endif
             </div>
             {{-- Fim mensagem de alerta --}}
-            {{--Formulario--}}
+            {{-- Formulario --}}
             {!! Form::open(['route'=>'user.store', 'id' => 'formUser', 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormUser')
             {!! Form::close() !!}
-            {{--Fim formulario--}}
+            {{-- Fim formulario --}}
         </section>
     </div>
 @stop

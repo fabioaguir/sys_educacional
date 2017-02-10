@@ -86,21 +86,20 @@
                 </div>
 
                 <div class="sp-info">
-                    {{--{{Auth::user()->operador()->get()->first()->nome_operadores}}--}}
-
+                    {{ Auth::user()->name }}
                     <i class="zmdi zmdi-caret-down"></i>
                 </div>
             </a>
 
             <ul class="main-menu">
-                <li>
+                {{--<li>
                     <a href="profile-about.html"><i class="zmdi zmdi-account"></i>Perfil</a>
                 </li>
-                {{--<li>
+                <li>
                     <a href=""><i class="zmdi zmdi-input-antenna"></i> Privacy Settings</a>
                 </li>--}}
                 <li>
-                    <a href=""><i class="zmdi zmdi-settings"></i>Alterar Senha</a>
+                    <a href="{{ route('user.alterarSenha') }}"><i class="zmdi zmdi-settings"></i>Alterar Senha</a>
                 </li>
                 <li>
                     <a href="{{ route('logout') }}"><i class="zmdi zmdi-time-restore"></i>Sair</a>
@@ -311,7 +310,6 @@
 
     $.validator.setDefaults({
         ignore: []
-
     });
 </script>
 

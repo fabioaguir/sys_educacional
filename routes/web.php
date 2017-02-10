@@ -318,6 +318,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'periodo', 'as' => 'periodo.'], function () {
         Route::get('index', ['middleware' => 'permission:periodo.select', 'as' => 'index', 'uses' => 'PeriodoController@index']);
         Route::get('grid', ['middleware' => 'permission:periodo.select', 'as' => 'grid', 'uses' => 'PeriodoController@grid']);
+        //Route::get('grid', ['middleware' => 'permission:periodo.select', 'as' => 'grid', 'uses' => 'PeriodoController@grid']);
         Route::get('create', ['middleware' => 'permission:periodo.store', 'as' => 'create', 'uses' => 'PeriodoController@create']);
         Route::post('store', ['middleware' => 'permission:periodo.store', 'as' => 'store', 'uses' => 'PeriodoController@store']);
         Route::get('edit/{id}', ['middleware' => 'permission:periodo.update', 'as' => 'edit', 'uses' => 'PeriodoController@edit']);
@@ -334,6 +335,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['middleware' => 'permission:user.update', 'as' => 'edit', 'uses' => 'UserController@edit']);
         Route::post('update/{id}', ['middleware' => 'permission:user.update', 'as' => 'update', 'uses' => 'UserController@update']);
         Route::get('destroy/{id}', ['middleware' => 'permission:user.destroy', 'as' => 'destroy', 'uses' => 'UserController@destroy']);
+
+            # Rotas usuários > alterar senha
+            Route::get('alterarSenha', ['as' => 'alterarSenha', 'uses' => 'UserController@alterarSenha']);
+            Route::post('searchSenha', ['as' => 'searchSenha', 'uses' => 'UserController@searchSenha']);
+            Route::post('novaSenha', ['as' => 'novaSenha', 'uses' => 'UserController@novaSenha']);
+            Route::post('atualizarSenha', ['as' => 'atualizarSenha', 'uses' => 'UserController@atualizarSenha']);
     });
 
     # Rotas dos perfís

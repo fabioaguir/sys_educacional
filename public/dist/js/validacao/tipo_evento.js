@@ -5,12 +5,14 @@ $(document).ready(function () {
         rules: {
             nome: {
                 required: true,
+                alphaSpace: true,
                 maxlength: 250
             },
             abreviatura: {
                 required: true,
+                alphaSpace: true,
                 maxlength: 45
-            },
+            }
         },
         //For custom messages
         /*messages: {

@@ -27,7 +27,7 @@
                 <div class="fg-line">
                     <div class="fg-line">
                         <label for="soma_carga_horaria">Soma Carga Horária</label>
-                        {!! Form::select('soma_carga_horaria', (["" => "Selecione", "1" => "Sim", "2" => "Não"]), null, array('class'=> 'form-control')) !!}
+                        {!! Form::select('soma_carga_horaria', (["" => "Selecione", "0" => "Sim", "1" => "Não"]), null, array('class'=> 'form-control')) !!}
                         {{--{!! Form::text('soma_carga_horaria', Session::getOldInput('soma_carga_horaria'), array('class' => 'form-control input-sm', 'placeholder' => 'Soma Carga Horária')) !!}--}}
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                 <div class=" fg-line">
                     <label for="controle_frequencia">Controle de Frequência *</label>
                     <div class="select">
-                        {!! Form::select('controle_frequencia', (["" => "Selecione", "1" => "Sim", "2" => "Não"]), null, array('class'=> 'form-control')) !!}
+                        {!! Form::select('controle_frequencia', (["" => "Selecione", "0" => "Sim", "1" => "Não"]), null, array('class'=> 'form-control')) !!}
                     </div>
                 </div>
             </div>
