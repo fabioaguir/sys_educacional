@@ -21,7 +21,7 @@ class Turma extends Model implements Transformable
         'curso_id',
         'curriculo_id',
         'serie_id',
-        'procedimento_avaliacao_id',
+        'forma_avaliacao_id',
         'turno_id',
         'dependencia_id',
         'vagas',

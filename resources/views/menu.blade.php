@@ -120,9 +120,9 @@
                         <a href="{{ route('formaAvaliacao.index')  }}">Formas de Avaliações</a>
                         @endpermission
 
-                        @permission('procedimento.avaliacao.select|procedimento.avaliacao.store|procedimento.avaliacao.update|procedimento.avaliacao.destroy')
+                        {{--@permission('procedimento.avaliacao.select|procedimento.avaliacao.store|procedimento.avaliacao.update|procedimento.avaliacao.destroy')
                         <a href="{{ route('procedimentoAvaliacao.index')  }}">Procedimentos de avaliação</a>
-                        @endpermission
+                        @endpermission--}}
 
                         {{--@permission('dependencia.select|dependencia.store|dependencia.update|dependencia.destroy')
                         <a href="{{ route('dependencia.index')  }}"> Dependências</a>

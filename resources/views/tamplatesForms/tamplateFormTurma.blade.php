@@ -101,9 +101,9 @@
 
                     <div class="form-group col-md-4">
                         <div class=" fg-line">
-                            <label for="procedimento_avaliacao_id">Procedimento de Avaliação *</label>
+                            <label for="forma_avaliacao_id">Forma de Avaliação *</label>
                             <div class="select">
-                                {!! Form::select("procedimento_avaliacao_id", ["" => "Selecione um procedimento"] + $loadFields['procedimentoavaliacao']->toArray(), null, array('class'=> 'form-control')) !!}
+                                {!! Form::select("forma_avaliacao_id", ["" => "Selecione uma avaliação"] + $loadFields['formaavaliacao']->toArray(), null, array('class'=> 'form-control')) !!}
                             </div>
                         </div>
                     </div>

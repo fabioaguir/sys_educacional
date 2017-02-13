@@ -34,7 +34,7 @@ class TurmaController extends Controller
         'Turno',
         'Serie',
         'Curriculo',
-        'ProcedimentoAvaliacao',
+        'FormaAvaliacao',
         'Calendario',
         'TipoAtendimento',
         'Dependencia',
@@ -85,7 +85,7 @@ class TurmaController extends Controller
             ->join('cursos', 'cursos.id', '=', 'turmas.curso_id')
             ->join('curriculos', 'curriculos.id', '=', 'turmas.curriculo_id')
             ->join('series', 'series.id', '=', 'turmas.serie_id')
-            ->join('procedimentos_avaliacoes', 'procedimentos_avaliacoes.id', '=', 'turmas.procedimento_avaliacao_id')
+            ->join('formas_avaliacoes', 'formas_avaliacoes.id', '=', 'turmas.forma_avaliacao_id')
             ->join('dependencias', 'dependencias.id', '=', 'turmas.dependencia_id')
             ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
             ->where('turmas.tipo_turma_id', 1)
