@@ -261,7 +261,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\DisponibilidadeRepository::class,
             \SerEducacional\Repositories\DisponibilidadeRepositoryEloquent::class);
         
-        $this->app->bind(\SerEducacional\Repositories\HorarioRepository::class, \SerEducacional\Repositories\HorarioRepositoryEloquent::class);
+        $this->app->bind(
+            \SerEducacional\Repositories\HorarioRepository::class,
+            \SerEducacional\Repositories\HorarioRepositoryEloquent::class);
+        
         //:end-bindings:
     }
 }
