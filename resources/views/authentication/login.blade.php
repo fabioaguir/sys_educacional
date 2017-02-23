@@ -54,11 +54,12 @@
                             {!! csrf_field() !!}
 
                             <div class="form-group has-feedback">
-                                {!! Form::text('email', old('email'), array('class' => 'form-control', 'id'=>'email', 'placeholder' =>                                      'Login', 'required' => 'required', 'autofocus' => 'autofocus')) !!}
+                                {!! Form::text('email', old('email'), array('class' => 'form-control', 'id'=>'email', 'placeholder' => 'Login', 'required' => 'required', 'autofocus' => 'autofocus')) !!}
                                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                             </div>
                             <div class="form-group has-feedback">
-                                {!! Form::text('password', Session::getOldInput('password'), array('class' => 'form-control',                                               'id'=>'password', 'placeholder' => 'placeholder', 'required' => 'required')) !!}
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Senha" required>
+                                {{--{!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control', 'id'=>'password', 'required' => 'required')) !!}--}}
                                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                             </div>
                             <div class="row">
