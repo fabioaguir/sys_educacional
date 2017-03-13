@@ -55,6 +55,6 @@ return [
     */
     //Para usar local
     //'prefix' => '',
-    'prefix' => '/sereducacional/public/index.php',
+    'prefix' => '/index.php',
 
 ];
