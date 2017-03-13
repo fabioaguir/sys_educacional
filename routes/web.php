@@ -3,6 +3,7 @@
 # Middleware de autenticação
 Route::group(['middleware' => 'auth'], function () {
     # Rota index
+    Route::get('', 'DefaultController@index');
     Route::get('index', ['as' => 'index', 'uses' => 'DefaultController@index']);
 
     # Rotas do cgm
