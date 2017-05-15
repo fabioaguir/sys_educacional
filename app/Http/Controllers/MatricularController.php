@@ -11,11 +11,11 @@ use SerEducacional\Http\Requests\AlunoTurmaCreateRequest;
 use SerEducacional\Http\Requests\AlunoTurmaUpdateRequest;
 use SerEducacional\Repositories\AlunoTurmaRepository;
 use SerEducacional\Validators\AlunoTurmaValidator;
-use SerEducacional\Services\AlunoTurmaService;
+use SerEducacional\Services\MatricularService;
 use Yajra\Datatables\Datatables;
 
 
-class AlunoTurmasController extends Controller
+class MatricularController extends Controller
 {
     /**
      * @var AlunoTurmaRepository
@@ -23,7 +23,7 @@ class AlunoTurmasController extends Controller
     protected $repository;
 
     /**
-     * @var AlunoTurmaService
+     * @var MatricularService
      */
     private $service;
 
@@ -36,21 +36,34 @@ class AlunoTurmasController extends Controller
      * @var array
      */
     private $loadFields = [
+
     ];
 
     /**
      * AlunoTurmasController constructor.
      * @param AlunoTurmaRepository $repository
-     * @param AlunoTurmaService $service
+     * @param MatricularService $service
      * @param AlunoTurmaValidator $validator
      */
     public function __construct(AlunoTurmaRepository $repository,
-                                AlunoTurmaService $service,
+                                MatricularService $service,
                                 AlunoTurmaValidator $validator)
     {
         $this->repository = $repository;
         $this->service = $service;
         $this->validator = $validator;
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        # Retorno para view
+        return view('matricular.create');
     }
 
     /**
@@ -61,6 +74,7 @@ class AlunoTurmasController extends Controller
         #Criando a consulta
         $rows = \DB::table('alunos_turmas')
             ->join('alunos', 'alunos.id', '=', 'alunos_turmas.alunos_id')
+            ->join('cgm', 'cgm.id', '=', 'alunos.cgm_id')
             ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
             ->join('escola', 'escola.id', '=', 'turmas.escola_id')
             ->join('cursos', 'cursos.id', '=', 'turmas.curso_id')
@@ -68,11 +82,14 @@ class AlunoTurmasController extends Controller
             ->join('calendarios', 'calendarios.id', '=', 'turmas.calendario_id')
             ->join('series', 'series.id', '=', 'turmas.serie_id')
             ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
-            ->where('alunos_turmas.alunos_id', '=', $id)
+            ->where('alunos_turmas.turmas_id', '=', $id)
             ->select([
                 'alunos_turmas.id as id',
                 'alunos_turmas.matricula',
+                'alunos.id as aluno_id',
+                'cgm.nome',
                 'turmas.nome as turma',
+                'turmas.id as turma_id',
                 'escola.nome as escola',
                 'cursos.nome as curso',
                 'curriculos.nome as curriculo',
@@ -80,6 +97,7 @@ class AlunoTurmasController extends Controller
                 'series.nome as serie',
                 'turnos.nome as turno',
                 \DB::raw('DATE_FORMAT(alunos_turmas.data_matricula,"%d/%m/%Y") as data_matricula'),
+                \DB::raw('DATE_FORMAT(alunos_turmas.data_saida,"%d/%m/%Y") as data_saida'),
             ]);
 
         #Editando a grid
@@ -91,6 +109,28 @@ class AlunoTurmasController extends Controller
 
             # Retorno
             return $html;
+        })->addColumn('turmaAnterior', function ($row) {
+
+            # pega a quantidade de alunos matrículados nessa turma
+            $turmaAnterior = \DB::table('alunos_turmas')
+                ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
+                ->groupBy('turmas.id')
+                ->having('turmas.id', '!=', $row->turma_id)
+                ->limit(1,1)
+                ->where('alunos_turmas.alunos_id', '=', $row->aluno_id)
+                ->select([
+                    \DB::raw('(max(alunos_turmas.id) - 1) as maximo'),
+                    'turmas.nome',
+                ])->first();
+
+            //dd($turmaAnterior);
+
+            if($turmaAnterior) {
+                return $turmaAnterior->nome;
+            } else {
+                return "";
+            }
+
         })->make(true);
     }
 
@@ -107,10 +147,10 @@ class AlunoTurmasController extends Controller
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             # Executando a ação
-            $this->service->store($data);
+            $retorno = $this->service->store($data);
 
             # Retorno
-            return \Illuminate\Support\Facades\Response::json(['success' => true]);
+            return \Illuminate\Support\Facades\Response::json(['success' => $retorno['retorno'], 'resposta' => $retorno['resposta']]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
         }
@@ -140,6 +180,10 @@ class AlunoTurmasController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
         try {
@@ -210,6 +254,21 @@ class AlunoTurmasController extends Controller
                     \DB::raw('count(alunos_turmas.id) as qtd'),
                 ])->first();
 
+            # pega os aluno que não estão matrículados nessa turma
+            $alunoNotTurma = \DB::table('alunos')
+                ->join('cgm', 'cgm.id', '=', 'alunos.cgm_id')
+                ->whereNotIn('alunos.id', function ($where) use ($dados) {
+                    $where->from('alunos')
+                        ->select('alunos.id')
+                        ->join('alunos_turmas', 'alunos_turmas.alunos_id', '=', 'alunos.id')
+                        ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id');
+                        //->where('turmas.id', $dados['turma']);
+                })
+                ->select([
+                    'alunos.id',
+                    'cgm.nome'
+                ])->get();
+
             # calculas a quantidade de vagas restantes
             if ($alunoTurma) {
                 $qtdAlunos = $alunoTurma->qtd;
@@ -219,7 +278,8 @@ class AlunoTurmasController extends Controller
                 $qtdAlunos      = "";
             }
 
-            return response()->json(['dados' => $turma, 'qtdAlunos' => $qtdAlunos, 'vRestantes' => $vagasRestantes]);
+            return response()->json(['dados' => $turma, 'qtdAlunos' => $qtdAlunos,
+                'vRestantes' => $vagasRestantes, 'alunoNotTurma' => $alunoNotTurma]);
 
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);

@@ -50,7 +50,7 @@ class TurmaComplementarAlunoController extends Controller
             })
             ->select([
                 'alunos_turmas_complementares.id',
-                'alunos.codigo as matricula',
+                'alunos.codigo as matricular',
                 'cgm.nome',
                 \DB::raw('DATE_FORMAT(alunos_turmas_complementares.data_inclusao, "%d/%m/%Y") as data_inclusao'),
                 \DB::raw('DATE_FORMAT(alunos_turmas.data_matricula, "%d/%m/%Y") as data_matricula')

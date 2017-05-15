@@ -200,6 +200,9 @@
                         @permission('aluno.select|aluno.store|aluno.update|aluno.destroy')
                         <a href="{{ route('aluno.index')  }}">Alunos</a>
                         @endpermission
+
+                        <a href="{{ route('matricular.index')  }}">Matricular</a>
+
                     </li>
                 </ul>
 

@@ -14,7 +14,7 @@ class Servidor extends Model implements Transformable
     protected $table    = 'servidor';
 
     protected $fillable = [
-        'matricula',
+        'matricular',
         'carteira_prof',
         'serie_carteira',
         'titulo_eleitor',

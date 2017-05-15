@@ -112,7 +112,7 @@ $(document).on('change', '#turma', function () {
         html += '<td>'+retorno['dados']['serie']+'</td>';
         html += '<td>'+retorno['dados']['turno']+'</td>';
         html += '<td>'+retorno['dados']['vagas']+'</td>';
-        html += '<td>'+retorno['qtdAlunos']['qtd']+'</td>';
+        html += '<td>'+retorno['qtdAlunos']+'</td>';
         html += '<td>'+retorno['vRestantes']+'</td>';
         html += '</tr>';
 

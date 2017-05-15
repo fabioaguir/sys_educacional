@@ -300,8 +300,23 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('getTurma', ['middleware' => 'permission:aluno.matricula', 'as' => 'getTurma', 'uses' => 'AlunoTurmasController@getTurma']);
         Route::post('storeAlunoTurma', ['middleware' => 'permission:aluno.matricula', 'as' => 'storeAlunoTurma', 'uses' => 'AlunoTurmasController@store']);
         Route::post('getDadosTurma', ['middleware' => 'permission:aluno.matricula', 'as' => 'getDadosTurma', 'uses' => 'AlunoTurmasController@getDadosTurma']);
-       // Route::post('updateTelefone/{id}', ['as' => 'updateTelefone', 'uses' => 'TelefonesController@update']);
-       // Route::post('removerTelefone/{id}', ['as' => 'removerTelefone', 'uses' => 'TelefonesController@destroy']);
+       //Route::post('updateTelefone/{id}', ['as' => 'updateTelefone', 'uses' => 'TelefonesController@update']);
+       //Route::post('removerTelefone/{id}', ['as' => 'removerTelefone', 'uses' => 'TelefonesController@destroy']);
+    });
+
+    # Rotas da matrícula
+    Route::group(['prefix' => 'matricular', 'as' => 'matricular.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'MatricularController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'MatricularController@grid']);
+        Route::post('store', ['as' => 'store', 'uses' => 'MatricularController@store']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'MatricularController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'MatricularController@destroy']);
+
+        # rotas para alunos turmas - em matrícula
+        Route::get('gridAlunoTurma/{id}', [ 'as' => 'gridAlunoTurma', 'uses' => 'MatricularController@grid']);
+        Route::post('getTurma', ['as' => 'getTurma', 'uses' => 'MatricularController@getTurma']);
+        //Route::post('storeAlunoTurma', ['as' => 'storeAlunoTurma', 'uses' => 'MatricularController@store']);
+        Route::post('getDadosTurma', ['as' => 'getDadosTurma', 'uses' => 'MatricularController@getDadosTurma']);
     });
 
     # Rotas dos tipos de eventos

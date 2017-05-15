@@ -376,7 +376,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="matricula">Matrícula</label>
-                                    {!! Form::text("matricula", Session::getOldInput("matricula"), array('class' => 'form-control input-sm', 'placeholder' => 'Matrícula')) !!}
+                                    {!! Form::text("matricular", Session::getOldInput("matricular"), array('class' => 'form-control input-sm', 'placeholder' => 'Matrícula')) !!}
                                 </div>
                             </div>
                         </div>

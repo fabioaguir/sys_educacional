@@ -101,7 +101,7 @@ class AlunoController extends Controller
                 $html  = '<a style="margin-right: 5%;" title="Editar Aluno" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             }
 
-            # Verificando a permissão de remorção
+            # Verificando a permissão de remoção
             if(count($aluno->matricula) == 0 && $user->can('aluno.destroy')) {
                 $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }

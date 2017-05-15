@@ -17,7 +17,8 @@ class AlunoTurma extends Model implements Transformable
         'alunos_id',
         'turmas_id',
         'data_matricula',
-        'matricula'
+        'matricula',
+        'data_saida'
     ];
 
     /**
@@ -35,6 +36,23 @@ class AlunoTurma extends Model implements Transformable
     public function setDataMatriculaAttribute($value)
     {
         $this->attributes['data_matricula'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataSaidaAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_saida']);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setDataSaidaAttribute($value)
+    {
+        $this->attributes['data_saida'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**

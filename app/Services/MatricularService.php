@@ -5,7 +5,7 @@ namespace SerEducacional\Services;
 use SerEducacional\Repositories\AlunoTurmaRepository;
 use SerEducacional\Entities\AlunoTurma;
 
-class AlunoTurmaService
+class MatricularService
 {
     use TraitService;
 
@@ -27,18 +27,50 @@ class AlunoTurmaService
      * @return AlunoTurma
      * @throws \Exception
      */
-    public function store(array $data) : AlunoTurma
+    public function store(array $data)
     {
         # Regras de negócios
         $this->tratamentoCampos($data);
 
-        # gerando o número de matrícula
-        $date = new \DateTime('now');
-        $numMatricula = $date->format('YmdHis');
-        $data['matricular'] = $numMatricula;
+        $matricula = "";
 
-        #Salvando o registro pincipal
-        $matricula =  $this->repository->create($data);
+        # pega a quantidade de alunos matrículados nessa turma
+        $qtdAlunoTurma = \DB::table('alunos_turmas')
+            ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
+            ->groupBy('turmas.id')
+            ->where('turmas.id', '=', $data['turma_id'])
+            ->select([
+                \DB::raw('count(alunos_turmas.id) as qtdAlunos'),
+                'turmas.vagas'
+            ])->first();
+
+        if ($qtdAlunoTurma) {
+            // Valida se a quantidade de vagas foi esgotada
+            if($qtdAlunoTurma->qtdAlunos >= $qtdAlunoTurma->vagas) {
+                return ['retorno' => false, 'resposta' => 'Limte de vagas foi atingido!'];
+            }
+
+            // Pega as vagas restantes
+            $vagasRestantes = $qtdAlunoTurma->vagas - $qtdAlunoTurma->qtdAlunos;
+
+            // Valida se a quantidade de alunos a serem matriculados ultrapassa o limite de vagas
+            if(count($data['dados']) > $vagasRestantes) {
+                return ['retorno' => false, 'resposta' => 'A quantidade de alunos ultrapassa o limte de vagas!'];
+            }
+
+        }
+
+        // Varrendos todos os alunos a serem matriculados e realizando a matrícula
+        foreach ($data['dados'] as $dado) {
+
+            # gerando o número de matrícula
+            $date = new \DateTime('now');
+            $numMatricula = $date->format('YmdHis');
+            $dado['matricula'] = $numMatricula;
+
+            #Salvando o registro pincipal
+            $matricula = $this->repository->create($dado);
+        }
 
         #Verificando se foi criado no banco de dados
         if(!$matricula) {
@@ -46,7 +78,7 @@ class AlunoTurmaService
         }
 
         #Retorno
-        return $matricula;
+        return ['retorno' => true, 'resposta' => $matricula];;
     }
 
     /**
