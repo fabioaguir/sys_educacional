@@ -128,7 +128,7 @@ class ServidorController extends Controller
             # Verificando a permissão de adicionar formação
             if($user->can('servidor.add.formacao')) {
                 # Html de adicionar formação
-                $html .= '<a style="margin-right: 5%;" title="Adicionar Formações" id="btnModalAdicionarFormacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-education"></i></a>';
+                $html .= '<a style="margin-right: 5%;" title="Adicionar Formações" id="btnModalAdicionarFormacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
             }
 
             # Verificando a permissão de adicionar formação
