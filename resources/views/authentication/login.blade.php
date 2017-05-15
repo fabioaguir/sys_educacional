@@ -45,7 +45,7 @@
 
                             <!-- logo -->
                             <div class="login-logo">
-                                <center><img id="logo" src="{{ asset('/dist/img/logo.jpg') }}"
+                                <center><img id="logo" src="{{ asset('/dist/img/logo_igarassu.png') }}"
                                              class="img-responsive" alt="Logo"/></center>
                             </div>
 
