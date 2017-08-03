@@ -18,7 +18,7 @@ function TablePhonesEdit(_idClient) {
         bFilter: false,
         ajax: "/index.php/contrato/telefone/grid/" + this.idClient,
         columns: [
-            {data: 'telefone', name: 'telefones.telefone'},
+            {data: 'telefone', name: 'edu_telefones.telefone'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

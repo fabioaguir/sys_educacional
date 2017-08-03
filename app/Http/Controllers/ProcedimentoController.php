@@ -58,15 +58,15 @@ class ProcedimentoController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('procedimentos')
-            ->join('periodos', 'periodos.id', '=', 'procedimentos.periodo_avaliacao_id')
-            ->join('formas_avaliacoes', 'formas_avaliacoes.id', '=', 'procedimentos.forma_avaliacao_id')
-            ->join('procedimentos_avaliacoes', 'procedimentos_avaliacoes.id', '=', 'procedimentos.procedimento_avaliacao_id')
-            ->where('procedimentos_avaliacoes.id', $id)
+        $rows = \DB::table('edu_procedimentos')
+            ->join('edu_periodos', 'edu_periodos.id', '=', 'edu_procedimentos.periodo_avaliacao_id')
+            ->join('edu_formas_avaliacoes', 'edu_formas_avaliacoes.id', '=', 'edu_procedimentos.forma_avaliacao_id')
+            ->join('edu_procedimentos_avaliacoes', 'edu_procedimentos_avaliacoes.id', '=', 'edu_procedimentos.procedimento_avaliacao_id')
+            ->where('edu_procedimentos_avaliacoes.id', $id)
             ->select([
-                'procedimentos.id',
-                'formas_avaliacoes.nome as forma_avaliacao',
-                'periodos.nome as periodo',
+                'edu_procedimentos.id',
+                'edu_formas_avaliacoes.nome as forma_avaliacao',
+                'edu_periodos.nome as periodo',
                 \DB::raw('IF(aparecer_boletim = 1, "Sim", "Não") as boletim')
             ]);
 

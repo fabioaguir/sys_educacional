@@ -10,7 +10,7 @@ class RegimeCurso extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'regime_cursos';
+    protected $table = 'edu_regime_cursos';
     
     protected $fillable = [];
 

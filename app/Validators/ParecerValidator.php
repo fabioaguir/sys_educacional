@@ -22,12 +22,12 @@ class ParecerValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|max:100|unique:pareceres,nome',
-            'codigo' => 'required|max:50|unique:pareceres,codigo'
+            'nome' => 'required|max:100|unique:edu_pareceres,nome',
+            'codigo' => 'required|max:50|unique:edu_pareceres,codigo'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|max:100|unique:pareceres,nome,:id',
-            'codigo' => 'required|max:50|unique:pareceres,codigo,:id'
+            'nome' => 'required|max:100|unique:edu_pareceres,nome,:id',
+            'codigo' => 'required|max:50|unique:edu_pareceres,codigo,:id'
         ],
    ];
 }

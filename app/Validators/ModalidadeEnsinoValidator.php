@@ -24,8 +24,8 @@ class ModalidadeEnsinoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|serbinario_alpha_space|max:30|unique:modalidades,nome',
-            'codigo' => 'required|max:15|unique:modalidades,codigo'
+            'nome' => 'required|serbinario_alpha_space|max:30|unique:edu_modalidades,nome',
+            'codigo' => 'required|max:15|unique:edu_modalidades,codigo'
         ],
 
         ValidatorInterface::RULE_UPDATE => [

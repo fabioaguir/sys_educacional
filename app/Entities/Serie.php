@@ -10,7 +10,7 @@ class Serie extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'series';
+    protected $table    = 'edu_series';
 
     protected $fillable = [
         'nome',
@@ -22,7 +22,7 @@ class Serie extends Model implements Transformable
      */
     public function curriculos()
     {
-        return $this->belongsToMany(Curriculo::class, 'curriculos_series', 'serie_id', 'curriculo_id')
+        return $this->belongsToMany(Curriculo::class, 'edu_curriculos_series', 'serie_id', 'curriculo_id')
             ->withPivot(['id']);
     }
 

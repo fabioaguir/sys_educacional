@@ -99,11 +99,11 @@ class PessoaJuridicaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('cgm')
+        $rows = \DB::table('gen_cgm')
             ->select([
-                'cgm.id',
-                'cgm.nome',
-                'cgm.cnpj',
+                'gen_cgm.id',
+                'gen_cgm.nome',
+                'gen_cgm.cnpj',
             ])
             ->where('cpf', '=', null);
         
@@ -202,10 +202,10 @@ class PessoaJuridicaController extends Controller
     {
         $idEstado = $request->get('id');
 
-        $cidades = \DB::table('cidades')
-            ->join('estados', 'estados.id', '=', 'cidades.estados_id')
-            ->select('cidades.id', 'cidades.nome')
-            ->where('estados.id', $idEstado)
+        $cidades = \DB::table('gen_cidades')
+            ->join('gen_estados', 'gen_estados.id', '=', 'gen_cidades.estados_id')
+            ->select('gen_cidades.id', 'gen_cidades.nome')
+            ->where('gen_estados.id', $idEstado)
             ->get();
 
         return response()->json($cidades);
@@ -219,10 +219,10 @@ class PessoaJuridicaController extends Controller
     {
         $idCidade = $request->get('id');
 
-        $cidades = \DB::table('bairros')
-            ->join('cidades', 'cidades.id', '=', 'bairros.cidades_id')
-            ->select('bairros.id', 'bairros.nome')
-            ->where('cidades.id', $idCidade)
+        $cidades = \DB::table('gen_bairros')
+            ->join('gen_cidades', 'gen_cidades.id', '=', 'gen_bairros.cidades_id')
+            ->select('gen_bairros.id', 'gen_bairros.nome')
+            ->where('gen_cidades.id', $idCidade)
             ->get();
 
         return response()->json($cidades);
@@ -243,22 +243,22 @@ class PessoaJuridicaController extends Controller
             #
             if (empty($pessoaJuridica['idModel'])) {
                 #Consultando
-                $pessoa = \DB::table('cgm')
+                $pessoa = \DB::table('gen_cgm')
                     ->select([
-                        'cgm.cnpj'
+                        'gen_cgm.cnpj'
                     ])
-                    ->where('cgm.cnpj', $pessoaJuridica['value'])
+                    ->where('gen_cgm.cnpj', $pessoaJuridica['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $pessoa = \DB::table('cgm')
+                $pessoa = \DB::table('gen_cgm')
                     ->select([
-                        'cgm.id',
-                        'cgm.cnpj'
+                        'gen_cgm.id',
+                        'gen_cgm.cnpj'
                     ])
-                    ->where('cgm.id', '!=' ,$pessoaJuridica['idModel'])
-                    ->where('cgm.cnpj', $pessoaJuridica['value'])
+                    ->where('gen_cgm.id', '!=' ,$pessoaJuridica['idModel'])
+                    ->where('gen_cgm.cnpj', $pessoaJuridica['value'])
                     ->get();
             }
 

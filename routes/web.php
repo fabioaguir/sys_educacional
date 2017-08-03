@@ -10,6 +10,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'pessoaFisica', 'as' => 'pessoaFisica.'], function () {
         Route::get('index', ['middleware' => 'permission:pessoa.fisica.select', 'as' => 'index', 'uses' => 'PessoaFisicaController@index']);
         Route::get('grid', ['middleware' => 'permission:pessoa.fisica.select', 'as' => 'grid', 'uses' => 'PessoaFisicaController@grid']);
+        Route::get('gridPesquisarPessoa', ['as' => 'gridPesquisarPessoa', 'uses' => 'PessoaFisicaController@gridPesquisarPessoa']);
         Route::get('create', ['middleware' => 'permission:pessoa.fisica.store', 'as' => 'create', 'uses' => 'PessoaFisicaController@create']);
         Route::post('store', ['middleware' => 'permission:pessoa.fisica.store', 'as' => 'store', 'uses' => 'PessoaFisicaController@store']);
         Route::get('edit/{id}', ['middleware' => 'permission:pessoa.fisica.update', 'as' => 'edit', 'uses' => 'PessoaFisicaController@edit']);

@@ -37,16 +37,16 @@ class TurmaComplementarAtividadeController extends Controller
     public function grid($idTurmaComplementar)
     {
         #Criando a consulta
-        $rows = \DB::table('atividades_complementares')
-            ->join('turmas_atividades', 'turmas_atividades.atividade_id', '=', 'atividades_complementares.id')
-            ->join('turmas', 'turmas.id', '=', 'turmas_atividades.turma_id')
+        $rows = \DB::table('edu_atividades_complementares')
+            ->join('edu_turmas_atividades', 'edu_turmas_atividades.atividade_id', '=', 'edu_atividades_complementares.id')
+            ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_turmas_atividades.turma_id')
             ->select([
-                'atividades_complementares.id',
-                'atividades_complementares.nome',
-                'atividades_complementares.codigo',
-                'turmas_atividades.id as idTurmaAtividade'
+                'edu_atividades_complementares.id',
+                'edu_atividades_complementares.nome',
+                'edu_atividades_complementares.codigo',
+                'edu_turmas_atividades.id as idTurmaAtividade'
             ])
-            ->where('turmas.id', $idTurmaComplementar);
+            ->where('edu_turmas.id', $idTurmaComplementar);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function () {
@@ -81,22 +81,22 @@ class TurmaComplementarAtividadeController extends Controller
             $pageValue   = $dados['page'];
 
             # QUery Principal
-            $query = \DB::table('atividades_complementares')
-                ->whereNotIn('atividades_complementares.id', function ($where) use ($idTurmaComplementar) {
-                   $where->from('atividades_complementares')
-                       ->select('atividades_complementares.id')
-                       ->join('turmas_atividades', 'turmas_atividades.atividade_id', '=', 'atividades_complementares.id')
-                       ->join('turmas', 'turmas.id', '=', 'turmas_atividades.turma_id')
-                       ->where('turmas.id', $idTurmaComplementar);
+            $query = \DB::table('edu_atividades_complementares')
+                ->whereNotIn('edu_atividades_complementares.id', function ($where) use ($idTurmaComplementar) {
+                   $where->from('edu_atividades_complementares')
+                       ->select('edu_atividades_complementares.id')
+                       ->join('edu_turmas_atividades', 'edu_turmas_atividades.atividade_id', '=', 'edu_atividades_complementares.id')
+                       ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_turmas_atividades.turma_id')
+                       ->where('edu_turmas.id', $idTurmaComplementar);
                 })
                 ->select([
-                    'atividades_complementares.id',
-                    'atividades_complementares.nome'
+                    'edu_atividades_complementares.id',
+                    'edu_atividades_complementares.nome'
                 ]);
 
             # Validando o valor da pesquisa
             if(!empty($valueSearch)) {
-                $query->where('atividades_complementares.nome', 'like', "%$valueSearch%");
+                $query->where('edu_atividades_complementares.nome', 'like', "%$valueSearch%");
             }
 
             # Recuperando todos os registros da consulta
@@ -192,7 +192,7 @@ class TurmaComplementarAtividadeController extends Controller
             }
 
             # Removendo a disciplina
-            \DB::table('turmas_atividades')->where('id', $dados['idTurmaAtividade'])->delete();
+            \DB::table('edu_turmas_atividades')->where('id', $dados['idTurmaAtividade'])->delete();
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

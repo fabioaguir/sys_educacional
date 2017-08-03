@@ -10,7 +10,7 @@ class DiaSemana extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'dias_semana';
+    protected $table    = 'edu_dias_semana';
 
     protected $fillable = [
         'nome',

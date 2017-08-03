@@ -55,8 +55,8 @@
             ajax: laroute.route('pessoaJuridica.grid'),
             columns: [
 
-                {data: 'nome', name: 'cgm.nome'},
-                {data: 'cnpj', name: 'cgm.cnpj'},
+                {data: 'nome', name: 'gen_cgm.nome'},
+                {data: 'cnpj', name: 'gen_cgm.cnpj'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

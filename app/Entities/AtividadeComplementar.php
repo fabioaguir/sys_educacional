@@ -10,7 +10,7 @@ class AtividadeComplementar extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'atividades_complementares';
+    protected $table = 'edu_atividades_complementares';
 
     protected $fillable = [
         'nome',

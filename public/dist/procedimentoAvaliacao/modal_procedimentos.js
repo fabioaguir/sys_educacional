@@ -13,8 +13,8 @@ function loadTableProcedimento (idProcedimentoAvaliacao) {
         autoWidth: false,
         ajax: laroute.route('procedimentoAvaliacao.procedimento.grid', {'id' : idProcedimentoAvaliacao }),
         columns: [
-            {data: 'periodo', name: 'periodos.nome'},
-            {data: 'forma_avaliacao', name: 'formas_avaliacoes.nome'},
+            {data: 'periodo', name: 'edu_periodos.nome'},
+            {data: 'forma_avaliacao', name: 'edu_formas_avaliacoes.nome'},
             {data: 'boletim', name: 'boletim'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]

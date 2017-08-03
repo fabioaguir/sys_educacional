@@ -59,13 +59,13 @@ class AlocacaosController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('alocacoes')
-            ->join('servidor', 'servidor.id', '=', 'alocacoes.servidor_id')
-            ->join('escola', 'escola.id', '=', 'alocacoes.escola_id')
-            ->where('alocacoes.servidor_id', '=', $id)
+        $rows = \DB::table('edu_alocacoes')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_alocacoes.servidor_id')
+            ->join('edu_escola', 'edu_escola.id', '=', 'edu_alocacoes.escola_id')
+            ->where('edu_alocacoes.servidor_id', '=', $id)
             ->select([
-                'alocacoes.id as id',
-                'escola.nome as escola',
+                'edu_alocacoes.id as id',
+                'edu_escola.nome as escola',
             ]);
 
         #Editando a grid
@@ -145,8 +145,8 @@ class AlocacaosController extends Controller
     public function getEscolas(Request $request)
     {
 
-        $tipos = \DB::table('escola')
-            ->select('escola.id', 'escola.nome')
+        $tipos = \DB::table('edu_escola')
+            ->select('edu_escola.id', 'edu_escola.nome')
             ->get();
 
         return response()->json($tipos);

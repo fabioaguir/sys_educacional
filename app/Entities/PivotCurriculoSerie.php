@@ -13,7 +13,7 @@ class PivotCurriculoSerie extends Pivot implements Transformable
     /**
      * @var string
      */
-    protected $table = 'curriculos_series';
+    protected $table = 'edu_curriculos_series';
 
     /**
      * @var array
@@ -28,7 +28,7 @@ class PivotCurriculoSerie extends Pivot implements Transformable
      */
     public function disciplinas()
     {
-        return $this->belongsToMany(Disciplina::class, "curriculos_series_disciplinas", "curriculo_serie_id", "disciplina_id")
+        return $this->belongsToMany(Disciplina::class, "edu_curriculos_series_disciplinas", "curriculo_serie_id", "disciplina_id")
             ->withPivot(['id', 'curriculo_serie_id', 'disciplina_id', 'periodo', 'e_obrigatoria']);
     }
 }

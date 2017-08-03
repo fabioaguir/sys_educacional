@@ -12,7 +12,6 @@ class AlunoValidator extends LaravelValidator
 
     protected $attributes = [
         'codigo' => 'Código',
-        'num_nis' => 'No. NIS',
         'num_inep' => 'No. INEP',
 
         //Tabela CGM
@@ -26,6 +25,7 @@ class AlunoValidator extends LaravelValidator
         'cgm.email' => 'Endereço eletrônico',
         'cgm.nacionalidade_id' => 'Nacionalidade',
         'cgm.naturalidade' => 'Naturalidade',
+        'cgm.numero_nis' => 'No. NIS',
 
         //Tabela telefone
         'telefone.nome' => 'No. Telefone',
@@ -55,7 +55,6 @@ class AlunoValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             //Tabela alunos
             'codigo' => 'required|numeric|digits_between:0,45',
-            'num_nis' => 'required|numeric|digits_between:0,30',
             'num_inep' => 'required|numeric|digits_between:0,30',
 
             //Tabela CGM
@@ -69,6 +68,7 @@ class AlunoValidator extends LaravelValidator
             'cgm.email' => 'email|max:45',
             'cgm.nacionalidade_id' => 'integer',
             'cgm.naturalidade' => 'required|serbinario_alpha_space|max:45',
+            'cgm.numero_nis' => 'required|numeric|digits_between:0,30',
 
             //Tabela telefone
             //'telefone.nome' => 'required|numeric|digits_between:0,20',
@@ -85,20 +85,20 @@ class AlunoValidator extends LaravelValidator
         ValidatorInterface::RULE_UPDATE => [
             //Tabela alunos
             'codigo' => 'required|numeric|digits_between:0,45',
-            'num_nis' => 'required|numeric|digits_between:0,30',
             'num_inep' => 'required|numeric|digits_between:0,30',
 
             //Tabela CGM
             'cgm.nome' => 'required|serbinario_alpha_space|max:45',
             'cgm.data_nascimento' => 'max:15', //date_br
             'cgm.sexo_id' => 'required|integer',
-            'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf:id',
+            'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:gen_cgm,cpf:id',
             'cgm.rg' => 'numeric|digits_between:0,20',
             'cgm.pai' => 'serbinario_alpha_space|max:45',
             'cgm.mae' => 'serbinario_alpha_space|max:45',
             'cgm.email' => 'email|max:45',
             'cgm.nacionalidade_id' => 'integer',
             'cgm.naturalidade' => 'required|serbinario_alpha_space|max:45',
+            'cgm.numero_nis' => 'required|numeric|digits_between:0,30',
 
             //Tabela telefone
             'telefone.nome' => 'required|numeric|digits_between:0,20',

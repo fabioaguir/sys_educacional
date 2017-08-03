@@ -12,7 +12,7 @@ function loadTableEscolaCurso (idEscola) {
         autoWidth: false,
         ajax: laroute.route('escola.curso.gridCursos', {'id' :idEscola }),
         columns: [
-            {data: 'nome', name: 'cursos.nome'},
+            {data: 'nome', name: 'edu_cursos.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
@@ -34,7 +34,7 @@ function loadTableCursoTurno (idEscolaCurso) {
         autoWidth: false,
         ajax: laroute.route('escola.turno.gridTurnos', {'idEscolaCurso' : idEscolaCurso }),
         columns: [
-            {data: 'nome', name: 'turnos.nome'},
+            {data: 'nome', name: 'edu_turnos.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

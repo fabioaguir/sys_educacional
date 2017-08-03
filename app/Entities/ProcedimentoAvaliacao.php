@@ -10,7 +10,7 @@ class ProcedimentoAvaliacao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'procedimentos_avaliacoes';
+    protected $table = 'edu_procedimentos_avaliacoes';
     
     protected $fillable = [
         'nome',

@@ -72,11 +72,11 @@ class ModalidadeEnsinoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('modalidades')
+        $rows = \DB::table('edu_modalidades')
             ->select([
-                'modalidades.id',
-                'modalidades.nome',
-                'modalidades.codigo',
+                'edu_modalidades.id',
+                'edu_modalidades.nome',
+                'edu_modalidades.codigo',
             ]);
 
         #Editando a grid
@@ -212,22 +212,22 @@ class ModalidadeEnsinoController extends Controller
             #
             if (empty($modalidadeEnsino['idModel'])) {
                 #Consultando
-                $modalidadeNome = \DB::table('modalidades')
+                $modalidadeNome = \DB::table('edu_modalidades')
                     ->select([
-                        'modalidades.nome'
+                        'edu_modalidades.nome'
                     ])
-                    ->where('modalidades.nome', $modalidadeEnsino['value'])
+                    ->where('edu_modalidades.nome', $modalidadeEnsino['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $modalidadeNome = \DB::table('modalidades')
+                $modalidadeNome = \DB::table('edu_modalidades')
                     ->select([
-                        'modalidades.id',
-                        'modalidades.nome'
+                        'edu_modalidades.id',
+                        'edu_modalidades.nome'
                     ])
-                    ->where('modalidades.id', '!=', $modalidadeEnsino['idModel'])
-                    ->where('modalidades.nome', $modalidadeEnsino['value'])
+                    ->where('edu_modalidades.id', '!=', $modalidadeEnsino['idModel'])
+                    ->where('edu_modalidades.nome', $modalidadeEnsino['value'])
                     ->get();
             }
 
@@ -257,22 +257,22 @@ class ModalidadeEnsinoController extends Controller
             #
             if (empty($modalidadeEnsino['idModel'])) {
                 #Consultando
-                $modalidadeEnsino = \DB::table('modalidades')
+                $modalidadeEnsino = \DB::table('edu_modalidades')
                     ->select([
-                        'modalidades.codigo'
+                        'edu_modalidades.codigo'
                     ])
-                    ->where('modalidades.codigo', $modalidadeEnsino['value'])
+                    ->where('edu_modalidades.codigo', $modalidadeEnsino['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $modalidadeEnsino = \DB::table('modalidades')
+                $modalidadeEnsino = \DB::table('edu_modalidades')
                     ->select([
-                        'modalidades.id',
-                        'modalidades.codigo'
+                        'edu_modalidades.id',
+                        'edu_modalidades.codigo'
                     ])
-                    ->where('modalidades.id', '!=', $modalidadeEnsino['idModel'])
-                    ->where('modalidades.codigo', $modalidadeEnsino['value'])
+                    ->where('edu_modalidades.id', '!=', $modalidadeEnsino['idModel'])
+                    ->where('edu_modalidades.codigo', $modalidadeEnsino['value'])
                     ->get();
             }
 

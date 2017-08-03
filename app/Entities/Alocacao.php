@@ -10,7 +10,7 @@ class Alocacao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'alocacoes';
+    protected $table    = 'edu_alocacoes';
 
     protected $fillable = [
         'servidor_id',

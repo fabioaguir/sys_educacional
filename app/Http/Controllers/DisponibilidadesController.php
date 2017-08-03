@@ -59,23 +59,23 @@ class DisponibilidadesController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('disponibilidades')
-            ->join('servidor', 'servidor.id', '=', 'disponibilidades.servidor_id')
-            ->join('escola', 'escola.id', '=', 'disponibilidades.escola_id')
-            ->join('dias_semana', 'dias_semana.id', '=', 'disponibilidades.dia_semana_id')
-            ->join('horas', 'horas.id', '=', 'disponibilidades.hora_id')
-            ->join('turnos', 'turnos.id', '=', 'horas.turnos_id')
-            ->where('disponibilidades.servidor_id', '=', $id)
+        $rows = \DB::table('edu_disponibilidades')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_disponibilidades.servidor_id')
+            ->join('edu_escola', 'edu_escola.id', '=', 'edu_disponibilidades.escola_id')
+            ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_disponibilidades.dia_semana_id')
+            ->join('edu_horas', 'edu_horas.id', '=', 'edu_disponibilidades.hora_id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_horas.turnos_id')
+            ->where('edu_disponibilidades.servidor_id', '=', $id)
             ->select([
-                'disponibilidades.id as id',
-                'escola.nome as escola',
-                'escola.id as escola_id',
-                'dias_semana.nome as dia_semana',
-                'dias_semana.id as dia_semana_id',
-                \DB::raw("CONCAT(DATE_FORMAT(horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(horas.hora_final,'%h:%i')) AS horario"),
-                'horas.id as hora_id',
-                'turnos.nome as turno',
-                'turnos.id as turno_id',
+                'edu_disponibilidades.id as id',
+                'edu_escola.nome as escola',
+                'edu_escola.id as escola_id',
+                'edu_dias_semana.nome as dia_semana',
+                'edu_dias_semana.id as dia_semana_id',
+                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS horario"),
+                'edu_horas.id as hora_id',
+                'edu_turnos.nome as turno',
+                'edu_turnos.id as turno_id',
             ]);
 
         #Editando a grid
@@ -154,8 +154,8 @@ class DisponibilidadesController extends Controller
     public function getDias(Request $request)
     {
 
-        $query = \DB::table('dias_semana')
-            ->select('dias_semana.id', 'dias_semana.nome')
+        $query = \DB::table('edu_dias_semana')
+            ->select('edu_dias_semana.id', 'edu_dias_semana.nome')
             ->get();
 
         return response()->json($query);
@@ -171,12 +171,12 @@ class DisponibilidadesController extends Controller
 
         $dados = $request->request->all();
         
-        $query = \DB::table('horas')
-            ->join('turnos', 'turnos.id', '=', 'horas.turnos_id')
-            ->where('turnos.id', '=', $dados['idTurno'])
+        $query = \DB::table('edu_horas')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_horas.turnos_id')
+            ->where('edu_turnos.id', '=', $dados['idTurno'])
             ->select(
-                'horas.id as id',
-                \DB::raw("CONCAT(DATE_FORMAT(horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(horas.hora_final,'%h:%i')) AS nome"))
+                'edu_horas.id as id',
+                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS nome"))
             ->get();
 
         return response()->json($query);
@@ -190,8 +190,8 @@ class DisponibilidadesController extends Controller
     public function getTurnos(Request $request)
     {
 
-        $query = \DB::table('turnos')
-            ->select('turnos.id', 'turnos.nome')
+        $query = \DB::table('edu_turnos')
+            ->select('edu_turnos.id', 'edu_turnos.nome')
             ->get();
 
         return response()->json($query);

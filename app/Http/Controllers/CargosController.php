@@ -66,11 +66,11 @@ class CargosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('cargos')
+        $rows = \DB::table('edu_cargos')
             ->select([
-                'cargos.id',
-                'cargos.nome',
-                'cargos.codigo',
+                'edu_cargos.id',
+                'edu_cargos.nome',
+                'edu_cargos.codigo',
             ]);
 
         #Editando a grid

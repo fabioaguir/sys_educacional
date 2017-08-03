@@ -81,13 +81,13 @@ class ServidorController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('servidor')
-            ->join('cgm', 'cgm.id', '=', 'servidor.id_cgm')
+        $rows = \DB::table('edu_servidor')
+            ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_servidor.id_cgm')
             ->select([
-                'servidor.id',
-                'cgm.nome',
-                'servidor.matricula',
-                'cgm.id as cgm_id',
+                'edu_servidor.id',
+                'gen_cgm.nome',
+                'edu_servidor.matricula',
+                'gen_cgm.id as cgm_id',
             ]);
 
         #Editando a grid
@@ -279,22 +279,22 @@ class ServidorController extends Controller
             #
             if (empty($dados['idModel'])) {
                 #Consultando
-                $servidor = \DB::table('cgm')
+                $servidor = \DB::table('gen_cgm')
                     ->select([
-                        'cgm.cpf'
+                        'gen_cgm.cpf'
                     ])
-                    ->where('cgm.cpf', $dados['value'])
+                    ->where('gen_cgm.cpf', $dados['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $servidor = \DB::table('cgm')
+                $servidor = \DB::table('gen_cgm')
                     ->select([
-                        'cgm.id',
-                        'cgm.cpf'
+                        'gen_cgm.id',
+                        'gen_cgm.cpf'
                     ])
-                    ->where('cgm.id', '!=' ,$dados['idModel'])
-                    ->where('cgm.cpf', $dados['value'])
+                    ->where('gen_cgm.id', '!=' ,$dados['idModel'])
+                    ->where('gen_cgm.cpf', $dados['value'])
                     ->get();
             }
 

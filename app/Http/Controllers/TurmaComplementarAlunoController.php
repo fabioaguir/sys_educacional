@@ -37,25 +37,25 @@ class TurmaComplementarAlunoController extends Controller
     public function grid($idTurmaComplementar)
     {
         #Criando a consulta
-        $rows = \DB::table('alunos_turmas_complementares')
-            ->join('turmas', 'turmas.id', '=', 'alunos_turmas_complementares.turma_complementar_id')
-            ->join('alunos', 'alunos.id', '=', 'alunos_turmas_complementares.aluno_id')
-            ->join('cgm', 'cgm.id', '=', 'alunos.cgm_id')
-            ->join('alunos_turmas', function ($join) {
+        $rows = \DB::table('edu_alunos_turmas_complementares')
+            ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_alunos_turmas_complementares.turma_complementar_id')
+            ->join('edu_alunos', 'edu_alunos.id', '=', 'edu_alunos_turmas_complementares.aluno_id')
+            ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
+            ->join('edu_alunos_turmas', function ($join) {
                 $join->on(
-                    'alunos_turmas.id', '=',
-                    \DB::raw('(SELECT turma_atual.id FROM alunos_turmas as turma_atual
-                        where turma_atual.alunos_id = alunos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                    'edu_alunos_turmas.id', '=',
+                    \DB::raw('(SELECT turma_atual.id FROM edu_alunos_turmas as turma_atual
+                        where turma_atual.alunos_id = edu_alunos.id ORDER BY turma_atual.id DESC LIMIT 1)')
                 );
             })
             ->select([
-                'alunos_turmas_complementares.id',
-                'alunos.codigo as matricular',
-                'cgm.nome',
-                \DB::raw('DATE_FORMAT(alunos_turmas_complementares.data_inclusao, "%d/%m/%Y") as data_inclusao'),
-                \DB::raw('DATE_FORMAT(alunos_turmas.data_matricula, "%d/%m/%Y") as data_matricula')
+                'edu_alunos_turmas_complementares.id',
+                'edu_alunos.codigo as matricular',
+                'gen_cgm.nome',
+                \DB::raw('DATE_FORMAT(edu_alunos_turmas_complementares.data_inclusao, "%d/%m/%Y") as data_inclusao'),
+                \DB::raw('DATE_FORMAT(edu_alunos_turmas.data_matricula, "%d/%m/%Y") as data_matricula')
             ])
-            ->where('turmas.id', $idTurmaComplementar);
+            ->where('edu_turmas.id', $idTurmaComplementar);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -90,31 +90,31 @@ class TurmaComplementarAlunoController extends Controller
             $pageValue   = $dados['page'];
 
             # QUery Principal
-            $query = \DB::table('alunos')
-                ->join('alunos_turmas', function ($join) {
+            $query = \DB::table('edu_alunos')
+                ->join('edu_alunos_turmas', function ($join) {
                     $join->on(
-                        'alunos_turmas.id', '=',
-                        \DB::raw('(SELECT turma_atual.id FROM alunos_turmas as turma_atual
-                        where turma_atual.alunos_id = alunos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                        'edu_alunos_turmas.id', '=',
+                        \DB::raw('(SELECT turma_atual.id FROM edu_alunos_turmas as turma_atual
+                        where turma_atual.alunos_id = edu_alunos.id ORDER BY turma_atual.id DESC LIMIT 1)')
                     );
                 })
-                ->join('cgm', 'cgm.id', '=', 'alunos.cgm_id')
-                ->whereNotIn('alunos.id', function ($where) use ($idTurmaComplementar) {
-                   $where->from('alunos')
-                       ->select('alunos.id')
-                       ->join('alunos_turmas_complementares', 'alunos_turmas_complementares.aluno_id', '=', 'alunos.id')
-                       ->join('turmas', 'turmas.id', '=', 'alunos_turmas_complementares.turma_complementar_id')
-                       ->where('turmas.id', $idTurmaComplementar);
+                ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
+                ->whereNotIn('edu_alunos.id', function ($where) use ($idTurmaComplementar) {
+                   $where->from('edu_alunos')
+                       ->select('edu_alunos.id')
+                       ->join('edu_alunos_turmas_complementares', 'edu_alunos_turmas_complementares.aluno_id', '=', 'edu_alunos.id')
+                       ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_alunos_turmas_complementares.turma_complementar_id')
+                       ->where('edu_turmas.id', $idTurmaComplementar);
                 })
                 ->select([
-                    'alunos.id',
-                    'cgm.nome',
-                    'alunos.codigo'
+                    'edu_alunos.id',
+                    'gen_cgm.nome',
+                    'edu_alunos.codigo'
                 ]);
 
             # Validando o valor da pesquisa
             if(!empty($valueSearch)) {
-                $query->where('cgm.nome', 'like', "%$valueSearch%");
+                $query->where('gen_cgm.nome', 'like', "%$valueSearch%");
             }
 
             # Recuperando todos os registros da consulta
@@ -220,7 +220,7 @@ class TurmaComplementarAlunoController extends Controller
             }
 
             # Removendo a disciplina
-            \DB::table('alunos_turmas_complementares')->where('id', $dados['idAlunoTurmaComplementar'])->delete();
+            \DB::table('edu_alunos_turmas_complementares')->where('id', $dados['idAlunoTurmaComplementar'])->delete();
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

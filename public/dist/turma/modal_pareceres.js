@@ -12,8 +12,8 @@ function loadTableParecer (idTurma) {
         autoWidth: false,
         ajax: laroute.route('turma.parecer.grid', {'idTurma' : idTurma }),
         columns: [
-            {data: 'codigo', name: 'pareceres.codigo'},
-            {data: 'nome', name: 'pareceres.nome'},
+            {data: 'codigo', name: 'edu_pareceres.codigo'},
+            {data: 'nome', name: 'edu_pareceres.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

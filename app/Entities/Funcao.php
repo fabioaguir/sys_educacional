@@ -10,7 +10,7 @@ class Funcao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'funcoes';
+    protected $table    = 'edu_funcoes';
 
     protected $fillable = [
         'nome',

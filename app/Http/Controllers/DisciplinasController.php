@@ -68,12 +68,12 @@ class DisciplinasController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('disciplinas')
+        $rows = \DB::table('edu_disciplinas')
             ->select([
-                'disciplinas.id',
-                'disciplinas.nome',
-                'disciplinas.codigo',
-                'disciplinas.carga_horaria'
+                'edu_disciplinas.id',
+                'edu_disciplinas.nome',
+                'edu_disciplinas.codigo',
+                'edu_disciplinas.carga_horaria'
             ]);
 
         #Editando a grid

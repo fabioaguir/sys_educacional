@@ -10,7 +10,7 @@ class TurmaComplementar extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'turmas';
+    protected $table = 'edu_turmas';
 
     protected $fillable = [
         'codigo',
@@ -32,7 +32,7 @@ class TurmaComplementar extends Model implements Transformable
      */
     public function atividades()
     {
-        return $this->belongsToMany(Serie::class, 'turmas_atividades', 'turma_id', 'atividade_id')
+        return $this->belongsToMany(Serie::class, 'edu_turmas_atividades', 'turma_id', 'atividade_id')
             ->withPivot(['id']);
     }
 
@@ -41,7 +41,7 @@ class TurmaComplementar extends Model implements Transformable
      */
     public function alunos()
     {
-        return $this->belongsToMany(Aluno::class, 'alunos_turmas_complementares', 'turma_complementar_id', 'aluno_id')
+        return $this->belongsToMany(Aluno::class, 'edu_alunos_turmas_complementares', 'turma_complementar_id', 'aluno_id')
             ->withPivot(['id', 'data_inclusao']);
     }
 }

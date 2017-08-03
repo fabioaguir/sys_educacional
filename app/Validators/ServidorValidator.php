@@ -55,7 +55,7 @@ class ServidorValidator extends LaravelValidator
             'cgm.cgm_municipio_id' => 'required|integer',
             'cgm.estado_civil_id' => 'required|integer',
             'cgm.escolaridade_id' => 'required|integer',
-            'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf',
+            'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:gen_cgm,cpf',
             'cgm.rg' => 'required|numeric|digits_between:0,20',
 
             //Tabela Servidor

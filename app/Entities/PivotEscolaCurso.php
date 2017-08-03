@@ -13,7 +13,7 @@ class PivotEscolaCurso extends Pivot implements Transformable
     /**
      * @var string
      */
-    protected $table = 'escolas_cursos';
+    protected $table = 'edu_escolas_cursos';
 
     /**
      * @var array
@@ -28,6 +28,6 @@ class PivotEscolaCurso extends Pivot implements Transformable
      */
     public function turnos()
     {
-        return $this->belongsToMany(Turno::class, "escolas_cursos_turnos", "escola_curso_id", "turno_id");
+        return $this->belongsToMany(Turno::class, "edu_escolas_cursos_turnos", "escola_curso_id", "turno_id");
     }
 }

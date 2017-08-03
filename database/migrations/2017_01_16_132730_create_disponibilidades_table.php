@@ -13,7 +13,7 @@ class CreateDisponibilidadesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('disponibilidades', function(Blueprint $table) {
+		Schema::create('edu_disponibilidades', function(Blueprint $table) {
             $table->increments('id');
 
             $table->timestamps();
@@ -27,7 +27,7 @@ class CreateDisponibilidadesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('disponibilidades');
+		Schema::drop('edu_disponibilidades');
 	}
 
 }

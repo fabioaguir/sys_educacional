@@ -48,16 +48,23 @@ class ServidorService
      */
     public function tratamentoEndereco($data)
     {
-        $dados = $data;
+        $dados = $data['cgm']['endereco'];
 
-        $endereco = $this->enderecoRepository->create($dados);
+        // Validando se o CGM já existe ou não
+        if (isset($data['endereco_id']) && $data['endereco_id'] != "") {
+            #Editando registro
+            $endereco = $this->enderecoRepository->update($dados, $data['endereco_id']);
+        } else {
+            #Salvando registro
+            $endereco = $this->enderecoRepository->create($dados);
+        }
 
         return $endereco;
     }
 
     /**
      * @param array $data
-     * @return PessoaFisica
+     * @return Servidor
      * @throws \Exception
      */
     public function store(array $data) : Servidor
@@ -66,16 +73,22 @@ class ServidorService
         $this->tratamentoCampos($data);
 
         #Retorno de endereço
-        $endereco = $this->tratamentoEndereco($data['cgm']['endereco']);
+        $endereco = $this->tratamentoEndereco($data);
 
         # Recuperando instituição
-        $instituicao = \DB::table('instituicao')->first();
+        $instituicao = \DB::table('edu_instituicao')->first();
 
         #criando vinculo
         $data['cgm']['endereco_id'] = $endereco->id;
 
-        #Salvando o registro cgm
-        $cgm =  $this->pessoaFisicaRepository->create($data['cgm']);
+        // Validando se o CGM já existe ou não
+        if (isset($data['cgm_id']) && $data['cgm_id'] != "") {
+            #Editando registro cgm
+            $cgm = $this->pessoaFisicaRepository->update($data['cgm'], $data['cgm_id']);
+        } else {
+            #Salvando registro cgm
+            $cgm = $this->pessoaFisicaRepository->create($data['cgm']);
+        }
 
         #criando vinculo
         $data['id_instituicao'] = $instituicao->id;

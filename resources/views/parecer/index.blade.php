@@ -69,8 +69,8 @@
             serverSide: true,
             ajax: "{{ route('parecer.grid') }}",
             columns: [
-                {data: 'nome', name: 'pareceres.nome'},
-                {data: 'codigo', name: 'pareceres.codigo'},
+                {data: 'nome', name: 'edu_pareceres.nome'},
+                {data: 'codigo', name: 'edu_pareceres.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

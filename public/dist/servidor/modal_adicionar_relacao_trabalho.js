@@ -12,10 +12,10 @@ function loadTableRelacoes (idServidor) {
         autoWidth: false,
         ajax: laroute.route('servidor.gridRelacao', {'id' :idServidor }),
         columns: [
-            {data: 'regime', name: 'regime_trabalho.nome'},
-            {data: 'area', name: 'area_trabalho.nome'},
-            {data: 'niveis_ensino', name: 'niveis_ensino.nome'},
-            {data: 'disciplina', name: 'disciplinas.nome'},
+            {data: 'regime', name: 'edu_regime_trabalho.nome'},
+            {data: 'area', name: 'edu_area_trabalho.nome'},
+            {data: 'niveis_ensino', name: 'edu_niveis_ensino.nome'},
+            {data: 'disciplina', name: 'edu_disciplinas.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

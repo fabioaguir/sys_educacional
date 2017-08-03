@@ -10,7 +10,7 @@ class PessoaJuridica extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'cgm';
+    protected $table    = 'gen_cgm';
 
     protected $fillable = [
         'nome',

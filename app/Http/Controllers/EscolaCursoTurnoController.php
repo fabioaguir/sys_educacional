@@ -45,15 +45,15 @@ class EscolaCursoTurnoController extends Controller
     public function gridTurnos($idEscolaCurso)
     {
         #Criando a consulta
-        $rows = \DB::table('turnos')
-            ->join('escolas_cursos_turnos', 'escolas_cursos_turnos.turno_id', '=', 'turnos.id')
-            ->join('escolas_cursos', 'escolas_cursos.id', '=', 'escolas_cursos_turnos.escola_curso_id')
+        $rows = \DB::table('edu_turnos')
+            ->join('edu_escolas_cursos_turnos', 'edu_escolas_cursos_turnos.turno_id', '=', 'edu_turnos.id')
+            ->join('edu_escolas_cursos', 'edu_escolas_cursos.id', '=', 'edu_escolas_cursos_turnos.escola_curso_id')
             ->select([
-                'turnos.id',
-                'turnos.nome',
-                'escolas_cursos_turnos.id as idEscolaCursoTurno'
+                'edu_turnos.id',
+                'edu_turnos.nome',
+                'edu_escolas_cursos_turnos.id as idEscolaCursoTurno'
             ])
-            ->where('escolas_cursos.id', $idEscolaCurso);
+            ->where('edu_escolas_cursos.id', $idEscolaCurso);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function () {
@@ -82,22 +82,22 @@ class EscolaCursoTurnoController extends Controller
             $pageValue     = $dados['page'];
           
             # QUery Principal
-            $query = \DB::table('turnos')
-                ->whereNotIn('turnos.id', function ($where) use ($idEscolaCurso) {
-                    $where->from('turnos')
-                        ->select('turnos.id')
-                        ->join('escolas_cursos_turnos', 'escolas_cursos_turnos.turno_id', '=', 'turnos.id')
-                        ->join('escolas_cursos', 'escolas_cursos.id', '=', 'escolas_cursos_turnos.escola_curso_id')
-                        ->where('escolas_cursos.id', $idEscolaCurso);
+            $query = \DB::table('edu_turnos')
+                ->whereNotIn('edu_turnos.id', function ($where) use ($idEscolaCurso) {
+                    $where->from('edu_turnos')
+                        ->select('edu_turnos.id')
+                        ->join('edu_escolas_cursos_turnos', 'edu_escolas_cursos_turnos.turno_id', '=', 'edu_turnos.id')
+                        ->join('edu_escolas_cursos', 'edu_escolas_cursos.id', '=', 'edu_escolas_cursos_turnos.escola_curso_id')
+                        ->where('edu_escolas_cursos.id', $idEscolaCurso);
                 })
                 ->select([
-                    'turnos.id',
-                    'turnos.nome'
+                    'edu_turnos.id',
+                    'edu_turnos.nome'
                 ]);
 
             # Validando o valor da pesquisa
             if(!empty($valueSearch)) {
-                $query->where('turnos.nome', 'like', "%$valueSearch%");
+                $query->where('edu_turnos.nome', 'like', "%$valueSearch%");
             }
 
             # Recuperando todos os registros da consulta
@@ -187,7 +187,7 @@ class EscolaCursoTurnoController extends Controller
             }
 
             # Removendo a disciplina
-            \DB::table('escolas_cursos_turnos')->where('id', $dados['idEscolaCursoTurno'])->delete();
+            \DB::table('edu_escolas_cursos_turnos')->where('id', $dados['idEscolaCursoTurno'])->delete();
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

@@ -11,7 +11,7 @@ class Escola extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'escola';
+    protected $table    = 'edu_escola';
 
     protected $fillable = [
         'codigo',
@@ -71,7 +71,7 @@ class Escola extends Model implements Transformable
      */
     public function cursos()
     {
-        return $this->belongsToMany(Curso::class, 'escolas_cursos', 'escola_id', 'curso_id')
+        return $this->belongsToMany(Curso::class, 'edu_escolas_cursos', 'escola_id', 'curso_id')
             ->withPivot(['id']);
     }
 

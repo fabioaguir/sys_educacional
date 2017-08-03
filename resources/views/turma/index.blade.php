@@ -87,12 +87,12 @@
             serverSide: true,
             ajax: "{{ route('turma.grid') }}",
             columns: [
-                {data: 'nome', name: 'turmas.nome'},
-                {data: 'codigo', name: 'turmas.codigo'},
-                {data: 'escola', name: 'escola.codigo'},
-                {data: 'curso', name: 'cursos.codigo'},
-                {data: 'curriculo', name: 'curriculos.codigo'},
-                {data: 'turno', name: 'turnos.nome'},
+                {data: 'nome', name: 'edu_turmas.nome'},
+                {data: 'codigo', name: 'edu_turmas.codigo'},
+                {data: 'escola', name: 'edu_escola.codigo'},
+                {data: 'curso', name: 'edu_cursos.codigo'},
+                {data: 'curriculo', name: 'edu_curriculos.codigo'},
+                {data: 'turno', name: 'edu_turnos.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

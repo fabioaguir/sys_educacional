@@ -60,17 +60,17 @@ class TelefonesController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('telefones')
-            ->join('tipo_telefones', 'tipo_telefones.id', '=', 'telefones.tipo_telefones_id')
-            ->join('cgm', 'cgm.id', '=', 'telefones.cgm_id')
-            ->where('telefones.cgm_id', '=', $id)
+        $rows = \DB::table('edu_telefones')
+            ->join('edu_tipo_telefones', 'edu_tipo_telefones.id', '=', 'edu_telefones.tipo_telefones_id')
+            ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_telefones.cgm_id')
+            ->where('edu_telefones.cgm_id', '=', $id)
             ->select([
-                'telefones.id as id',
-                'telefones.nome as nome',
-                'telefones.ramal',
-                'telefones.observacao',
-                'tipo_telefones.nome as tipo',
-                'tipo_telefones.id as tipo_id',
+                'edu_telefones.id as id',
+                'edu_telefones.nome as nome',
+                'edu_telefones.ramal',
+                'edu_telefones.observacao',
+                'edu_tipo_telefones.nome as tipo',
+                'edu_tipo_telefones.id as tipo_id',
             ]);
 
         #Editando a grid
@@ -149,8 +149,8 @@ class TelefonesController extends Controller
     public function getTipoTelefone(Request $request)
     {
 
-        $tipos = \DB::table('tipo_telefones')
-            ->select('tipo_telefones.id', 'tipo_telefones.nome')
+        $tipos = \DB::table('edu_tipo_telefones')
+            ->select('edu_tipo_telefones.id', 'edu_tipo_telefones.nome')
             ->get();
 
         return response()->json($tipos);

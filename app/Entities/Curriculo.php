@@ -11,6 +11,8 @@ class Curriculo extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table    = 'edu_curriculos';
+
     protected $dates = [
         'validade_inicio',
         'validade_fim'
@@ -77,7 +79,7 @@ class Curriculo extends Model implements Transformable
      */
     public function series()
     {
-        return $this->belongsToMany(Serie::class, 'curriculos_series', 'curriculo_id', 'serie_id')
+        return $this->belongsToMany(Serie::class, 'edu_curriculos_series', 'curriculo_id', 'serie_id')
             ->withPivot(['id']);
     }
 

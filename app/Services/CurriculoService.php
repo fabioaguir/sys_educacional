@@ -117,7 +117,7 @@ class CurriculoService
     private function tratamentoAtivo($data)
     {
         # Executando a query
-        return \DB::table('curriculos')
+        return \DB::table('edu_curriculos')
             ->where('curso_id', (int) $data['curso_id'])
             ->update(['ativo' => 0]);
     }

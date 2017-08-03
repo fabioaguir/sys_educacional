@@ -8,7 +8,7 @@
             </div>
 
             <div class="modal-body" style="alignment-baseline: central">
-                <div class="row" style="margin-bottom: 5%; background-color: #D3D3D3; border-bottom: #696969 solid;"">
+                <div class="row" style="margin-bottom: 5%; background-color: #D3D3D3; border-bottom: #696969 solid;">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12">

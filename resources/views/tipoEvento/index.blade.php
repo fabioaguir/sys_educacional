@@ -69,8 +69,8 @@
             serverSide: true,
             ajax: "{{ route('tipoEvento.grid') }}",
             columns: [
-                {data: 'nome', name: 'tipo_evento.nome'},
-                {data: 'abreviatura', name: 'tipo_evento.abreviatura'},
+                {data: 'nome', name: 'edu_tipo_evento.nome'},
+                {data: 'abreviatura', name: 'edu_tipo_evento.abreviatura'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

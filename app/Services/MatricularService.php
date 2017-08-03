@@ -35,13 +35,13 @@ class MatricularService
         $matricula = "";
 
         # pega a quantidade de alunos matrículados nessa turma
-        $qtdAlunoTurma = \DB::table('alunos_turmas')
-            ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
-            ->groupBy('turmas.id')
-            ->where('turmas.id', '=', $data['turma_id'])
+        $qtdAlunoTurma = \DB::table('edu_alunos_turmas')
+            ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_alunos_turmas.turmas_id')
+            ->groupBy('edu_turmas.id')
+            ->where('edu_turmas.id', '=', $data['turma_id'])
             ->select([
-                \DB::raw('count(alunos_turmas.id) as qtdAlunos'),
-                'turmas.vagas'
+                \DB::raw('count(edu_alunos_turmas.id) as qtdAlunos'),
+                'edu_turmas.vagas'
             ])->first();
 
         if ($qtdAlunoTurma) {

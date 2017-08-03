@@ -75,14 +75,14 @@ class AlunoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('alunos')
-            ->join('cgm', 'cgm.id', '=', 'alunos.cgm_id')
+        $rows = \DB::table('edu_alunos')
+            ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
             ->select([
-                'alunos.id',
-                'alunos.codigo',
-                'cgm.nome',
-                'cgm.data_nascimento',
-                'cgm.mae'
+                'edu_alunos.id',
+                'edu_alunos.codigo',
+                'gen_cgm.nome',
+                'gen_cgm.data_nascimento',
+                'gen_cgm.mae'
             ]);
 
         #Editando a grid
@@ -191,6 +191,8 @@ class AlunoController extends Controller
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
+            dd($data);
+
             #Executando a ação
             $this->service->update($data, $id);
 
@@ -228,10 +230,10 @@ class AlunoController extends Controller
     {
         $idEstado = $request->get('id');
 
-        $cidades = \DB::table('cidades')
-            ->join('estados', 'estados.id', '=', 'cidades.estados_id')
-            ->select('cidades.id', 'cidades.nome')
-            ->where('estados.id', $idEstado)
+        $cidades = \DB::table('gen_cidades')
+            ->join('gen_estados', 'gen_estados.id', '=', 'gen_cidades.estados_id')
+            ->select('gen_cidades.id', 'gen_cidades.nome')
+            ->where('gen_estados.id', $idEstado)
             ->get();
 
         return response()->json($cidades);
@@ -245,10 +247,10 @@ class AlunoController extends Controller
     {
         $idCidade = $request->get('id');
 
-        $cidades = \DB::table('bairros')
-            ->join('cidades', 'cidades.id', '=', 'bairros.cidades_id')
-            ->select('bairros.id', 'bairros.nome')
-            ->where('cidades.id', $idCidade)
+        $cidades = \DB::table('gen_bairros')
+            ->join('gen_cidades', 'gen_cidades.id', '=', 'gen_bairros.cidades_id')
+            ->select('gen_bairros.id', 'gen_bairros.nome')
+            ->where('gen_cidades.id', $idCidade)
             ->get();
 
         return response()->json($cidades);
@@ -269,22 +271,22 @@ class AlunoController extends Controller
             #
             if (empty($dados['idModel'])) {
                 #Consultando
-                $aluno = \DB::table('cgm')
+                $aluno = \DB::table('gen_cgm')
                     ->select([
-                        'cgm.cpf'
+                        'gen_cgm.cpf'
                     ])
-                    ->where('cgm.cpf', $dados['value'])
+                    ->where('gen_cgm.cpf', $dados['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $aluno = \DB::table('cgm')
+                $aluno = \DB::table('gen_cgm')
                     ->select([
-                        'cgm.id',
-                        'cgm.cpf'
+                        'gen_cgm.id',
+                        'gen_cgm.cpf'
                     ])
-                    ->where('cgm.id', '!=' ,$dados['idModel'])
-                    ->where('cgm.cpf', $dados['value'])
+                    ->where('gen_cgm.id', '!=' ,$dados['idModel'])
+                    ->where('gen_cgm.cpf', $dados['value'])
                     ->get();
             }
 

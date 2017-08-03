@@ -11,7 +11,7 @@ class Calendario extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'calendarios';
+    protected $table    = 'edu_calendarios';
 
     protected $fillable = [
         'nome',

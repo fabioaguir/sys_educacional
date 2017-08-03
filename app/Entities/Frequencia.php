@@ -10,7 +10,7 @@ class Frequencia extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'frequencias';
+    protected $table = 'edu_frequencias';
 
     protected $fillable = [
         'nome',

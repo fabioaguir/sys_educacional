@@ -10,7 +10,7 @@ class ModalidadeEnsino extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'modalidades';
+    protected $table    = 'edu_modalidades';
 
     protected $fillable = [
         'nome',

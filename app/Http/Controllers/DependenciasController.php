@@ -72,14 +72,14 @@ class DependenciasController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('dependencias')
-            ->join('escola', 'escola.id', '=', 'dependencias.escola_id')
-            ->where('escola.id', '=', $id)
+        $rows = \DB::table('edu_dependencias')
+            ->join('edu_escola', 'edu_escola.id', '=', 'edu_dependencias.escola_id')
+            ->where('edu_escola.id', '=', $id)
             ->select([
-                'dependencias.id',
-                'dependencias.nome',
-                'dependencias.capacidade',
-                'escola.nome as escola'
+                'edu_dependencias.id',
+                'edu_dependencias.nome',
+                'edu_dependencias.capacidade',
+                'edu_escola.nome as escola'
             ]);
 
         #Editando a grid

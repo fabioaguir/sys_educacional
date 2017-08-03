@@ -28,7 +28,7 @@ class CurriculoValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|max:100',
-            'codigo' => 'required|max:50|unique:curriculos,codigo',
+            'codigo' => 'required|max:50|unique:edu_curriculos,codigo',
             'curso_id' => 'integer|required',
             'observacao' => 'max:500',
             'serie_inicial_id' => 'integer|required',
@@ -36,7 +36,7 @@ class CurriculoValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:100',
-            'codigo' => 'required|max:50|unique:curriculos,codigo,:id',
+            'codigo' => 'required|max:50|unique:edu_curriculos,codigo,:id',
             'curso_id' => 'integer|required',
             'observacao' => 'max:500',
             'serie_inicial_id' => 'integer|required',

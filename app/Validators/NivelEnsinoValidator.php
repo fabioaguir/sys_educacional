@@ -26,8 +26,8 @@ class NivelEnsinoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|serbinario_alpha_space|max:30|unique:niveis_ensino,nome',
-            'codigo' => 'required|max:15|unique:niveis_ensino,codigo',
+            'nome' => 'required|serbinario_alpha_space|max:30|unique:edu_niveis_ensino,nome',
+            'codigo' => 'required|max:15|unique:edu_niveis_ensino,codigo',
             'modalidade_id' => 'required|integer'
         ],
 

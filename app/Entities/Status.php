@@ -10,7 +10,7 @@ class Status extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'status';
+    protected $table    = 'edu_status';
 
     protected $fillable = [
         'nome'

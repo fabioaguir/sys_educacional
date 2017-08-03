@@ -10,7 +10,7 @@ class Periodo extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'periodos';
+    protected $table    = 'edu_periodos';
 
     protected $fillable = [
         'nome',

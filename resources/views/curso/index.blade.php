@@ -72,9 +72,9 @@
             serverSide: true,
             ajax: "{{ route('curso.grid') }}",
             columns: [
-                {data: 'nome', name: 'cursos.nome'},
-                {data: 'codigo', name: 'cursos.codigo'},
-                {data: 'nivel_ensino', name: 'niveis_ensino.nome'},
+                {data: 'nome', name: 'edu_cursos.nome'},
+                {data: 'codigo', name: 'edu_cursos.codigo'},
+                {data: 'nivel_ensino', name: 'edu_niveis_ensino.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

@@ -62,20 +62,20 @@ class EventosController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('feriados_eventos')
-            ->join('dia_letivo', 'dia_letivo.id', '=', 'feriados_eventos.dia_letivo_id')
-            ->join('tipo_evento', 'tipo_evento.id', '=', 'feriados_eventos.tipo_evento_id')
-            ->join('calendarios', 'calendarios.id', '=', 'feriados_eventos.calendarios_id')
-            ->where('feriados_eventos.calendarios_id', '=', $id)
+        $rows = \DB::table('edu_feriados_eventos')
+            ->join('edu_dia_letivo', 'edu_dia_letivo.id', '=', 'edu_feriados_eventos.dia_letivo_id')
+            ->join('edu_tipo_evento', 'edu_tipo_evento.id', '=', 'edu_feriados_eventos.tipo_evento_id')
+            ->join('edu_calendarios', 'edu_calendarios.id', '=', 'edu_feriados_eventos.calendarios_id')
+            ->where('edu_feriados_eventos.calendarios_id', '=', $id)
             ->select([
-                'feriados_eventos.id as id',
-                'feriados_eventos.nome as nome',
-                \DB::raw('DATE_FORMAT(feriados_eventos.data_feriado,"%d/%m/%Y") as data_feriado'),
-                'feriados_eventos.dia_semana',
-                'dia_letivo.nome as dia_letivo',
-                'dia_letivo.id as dia_letivo_id',
-                'tipo_evento.nome as tipo_evento',
-                'tipo_evento.id as tipo_evento_id',
+                'edu_feriados_eventos.id as id',
+                'edu_feriados_eventos.nome as nome',
+                \DB::raw('DATE_FORMAT(edu_feriados_eventos.data_feriado,"%d/%m/%Y") as data_feriado'),
+                'edu_feriados_eventos.dia_semana',
+                'edu_dia_letivo.nome as dia_letivo',
+                'edu_dia_letivo.id as dia_letivo_id',
+                'edu_tipo_evento.nome as tipo_evento',
+                'edu_tipo_evento.id as tipo_evento_id',
             ]);
 
         #Editando a grid
@@ -154,8 +154,8 @@ class EventosController extends Controller
     public function getTipoEvento(Request $request)
     {
 
-        $tipos = \DB::table('tipo_evento')
-            ->select('tipo_evento.id', 'tipo_evento.nome')
+        $tipos = \DB::table('edu_tipo_evento')
+            ->select('edu_tipo_evento.id', 'edu_tipo_evento.nome')
             ->get();
 
         return response()->json($tipos);
@@ -169,8 +169,8 @@ class EventosController extends Controller
     public function getDiaLetivo(Request $request)
     {
 
-        $dias = \DB::table('dia_letivo')
-            ->select('dia_letivo.id', 'dia_letivo.nome')
+        $dias = \DB::table('edu_dia_letivo')
+            ->select('edu_dia_letivo.id', 'edu_dia_letivo.nome')
             ->get();
 
         return response()->json($dias);

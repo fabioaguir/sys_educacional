@@ -103,11 +103,11 @@
             serverSide: true,
             ajax: laroute.route('escola.grid'),
             columns: [
-                {data: 'codigo', name: 'escola.codigo'},
-                {data: 'nome', name: 'escola.nome'},
-                {data: 'nome_abreviado', name: 'escola.nome_abreviado'},
-                {data: 'coordenadoria', name: 'coordenadoria.nome'},
-                {data: 'mantenedora', name: 'mantenedora.nome'},
+                {data: 'codigo', name: 'edu_escola.codigo'},
+                {data: 'nome', name: 'edu_escola.nome'},
+                {data: 'nome_abreviado', name: 'edu_escola.nome_abreviado'},
+                {data: 'coordenadoria', name: 'edu_coordenadoria.nome'},
+                {data: 'mantenedora', name: 'edu_mantenedora.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]});
 

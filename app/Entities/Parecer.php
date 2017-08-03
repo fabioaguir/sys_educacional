@@ -10,7 +10,7 @@ class Parecer extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'pareceres';
+    protected $table = 'edu_pareceres';
     
     protected $fillable = [
         'nome',

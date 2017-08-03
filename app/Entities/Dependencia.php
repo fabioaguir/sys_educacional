@@ -10,7 +10,7 @@ class Dependencia extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'dependencias';
+    protected $table    = 'edu_dependencias';
 
     protected $fillable = [
         'nome',

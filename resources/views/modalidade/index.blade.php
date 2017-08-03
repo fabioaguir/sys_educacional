@@ -69,8 +69,8 @@
             serverSide: true,
             ajax: laroute.route('modalidadeEnsino.grid'),
             columns: [
-                {data: 'codigo', name: 'modalidades.codigo'},
-                {data: 'nome', name: 'modalidades.nome'},
+                {data: 'codigo', name: 'edu_modalidades.codigo'},
+                {data: 'nome', name: 'edu_modalidades.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
             /*"oLanguage": {

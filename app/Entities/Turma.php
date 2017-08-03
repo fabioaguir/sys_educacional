@@ -10,7 +10,7 @@ class Turma extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'turmas';
+    protected $table = 'edu_turmas';
 
     protected $fillable = [
         'codigo',
@@ -59,6 +59,6 @@ class Turma extends Model implements Transformable
      */
     public function pareceres()
     {
-        return $this->belongsToMany(Parecer::class, 'turmas_pareceres', 'turma_id', 'parecer_id');
+        return $this->belongsToMany(Parecer::class, 'edu_turmas_pareceres', 'turma_id', 'parecer_id');
     }
 }

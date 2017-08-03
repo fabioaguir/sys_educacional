@@ -69,8 +69,8 @@
             serverSide: true,
             ajax: "{{ route('disciplina.grid') }}",
             columns: [
-                {data: 'nome', name: 'disciplinas.nome'},
-                {data: 'codigo', name: 'disciplinas.codigo'},
+                {data: 'nome', name: 'edu_disciplinas.nome'},
+                {data: 'codigo', name: 'edu_disciplinas.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

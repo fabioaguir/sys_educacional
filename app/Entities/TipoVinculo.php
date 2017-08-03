@@ -10,7 +10,7 @@ class TipoVinculo extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'tipo_vinculo';
+    protected $table    = 'edu_tipo_vinculo';
 
     protected $fillable = [
         'nome'

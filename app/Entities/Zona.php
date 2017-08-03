@@ -10,7 +10,7 @@ class Zona extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'zonas';
+    protected $table    = 'edu_zonas';
 
     protected $fillable = [
         'nome',

@@ -10,7 +10,7 @@ class AreaTrabalho extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'area_trabalho';
+    protected $table    = 'edu_area_trabalho';
 
     protected $fillable = [
         'nome'

@@ -59,17 +59,17 @@ class AtividadesController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('atividades')
-            ->join('funcoes', 'funcoes.id', '=', 'atividades.funcoes_id')
-            ->join('servidor', 'servidor.id', '=', 'atividades.servidor_id')
-            ->where('atividades.servidor_id', '=', $id)
+        $rows = \DB::table('edu_atividades')
+            ->join('edu_funcoes', 'edu_funcoes.id', '=', 'edu_atividades.funcoes_id')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_atividades.servidor_id')
+            ->where('edu_atividades.servidor_id', '=', $id)
             ->select([
-                'atividades.id as id',
-                'atividades.horas_manha',
-                'atividades.horas_tarde',
-                'atividades.horas_noite',
-                'funcoes.nome as funcao',
-                'funcoes.id as funcao_id',
+                'edu_atividades.id as id',
+                'edu_atividades.horas_manha',
+                'edu_atividades.horas_tarde',
+                'edu_atividades.horas_noite',
+                'edu_funcoes.nome as funcao',
+                'edu_funcoes.id as funcao_id',
             ]);
 
         #Editando a grid
@@ -148,8 +148,8 @@ class AtividadesController extends Controller
     public function getFuncoes(Request $request)
     {
 
-        $query = \DB::table('funcoes')
-            ->select('funcoes.id', 'funcoes.nome')
+        $query = \DB::table('edu_funcoes')
+            ->select('edu_funcoes.id', 'edu_funcoes.nome')
             ->get();
 
         return response()->json($query);

@@ -10,7 +10,7 @@ class DiaLetivo extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'dia_letivo';
+    protected $table    = 'edu_dia_letivo';
 
     protected $fillable = [
         'nome',

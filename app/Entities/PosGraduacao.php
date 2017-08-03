@@ -10,7 +10,7 @@ class PosGraduacao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'pos_graduacao';
+    protected $table    = 'edu_pos_graduacao';
 
     protected $fillable = [
         'nome'

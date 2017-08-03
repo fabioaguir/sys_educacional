@@ -71,16 +71,16 @@ class EscolaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('escola')
-            ->leftJoin('coordenadoria', 'coordenadoria.id', 'escola.coordenadoria_id')
-            ->leftJoin('mantenedora', 'mantenedora.id', 'escola.mantenedora_id')
+        $rows = \DB::table('edu_escola')
+            ->leftJoin('edu_coordenadoria', 'edu_coordenadoria.id', 'edu_escola.coordenadoria_id')
+            ->leftJoin('edu_mantenedora', 'edu_mantenedora.id', 'edu_escola.mantenedora_id')
             ->select([
-                'escola.id',
-                'escola.codigo',
-                'escola.nome',
-                'escola.nome_abreviado',
-                'coordenadoria.nome as coordenadoria',
-                'mantenedora.nome as mantenedora'
+                'edu_escola.id',
+                'edu_escola.codigo',
+                'edu_escola.nome',
+                'edu_escola.nome_abreviado',
+                'edu_coordenadoria.nome as coordenadoria',
+                'edu_mantenedora.nome as mantenedora'
             ]);
        
         #Editando a grid
@@ -239,10 +239,10 @@ class EscolaController extends Controller
     {
         $idEstado = $request->get('id');
 
-        $cidades = \DB::table('cidades')
-            ->join('estados', 'estados.id', '=', 'cidades.estados_id')
-            ->select('cidades.id', 'cidades.nome')
-            ->where('estados.id', $idEstado)
+        $cidades = \DB::table('gen_cidades')
+            ->join('gen_estados', 'gen_estados.id', '=', 'gen_cidades.estados_id')
+            ->select('gen_cidades.id', 'gen_cidades.nome')
+            ->where('gen_estados.id', $idEstado)
             ->get();
 
         return response()->json($cidades);
@@ -256,10 +256,10 @@ class EscolaController extends Controller
     {
         $idCidade = $request->get('id');
 
-        $cidades = \DB::table('bairros')
-            ->join('cidades', 'cidades.id', '=', 'bairros.cidades_id')
-            ->select('bairros.id', 'bairros.nome')
-            ->where('cidades.id', $idCidade)
+        $cidades = \DB::table('gen_bairros')
+            ->join('gen_cidades', 'gen_cidades.id', '=', 'gen_bairros.cidades_id')
+            ->select('gen_bairros.id', 'gen_bairros.nome')
+            ->where('gen_cidades.id', $idCidade)
             ->get();
 
         return response()->json($cidades);

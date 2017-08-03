@@ -30,7 +30,7 @@ class TurmaComplementarValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'codigo' => 'required|max:50|unique:turmas,codigo',
+            'codigo' => 'required|max:50|unique:edu_turmas,codigo',
             'nome' => 'required|max:100',
             'escola_id' => 'required|numeric',
             'tipo_atendimento_id' => 'required|numeric',
@@ -44,7 +44,7 @@ class TurmaComplementarValidator extends LaravelValidator
 
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'codigo' => 'required|max:50|unique:turmas,codigo,:id',
+            'codigo' => 'required|max:50|unique:edu_turmas,codigo,:id',
             'nome' => 'required|max:100',
             'escola_id' => 'required|numeric',
             'tipo_atendimento_id' => 'required|numeric',

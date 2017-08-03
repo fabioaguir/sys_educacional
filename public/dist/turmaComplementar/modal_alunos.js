@@ -12,8 +12,8 @@ function loadTableAluno (idTurmaComplementar) {
         autoWidth: false,
         ajax: laroute.route('turmaComplementar.aluno.grid', {'idTurmaComplementar' : idTurmaComplementar }),
         columns: [
-            {data: 'matricular', name: 'alunos.codigo'},
-            {data: 'nome', name: 'cgm.nome'},
+            {data: 'matricular', name: 'edu_alunos.codigo'},
+            {data: 'nome', name: 'gen_cgm.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

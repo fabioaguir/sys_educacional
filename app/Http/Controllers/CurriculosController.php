@@ -75,14 +75,14 @@ class CurriculosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('curriculos')
-            ->join('cursos', 'cursos.id', '=', 'curriculos.curso_id')
+        $rows = \DB::table('edu_curriculos')
+            ->join('edu_cursos', 'edu_cursos.id', '=', 'edu_curriculos.curso_id')
             ->select([
-                'curriculos.id',
-                'curriculos.nome',
-                'curriculos.codigo',
-                'cursos.codigo as codigo_curso',
-                \DB::raw('IF(curriculos.ativo = 1, "SIM", "NÃO") as ativo')
+                'edu_curriculos.id',
+                'edu_curriculos.nome',
+                'edu_curriculos.codigo',
+                'edu_cursos.codigo as codigo_curso',
+                \DB::raw('IF(edu_curriculos.ativo = 1, "SIM", "NÃO") as ativo')
             ]);
 
         #Editando a grid
@@ -102,12 +102,12 @@ class CurriculosController extends Controller
             }
 
             # Recuperando as disciplinas
-            $disciplinas = \DB::table('disciplinas')
-                ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
-                ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
-                ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
-                ->where('curriculos.id', $curriculo->id)
-                ->select(['disciplinas.id'])->get();
+            $disciplinas = \DB::table('edu_disciplinas')
+                ->join('edu_curriculos_series_disciplinas', 'edu_curriculos_series_disciplinas.disciplina_id', '=', 'edu_disciplinas.id')
+                ->join('edu_curriculos_series', 'edu_curriculos_series.id', '=', 'edu_curriculos_series_disciplinas.curriculo_serie_id')
+                ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_curriculos_series.curriculo_id')
+                ->where('edu_curriculos.id', $curriculo->id)
+                ->select(['edu_disciplinas.id'])->get();
 
             # Verificando se o currículo possui disciplinas
             if(count($disciplinas) == 0 && $user->can('curriculo.destroy')) {

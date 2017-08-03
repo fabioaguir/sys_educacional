@@ -72,9 +72,9 @@
             serverSide: true,
             ajax: "{{ route('dependencia.grid') }}",
             columns: [
-                {data: 'nome', name: 'dependencias.nome'},
-                {data: 'capacidade', name: 'dependencias.capacidade'},
-                {data: 'escola', name: 'escola.nome'},
+                {data: 'nome', name: 'edu_dependencias.nome'},
+                {data: 'capacidade', name: 'edu_dependencias.capacidade'},
+                {data: 'escola', name: 'edu_escola.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {

@@ -12,10 +12,10 @@ function loadTableDisponibilidades (idServidor) {
         autoWidth: false,
         ajax: laroute.route('servidor.gridDisponibilidade', {'id' :idServidor }),
         columns: [
-            {data: 'turno', name: 'turnos.nome'},
-            {data: 'dia_semana', name: 'dias_semana.nome'},
+            {data: 'turno', name: 'edu_turnos.nome'},
+            {data: 'dia_semana', name: 'edu_dias_semana.nome'},
             {data: 'horario', name: 'horario', orderable: false, searchable: false},
-            {data: 'escola', name: 'escola.nome'},
+            {data: 'escola', name: 'edu_escola.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

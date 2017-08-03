@@ -11,7 +11,7 @@ class Endereco extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'endereco';
+    protected $table    = 'gen_endereco';
 
     protected $fillable = [
         'logradouro',

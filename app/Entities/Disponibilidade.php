@@ -10,7 +10,7 @@ class Disponibilidade extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'disponibilidades';
+    protected $table    = 'edu_disponibilidades';
 
     protected $fillable = [
         'dia_semana_id',

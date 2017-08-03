@@ -10,7 +10,7 @@ class QuantidadeAtividade extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'quantidades_atividades';
+    protected $table = 'edu_quantidades_atividades';
 
     protected $fillable = [
         'nome',

@@ -12,7 +12,7 @@ function loadTableCurriculoSerie (idCurriculo) {
         autoWidth: false,
         ajax: laroute.route('curriculo.gridSerie', {'id' :idCurriculo }),
         columns: [
-            {data: 'nome', name: 'series.nome', orderable: false}
+            {data: 'nome', name: 'edu_series.nome', orderable: false}
         ]
     });
 
@@ -33,9 +33,9 @@ function loadTableAdicionarDisciplina (curriculoSerieId) {
         autoWidth: false,
         ajax: laroute.route('curriculo.gridAdicionarDisciplina', {'idCurriculoSerie' : curriculoSerieId }),
         columns: [
-            {data: 'codigo', name: 'disciplinas.codigo', orderable: false},
-            {data: 'nome', name: 'disciplinas.nome'},
-            {data: 'periodo', name: 'curriculos_series_disciplinas.periodo', orderable: false},
+            {data: 'codigo', name: 'edu_disciplinas.codigo', orderable: false},
+            {data: 'nome', name: 'edu_disciplinas.nome'},
+            {data: 'periodo', name: 'edu_curriculos_series_disciplinas.periodo', orderable: false},
             {data: 'e_obrigatoria', name: 'e_obrigatoria', orderable: false},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]

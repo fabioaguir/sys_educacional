@@ -38,16 +38,16 @@ class TurmaParecerController extends Controller
     public function grid($idTurma)
     {
         #Criando a consulta
-        $rows = \DB::table('pareceres')
-            ->join('turmas_pareceres', 'turmas_pareceres.parecer_id', '=', 'pareceres.id')
-            ->join('turmas', 'turmas.id', '=', 'turmas_pareceres.turma_id')
+        $rows = \DB::table('edu_pareceres')
+            ->join('edu_turmas_pareceres', 'edu_turmas_pareceres.parecer_id', '=', 'edu_pareceres.id')
+            ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_turmas_pareceres.turma_id')
             ->select([
-                'pareceres.id',
-                'pareceres.nome',
-                'pareceres.codigo',
-                'turmas_pareceres.id as idTurmaParecer'
+                'edu_pareceres.id',
+                'edu_pareceres.nome',
+                'edu_pareceres.codigo',
+                'edu_turmas_pareceres.id as idTurmaParecer'
             ])
-            ->where('turmas.id', $idTurma);
+            ->where('edu_turmas.id', $idTurma);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function () {
@@ -82,22 +82,22 @@ class TurmaParecerController extends Controller
             $pageValue   = $dados['page'];
 
             # QUery Principal
-            $query = \DB::table('pareceres')
-                ->whereNotIn('pareceres.id', function ($where) use ($idTurma) {
-                   $where->from('pareceres')
-                       ->select('pareceres.id')
-                       ->join('turmas_pareceres', 'turmas_pareceres.parecer_id', '=', 'pareceres.id')
-                       ->join('turmas', 'turmas.id', '=', 'turmas_pareceres.turma_id')
-                       ->where('turmas.id', $idTurma);
+            $query = \DB::table('edu_pareceres')
+                ->whereNotIn('edu_pareceres.id', function ($where) use ($idTurma) {
+                   $where->from('edu_pareceres')
+                       ->select('edu_pareceres.id')
+                       ->join('edu_turmas_pareceres', 'edu_turmas_pareceres.parecer_id', '=', 'edu_pareceres.id')
+                       ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_turmas_pareceres.turma_id')
+                       ->where('edu_turmas.id', $idTurma);
                 })
                 ->select([
-                    'pareceres.id',
-                    'pareceres.nome'
+                    'edu_pareceres.id',
+                    'edu_pareceres.nome'
                 ]);
 
             # Validando o valor da pesquisa
             if(!empty($valueSearch)) {
-                $query->where('pareceres.nome', 'like', "%$valueSearch%");
+                $query->where('edu_pareceres.nome', 'like', "%$valueSearch%");
             }
 
             # Recuperando todos os registros da consulta
@@ -193,7 +193,7 @@ class TurmaParecerController extends Controller
             }
 
             # Removendo a disciplina
-            \DB::table('turmas_pareceres')->where('id', $dados['idTurmaParecer'])->delete();
+            \DB::table('edu_turmas_pareceres')->where('id', $dados['idTurmaParecer'])->delete();
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

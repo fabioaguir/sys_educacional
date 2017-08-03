@@ -84,8 +84,8 @@
             serverSide: true,
             ajax: "{{ route ('servidor.grid') }}",
             columns: [
-                {data: 'nome', name: 'cgm.nome'},
-                {data: 'matricula', name: 'servidor.matricula'},
+                {data: 'nome', name: 'gen_cgm.nome'},
+                {data: 'matricula', name: 'edu_servidor.matricula'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
         });

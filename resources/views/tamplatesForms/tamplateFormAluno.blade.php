@@ -24,6 +24,27 @@
                     <div class="tab-content">
                         {{--#1--}}
                         <div role="tabpanel" class="tab-pane active" id="dadosPessoais">
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <div class="fg-line">
+                                        <div class="fg-line">
+                                            <label for="cgm[nome]">Nome *</label>
+                                            {!! Form::text('cgm[nome]', Session::getOldInput('cgm[nome]'), array('class' => 'form-control input-sm', 'id' => 'nome', 'placeholder' => 'Nome completo')) !!}
+                                            <input type="hidden" value="" name="cgm_id" id="cgm_id">
+                                            <input type="hidden" value="" name="endereco_id" id="endereco_id">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="nome_id"></label>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-sm m-t-10"  {{--data-toggle="modal" data-target="#modal-pesquisar-pessoa"--}} id="nome-search" style="margin-left: -31px;" type="button">
+                                            Pesquisar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="fg-line">
@@ -37,20 +58,12 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="num_nis">NIS *</label>
-                                            {!! Form::text('num_nis', Session::getOldInput('num_nis'), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
+                                            {!! Form::text('cgm[numero_nis]', Session::getOldInput('num_nis'), array('class' => 'form-control input-sm', 'id' => 'numero_nis', 'placeholder' => 'Número')) !!}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4">
-                                    <div class="fg-line">
-                                        <div class="fg-line">
-                                            <label for="cgm[nome]">Nome *</label>
-                                            {!! Form::text('cgm[nome]', Session::getOldInput('cgm[nome]'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome completo')) !!}
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="form-group col-md-4">
                                     <div class="fg-line">
                                         <div class="fg-line">
@@ -65,7 +78,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[data_nascimento]">Data de Nascimento *</label>
-                                            {!! Form::text('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), array('class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de Nascimento')) !!}
+                                            {!! Form::text('cgm[data_nascimento]', Session::getOldInput('cgm[data_nascimento]'), array('class' => 'form-control input-sm date-picker', 'id' => 'data_nascimento', 'placeholder' => 'Data de Nascimento')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +86,7 @@
                                     <div class=" fg-line">
                                         <label for="cgm[sexo_id]">Gênero *</label>
                                         <div class="select">
-                                            {!! Form::select('cgm[sexo_id]', (["" => "Selecione Gênero"] + $loadFields['sexo']->toArray()), null, array('class'=> 'form-control')) !!}
+                                            {!! Form::select('cgm[sexo_id]', (["" => "Selecione Gênero"] + $loadFields['sexo']->toArray()), null, array('id' => 'sexo_id', 'class'=> 'form-control')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +104,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[rg]">RG *</label>
-                                            {!! Form::text('cgm[rg]', Session::getOldInput('cgm[rg]'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome completo da mãe')) !!}
+                                            {!! Form::text('cgm[rg]', Session::getOldInput('cgm[rg]'), array( 'id' => 'rg',  'class' => 'form-control input-sm', 'placeholder' => 'Nome completo da mãe')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +114,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[pai]">Nome Pai</label>
-                                            {!! Form::text('cgm[pai]', Session::getOldInput('cgm[pai]'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome completo do pai')) !!}
+                                            {!! Form::text('cgm[pai]', Session::getOldInput('cgm[pai]'), array('id' => 'pai', 'class' => 'form-control input-sm', 'placeholder' => 'Nome completo do pai')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +122,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[mae]">Nome Mãe</label>
-                                            {!! Form::text('cgm[mae]', Session::getOldInput('cgm[mae]'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome completo da mãe')) !!}
+                                            {!! Form::text('cgm[mae]', Session::getOldInput('cgm[mae]'), array('id' => 'mae', 'class' => 'form-control input-sm', 'placeholder' => 'Nome completo da mãe')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +144,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[email]">E-mail</label>
-                                            {!! Form::text('cgm[email]', Session::getOldInput('cgm[email]'), array('class' => 'form-control input-sm', 'placeholder' => 'Endereço eletrônico')) !!}
+                                            {!! Form::text('cgm[email]', Session::getOldInput('cgm[email]'), array('id' => 'email', 'class' => 'form-control input-sm', 'placeholder' => 'Endereço eletrônico')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -141,7 +154,7 @@
                                     <div class=" fg-line">
                                         <label for="cgm[nacionalidade_id]">Nacionalidade *</label>
                                         <div class="select">
-                                            {!! Form::select('cgm[nacionalidade_id]', (["" => "Selecione nacionalidade"] + $loadFields['nacionalidade']->toArray()), null, array('class'=> 'form-control')) !!}
+                                            {!! Form::select('cgm[nacionalidade_id]', (["" => "Selecione nacionalidade"] + $loadFields['nacionalidade']->toArray()), null, array('id' => 'nacionalidade_id', 'class'=> 'form-control')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +162,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[naturalidade]">Naturalidade</label>
-                                            {!! Form::text('cgm[naturalidade]', Session::getOldInput('cgm[naturalidade]'), array('class' => 'form-control input-sm', 'placeholder' => 'Cidade natal')) !!}
+                                            {!! Form::text('cgm[naturalidade]', Session::getOldInput('cgm[naturalidade]'), array('id' => 'naturalidade', 'class' => 'form-control input-sm', 'placeholder' => 'Cidade natal')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +176,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[endereco][logradouro]">Logradouro *</label>
-                                            {!! Form::text("cgm[endereco][logradouro]", Session::getOldInput("cgm[endereco][logradouro]"), array('class' => 'form-control input-sm', 'placeholder' => 'Logradouro')) !!}
+                                            {!! Form::text("cgm[endereco][logradouro]", Session::getOldInput("cgm[endereco][logradouro]"), array('id' => 'logradouro', 'class' => 'form-control input-sm', 'placeholder' => 'Logradouro')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -171,7 +184,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[endereco][numero]">Número *</label>
-                                            {!! Form::text("cgm[endereco][numero]", Session::getOldInput("cgm[endereco][numero]"), array('class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
+                                            {!! Form::text("cgm[endereco][numero]", Session::getOldInput("cgm[endereco][numero]"), array('id' => 'numero', 'class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +194,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[endereco][complemento]">Complemento</label>
-                                            {!! Form::text("cgm[endereco][complemento]", Session::getOldInput("cgm[endereco][complemento]"), array('class' => 'form-control input-sm', 'placeholder' => 'Ponto de referência')) !!}
+                                            {!! Form::text("cgm[endereco][complemento]", Session::getOldInput("cgm[endereco][complemento]"), array('id' => 'complemento', 'class' => 'form-control input-sm', 'placeholder' => 'Ponto de referência')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -199,7 +212,7 @@
                                     <div class=" fg-line">
                                         <label for="cgm[endereco][zona_id]">Zona</label>
                                         <div class="select">
-                                            {!! Form::select("cgm[endereco][zona_id]", (["" => "Selecione zona"] + $loadFields['zona']->toArray()), null, array('class' => 'form-control Form::select')) !!}
+                                            {!! Form::select("cgm[endereco][zona_id]", (["" => "Selecione zona"] + $loadFields['zona']->toArray()), null, array('id' => 'zona_id', 'class' => 'form-control Form::select')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -262,6 +275,9 @@
     </div>
 {{--</div>--}}
 
+
+@include('modal.modal_pesquisar_pessoa')
+
 @section('javascript')
     {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/dist/js/messages_pt_BR.js')  }}"></script>
@@ -272,6 +288,9 @@
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/aluno.js')  }}"></script>
+
+
+    <script type="text/javascript" src="{{ asset('/dist/aluno/modal_pesquisar_pessoa.js')  }}"></script>
 
     <script type="text/javascript">
         {{-- MASCARAS --}}

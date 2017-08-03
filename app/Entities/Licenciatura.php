@@ -10,7 +10,7 @@ class Licenciatura extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'licenciatura';
+    protected $table    = 'edu_licenciatura';
 
     protected $fillable = [
         'nome'

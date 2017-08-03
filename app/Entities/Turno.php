@@ -10,7 +10,7 @@ class Turno extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'turnos';
+    protected $table = 'edu_turnos';
 
     protected $fillable = [
         'nome',

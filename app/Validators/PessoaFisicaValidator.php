@@ -52,7 +52,7 @@ class PessoaFisicaValidator extends LaravelValidator
             'escolaridade_id' => 'integer|required',
             'endereco_id' => 'integer',
             //'num_cgm' => 'number',
-            'cpf' => 'required|cpf_br|digits_between:0,20|unique:cgm,cpf',
+            'cpf' => 'required|cpf_br|digits_between:0,20|unique:gen_cgm,cpf',
             'rg' => 'required|numeric||digits_between:0,20',
             'orgao_emissor' => 'required|serbinario_alpha_space|max:30',
             'nome' => 'required|serbinario_alpha_space|max:45',

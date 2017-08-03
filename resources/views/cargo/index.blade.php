@@ -69,8 +69,8 @@
             serverSide: true,
             ajax: "{{ route('cargo.grid') }}",
             columns: [
-                {data: 'nome', name: 'cargos.nome'},
-                {data: 'codigo', name: 'cargos.codigo'},
+                {data: 'nome', name: 'edu_cargos.nome'},
+                {data: 'codigo', name: 'edu_cargos.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {

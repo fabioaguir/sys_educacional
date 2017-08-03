@@ -12,11 +12,11 @@ function loadTableEventos (idCalendario) {
         autoWidth: false,
         ajax: laroute.route('calendario.gridEvento', {'id' :idCalendario }),
         columns: [
-            {data: 'nome', name: 'feriados_eventos.nome'},
-            {data: 'data_feriado', name: 'feriados_eventos.data_feriado'},
-            {data: 'dia_semana', name: 'feriados_eventos.dia_semana'},
-            {data: 'dia_letivo', name: 'dia_letivo.nome'},
-            {data: 'tipo_evento', name: 'tipo_evento.nome'},
+            {data: 'nome', name: 'edu_feriados_eventos.nome'},
+            {data: 'data_feriado', name: 'edu_feriados_eventos.data_feriado'},
+            {data: 'dia_semana', name: 'edu_feriados_eventos.dia_semana'},
+            {data: 'dia_letivo', name: 'edu_dia_letivo.nome'},
+            {data: 'edu_tipo_evento', name: 'edu_tipo_evento.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

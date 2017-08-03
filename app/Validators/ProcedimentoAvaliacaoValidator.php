@@ -24,13 +24,13 @@ class ProcedimentoAvaliacaoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required|max:100|unique:procedimentos_avaliacoes,nome',
-            'codigo' => 'required|max:50|unique:procedimentos_avaliacoes,codigo',
+            'nome' => 'required|max:100|unique:edu_procedimentos_avaliacoes,nome',
+            'codigo' => 'required|max:50|unique:edu_procedimentos_avaliacoes,codigo',
             'frequencia_minima_avaliacao' => 'required|numeric'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'nome' => 'required|max:100|unique:procedimentos_avaliacoes,nome,:id',
-            'codigo' => 'required|max:50|unique:procedimentos_avaliacoes,codigo,:id',
+            'nome' => 'required|max:100|unique:edu_procedimentos_avaliacoes,nome,:id',
+            'codigo' => 'required|max:50|unique:edu_procedimentos_avaliacoes,codigo,:id',
             'frequencia_minima_avaliacao' => 'required|numeric'
         ],
     ];

@@ -10,7 +10,7 @@ class Duracao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'duracoes';
+    protected $table    = 'edu_duracoes';
 
     protected $fillable = [
         'nome'

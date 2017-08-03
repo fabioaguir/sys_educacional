@@ -76,13 +76,13 @@ class FuncaoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('funcoes')
+        $rows = \DB::table('edu_funcoes')
             ->select([
-                'funcoes.id',
-                'funcoes.nome',
-                'funcoes.sigla',
+                'edu_funcoes.id',
+                'edu_funcoes.nome',
+                'edu_funcoes.sigla',
                 //sobscrevendo um valor que vem do banco (somente exibição)
-                \DB::raw('IF(funcoes.funcao_professor = 1, "Sim", "Não") as funcao_professor')
+                \DB::raw('IF(edu_funcoes.funcao_professor = 1, "Sim", "Não") as funcao_professor')
             ]);
 
         #Editando a grid

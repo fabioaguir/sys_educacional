@@ -11,7 +11,7 @@ class PeriodoAvaliacao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'periodos_avaliacao';
+    protected $table    = 'edu_periodos_avaliacao';
 
     protected $fillable = [
         'data_inicial',

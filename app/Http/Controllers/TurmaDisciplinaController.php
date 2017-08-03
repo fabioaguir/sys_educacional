@@ -39,20 +39,20 @@ class TurmaDisciplinaController extends Controller
         $turma = $this->turmaRepository->find($idTurma);
 
         #Criando a consulta
-        $rows = \DB::table('disciplinas')
-            ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
-            ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
-            ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
-            ->join('turmas', 'turmas.curriculo_id', '=', 'curriculos.id')
-            ->where('turmas.id', $turma->id)
-            ->where('curriculos_series.serie_id', $turma->serie_id)
+        $rows = \DB::table('edu_disciplinas')
+            ->join('edu_curriculos_series_disciplinas', 'edu_curriculos_series_disciplinas.disciplina_id', '=', 'edu_disciplinas.id')
+            ->join('edu_curriculos_series', 'edu_curriculos_series.id', '=', 'edu_curriculos_series_disciplinas.curriculo_serie_id')
+            ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_curriculos_series.curriculo_id')
+            ->join('edu_turmas', 'edu_turmas.curriculo_id', '=', 'edu_curriculos.id')
+            ->where('edu_turmas.id', $turma->id)
+            ->where('edu_curriculos_series.serie_id', $turma->serie_id)
             ->select([
-                'disciplinas.id',
-                'disciplinas.nome',
-                'disciplinas.codigo',
-                'curriculos_series_disciplinas.periodo',
-                \DB::raw('IF(curriculos_series_disciplinas.e_obrigatoria = 1, "Sim", "Não") as e_obrigatoria'),
-                'curriculos_series_disciplinas.id as idCurriculoSerieDisciplina'
+                'edu_disciplinas.id',
+                'edu_disciplinas.nome',
+                'edu_disciplinas.codigo',
+                'edu_curriculos_series_disciplinas.periodo',
+                \DB::raw('IF(edu_curriculos_series_disciplinas.e_obrigatoria = 1, "Sim", "Não") as e_obrigatoria'),
+                'edu_curriculos_series_disciplinas.id as idCurriculoSerieDisciplina'
             ]);
 
         #Editando a grid
@@ -77,25 +77,25 @@ class TurmaDisciplinaController extends Controller
             $pageValue   = $dados['page'];
 
             # QUery Principal
-            $query = \DB::table('disciplinas')
-                ->whereNotIn('disciplinas.id', function ($where) use ($idTurma) {
-                   $where->from('disciplinas')
-                       ->select('disciplinas.id')
-                       ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
-                       ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
-                       ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
-                       ->join('turmas', 'turmas.curriculo_id', '=', 'curriculos.id')
-                       ->where('curriculos_series.serie_id', '=', 'turmas.serie_id')
-                       ->where('turmas.id', $idTurma);
+            $query = \DB::table('edu_disciplinas')
+                ->whereNotIn('edu_disciplinas.id', function ($where) use ($idTurma) {
+                   $where->from('edu_disciplinas')
+                       ->select('edu_disciplinas.id')
+                       ->join('edu_curriculos_series_disciplinas', 'edu_curriculos_series_disciplinas.disciplina_id', '=', 'edu_disciplinas.id')
+                       ->join('edu_curriculos_series', 'edu_curriculos_series.id', '=', 'edu_curriculos_series_disciplinas.curriculo_serie_id')
+                       ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_curriculos_series.curriculo_id')
+                       ->join('edu_turmas', 'edu_turmas.curriculo_id', '=', 'edu_curriculos.id')
+                       ->where('edu_curriculos_series.serie_id', '=', 'edu_turmas.serie_id')
+                       ->where('edu_turmas.id', $idTurma);
                 })
                 ->select([
-                    'disciplinas.id',
-                    'disciplinas.nome'
+                    'edu_disciplinas.id',
+                    'edu_disciplinas.nome'
                 ]);
 
             # Validando o valor da pesquisa
             if(!empty($valueSearch)) {
-                $query->where('disciplinas.nome', 'like', "%$valueSearch%");
+                $query->where('edu_disciplinas.nome', 'like', "%$valueSearch%");
             }
 
             # Recuperando todos os registros da consulta
@@ -198,7 +198,7 @@ class TurmaDisciplinaController extends Controller
             }
 
             # Removendo a disciplina
-            \DB::table('curriculos_series_disciplinas')->where('id', $dados['idCurriculoSerieDisciplina'])->delete();
+            \DB::table('edu_curriculos_series_disciplinas')->where('id', $dados['idCurriculoSerieDisciplina'])->delete();
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

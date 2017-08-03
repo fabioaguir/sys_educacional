@@ -86,10 +86,10 @@
             serverSide: true,
             ajax: "{{ route('aluno.grid') }}",
             columns: [
-                {data: 'nome', name: 'cgm.nome'},
-                {data: 'codigo', name: 'alunos.codigo'},
-                {data: 'data_nascimento', name: 'cgm.data_nascimento'},
-                {data: 'mae', name: 'cgm.mae'},
+                {data: 'nome', name: 'gen_cgm.nome'},
+                {data: 'codigo', name: 'edu_alunos.codigo'},
+                {data: 'data_nascimento', name: 'gen_cgm.data_nascimento'},
+                {data: 'mae', name: 'gen_cgm.mae'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

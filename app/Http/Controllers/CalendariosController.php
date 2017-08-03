@@ -83,20 +83,20 @@ class CalendariosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('calendarios')
-            ->join('duracoes', 'duracoes.id', '=', 'calendarios.duracoes_id')
-            ->join('status', 'status.id', '=', 'calendarios.status_id')
+        $rows = \DB::table('edu_calendarios')
+            ->join('edu_duracoes', 'edu_duracoes.id', '=', 'edu_calendarios.duracoes_id')
+            ->join('edu_status', 'edu_status.id', '=', 'edu_calendarios.status_id')
             ->select([
-                'calendarios.id',
-                'calendarios.nome as nome',
-                \DB::raw('DATE_FORMAT(calendarios.data_inicial,"%d/%m/%Y") as data_inicial'),
-                \DB::raw('DATE_FORMAT(calendarios.data_final,"%d/%m/%Y") as data_final'),
-                \DB::raw('DATE_FORMAT(calendarios.data_resultado_final,"%d/%m/%Y") as data_resultado_final'),
-                'calendarios.dias_letivos',
-                'calendarios.semanas_letivas',
-                'calendarios.ano',
-                'status.nome as status',
-                'duracoes.nome as duracao',
+                'edu_calendarios.id',
+                'edu_calendarios.nome as nome',
+                \DB::raw('DATE_FORMAT(edu_calendarios.data_inicial,"%d/%m/%Y") as data_inicial'),
+                \DB::raw('DATE_FORMAT(edu_calendarios.data_final,"%d/%m/%Y") as data_final'),
+                \DB::raw('DATE_FORMAT(edu_calendarios.data_resultado_final,"%d/%m/%Y") as data_resultado_final'),
+                'edu_calendarios.dias_letivos',
+                'edu_calendarios.semanas_letivas',
+                'edu_calendarios.ano',
+                'edu_status.nome as status',
+                'edu_duracoes.nome as duracao',
             ]);
 
         #Editando a grid

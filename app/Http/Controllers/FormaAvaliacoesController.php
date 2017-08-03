@@ -81,13 +81,13 @@ class FormaAvaliacoesController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('formas_avaliacoes')
-            ->join('tipos_resultados', 'tipos_resultados.id', '=', 'formas_avaliacoes.tipo_resultado_id')
+        $rows = \DB::table('edu_formas_avaliacoes')
+            ->join('edu_tipos_resultados', 'edu_tipos_resultados.id', '=', 'edu_formas_avaliacoes.tipo_resultado_id')
             ->select([
-                'formas_avaliacoes.id',
-                'formas_avaliacoes.nome',
-                'formas_avaliacoes.codigo',
-                'tipos_resultados.nome as tipo_resultado'
+                'edu_formas_avaliacoes.id',
+                'edu_formas_avaliacoes.nome',
+                'edu_formas_avaliacoes.codigo',
+                'edu_tipos_resultados.nome as tipo_resultado'
             ]);
 
         #Editando a grid
@@ -120,14 +120,14 @@ class FormaAvaliacoesController extends Controller
     public function gridNiveis($id)
     {
         #Criando a consulta
-        $rows = \DB::table('niveis_alfabetizacao')
-            ->join('formas_avaliacoes', 'formas_avaliacoes.id', '=', 'niveis_alfabetizacao.forma_avaliacao_id')
-            ->where('formas_avaliacoes.id', $id)
+        $rows = \DB::table('edu_niveis_alfabetizacao')
+            ->join('edu_formas_avaliacoes', 'edu_formas_avaliacoes.id', '=', 'edu_niveis_alfabetizacao.forma_avaliacao_id')
+            ->where('edu_formas_avaliacoes.id', $id)
             ->select([
-                'niveis_alfabetizacao.id',
-                'niveis_alfabetizacao.nome',
-                'niveis_alfabetizacao.codigo',
-                \DB::raw('IF(niveis_alfabetizacao.minimo_aprovacao = 1, "SIM", "NÃO") as minimo ')
+                'edu_niveis_alfabetizacao.id',
+                'edu_niveis_alfabetizacao.nome',
+                'edu_niveis_alfabetizacao.codigo',
+                \DB::raw('IF(edu_niveis_alfabetizacao.minimo_aprovacao = 1, "SIM", "NÃO") as minimo ')
             ]);
 
         #Editando a grid
@@ -189,7 +189,7 @@ class FormaAvaliacoesController extends Controller
 
             # Regra para só existir um mínimo para aprovação
             if(isset($dados['minimo_aprovacao']) && $dados['minimo_aprovacao'] == 1) {
-                \DB::table('niveis_alfabetizacao')
+                \DB::table('edu_niveis_alfabetizacao')
                     ->where('forma_avaliacao_id', $dados['forma_avaliacao_id'])
                     ->update(['minimo_aprovacao' => 0]);
             }

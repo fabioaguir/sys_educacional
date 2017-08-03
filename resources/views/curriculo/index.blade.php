@@ -101,10 +101,10 @@
             serverSide: true,
             ajax: "{{ route('curriculo.grid') }}",
             columns: [
-                {data: 'nome', name: 'curriculos.nome'},
-                {data: 'codigo', name: 'curriculos.codigo'},
-                {data: 'codigo_curso', name: 'cursos.codigo'},
-                {data: 'ativo', name: 'curriculos.ativo'},
+                {data: 'nome', name: 'edu_curriculos.nome'},
+                {data: 'codigo', name: 'edu_curriculos.codigo'},
+                {data: 'codigo_curso', name: 'edu_cursos.codigo'},
+                {data: 'ativo', name: 'edu_curriculos.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
 
             ]

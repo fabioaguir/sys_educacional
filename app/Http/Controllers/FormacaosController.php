@@ -68,24 +68,24 @@ class FormacaosController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('formacoes')
-            ->join('cursos_formacao', 'cursos_formacao.id', '=', 'formacoes.cursos_formacao_id')
-            ->join('situacao_formacao', 'situacao_formacao.id', '=', 'formacoes.situacao_formacao_id')
-            ->join('licenciatura', 'licenciatura.id', '=', 'formacoes.licenciatura_id')
-            ->join('instituicoes_formacao', 'instituicoes_formacao.id', '=', 'formacoes.instituicoes_formacao_id')
-            ->join('servidor', 'servidor.id', '=', 'formacoes.servidor_id')
-            ->where('formacoes.servidor_id', '=', $id)
+        $rows = \DB::table('edu_formacoes')
+            ->join('edu_cursos_formacao', 'edu_cursos_formacao.id', '=', 'edu_formacoes.cursos_formacao_id')
+            ->join('edu_situacao_formacao', 'edu_situacao_formacao.id', '=', 'edu_formacoes.situacao_formacao_id')
+            ->join('edu_licenciatura', 'edu_licenciatura.id', '=', 'edu_formacoes.licenciatura_id')
+            ->join('edu_instituicoes_formacao', 'edu_instituicoes_formacao.id', '=', 'edu_formacoes.instituicoes_formacao_id')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_formacoes.servidor_id')
+            ->where('edu_formacoes.servidor_id', '=', $id)
             ->select([
-                'formacoes.id as id',
-                'formacoes.ano_conclusao',
-                'cursos_formacao.id as curso_id',
-                'cursos_formacao.nome as curso',
-                'situacao_formacao.id as situacao_id',
-                'situacao_formacao.nome as situacao',
-                'licenciatura.id as licenciatura_id',
-                'licenciatura.nome as licenciatura',
-                'instituicoes_formacao.id as instituicao_id',
-                'instituicoes_formacao.nome as instituicao',
+                'edu_formacoes.id as id',
+                'edu_formacoes.ano_conclusao',
+                'edu_cursos_formacao.id as curso_id',
+                'edu_cursos_formacao.nome as curso',
+                'edu_situacao_formacao.id as situacao_id',
+                'edu_situacao_formacao.nome as situacao',
+                'edu_licenciatura.id as licenciatura_id',
+                'edu_licenciatura.nome as licenciatura',
+                'edu_instituicoes_formacao.id as instituicao_id',
+                'edu_instituicoes_formacao.nome as instituicao',
 
             ]);
 
@@ -201,8 +201,8 @@ class FormacaosController extends Controller
     public function getCursos(Request $request)
     {
 
-        $query = \DB::table('cursos_formacao')
-            ->select('cursos_formacao.id', 'cursos_formacao.nome')
+        $query = \DB::table('edu_cursos_formacao')
+            ->select('edu_cursos_formacao.id', 'edu_cursos_formacao.nome')
             ->get();
 
         return response()->json($query);
@@ -216,8 +216,8 @@ class FormacaosController extends Controller
     public function getInstituicoes(Request $request)
     {
 
-        $query = \DB::table('instituicoes_formacao')
-            ->select('instituicoes_formacao.id', 'instituicoes_formacao.nome')
+        $query = \DB::table('edu_instituicoes_formacao')
+            ->select('edu_instituicoes_formacao.id', 'edu_instituicoes_formacao.nome')
             ->get();
 
         return response()->json($query);
@@ -231,8 +231,8 @@ class FormacaosController extends Controller
     public function getSituacoes(Request $request)
     {
 
-        $query = \DB::table('situacao_formacao')
-            ->select('situacao_formacao.id', 'situacao_formacao.nome')
+        $query = \DB::table('edu_situacao_formacao')
+            ->select('edu_situacao_formacao.id', 'edu_situacao_formacao.nome')
             ->get();
 
         return response()->json($query);
@@ -246,8 +246,8 @@ class FormacaosController extends Controller
     public function getLicenciaturas(Request $request)
     {
 
-        $query = \DB::table('licenciatura')
-            ->select('licenciatura.id', 'licenciatura.nome')
+        $query = \DB::table('edu_licenciatura')
+            ->select('edu_licenciatura.id', 'edu_licenciatura.nome')
             ->get();
 
         return response()->json($query);
@@ -263,15 +263,15 @@ class FormacaosController extends Controller
 
         $dados = $request->request->all();
 
-        $pos = \DB::table('servidor_pos_graduacao')
-            ->join('pos_graduacao', 'pos_graduacao.id', '=', 'servidor_pos_graduacao.pos_graduacao_id')
-            ->join('servidor', 'servidor.id', '=', 'servidor_pos_graduacao.servidor_id')
-            ->where('servidor_pos_graduacao.servidor_id', '=', $dados['servidor_id'])
-            ->select(['pos_graduacao.id'])
+        $pos = \DB::table('edu_servidor_pos_graduacao')
+            ->join('edu_pos_graduacao', 'edu_pos_graduacao.id', '=', 'edu_servidor_pos_graduacao.pos_graduacao_id')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_servidor_pos_graduacao.servidor_id')
+            ->where('edu_servidor_pos_graduacao.servidor_id', '=', $dados['servidor_id'])
+            ->select(['edu_pos_graduacao.id'])
             ->get();
         
-        $query = \DB::table('pos_graduacao')
-            ->select('pos_graduacao.id', 'pos_graduacao.nome')
+        $query = \DB::table('edu_pos_graduacao')
+            ->select('edu_pos_graduacao.id', 'edu_pos_graduacao.nome')
             ->get();
 
         return response()->json(['pos' => $pos, 'query' => $query]);
@@ -287,15 +287,15 @@ class FormacaosController extends Controller
 
         $dados = $request->request->all();
         
-        $outrosCursos = \DB::table('outros_cursos_servidor')
-            ->join('outros_cursos', 'outros_cursos.id', '=', 'outros_cursos_servidor.outros_cursos_id')
-            ->join('servidor', 'servidor.id', '=', 'outros_cursos_servidor.servidor_id')
-            ->where('outros_cursos_servidor.servidor_id', '=', $dados['servidor_id'])
-            ->select(['outros_cursos.id'])
+        $outrosCursos = \DB::table('edu_outros_cursos_servidor')
+            ->join('edu_outros_cursos', 'edu_outros_cursos.id', '=', 'edu_outros_cursos_servidor.outros_cursos_id')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_outros_cursos_servidor.servidor_id')
+            ->where('edu_outros_cursos_servidor.servidor_id', '=', $dados['servidor_id'])
+            ->select(['edu_outros_cursos.id'])
             ->get();
         
-        $query = \DB::table('outros_cursos')
-            ->select('outros_cursos.id', 'outros_cursos.nome')
+        $query = \DB::table('edu_outros_cursos')
+            ->select('edu_outros_cursos.id', 'edu_outros_cursos.nome')
             ->get();
 
         return response()->json(['outros' => $outrosCursos, 'query' => $query]);
@@ -311,18 +311,18 @@ class FormacaosController extends Controller
         
         $dados = $request->request->all();
 
-        $pos = \DB::table('servidor_pos_graduacao')
-            ->join('pos_graduacao', 'pos_graduacao.id', '=', 'servidor_pos_graduacao.pos_graduacao_id')
-            ->join('servidor', 'servidor.id', '=', 'servidor_pos_graduacao.servidor_id')
-            ->where('servidor_pos_graduacao.servidor_id', '=', $dados['servidor_id'])
-            ->select(['pos_graduacao.id'])
+        $pos = \DB::table('edu_servidor_pos_graduacao')
+            ->join('edu_pos_graduacao', 'edu_pos_graduacao.id', '=', 'edu_servidor_pos_graduacao.pos_graduacao_id')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_servidor_pos_graduacao.servidor_id')
+            ->where('edu_servidor_pos_graduacao.servidor_id', '=', $dados['servidor_id'])
+            ->select(['edu_pos_graduacao.id'])
             ->get();
 
-        $outrosCursos = \DB::table('outros_cursos_servidor')
-            ->join('outros_cursos', 'outros_cursos.id', '=', 'outros_cursos_servidor.outros_cursos_id')
-            ->join('servidor', 'servidor.id', '=', 'outros_cursos_servidor.servidor_id')
-            ->where('outros_cursos_servidor.servidor_id', '=', $dados['servidor_id'])
-            ->select(['outros_cursos.id'])
+        $outrosCursos = \DB::table('edu_outros_cursos_servidor')
+            ->join('edu_outros_cursos', 'edu_outros_cursos.id', '=', 'edu_outros_cursos_servidor.outros_cursos_id')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_outros_cursos_servidor.servidor_id')
+            ->where('edu_outros_cursos_servidor.servidor_id', '=', $dados['servidor_id'])
+            ->select(['edu_outros_cursos.id'])
             ->get();
 
         return response()->json(['pos' => $pos, 'outros' => $outrosCursos]);

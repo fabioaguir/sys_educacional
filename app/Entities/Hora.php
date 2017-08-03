@@ -10,7 +10,7 @@ class Hora extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'horas';
+    protected $table    = 'edu_horas';
 
     protected $fillable = [
         'hora_inicial',

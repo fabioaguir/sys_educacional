@@ -10,7 +10,7 @@ class NivelAlfabetizacao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'niveis_alfabetizacao';
+    protected $table = 'edu_niveis_alfabetizacao';
 
     protected $fillable = [
         'nome',

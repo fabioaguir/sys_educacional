@@ -24,13 +24,13 @@ class CursoValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|max:100',
-            'codigo' => 'required|max:50|unique:cursos,codigo',
+            'codigo' => 'required|max:50|unique:edu_cursos,codigo',
             'nivel_ensino_id' => 'required'
         ],
 
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:100',
-            'codigo' => 'required|max:50|unique:cursos,codigo,:id',
+            'codigo' => 'required|max:50|unique:edu_cursos,codigo,:id',
             'nivel_ensino_id' => 'required'
         ],
     ];

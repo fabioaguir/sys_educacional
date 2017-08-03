@@ -13,9 +13,9 @@ function loadTableDisciplina (idTurma) {
         autoWidth: false,
         ajax: laroute.route('turma.disciplina.grid', {'id' : idTurma }),
         columns: [
-            {data: 'codigo', name: 'disciplinas.codigo', orderable: false},
-            {data: 'nome', name: 'disciplinas.nome'},
-            {data: 'periodo', name: 'curriculos_series_disciplinas.periodo', orderable: false},
+            {data: 'codigo', name: 'edu_disciplinas.codigo', orderable: false},
+            {data: 'nome', name: 'edu_disciplinas.nome'},
+            {data: 'periodo', name: 'edu_curriculos_series_disciplinas.periodo', orderable: false},
             {data: 'e_obrigatoria', name: 'e_obrigatoria', orderable: false}
         ]
     });

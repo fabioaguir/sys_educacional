@@ -67,11 +67,11 @@ class ParecerController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('pareceres')
+        $rows = \DB::table('edu_pareceres')
             ->select([
-                'pareceres.id',
-                'pareceres.nome',
-                'pareceres.codigo'
+                'edu_pareceres.id',
+                'edu_pareceres.nome',
+                'edu_pareceres.codigo'
             ]);
 
         #Editando a grid

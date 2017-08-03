@@ -72,11 +72,11 @@ class TipoEventosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('tipo_evento')
+        $rows = \DB::table('edu_tipo_evento')
             ->select([
-                'tipo_evento.id',
-                'tipo_evento.nome',
-                'tipo_evento.abreviatura',
+                'edu_tipo_evento.id',
+                'edu_tipo_evento.nome',
+                'edu_tipo_evento.abreviatura',
             ]);
 
         #Editando a grid

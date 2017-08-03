@@ -75,20 +75,20 @@ class TurmaComplementarController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('turmas')
-            ->join('escola', 'escola.id', '=', 'turmas.escola_id')
-            ->join('tipos_atendimentos', 'tipos_atendimentos.id', '=', 'turmas.tipo_atendimento_id')
-            ->join('calendarios', 'calendarios.id', '=', 'turmas.calendario_id')
-            ->join('dependencias', 'dependencias.id', '=', 'turmas.dependencia_id')
-            ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
-            ->where('turmas.tipo_turma_id', 2)
+        $rows = \DB::table('edu_turmas')
+            ->join('edu_escola', 'edu_escola.id', '=', 'edu_turmas.escola_id')
+            ->join('edu_tipos_atendimentos', 'edu_tipos_atendimentos.id', '=', 'edu_turmas.tipo_atendimento_id')
+            ->join('edu_calendarios', 'edu_calendarios.id', '=', 'edu_turmas.calendario_id')
+            ->join('edu_dependencias', 'edu_dependencias.id', '=', 'edu_turmas.dependencia_id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
+            ->where('edu_turmas.tipo_turma_id', 2)
             ->select([
-                'turmas.id',
-                'turmas.nome',
-                'turmas.codigo',
-                'escola.codigo as escola',
-                'turnos.nome as turno',
-                'turmas.vagas'
+                'edu_turmas.id',
+                'edu_turmas.nome',
+                'edu_turmas.codigo',
+                'edu_escola.codigo as escola',
+                'edu_turnos.nome as turno',
+                'edu_turmas.vagas'
             ]);
 
         #Editando a grid

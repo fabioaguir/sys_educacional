@@ -116,15 +116,15 @@
             serverSide: true,
             ajax: laroute.route('calendario.grid'),
             columns: [
-                {data: 'nome', name: 'calendarios.nome'},
-                {data: 'ano', name: 'calendarios.ano'},
-                {data: 'data_inicial', name: 'calendarios.data_inicial'},
-                {data: 'data_final', name: 'calendarios.data_final'},
-                {data: 'data_resultado_final', name: 'calendarios.data_resultado_final'},
-                {data: 'dias_letivos', name: 'calendarios.dias_letivos'},
-                {data: 'semanas_letivas', name: 'calendarios.semanas_letivas'},
+                {data: 'nome', name: 'edu_calendarios.nome'},
+                {data: 'ano', name: 'edu_calendarios.ano'},
+                {data: 'data_inicial', name: 'edu_calendarios.data_inicial'},
+                {data: 'data_final', name: 'edu_calendarios.data_final'},
+                {data: 'data_resultado_final', name: 'edu_calendarios.data_resultado_final'},
+                {data: 'dias_letivos', name: 'edu_calendarios.dias_letivos'},
+                {data: 'semanas_letivas', name: 'edu_calendarios.semanas_letivas'},
                 {data: 'status', name: 'status.nome'},
-                {data: 'duracao', name: 'duracoes.nome'},
+                {data: 'duracao', name: 'edu_duracoes.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

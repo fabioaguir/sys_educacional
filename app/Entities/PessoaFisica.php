@@ -11,7 +11,7 @@ class PessoaFisica extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'cgm';
+    protected $table    = 'gen_cgm';
 
     protected $fillable = [
         'estado_civil_id',
@@ -37,7 +37,19 @@ class PessoaFisica extends Model implements Transformable
         'email',
         'num_cnh',
         'cnh_categoria_id',
-        'email'
+        'email',
+        'numero_nis',
+        'fone',
+        'idade',
+        'fone2',
+        'fone3',
+        'numero_sus',
+        'numero_nis',
+        'numero_sessao',
+        'numero_titulo',
+        'numero_zona',
+        'carteira_prof',
+        'serie_carteira',
     ];
 
     /**
@@ -160,6 +172,7 @@ class PessoaFisica extends Model implements Transformable
     {
         $this->attributes['data_vencimento_cnh'] = SerbinarioDateFormat::toUsa($value);
     }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

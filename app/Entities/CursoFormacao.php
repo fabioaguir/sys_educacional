@@ -10,7 +10,7 @@ class CursoFormacao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'cursos_formacao';
+    protected $table    = 'edu_cursos_formacao';
 
     protected $fillable = [
         'nome'

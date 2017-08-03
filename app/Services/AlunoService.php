@@ -58,8 +58,14 @@ class AlunoService
         #Separando dados referente a endereço
         $dados = $data['cgm']['endereco'];
 
-        #Salvando registro
-        $endereco = $this->enderecoRepository->create($dados);
+        // Validando se o CGM já existe ou não
+        if (isset($data['endereco_id']) && $data['endereco_id'] != "") {
+            #Editando registro
+            $endereco = $this->enderecoRepository->update($dados, $data['endereco_id']);
+        } else {
+            #Salvando registro
+            $endereco = $this->enderecoRepository->create($dados);
+        }
 
         #Retorno
         return $endereco;
@@ -87,8 +93,14 @@ class AlunoService
         #Separando dados referente a endereço
         $dados = $data['cgm'];
 
-        #Salvando registro
-        $pessoaFisica = $this->pessoaFisicaRepository->create($dados);
+        // Validando se o CGM já existe ou não
+        if (isset($data['cgm_id']) && $data['cgm_id'] != "") {
+            #Editando registro
+            $pessoaFisica = $this->pessoaFisicaRepository->update($dados, $data['cgm_id']);
+        } else {
+            #Salvando registro
+            $pessoaFisica = $this->pessoaFisicaRepository->create($dados);
+        }
 
         return $pessoaFisica;
     }

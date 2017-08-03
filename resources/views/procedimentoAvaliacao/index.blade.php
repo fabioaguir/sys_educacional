@@ -75,8 +75,8 @@
             serverSide: true,
             ajax: "{{ route('procedimentoAvaliacao.grid') }}",
             columns: [
-                {data: 'nome', name: 'procedimentos_avaliacoes.nome'},
-                {data: 'codigo', name: 'procedimentos_avaliacoes.codigo'},
+                {data: 'nome', name: 'edu_procedimentos_avaliacoes.nome'},
+                {data: 'codigo', name: 'edu_procedimentos_avaliacoes.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

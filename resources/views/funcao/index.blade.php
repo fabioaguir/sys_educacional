@@ -71,9 +71,9 @@
             serverSide: true,
             ajax: laroute.route('funcao.grid'),
             columns: [
-                {data: 'nome', name: 'funcoes.nome'},
-                {data: 'sigla', name: 'funcoes.sigla'},
-                {data: 'funcao_professor', name: 'funcoes.funcao_professor'},
+                {data: 'nome', name: 'edu_funcoes.nome'},
+                {data: 'sigla', name: 'edu_funcoes.sigla'},
+                {data: 'funcao_professor', name: 'edu_funcoes.funcao_professor'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {

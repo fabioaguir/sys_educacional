@@ -61,7 +61,7 @@ class EscolaService
         $this->latitudeLongitude($data);
 
         # Recuperando instituição
-        $instituicao = \DB::table('instituicao')->first();
+        $instituicao = \DB::table('edu_instituicao')->first();
 
         #retorno com objeto endereço
         $endereco = $this->tratamentoEndereco($data);

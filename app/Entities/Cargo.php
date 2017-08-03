@@ -10,7 +10,7 @@ class Cargo extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'cargos';
+    protected $table    = 'edu_cargos';
 
     protected $fillable = [
         'nome',

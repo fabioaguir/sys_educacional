@@ -12,11 +12,11 @@ function loadTableFormacoes (idServidor) {
         autoWidth: false,
         ajax: laroute.route('servidor.gridFormacao', {'id' :idServidor }),
         columns: [
-            {data: 'curso', name: 'cursos_formacao.nome'},
-            {data: 'instituicao', name: 'instituicoes_formacao.nome'},
-            {data: 'licenciatura', name: 'licenciatura.nome'},
-            {data: 'situacao', name: 'situacao_formacao.nome'},
-            {data: 'ano_conclusao', name: 'formacoes.ano_conclusao'},
+            {data: 'curso', name: 'edu_cursos_formacao.nome'},
+            {data: 'instituicao', name: 'edu_instituicoes_formacao.nome'},
+            {data: 'licenciatura', name: 'edu_licenciatura.nome'},
+            {data: 'situacao', name: 'edu_situacao_formacao.nome'},
+            {data: 'ano_conclusao', name: 'edu_formacoes.ano_conclusao'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

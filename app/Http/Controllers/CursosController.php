@@ -70,13 +70,13 @@ class CursosController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('cursos')
-            ->leftJoin('niveis_ensino', 'niveis_ensino.id', '=', 'cursos.nivel_ensino_id')
+        $rows = \DB::table('edu_cursos')
+            ->leftJoin('edu_niveis_ensino', 'edu_niveis_ensino.id', '=', 'edu_cursos.nivel_ensino_id')
             ->select([
-                'cursos.id',
-                'cursos.nome',
-                'cursos.codigo',
-                'niveis_ensino.nome as nivel_ensino'
+                'edu_cursos.id',
+                'edu_cursos.nome',
+                'edu_cursos.codigo',
+                'edu_niveis_ensino.nome as nivel_ensino'
             ]);
 
         #Editando a grid

@@ -10,7 +10,7 @@ class Situacao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'situacao_servidores';
+    protected $table    = 'edu_situacao_servidores';
 
     protected $fillable = [
         'nome'

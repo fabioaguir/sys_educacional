@@ -12,11 +12,11 @@ function loadTableHorarios (idTurma) {
         autoWidth: false,
         ajax: laroute.route('turma.horario.grid', {'idTurma' :idTurma }),
         columns: [
-            {data: 'dia', name: 'dias_semana.nome'},
-            {data: 'turno', name: 'turnos.nome'},
+            {data: 'dia', name: 'edu_dias_semana.nome'},
+            {data: 'turno', name: 'edu_turnos.nome'},
             {data: 'hora', name: 'hora', orderable: false, searchable: false},
-            {data: 'disciplina', name: 'disciplinas.nome'},
-            {data: 'professor', name: 'cgm.nome'},
+            {data: 'disciplina', name: 'edu_disciplinas.nome'},
+            {data: 'professor', name: 'gen_cgm.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

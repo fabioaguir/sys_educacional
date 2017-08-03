@@ -37,23 +37,23 @@ class TurmaAlunoController extends Controller
     public function grid($idTurma)
     {
         #Criando a consulta
-        $rows = \DB::table('alunos')
-            ->join('alunos_turmas', function ($join) {
+        $rows = \DB::table('edu_alunos')
+            ->join('edu_alunos_turmas', function ($join) {
                 $join->on(
-                    'alunos_turmas.id', '=',
-                    \DB::raw('(SELECT turma_atual.id FROM alunos_turmas as turma_atual
-                        where turma_atual.alunos_id = alunos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                    'edu_alunos_turmas.id', '=',
+                    \DB::raw('(SELECT turma_atual.id FROM edu_alunos_turmas as turma_atual
+                        where turma_atual.alunos_id = edu_alunos.id ORDER BY turma_atual.id DESC LIMIT 1)')
                 );
             })
-            ->join('cgm', 'cgm.id', '=', 'alunos.cgm_id')
-            ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
+            ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
+            ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_alunos_turmas.turmas_id')
             ->select([
-                'alunos_turmas.id',
-                'alunos_turmas.matricula',
-                'cgm.nome',
-                \DB::raw('DATE_FORMAT(alunos_turmas.data_matricula, "%d/%m/%Y") as data_matricula')
+                'edu_alunos_turmas.id',
+                'edu_alunos_turmas.matricula',
+                'gen_cgm.nome',
+                \DB::raw('DATE_FORMAT(edu_alunos_turmas.data_matricula, "%d/%m/%Y") as data_matricula')
             ])
-            ->where('turmas.id', $idTurma);
+            ->where('edu_turmas.id', $idTurma);
 
         #Editando a grid
         return Datatables::of($rows)->make(true);

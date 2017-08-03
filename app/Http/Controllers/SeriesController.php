@@ -71,10 +71,10 @@ class SeriesController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('series')
+        $rows = \DB::table('edu_series')
             ->select([
-                'series.id',
-                'series.nome',
+                'edu_series.id',
+                'edu_series.nome',
             ]);
 
         #Editando a grid

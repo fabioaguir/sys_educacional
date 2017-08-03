@@ -13,10 +13,10 @@ function loadTableAtividades (idServidor) {
         autoWidth: false,
         ajax: laroute.route('servidor.gridAtividade', {'id' :idServidor }),
         columns: [
-            {data: 'funcao', name: 'funcoes.nome'},
-            {data: 'horas_manha', name: 'atividades.horas_manha'},
-            {data: 'horas_tarde', name: 'atividades.horas_tarde'},
-            {data: 'horas_noite', name: 'atividades.horas_noite'},
+            {data: 'funcao', name: 'edu_funcoes.nome'},
+            {data: 'horas_manha', name: 'edu_atividades.horas_manha'},
+            {data: 'horas_tarde', name: 'edu_atividades.horas_tarde'},
+            {data: 'horas_noite', name: 'edu_atividades.horas_noite'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

@@ -57,9 +57,9 @@
             ajax: laroute.route('pessoaFisica.grid'),
             columns: [
 
-                {data: 'nome', name: 'cgm.nome'},
-                {data: 'rg', name: 'cgm.rg'},
-                {data: 'cpf', name: 'cgm.cpf'},
+                {data: 'nome', name: 'gen_cgm.nome'},
+                {data: 'rg', name: 'gen_cgm.rg'},
+                {data: 'cpf', name: 'gen_cgm.cpf'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             /*"oLanguage": {

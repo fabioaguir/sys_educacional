@@ -10,7 +10,7 @@ class Coordenadoria extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'coordenadoria';
+    protected $table    = 'edu_coordenadoria';
 
     protected $fillable = [
         'nome'

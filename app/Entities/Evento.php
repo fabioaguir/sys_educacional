@@ -11,7 +11,7 @@ class Evento extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'feriados_eventos';
+    protected $table    = 'edu_feriados_eventos';
 
     protected $fillable = [
         'nome',

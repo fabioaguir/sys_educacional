@@ -104,12 +104,12 @@ class PessoaFisicaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('cgm')
+        $rows = \DB::table('gen_cgm')
             ->select([
-                'cgm.id',
-                'cgm.nome',
-                'cgm.rg',
-                'cgm.cpf',
+                'gen_cgm.id',
+                'gen_cgm.nome',
+                'gen_cgm.rg',
+                'gen_cgm.cpf',
             ])
             ->where('cnpj', '=', null);
         
@@ -140,6 +140,63 @@ class PessoaFisicaController extends Controller
             # Retorno
             return $html;
         })->make(true);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function gridPesquisarPessoa()
+    {
+        #Criando a consulta
+        $rows = \DB::table('gen_cgm')
+            ->leftJoin('gen_endereco', 'gen_endereco.id', '=', 'gen_cgm.endereco_id')
+            ->leftJoin('gen_bairros', 'gen_bairros.id', '=', 'gen_endereco.bairro_id')
+            ->leftJoin('gen_cidades', 'gen_cidades.id', '=', 'gen_bairros.cidades_id')
+            ->leftJoin('gen_estados', 'gen_estados.id', '=', 'gen_cidades.estados_id')
+            ->select([
+                'gen_cgm.id',
+                'gen_cgm.nome',
+                'gen_cgm.mae',
+                'gen_cgm.cpf',
+                'gen_cgm.numero_nis',
+                \DB::raw('DATE_FORMAT(gen_cgm.data_nascimento,"%d/%m/%Y") as data_nascimento'),
+                'gen_cgm.rg',
+                'gen_cgm.pai',
+                'gen_cgm.fone',
+                'gen_cgm.email',
+                'gen_cgm.nacionalidade_id',
+                'gen_cgm.naturalidade',
+                'gen_cgm.sexo_id',
+                'gen_cgm.inscricao_estadual',
+                'gen_cgm.estado_civil_id',
+                'gen_cgm.cgm_municipio_id',
+                'gen_cgm.escolaridade_id',
+                \DB::raw('DATE_FORMAT(gen_cgm.data_expedicao,"%d/%m/%Y") as data_expedicao'),
+                \DB::raw('DATE_FORMAT(gen_cgm.data_vencimento_cnh,"%d/%m/%Y") as data_vencimento_cnh'),
+                \DB::raw('DATE_FORMAT(gen_cgm.data_falecimento,"%d/%m/%Y") as data_falecimento'),
+                'gen_cgm.num_cnh',
+                'gen_cgm.cnh_categoria_id',
+                'gen_cgm.carteira_prof',
+                'gen_cgm.serie_carteira',
+                'gen_cgm.numero_titulo',
+                'gen_cgm.numero_sessao',
+                'gen_cgm.numero_zona',
+
+                'gen_endereco.id as endereco_id',
+                'gen_endereco.logradouro',
+                'gen_endereco.numero',
+                'gen_endereco.complemento',
+                'gen_endereco.cep',
+                'gen_endereco.zona_id',
+                'gen_bairros.nome as bairro',
+                'gen_bairros.id as bairro_id',
+                'gen_cidades.nome as cidade',
+                'gen_cidades.id as cidade_id',
+                'gen_estados.id as estado_id',
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->make(true);
     }
 
     /**
@@ -239,10 +296,10 @@ class PessoaFisicaController extends Controller
     {
         $idEstado = $request->get('id');
 
-        $cidades = \DB::table('cidades')
-            ->join('estados', 'estados.id', '=', 'cidades.estados_id')
-            ->select('cidades.id', 'cidades.nome')
-            ->where('estados.id', $idEstado)
+        $cidades = \DB::table('gen_cidades')
+            ->join('gen_estados', 'gen_estados.id', '=', 'gen_cidades.estados_id')
+            ->select('gen_cidades.id', 'gen_cidades.nome')
+            ->where('gen_estados.id', $idEstado)
             ->get();
 
         return response()->json($cidades);
@@ -256,10 +313,10 @@ class PessoaFisicaController extends Controller
     {
         $idCidade = $request->get('id');
 
-        $cidades = \DB::table('bairros')
-            ->join('cidades', 'cidades.id', '=', 'bairros.cidades_id')
-            ->select('bairros.id', 'bairros.nome')
-            ->where('cidades.id', $idCidade)
+        $cidades = \DB::table('gen_bairros')
+            ->join('gen_cidades', 'gen_cidades.id', '=', 'gen_bairros.cidades_id')
+            ->select('gen_bairros.id', 'gen_bairros.nome')
+            ->where('gen_cidades.id', $idCidade)
             ->get();
 
         return response()->json($cidades);
@@ -280,22 +337,22 @@ class PessoaFisicaController extends Controller
             #
             if (empty($pessoaFisica['idModel'])) {
                 #Consultando
-                $pessoa = \DB::table('cgm')
+                $pessoa = \DB::table('gen_cgm')
                     ->select([
-                        'cgm.cpf'
+                        'gen_cgm.cpf'
                     ])
-                    ->where('cgm.cpf', $pessoaFisica['value'])
+                    ->where('gen_cgm.cpf', $pessoaFisica['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $pessoa = \DB::table('cgm')
+                $pessoa = \DB::table('gen_cgm')
                     ->select([
-                        'cgm.id',
-                        'cgm.cpf'
+                        'gen_cgm.id',
+                        'gen_cgm.cpf'
                     ])
-                    ->where('cgm.id', '!=' ,$pessoaFisica['idModel'])
-                    ->where('cgm.cpf', $pessoaFisica['value'])
+                    ->where('gen_cgm.id', '!=' ,$pessoaFisica['idModel'])
+                    ->where('gen_cgm.cpf', $pessoaFisica['value'])
                     ->get();
             }
 

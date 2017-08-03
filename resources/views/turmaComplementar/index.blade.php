@@ -78,10 +78,10 @@
             serverSide: true,
             ajax: "{{ route('turmaComplementar.grid') }}",
             columns: [
-                {data: 'nome', name: 'turmas.nome'},
-                {data: 'codigo', name: 'turmas.codigo'},
-                {data: 'escola', name: 'escola.codigo'},
-                {data: 'turno', name: 'turnos.nome'},
+                {data: 'nome', name: 'edu_turmas.nome'},
+                {data: 'codigo', name: 'edu_turmas.codigo'},
+                {data: 'escola', name: 'edu_escola.codigo'},
+                {data: 'turno', name: 'edu_turnos.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

@@ -68,11 +68,11 @@ class ProcedimentoAvaliacaoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('procedimentos_avaliacoes')
+        $rows = \DB::table('edu_procedimentos_avaliacoes')
             ->select([
-                'procedimentos_avaliacoes.id',
-                'procedimentos_avaliacoes.nome',
-                'procedimentos_avaliacoes.codigo'
+                'edu_procedimentos_avaliacoes.id',
+                'edu_procedimentos_avaliacoes.nome',
+                'edu_procedimentos_avaliacoes.codigo'
             ]);
 
         #Editando a grid

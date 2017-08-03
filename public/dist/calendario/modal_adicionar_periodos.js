@@ -12,11 +12,11 @@ function loadTablePeriodos (idCalendario) {
         autoWidth: false,
         ajax: laroute.route('calendario.gridPeriodo', {'id' :idCalendario }),
         columns: [
-            {data: 'periodo', name: 'periodos.nome'},
-            {data: 'data_inicial', name: 'periodos_avaliacao.data_inicial'},
-            {data: 'data_final', name: 'periodos_avaliacao.data_final'},
-            {data: 'dias_letivos', name: 'periodos_avaliacao.dias_letivos'},
-            {data: 'semanas_letivas', name: 'periodos_avaliacao.semanas_letivas'},
+            {data: 'periodo', name: 'edu_periodos.nome'},
+            {data: 'data_inicial', name: 'edu_periodos_avaliacao.data_inicial'},
+            {data: 'data_final', name: 'edu_periodos_avaliacao.data_final'},
+            {data: 'dias_letivos', name: 'edu_periodos_avaliacao.dias_letivos'},
+            {data: 'semanas_letivas', name: 'edu_periodos_avaliacao.semanas_letivas'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

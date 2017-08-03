@@ -12,9 +12,9 @@ function loadTableTelefones (idCgm) {
         autoWidth: false,
         ajax: laroute.route('servidor.gridTelefone', {'id' :idCgm }),
         columns: [
-            {data: 'nome', name: 'telefones.nome'},
-            {data: 'tipo', name: 'tipo_telefones.nome'},
-            {data: 'ramal', name: 'telefones.ramal'},
+            {data: 'nome', name: 'edu_telefones.nome'},
+            {data: 'tipo', name: 'edu_tipo_telefones.nome'},
+            {data: 'ramal', name: 'edu_telefones.ramal'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

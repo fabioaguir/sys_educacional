@@ -12,7 +12,7 @@ function loadTableAlocacoes (idServidor) {
         autoWidth: false,
         ajax: laroute.route('servidor.gridAlocacao', {'id' :idServidor }),
         columns: [
-            {data: 'escola', name: 'escola.nome'},
+            {data: 'escola', name: 'edu_escola.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

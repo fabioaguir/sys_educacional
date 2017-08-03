@@ -59,27 +59,27 @@ class AlunoTurmasController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('alunos_turmas')
-            ->join('alunos', 'alunos.id', '=', 'alunos_turmas.alunos_id')
-            ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
-            ->join('escola', 'escola.id', '=', 'turmas.escola_id')
-            ->join('cursos', 'cursos.id', '=', 'turmas.curso_id')
-            ->join('curriculos', 'curriculos.id', '=', 'turmas.curriculo_id')
-            ->join('calendarios', 'calendarios.id', '=', 'turmas.calendario_id')
-            ->join('series', 'series.id', '=', 'turmas.serie_id')
-            ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
-            ->where('alunos_turmas.alunos_id', '=', $id)
+        $rows = \DB::table('edu_alunos_turmas')
+            ->join('edu_alunos', 'edu_alunos.id', '=', 'edu_alunos_turmas.alunos_id')
+            ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_alunos_turmas.turmas_id')
+            ->join('edu_escola', 'edu_escola.id', '=', 'edu_turmas.escola_id')
+            ->join('edu_cursos', 'edu_cursos.id', '=', 'edu_turmas.curso_id')
+            ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_turmas.curriculo_id')
+            ->join('edu_calendarios', 'edu_calendarios.id', '=', 'edu_turmas.calendario_id')
+            ->join('edu_series', 'edu_series.id', '=', 'edu_turmas.serie_id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
+            ->where('edu_alunos_turmas.alunos_id', '=', $id)
             ->select([
-                'alunos_turmas.id as id',
-                'alunos_turmas.matricula',
-                'turmas.nome as turma',
-                'escola.nome as escola',
-                'cursos.nome as curso',
-                'curriculos.nome as curriculo',
-                'calendarios.ano as calendario_ano',
-                'series.nome as serie',
-                'turnos.nome as turno',
-                \DB::raw('DATE_FORMAT(alunos_turmas.data_matricula,"%d/%m/%Y") as data_matricula'),
+                'edu_alunos_turmas.id as id',
+                'edu_alunos_turmas.matricula',
+                'edu_turmas.nome as turma',
+                'edu_escola.nome as escola',
+                'edu_cursos.nome as curso',
+                'edu_curriculos.nome as curriculo',
+                'edu_calendarios.ano as calendario_ano',
+                'edu_series.nome as serie',
+                'edu_turnos.nome as turno',
+                \DB::raw('DATE_FORMAT(edu_alunos_turmas.data_matricula,"%d/%m/%Y") as data_matricula'),
             ]);
 
         #Editando a grid
@@ -160,10 +160,10 @@ class AlunoTurmasController extends Controller
     public function getTurma(Request $request)
     {
 
-        $tipos = \DB::table('turmas')
-            ->join('tipo_turmas', 'tipo_turmas.id', '=', 'turmas.tipo_turma_id')
-            ->where('tipo_turmas.id', '=', '1')
-            ->select('turmas.id', 'turmas.nome')
+        $tipos = \DB::table('edu_turmas')
+            ->join('edu_tipo_turmas', 'edu_tipo_turmas.id', '=', 'edu_turmas.tipo_turma_id')
+            ->where('edu_tipo_turmas.id', '=', '1')
+            ->select('edu_turmas.id', 'edu_turmas.nome')
             ->get();
 
         return response()->json($tipos);
@@ -181,33 +181,33 @@ class AlunoTurmasController extends Controller
         try {
 
             # recuper os dados da turma
-            $turma = \DB::table('turmas')
-                ->join('escola', 'escola.id', '=', 'turmas.escola_id')
-                ->join('cursos', 'cursos.id', '=', 'turmas.curso_id')
-                ->join('curriculos', 'curriculos.id', '=', 'turmas.curriculo_id')
-                ->join('calendarios', 'calendarios.id', '=', 'turmas.calendario_id')
-                ->join('series', 'series.id', '=', 'turmas.serie_id')
-                ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
-                ->where('turmas.id', '=', $dados['turma'])
+            $turma = \DB::table('edu_turmas')
+                ->join('edu_escola', 'edu_escola.id', '=', 'edu_turmas.escola_id')
+                ->join('edu_cursos', 'edu_cursos.id', '=', 'edu_turmas.curso_id')
+                ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_turmas.curriculo_id')
+                ->join('edu_calendarios', 'edu_calendarios.id', '=', 'edu_turmas.calendario_id')
+                ->join('edu_series', 'edu_series.id', '=', 'edu_turmas.serie_id')
+                ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
+                ->where('edu_turmas.id', '=', $dados['turma'])
                 ->select([
-                    'turmas.vagas',
-                    'escola.nome as escola',
-                    'cursos.nome as curso',
-                    'curriculos.nome as curriculo',
-                    'calendarios.nome as calendario_nome',
-                    'calendarios.ano as calendario_ano',
-                    'series.nome as serie',
-                    'turnos.nome as turno',
+                    'edu_turmas.vagas',
+                    'edu_escola.nome as escola',
+                    'edu_cursos.nome as curso',
+                    'edu_curriculos.nome as curriculo',
+                    'edu_calendarios.nome as calendario_nome',
+                    'edu_calendarios.ano as calendario_ano',
+                    'edu_series.nome as serie',
+                    'edu_turnos.nome as turno',
                 ])
                 ->first();
 
             # pega a quantidade de alunos matrículados nessa turma
-            $alunoTurma = \DB::table('alunos_turmas')
-                ->join('turmas', 'turmas.id', '=', 'alunos_turmas.turmas_id')
-                ->groupBy('turmas.id')
-                ->where('turmas.id', '=', $dados['turma'])
+            $alunoTurma = \DB::table('edu_alunos_turmas')
+                ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_alunos_turmas.turmas_id')
+                ->groupBy('edu_turmas.id')
+                ->where('edu_turmas.id', '=', $dados['turma'])
                 ->select([
-                    \DB::raw('count(alunos_turmas.id) as qtd'),
+                    \DB::raw('count(edu_alunos_turmas.id) as qtd'),
                 ])->first();
 
             # calculas a quantidade de vagas restantes

@@ -71,9 +71,9 @@
             serverSide: true,
             ajax: laroute.route('nivelEnsino.grid'),
             columns: [
-                {data: 'codigo', name: 'niveis_ensino.codigo'},
-                {data: 'nome', name: 'niveis_ensino.nome'},
-                {data: 'modalidade', name: 'modalidades.nome'},
+                {data: 'codigo', name: 'edu_niveis_ensino.codigo'},
+                {data: 'nome', name: 'edu_niveis_ensino.nome'},
+                {data: 'modalidade', name: 'edu_modalidades.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
             /*"oLanguage": {

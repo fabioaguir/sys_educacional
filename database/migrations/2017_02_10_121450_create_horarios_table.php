@@ -13,7 +13,7 @@ class CreateHorariosTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('horarios', function(Blueprint $table) {
+		Schema::create('edu_horarios', function(Blueprint $table) {
             $table->increments('id');
 
             $table->timestamps();
@@ -27,7 +27,7 @@ class CreateHorariosTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('horarios');
+		Schema::drop('edu_horarios');
 	}
 
 }

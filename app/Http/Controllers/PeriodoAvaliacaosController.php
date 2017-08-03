@@ -62,20 +62,20 @@ class PeriodoAvaliacaosController extends Controller
     public function grid($id)
     {
         #Criando a consulta
-        $rows = \DB::table('periodos_avaliacao')
-            ->join('periodos', 'periodos.id', '=', 'periodos_avaliacao.periodos_id')
-            ->join('calendarios', 'calendarios.id', '=', 'periodos_avaliacao.calendarios_id')
-            ->where('periodos_avaliacao.calendarios_id', '=', $id)
+        $rows = \DB::table('edu_periodos_avaliacao')
+            ->join('edu_periodos', 'edu_periodos.id', '=', 'edu_periodos_avaliacao.periodos_id')
+            ->join('edu_calendarios', 'edu_calendarios.id', '=', 'edu_periodos_avaliacao.calendarios_id')
+            ->where('edu_periodos_avaliacao.calendarios_id', '=', $id)
             ->select([
-                'periodos_avaliacao.id as id',
-                'periodos.nome as periodo',
-                \DB::raw('DATE_FORMAT(periodos_avaliacao.data_inicial,"%d/%m/%Y") as data_inicial'),
-                \DB::raw('DATE_FORMAT(periodos_avaliacao.data_final,"%d/%m/%Y") as data_final'),
-                'periodos_avaliacao.dias_letivos',
-                'periodos_avaliacao.semanas_letivas',
-                'calendarios.dias_letivos as total_dias',
-                'calendarios.semanas_letivas as total_semanas',
-                'periodos.id as periodo_id',
+                'edu_periodos_avaliacao.id as id',
+                'edu_periodos.nome as periodo',
+                \DB::raw('DATE_FORMAT(edu_periodos_avaliacao.data_inicial,"%d/%m/%Y") as data_inicial'),
+                \DB::raw('DATE_FORMAT(edu_periodos_avaliacao.data_final,"%d/%m/%Y") as data_final'),
+                'edu_periodos_avaliacao.dias_letivos',
+                'edu_periodos_avaliacao.semanas_letivas',
+                'edu_calendarios.dias_letivos as total_dias',
+                'edu_calendarios.semanas_letivas as total_semanas',
+                'edu_periodos.id as periodo_id',
             ]);
 
         #Editando a grid
@@ -186,8 +186,8 @@ class PeriodoAvaliacaosController extends Controller
     public function getPeriodo(Request $request)
     {
 
-        $periodos = \DB::table('periodos')
-            ->select('periodos.id', 'periodos.nome')
+        $periodos = \DB::table('edu_periodos')
+            ->select('edu_periodos.id', 'edu_periodos.nome')
             ->get();
 
         return response()->json($periodos);
@@ -210,10 +210,10 @@ class PeriodoAvaliacaosController extends Controller
             $data = SerbinarioDateFormat::toUsa($request->get('data'));
 
             // Validando de a data está entre o período do calendário
-            $query = \DB::table('calendarios')
-                ->where('calendarios.id', '=', $idCalendario)
-                ->where('calendarios.data_inicial', '<=', $data)
-                ->where('calendarios.data_final', '>=', $data)
+            $query = \DB::table('edu_calendarios')
+                ->where('edu_calendarios.id', '=', $idCalendario)
+                ->where('edu_calendarios.data_inicial', '<=', $data)
+                ->where('edu_calendarios.data_final', '>=', $data)
                 ->first();
 
             // Valida se o retorno da quary foi nula ou não

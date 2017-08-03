@@ -10,7 +10,7 @@ class Horario extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'horarios';
+    protected $table    = 'edu_horarios';
 
     protected $fillable = [
         'horas_id',

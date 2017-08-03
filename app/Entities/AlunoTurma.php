@@ -11,7 +11,7 @@ class AlunoTurma extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'alunos_turmas';
+    protected $table    = 'edu_alunos_turmas';
 
     protected $fillable = [
         'alunos_id',

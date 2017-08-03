@@ -62,27 +62,27 @@ class HorariosController extends Controller
     public function grid($idTurma)
     {
         #Criando a consulta
-        $rows = \DB::table('horarios')
-            ->join('horas', 'horas.id', '=', 'horarios.horas_id')
-            ->join('turnos', 'turnos.id', '=', 'horas.turnos_id')
-            ->join('dias_semana', 'dias_semana.id', '=', 'horarios.dia_semana_id')
-            ->join('disciplinas', 'disciplinas.id', '=', 'horarios.disciplinas_id')
-            ->join('servidor', 'servidor.id', '=', 'horarios.servidor_id')
-            ->join('cgm', 'cgm.id', '=', 'servidor.id_cgm')
-            ->join('turmas', 'turmas.id', '=', 'horarios.turmas_id')
-            ->where('turmas.id', '=', $idTurma)
+        $rows = \DB::table('edu_horarios')
+            ->join('edu_horas', 'edu_horas.id', '=', 'edu_horarios.horas_id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_horas.turnos_id')
+            ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_horarios.dia_semana_id')
+            ->join('edu_disciplinas', 'edu_disciplinas.id', '=', 'edu_horarios.disciplinas_id')
+            ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_horarios.servidor_id')
+            ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_servidor.id_cgm')
+            ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turmas_id')
+            ->where('edu_turmas.id', '=', $idTurma)
             ->select([
-                'horarios.id as id',
-                'dias_semana.nome as dia',
-                'dias_semana.id as dia_id',
-                'turnos.nome as turno',
-                'turnos.id as turno_id',
-                \DB::raw("CONCAT(DATE_FORMAT(horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(horas.hora_final,'%h:%i')) AS hora"),
-                'horas.id as hora_id',
-                'disciplinas.nome as disciplina',
-                'disciplinas.id as disciplina_id',
-                'cgm.nome as professor',
-                'servidor.id as professor_id',
+                'edu_horarios.id as id',
+                'edu_dias_semana.nome as dia',
+                'edu_dias_semana.id as dia_id',
+                'edu_turnos.nome as turno',
+                'edu_turnos.id as turno_id',
+                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS hora"),
+                'edu_horas.id as hora_id',
+                'edu_disciplinas.nome as disciplina',
+                'edu_disciplinas.id as disciplina_id',
+                'gen_cgm.nome as professor',
+                'edu_servidor.id as professor_id',
             ]);
         
         #Editando a grid
@@ -167,16 +167,16 @@ class HorariosController extends Controller
 
         $dados = $request->all();
 
-        $rows = \DB::table('disciplinas')
-            ->join('curriculos_series_disciplinas', 'curriculos_series_disciplinas.disciplina_id', '=', 'disciplinas.id')
-            ->join('curriculos_series', 'curriculos_series.id', '=', 'curriculos_series_disciplinas.curriculo_serie_id')
-            ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
-            ->join('turmas', 'turmas.curriculo_id', '=', 'curriculos.id')
-            ->where('turmas.id', $dados['idTurma'])
-            ->where('curriculos_series.serie_id', $dados['idSerie'])
+        $rows = \DB::table('edu_disciplinas')
+            ->join('edu_curriculos_series_disciplinas', 'edu_curriculos_series_disciplinas.disciplina_id', '=', 'edu_disciplinas.id')
+            ->join('edu_curriculos_series', 'edu_curriculos_series.id', '=', 'edu_curriculos_series_disciplinas.curriculo_serie_id')
+            ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_curriculos_series.curriculo_id')
+            ->join('edu_turmas', 'edu_turmas.curriculo_id', '=', 'edu_curriculos.id')
+            ->where('edu_turmas.id', $dados['idTurma'])
+            ->where('edu_curriculos_series.serie_id', $dados['idSerie'])
             ->select([
-                'disciplinas.id as id',
-                'disciplinas.nome as nome',
+                'edu_disciplinas.id as id',
+                'edu_disciplinas.nome as nome',
             ])->get();
 
         return response()->json($rows);
@@ -192,16 +192,16 @@ class HorariosController extends Controller
 
         $dados = $request->all();
 
-        $rows = \DB::table('servidor')
-            ->join('alocacoes', 'alocacoes.servidor_id', '=', 'servidor.id')
-            ->join('escola', 'escola.id', '=', 'alocacoes.escola_id')
-            ->join('funcoes', 'funcoes.id', '=', 'servidor.funcoes_id')
-            ->join('cgm', 'cgm.id', '=', 'servidor.id_cgm')
-            ->where('escola.id', $dados['idEscola'])
-            ->where('funcoes.funcao_professor', '1')
+        $rows = \DB::table('edu_servidor')
+            ->join('edu_alocacoes', 'edu_alocacoes.servidor_id', '=', 'edu_servidor.id')
+            ->join('edu_escola', 'edu_escola.id', '=', 'edu_alocacoes.escola_id')
+            ->join('edu_funcoes', 'edu_funcoes.id', '=', 'edu_servidor.funcoes_id')
+            ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_servidor.id_cgm')
+            ->where('edu_escola.id', $dados['idEscola'])
+            ->where('edu_funcoes.funcao_professor', '1')
             ->select([
-                'servidor.id as id',
-                'cgm.nome as nome',
+                'edu_servidor.id as id',
+                'gen_cgm.nome as nome',
             ])->get();
 
         return response()->json($rows);
@@ -217,13 +217,13 @@ class HorariosController extends Controller
         $dados = $request->request->all();
 
 
-        $query = \DB::table('dias_semana')
-            ->join('disponibilidades', 'disponibilidades.dia_semana_id', '=', 'dias_semana.id')
-            ->join('servidor', 'disponibilidades.servidor_id', '=', 'servidor.id')
-            ->join('escola', 'disponibilidades.escola_id', '=', 'escola.id')
-            ->where('escola.id', $dados['idEscola'])
-            ->where('servidor.id', $dados['idProfessor'])
-            ->select('dias_semana.id', 'dias_semana.nome')
+        $query = \DB::table('edu_dias_semana')
+            ->join('edu_disponibilidades', 'edu_disponibilidades.dia_semana_id', '=', 'edu_dias_semana.id')
+            ->join('edu_servidor', 'edu_disponibilidades.servidor_id', '=', 'edu_servidor.id')
+            ->join('edu_escola', 'edu_disponibilidades.escola_id', '=', 'edu_escola.id')
+            ->where('edu_escola.id', $dados['idEscola'])
+            ->where('edu_servidor.id', $dados['idProfessor'])
+            ->select('edu_dias_semana.id', 'edu_dias_semana.nome')
             ->get();
 
 
@@ -240,28 +240,28 @@ class HorariosController extends Controller
 
         $dados = $request->request->all();
 
-        $query = \DB::table('horas')
-            ->join('disponibilidades', 'disponibilidades.hora_id', '=', 'horas.id')
-            ->join('servidor', 'disponibilidades.servidor_id', '=', 'servidor.id')
-            ->join('escola', 'disponibilidades.escola_id', '=', 'escola.id')
-            ->join('turnos', 'turnos.id', '=', 'horas.turnos_id')
-            ->join('dias_semana', 'dias_semana.id', '=', 'disponibilidades.dia_semana_id')
-            ->where('escola.id', $dados['idEscola'])
-            ->where('servidor.id', $dados['idProfessor'])
-            ->where('dias_semana.id', '=', $dados['idDia'])
-            ->where('turnos.id', '=', $dados['idTurno'])
-            ->whereNotIn('horas.id', function ($where) use ($dados) {
-                $where->from('horas')
-                    ->select('horas.id')
-                    ->join('horarios', 'horarios.horas_id', '=', 'horas.id')
-                    ->join('servidor', 'horarios.servidor_id', '=', 'servidor.id')
-                    ->join('dias_semana', 'dias_semana.id', '=', 'horarios.dia_semana_id')
-                    ->where('servidor.id', $dados['idProfessor'])
-                    ->where('dias_semana.id', '=', $dados['idDia']);
+        $query = \DB::table('edu_horas')
+            ->join('edu_disponibilidades', 'edu_disponibilidades.hora_id', '=', 'edu_horas.id')
+            ->join('edu_servidor', 'edu_disponibilidades.servidor_id', '=', 'edu_servidor.id')
+            ->join('edu_escola', 'edu_disponibilidades.escola_id', '=', 'edu_escola.id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_horas.turnos_id')
+            ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_disponibilidades.dia_semana_id')
+            ->where('edu_escola.id', $dados['idEscola'])
+            ->where('edu_servidor.id', $dados['idProfessor'])
+            ->where('edu_dias_semana.id', '=', $dados['idDia'])
+            ->where('edu_turnos.id', '=', $dados['idTurno'])
+            ->whereNotIn('edu_horas.id', function ($where) use ($dados) {
+                $where->from('edu_horas')
+                    ->select('edu_horas.id')
+                    ->join('edu_horarios', 'edu_horarios.horas_id', '=', 'edu_horas.id')
+                    ->join('edu_servidor', 'edu_horarios.servidor_id', '=', 'edu_servidor.id')
+                    ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_horarios.dia_semana_id')
+                    ->where('edu_servidor.id', $dados['idProfessor'])
+                    ->where('edu_dias_semana.id', '=', $dados['idDia']);
             })
             ->select(
-                'horas.id as id',
-                \DB::raw("CONCAT(DATE_FORMAT(horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(horas.hora_final,'%h:%i')) AS nome"))
+                'edu_horas.id as id',
+                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS nome"))
             ->get();
 
         return response()->json($query);

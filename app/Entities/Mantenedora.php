@@ -10,7 +10,7 @@ class Mantenedora extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'mantenedora';
+    protected $table = 'edu_mantenedora';
 
     protected $fillable = [
         'codigo',

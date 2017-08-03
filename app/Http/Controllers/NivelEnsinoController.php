@@ -79,13 +79,13 @@ class NivelEnsinoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('niveis_ensino')
-            ->join('modalidades', 'modalidades.id', '=', 'niveis_ensino.modalidade_id')
+        $rows = \DB::table('edu_niveis_ensino')
+            ->join('edu_modalidades', 'edu_modalidades.id', '=', 'edu_niveis_ensino.modalidade_id')
             ->select([
-                'niveis_ensino.id',
-                'niveis_ensino.nome',
-                'niveis_ensino.codigo',
-                'modalidades.nome as modalidade',
+                'edu_niveis_ensino.id',
+                'edu_niveis_ensino.nome',
+                'edu_niveis_ensino.codigo',
+                'edu_modalidades.nome as modalidade',
             ]);
 
         #Editando a grid
@@ -218,22 +218,22 @@ class NivelEnsinoController extends Controller
             #
             if (empty($nivelEnsino['idModel'])) {
                 #Consultando
-                $nivel = \DB::table('niveis_ensino')
+                $nivel = \DB::table('edu_niveis_ensino')
                     ->select([
-                        'niveis_ensino.nome'
+                        'edu_niveis_ensino.nome'
                     ])
-                    ->where('niveis_ensino.nome', $nivelEnsino['value'])
+                    ->where('edu_niveis_ensino.nome', $nivelEnsino['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $nivel = \DB::table('niveis_ensino')
+                $nivel = \DB::table('edu_niveis_ensino')
                     ->select([
-                        'niveis_ensino.id',
-                        'niveis_ensino.nome'
+                        'edu_niveis_ensino.id',
+                        'edu_niveis_ensino.nome'
                     ])
-                    ->where('niveis_ensino.id', '!=', $nivelEnsino['idModel'])
-                    ->where('niveis_ensino.nome', $nivelEnsino['value'])
+                    ->where('edu_niveis_ensino.id', '!=', $nivelEnsino['idModel'])
+                    ->where('edu_niveis_ensino.nome', $nivelEnsino['value'])
                     ->get();
             }
 
@@ -263,22 +263,22 @@ class NivelEnsinoController extends Controller
             #
             if (empty($nivelEnsino['idModel'])) {
                 #Consultando
-                $nivel = \DB::table('niveis_ensino')
+                $nivel = \DB::table('edu_niveis_ensino')
                     ->select([
-                        'niveis_ensino.codigo'
+                        'edu_niveis_ensino.codigo'
                     ])
-                    ->where('niveis_ensino.codigo', $nivelEnsino['value'])
+                    ->where('edu_niveis_ensino.codigo', $nivelEnsino['value'])
                     ->get();
 
             } else {
                 #Consultando
-                $nivel = \DB::table('niveis_ensino')
+                $nivel = \DB::table('edu_niveis_ensino')
                     ->select([
-                        'niveis_ensino.id',
-                        'niveis_ensino.codigo'
+                        'edu_niveis_ensino.id',
+                        'edu_niveis_ensino.codigo'
                     ])
-                    ->where('niveis_ensino.id', '!=', $nivelEnsino['idModel'])
-                    ->where('niveis_ensino.codigo', $nivelEnsino['value'])
+                    ->where('edu_niveis_ensino.id', '!=', $nivelEnsino['idModel'])
+                    ->where('edu_niveis_ensino.codigo', $nivelEnsino['value'])
                     ->get();
             }
 

@@ -60,10 +60,10 @@
             serverSide: true,
             ajax: "{{ route ('periodo.grid') }}",
             columns: [
-                {data: 'nome',                  name: 'periodos.nome'},
-                {data: 'abreviatura',           name: 'periodos.abreviatura'},
-                {data: 'soma_carga_horaria',    name: 'periodos.soma_carga_horaria'},
-                {data: 'controle_frequencia',   name: 'periodos.controle_frequencia'},
+                {data: 'nome',                  name: 'edu_periodos.nome'},
+                {data: 'abreviatura',           name: 'edu_periodos.abreviatura'},
+                {data: 'soma_carga_horaria',    name: 'edu_periodos.soma_carga_horaria'},
+                {data: 'controle_frequencia',   name: 'edu_periodos.controle_frequencia'},
 //                {data: 'ordenacao',             name: 'periodos.ordenacao'},
                 {data: 'action',                name: 'action', orderable: false, searchable: false}
             ]

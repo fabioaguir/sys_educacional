@@ -18,8 +18,8 @@ function TableNivelEdit(id) {
         bFilter: false,
         ajax: laroute.route('formaAvaliacao.nivelAlfabetizacao.grid', {'id' : idTable}),
         columns: [
-            {data: 'codigo', name: 'niveis_alfabetizacao.codigo'},
-            {data: 'nome', name: 'niveis_alfabetizacao.nome'},
+            {data: 'codigo', name: 'edu_niveis_alfabetizacao.codigo'},
+            {data: 'nome', name: 'edu_niveis_alfabetizacao.nome'},
             {data: 'minimo', name: 'minimo'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]

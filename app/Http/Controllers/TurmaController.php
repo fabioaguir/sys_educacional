@@ -78,28 +78,28 @@ class TurmaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('turmas')
-            ->join('escola', 'escola.id', '=', 'turmas.escola_id')
-            ->join('tipos_atendimentos', 'tipos_atendimentos.id', '=', 'turmas.tipo_atendimento_id')
-            ->join('calendarios', 'calendarios.id', '=', 'turmas.calendario_id')
-            ->join('cursos', 'cursos.id', '=', 'turmas.curso_id')
-            ->join('curriculos', 'curriculos.id', '=', 'turmas.curriculo_id')
-            ->join('series', 'series.id', '=', 'turmas.serie_id')
-            ->join('formas_avaliacoes', 'formas_avaliacoes.id', '=', 'turmas.forma_avaliacao_id')
-            ->join('dependencias', 'dependencias.id', '=', 'turmas.dependencia_id')
-            ->join('turnos', 'turnos.id', '=', 'turmas.turno_id')
-            ->where('turmas.tipo_turma_id', 1)
+        $rows = \DB::table('edu_turmas')
+            ->join('edu_escola', 'edu_escola.id', '=', 'edu_turmas.escola_id')
+            ->join('edu_tipos_atendimentos', 'edu_tipos_atendimentos.id', '=', 'edu_turmas.tipo_atendimento_id')
+            ->join('edu_calendarios', 'edu_calendarios.id', '=', 'edu_turmas.calendario_id')
+            ->join('edu_cursos', 'edu_cursos.id', '=', 'edu_turmas.curso_id')
+            ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_turmas.curriculo_id')
+            ->join('edu_series', 'edu_series.id', '=', 'edu_turmas.serie_id')
+            ->join('edu_formas_avaliacoes', 'edu_formas_avaliacoes.id', '=', 'edu_turmas.forma_avaliacao_id')
+            ->join('edu_dependencias', 'edu_dependencias.id', '=', 'edu_turmas.dependencia_id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
+            ->where('edu_turmas.tipo_turma_id', 1)
             ->select([
-                'turmas.id',
-                'turmas.nome',
-                'turmas.codigo',
-                'escola.codigo as escola',
-                'escola.id as escola_id',
-                'cursos.codigo as curso',
-                'curriculos.codigo as curriculo',
-                'turnos.nome as turno',
-                'turnos.id as turno_id',
-                'series.id as serie_id'
+                'edu_turmas.id',
+                'edu_turmas.nome',
+                'edu_turmas.codigo',
+                'edu_escola.codigo as escola',
+                'edu_escola.id as escola_id',
+                'edu_cursos.codigo as curso',
+                'edu_curriculos.codigo as curriculo',
+                'edu_turnos.nome as turno',
+                'edu_turnos.id as turno_id',
+                'edu_series.id as serie_id'
             ]);
 
         #Editando a grid
@@ -266,12 +266,12 @@ class TurmaController extends Controller
     {
         try {
             # Consulta ao banco de dados
-            $result = \DB::table('curriculos')
-                ->join('cursos', 'cursos.id', '=', 'curriculos.curso_id')
-                ->where('cursos.id', $idCurso)
+            $result = \DB::table('edu_curriculos')
+                ->join('edu_cursos', 'edu_cursos.id', '=', 'edu_curriculos.curso_id')
+                ->where('edu_cursos.id', $idCurso)
                 ->select([
-                    'curriculos.id',
-                    'curriculos.nome'
+                    'edu_curriculos.id',
+                    'edu_curriculos.nome'
                 ])
                 ->get();
 
@@ -290,13 +290,13 @@ class TurmaController extends Controller
     {
         try {
             # Consulta ao banco de dados
-            $result = \DB::table('series')
-                ->join('curriculos_series', 'curriculos_series.serie_id', '=', 'series.id')
-                ->join('curriculos', 'curriculos.id', '=', 'curriculos_series.curriculo_id')
-                ->where('curriculos.id', $idCurriculo)
+            $result = \DB::table('edu_series')
+                ->join('edu_curriculos_series', 'edu_curriculos_series.serie_id', '=', 'edu_series.id')
+                ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_curriculos_series.curriculo_id')
+                ->where('edu_curriculos.id', $idCurriculo)
                 ->select([
-                    'series.id',
-                    'series.nome'
+                    'edu_series.id',
+                    'edu_series.nome'
                 ])
                 ->get();
 

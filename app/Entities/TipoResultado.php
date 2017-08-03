@@ -10,7 +10,7 @@ class TipoResultado extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'tipos_resultados';
+    protected $table = 'edu_tipos_resultados';
 
     protected $fillable = [
         'nome',

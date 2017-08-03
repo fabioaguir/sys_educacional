@@ -11,15 +11,10 @@ class Servidor extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'servidor';
+    protected $table    = 'edu_servidor';
 
     protected $fillable = [
-        'matricular',
-        'carteira_prof',
-        'serie_carteira',
-        'titulo_eleitor',
-        'sessao_titulo_eleitor',
-        'zona_titulo_eleitor',
+        'matricula',
         'pis_pasep',
         'id_instituicao',
         'id_cgm',
@@ -104,7 +99,7 @@ class Servidor extends Model implements Transformable
      */
     public function posgraduacao()
     {
-        return $this->belongsToMany(Serie::class, 'servidor_pos_graduacao', 'servidor_id', 'pos_graduacao_id')
+        return $this->belongsToMany(Serie::class, 'edu_servidor_pos_graduacao', 'servidor_id', 'pos_graduacao_id')
             ->withPivot(['id']);
     }
 
@@ -113,7 +108,7 @@ class Servidor extends Model implements Transformable
      */
     public function outroscursos()
     {
-        return $this->belongsToMany(Serie::class, 'outros_cursos_servidor', 'servidor_id', 'outros_cursos_id')
+        return $this->belongsToMany(Serie::class, 'edu_outros_cursos_servidor', 'servidor_id', 'outros_cursos_id')
             ->withPivot(['id']);
     }
 }

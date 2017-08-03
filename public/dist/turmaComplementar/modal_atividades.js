@@ -12,8 +12,8 @@ function loadTableAtividade (idTurmaComplementar) {
         autoWidth: false,
         ajax: laroute.route('turmaComplementar.atividade.grid', {'idTurmaComplementar' : idTurmaComplementar }),
         columns: [
-            {data: 'codigo', name: 'atividades_complementares.codigo'},
-            {data: 'nome', name: 'atividades_complementares.nome'},
+            {data: 'codigo', name: 'edu_atividades_complementares.codigo'},
+            {data: 'nome', name: 'edu_atividades_complementares.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

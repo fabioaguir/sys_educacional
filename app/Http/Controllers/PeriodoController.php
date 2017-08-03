@@ -97,7 +97,7 @@ class PeriodoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('periodos')
+        $rows = \DB::table('edu_periodos')
             ->select([
                 'id',
                 'nome',

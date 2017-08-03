@@ -71,9 +71,9 @@
             serverSide: true,
             ajax: "{{ route('formaAvaliacao.grid') }}",
             columns: [
-                {data: 'nome', name: 'formas_avaliacoes.nome'},
-                {data: 'codigo', name: 'formas_avaliacoes.codigo'},
-                {data: 'tipo_resultado', name: 'tipos_resultados.nome'},
+                {data: 'nome', name: 'edu_formas_avaliacoes.nome'},
+                {data: 'codigo', name: 'edu_formas_avaliacoes.codigo'},
+                {data: 'tipo_resultado', name: 'edu_tipos_resultados.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

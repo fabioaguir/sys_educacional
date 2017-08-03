@@ -10,7 +10,7 @@ class CategoriaCnh extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'categoria_cnh';
+    protected $table    = 'gen_categoria_cnh';
 
     protected $fillable = [
         'nome'
