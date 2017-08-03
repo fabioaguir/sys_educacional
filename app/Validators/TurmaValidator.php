@@ -16,7 +16,7 @@ class TurmaValidator extends LaravelValidator
         'tipo_atendimento_id' => 'Tipo de Atendimento',
         'calendario_id' => 'Calendário',
         'curso_id' => 'Curso',
-        'curriculo_id' => 'Currículo',
+        'curriculo_id' => 'Base Curricular',
         'serie_id' => 'Série',
         'forma_avaliacao_id' => 'Forma de Avaliação',
         'turno_id' => 'Turno',

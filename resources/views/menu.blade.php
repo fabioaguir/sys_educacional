@@ -182,7 +182,7 @@
                         @endpermission
 
                         @permission('curriculo.select|curriculo.store|curriculo.update|curriculo.destroy')
-                        <a href="{{ route('curriculo.index')  }}">Currículos</a>
+                        <a href="{{ route('curriculo.index')  }}">Base Currícular</a>
                         @endpermission
 
                         @permission('calendario.select|calendario.store|calendario.update|calendario.destroy')

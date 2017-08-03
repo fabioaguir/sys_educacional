@@ -1,5 +1,5 @@
 <div class="block-header">
-    <h2>Cadastro de Currículos</h2>
+    <h2>Cadastro de Bases Currículares</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">

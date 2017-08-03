@@ -46,7 +46,7 @@
                                 <th>Codigo</th>
                                 <th>Escola</th>
                                 <th>Curso</th>
-                                <th>Currículo</th>
+                                <th>Base Curricular</th>
                                 <th>Turno</th>
                                 <th>Açao</th>
                             </tr>
@@ -57,7 +57,7 @@
                                 <th>Codigo</th>
                                 <th>Escola</th>
                                 <th>Curso</th>
-                                <th>Currículo</th>
+                                <th>Base Curricular</th>
                                 <th>Turno</th>
                                 <th style="width: 15%;">Açao</th>
                             </tr>

@@ -116,13 +116,13 @@ class TurmaController extends Controller
             # Verificando a permissão de editar
             if($user->can('turma.update')) {
                 # Html do edit
-                $html  = '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html  = '<a style="margin-right: 5%;" title="Editar Base Curricular"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             }
 
             # Verificando se o currículo possui disciplinas
             if(count($turma->pareceres) == 0 && $user->can('turma.destroy')) {
                 # Html de delete
-                $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+                $html .= '<a style="margin-right: 5%;" title="Remover Base Curricular" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
             # Verificando a permissão das disciplinas

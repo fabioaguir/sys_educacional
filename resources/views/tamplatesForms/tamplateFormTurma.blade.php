@@ -62,7 +62,7 @@
 
                     <div class="form-group col-md-4">
                         <div class=" fg-line">
-                            <label for="curriculo_id">Currículo *</label>
+                            <label for="curriculo_id">Base Curricular *</label>
                             <div class="select">
                                 @if(isset($model->curriculo))
                                     {!! Form::select("curriculo_id", [$model->curriculo->id => $model->curriculo->nome], null,
@@ -197,7 +197,7 @@
                 var option = "";
 
                 // option default
-                option += '<option value="">Selecione um Currículo</option>';
+                option += '<option value="">Selecione uma Base Currículo</option>';
 
                 // Percorrendo o array
                 for (var i = 0; i < json.length; i++) {

@@ -98,7 +98,7 @@ class CurriculosController extends Controller
 
             if($user->can('curriculo.update')) {
                 # Html do edit
-                $html  .= '<a style="margin-right: 5%;" title="Editar Currículo"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html  .= '<a style="margin-right: 5%;" title="Editar Base Curricular"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             }
 
             # Recuperando as disciplinas
@@ -112,7 +112,7 @@ class CurriculosController extends Controller
             # Verificando se o currículo possui disciplinas
             if(count($disciplinas) == 0 && $user->can('curriculo.destroy')) {
                 # Html de delete
-                $html .= '<a style="margin-right: 5%;" title="Remover Currículo" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+                $html .= '<a style="margin-right: 5%;" title="Remover Base Curricular" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
             # Validando a permissão
