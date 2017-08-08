@@ -4,15 +4,14 @@ namespace SerEducacional\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use SerEducacional\Repositories\AlunoTurmaRepository;
 use SerEducacional\Entities\Historico;
-use SerEducacional\Validators\AlunoTurmaValidator;
+use SerEducacional\Repositories\HistoricoRepository;
 
 /**
- * Class AlunoTurmaRepositoryEloquent
+ * Class AlocacaoRepositoryEloquent
  * @package namespace SerEducacional\Repositories;
  */
-class AlunoTurmaRepositoryEloquent extends BaseRepository implements AlunoTurmaRepository
+class HistoricoRepositoryEloquent extends BaseRepository implements HistoricoRepository
 {
     /**
      * Specify Model class name

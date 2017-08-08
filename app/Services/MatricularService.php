@@ -78,7 +78,7 @@ class MatricularService
         }
 
         #Retorno
-        return ['retorno' => true, 'resposta' => $matricula];;
+        return ['retorno' => true, 'resposta' => $matricula];
     }
 
     /**

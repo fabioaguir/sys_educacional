@@ -99,7 +99,8 @@ class TurmaController extends Controller
                 'edu_curriculos.codigo as curriculo',
                 'edu_turnos.nome as turno',
                 'edu_turnos.id as turno_id',
-                'edu_series.id as serie_id'
+                'edu_series.id as serie_id',
+                'edu_series.nome as serie'
             ]);
 
         #Editando a grid
@@ -110,47 +111,53 @@ class TurmaController extends Controller
             # recuperando o curriculo
             $turma = $this->repository->find($row->id);
 
-            # Variável de uso
-            $html = '';
+            # Variáveis de uso
+            $html = '<div class="fixed-action-btn horizontal">';
+            $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
 
             # Verificando a permissão de editar
             if($user->can('turma.update')) {
                 # Html do edit
-                $html  = '<a style="margin-right: 5%;" title="Editar Base Curricular"  href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html .= '<li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar Turma"><i class="material-icons">edit</i></a></li>';
             }
 
             # Verificando se o currículo possui disciplinas
             if(count($turma->pareceres) == 0 && $user->can('turma.destroy')) {
                 # Html de delete
-                $html .= '<a style="margin-right: 5%;" title="Remover Base Curricular" href="destroy/'.$row->id.'"  class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+                $html .= '<li><a class="btn-floating" href="destroy/'.$row->id.'" title="Remover Turma"><i class="material-icons">delete</i></a></li>';
             }
 
             # Verificando a permissão das disciplinas
             if($user->can('turma.disciplina')) {
                 # Html de disciplinas
-                $html .= '<a style="margin-right: 5%;" title="Disciplinas" id="btnModalDisciplinas" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+                $html .= '<li><a id="btnModalDisciplinas" class="btn-floating" title="Disciplinas"><i class="material-icons">school</i></a></li>';
             }
 
             # Verificando a permissão dos alunos
             if($user->can('turma.aluno')) {
                 # Html de alunos
-                $html .= '<a style="margin-right: 5%;" title="Alunos" id="btnModalAlunos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+                $html .= '<li><a id="btnModalAlunos" class="btn-floating" title="Alunos"><i class="material-icons">school</i></a></li>';
             }
 
             # Verificando a permissão dos pareceres
             if($user->can('turma.parecer')) {
                 # Html de pareceres
-                $html .= '<a title="Pareceres" id="btnModalPareceres" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
+                $html .= '<li><a id="btnModalPareceres" class="btn-floating" title="Pareceres"><i class="material-icons">school</i></a></li>';
             }
 
             # Verificando a permissão dos pareceres
             
             # Html de horários
-            $html .= '<a title="Horários" id="btnModalHorarios" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
-            
+            $html .= '<li><a id="btnModalHorarios" class="btn-floating" title="Horários"><i class="material-icons">school</i></a></li>';
+
+            # Html de historico
+            $html .= '<li><a id="btnModalHistorico" class="btn-floating" title="Matricula"><i class="material-icons">school</i></a></li>';
+
+            $html .= '</ul></div>';
 
             # Retorno
             return $html;
+
         })->make(true);
     }
 

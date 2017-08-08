@@ -18,6 +18,9 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/datatables.net-dt/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/select2/dist/css/select2.min.css')}}" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/lib/select2-bootstrap-theme/dist/select2-bootstrap.min.css')}}" rel="stylesheet"/>
+    <link href="{{ asset('/fonts/iconfont/material-icons.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
+
     <!-- Datepicker -->
     <link type="text/css" rel="stylesheet" href="{{ asset('lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('/dist/css/validate.css') }}"  media="screen,projection"/>
@@ -280,6 +283,7 @@
 <script src="{{ asset('/lib/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/lib/select2/dist/js/select2.full.js') }}"></script>
+<script src="{{ asset('/js/plugins/botao/materialize.min.js')  }}"></script>
 
 <!-- Datepicker e suas dependencias. Sempre importa-lo nessa ordem -->
 <script src="{{ asset('/lib/flot/jquery.flot.js') }}"></script>

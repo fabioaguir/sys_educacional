@@ -12,9 +12,9 @@ function loadTableAluno (idTurma) {
         autoWidth: false,
         ajax: laroute.route('turma.aluno.grid', {'idTurma' : idTurma }),
         columns: [
-            {data: 'matricula', name: 'edu_alunos_turmas.matricula'},
+            {data: 'matricula', name: 'edu_historico.matricula'},
             {data: 'nome', name: 'gen_cgm.nome'},
-            {data: 'data_matricula', name: 'edu_alunos_turmas.data_matricula'}
+            {data: 'data_matricula', name: 'edu_historico.data_matricula'}
         ]
     });
 

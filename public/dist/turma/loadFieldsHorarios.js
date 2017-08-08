@@ -2,6 +2,9 @@
  * Created by Fabio Aguiar on 22/12/2016.
  */
 
+// Global idTurma
+var idTurma, idEscola, idSerie, idTurno, nomeSerie, idsAlunos;
+
 //Função para listar as disciplinas
 function disciplinasHorario(id, idTurma, idSerie) {
     
@@ -64,66 +67,6 @@ function professores(id, idEscola) {
         $('#professor').append(option);
     });
 }
-
-//Função para listar os dias da semana
-/*function dias(id) {
-    
-    jQuery.ajax({
-        type: 'POST',
-        url: laroute.route('turma.horario.getDias'),
-        datatype: 'json',
-    }).done(function (json) {
-        var option = '';
-
-        option += '<option value="">Selecione um dia</option>';
-        for (var i = 0; i < json.length; i++) {
-            if (json[i]['id'] == id) {
-                option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-            } else {
-                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-            }
-        }
-
-        $('#dia option').remove();
-        $('#dia').append(option);
-    });
-}*/
-
-//Função para listar os horários
-/*function horas(id, idTurno) {
-
-    if (idTurno) {
-
-        //Setando o o json para envio
-        var dados = {
-            'idTurno' : idTurno
-        };
-
-        jQuery.ajax({
-            type: 'POST',
-            data: dados,
-            url: laroute.route('turma.horario.getHoras'),
-            datatype: 'json',
-        }).done(function (json) {
-            var option = '';
-
-            option += '<option value="">Selecione um horário</option>';
-            for (var i = 0; i < json.length; i++) {
-                if (json[i]['id'] == id) {
-                    option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-                } else {
-                    option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-                }
-            }
-
-            $('#hora option').remove();
-            $('#hora').append(option);
-        });
-        
-    } else {
-        $('#hora option').remove();
-    }
-}*/
 
 // Pegando os dias disponíveis para um determinado professor
 $(document).on('change', '#professor', function(){
@@ -197,5 +140,103 @@ $(document).on('change', '#dia', function(){
     } else {
         swal("Nenhum horário encontrado para esse professor", "error");
     }
+
+});
+
+
+//Função para pegar as series para matrícula
+function series(id, idSerie) {
+
+    var dados = {
+        'idSerie' : idSerie
+    };
+
+    jQuery.ajax({
+        type: 'POST',
+        url: laroute.route('turma.historico.getSerie'),
+        datatype: 'json',
+        data: dados
+    }).done(function (json) {
+        var option = '';
+
+        option += '<option value="">Selecione uma série</option>';
+        for (var i = 0; i < json.length; i++) {
+            if (json[i]['id'] == id) {
+                option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            } else {
+                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            }
+        }
+
+        $('#serie-historico option').remove();
+        $('#serie-historico').append(option);
+    });
+}
+
+
+// Pegando as turmas para matricula
+$(document).on('change', '#serie-historico', function() {
+
+    var idSerie = $(this).val();
+
+    var dados = {
+        'idSerie' : idSerie,
+        'idEscola' : idEscola
+    };
+
+    jQuery.ajax({
+        type: 'POST',
+        url: laroute.route('turma.historico.getTurma'),
+        datatype: 'json',
+        data: dados
+    }).done(function (json) {
+        var option = '';
+
+        option += '<option value="">Selecione uma turma</option>';
+        for (var i = 0; i < json.length; i++) {
+            option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+        }
+
+        $('#turma-historico option').remove();
+        $('#turma-historico').append(option);
+    });
+
+});
+
+//Evento para pegar o dia da semana da data de feriado informado
+$(document).on('change', '#turma-historico', function () {
+
+    // Recuperando o valor da data inicial
+    var turma = $(this).val();
+
+    //Setando o o json para envio
+    var dados = {
+        'turma' : turma
+    };
+
+    if (turma) {
+
+        // Requisição Ajax
+        jQuery.ajax({
+            type: 'POST',
+            url: laroute.route('turma.historico.getDadosTurma'),
+            data: dados,
+            datatype: 'json'
+        }).done(function (retorno) {
+
+            $('#turno-historico').val(retorno['dados']['turno']);
+            $('#vagas-historico').val(retorno['dados']['vagas']);
+            $('#matriculados-historico').val(retorno['qtdAlunos']);
+            $('#vagas-restantes-historico').val(retorno['vRestantes']);
+
+        });
+
+    } else {
+        $('#turno-historico').val("");
+        $('#vagas-historico').val("");
+        $('#matriculados-historico').val("");
+        $('#vagas-restantes-historico').val("");
+    }
+
 
 });

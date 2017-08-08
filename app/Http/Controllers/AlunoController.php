@@ -94,23 +94,27 @@ class AlunoController extends Controller
             $aluno = $this->repository->find($row->id);
 
             # Variáveis de uso
-            $html  = '';
+            $html = '<div class="fixed-action-btn horizontal">';
+            $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
 
             # Verificando a permissão de edição
             if($user->can('aluno.update')) {
-                $html  = '<a style="margin-right: 5%;" title="Editar Aluno" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html .= '<li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar Aluno"><i class="material-icons">edit</i></a></li>';
             }
 
             # Verificando a permissão de remoção
             if(count($aluno->matricula) == 0 && $user->can('aluno.destroy')) {
-                $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Cargo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+                $html .= '<li><a class="btn-floating" href="destroy/'.$row->id.'" title="Remover Aluno"><i class="material-icons">delete</i></a></li>';
             }
 
             # Verificando a permissão da matrícula
             if($user->can('aluno.matricula')) {
                 # Html de adicionar alunos em turma
-                $html .= '<a title="Matricular" id="btnModalAdicionarAlunoTurma" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+                $html .= '<li><a id="btnModalAdicionarAlunoTurma" class="btn-floating" title="Matricular"><i class="material-icons">school</i></a></li>';
             }
+
+
+            $html .= '</ul></div>';
 
             # Retorno
             return $html;

@@ -305,21 +305,6 @@ Route::group(['middleware' => 'auth'], function () {
        //Route::post('removerTelefone/{id}', ['as' => 'removerTelefone', 'uses' => 'TelefonesController@destroy']);
     });
 
-    # Rotas da matrícula
-    Route::group(['prefix' => 'matricular', 'as' => 'matricular.'], function () {
-        Route::get('index', ['as' => 'index', 'uses' => 'MatricularController@index']);
-        Route::get('grid', ['as' => 'grid', 'uses' => 'MatricularController@grid']);
-        Route::post('store', ['as' => 'store', 'uses' => 'MatricularController@store']);
-        Route::post('update/{id}', ['as' => 'update', 'uses' => 'MatricularController@update']);
-        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'MatricularController@destroy']);
-
-        # rotas para alunos turmas - em matrícula
-        Route::get('gridAlunoTurma/{id}', [ 'as' => 'gridAlunoTurma', 'uses' => 'MatricularController@grid']);
-        Route::post('getTurma', ['as' => 'getTurma', 'uses' => 'MatricularController@getTurma']);
-        //Route::post('storeAlunoTurma', ['as' => 'storeAlunoTurma', 'uses' => 'MatricularController@store']);
-        Route::post('getDadosTurma', ['as' => 'getDadosTurma', 'uses' => 'MatricularController@getDadosTurma']);
-    });
-
     # Rotas dos tipos de eventos
     Route::group(['prefix' => 'tipoEvento', 'as' => 'tipoEvento.'], function () {
         Route::get('index', ['middleware' => 'permission:tipo.evento.select', 'as' => 'index', 'uses' => 'TipoEventosController@index']);
@@ -393,6 +378,22 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
+
+    # Rotas da matrícula
+    Route::group(['prefix' => 'matricular', 'as' => 'matricular.'], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'MatricularController@index']);
+        Route::get('grid', ['as' => 'grid', 'uses' => 'MatricularController@grid']);
+        Route::post('store', ['as' => 'store', 'uses' => 'MatricularController@store']);
+        Route::post('update/{id}', ['as' => 'update', 'uses' => 'MatricularController@update']);
+        Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'MatricularController@destroy']);
+
+        # rotas para alunos turmas - em matrícula
+        Route::get('gridAlunoTurma/{id}', [ 'as' => 'gridAlunoTurma', 'uses' => 'MatricularController@grid']);
+        //Route::post('getTurma', ['as' => 'getTurma', 'uses' => 'MatricularController@getTurma']);
+        //Route::post('storeAlunoTurma', ['as' => 'storeAlunoTurma', 'uses' => 'MatricularController@store']);
+        //Route::post('getDadosTurma', ['as' => 'getDadosTurma', 'uses' => 'MatricularController@getDadosTurma']);
+    });
+
     # Rotas das turmas
     Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
         Route::get('index', ['middleware' => 'permission:turma.select', 'as' => 'index', 'uses' => 'TurmaController@index']);
@@ -434,6 +435,17 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('getProfessores', ['as' => 'getProfessores', 'uses' => 'HorariosController@getProfessores']);
             Route::post('getDias', ['as' => 'getDias', 'uses' => 'HorariosController@getDias']);
             Route::post('getHoras', ['as' => 'getHoras', 'uses' => 'HorariosController@getHoras']);
+        });
+
+        # Modal de matricula
+        Route::group(['prefix' => 'historico', 'as' => 'historico.'], function () {
+            Route::get('gridAlunos/{idTurma}', ['as' => 'gridAlunos', 'uses' => 'HistoricoController@gridAlunos']);
+            Route::post('getTurma', ['as' => 'getTurma', 'uses' => 'HistoricoController@getTurma']);
+            Route::post('getSerie', ['as' => 'getSerie', 'uses' => 'HistoricoController@getSerie']);
+            Route::post('getDadosTurma', ['as' => 'getDadosTurma', 'uses' => 'HistoricoController@getDadosTurma']);
+            Route::post('store', ['as' => 'store', 'uses' => 'HistoricoController@store']);
+            //Route::post('adicionarParecer', ['as' => 'adicionarParecer', 'uses' => 'TurmaParecerController@adicionarParecer']);
+            //Route::post('removerParecer', ['as' => 'removerParecer', 'uses' => 'TurmaParecerController@removerParecer']);
         });
     });
 

@@ -99,53 +99,57 @@ class ServidorController extends Controller
             $servidor = $this->repository->find($row->id);
             
             # Variáveis de uso
-            $html  = '';
+            $html = '<div class="fixed-action-btn horizontal">';
+            $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
 
             # Verificando a permissão de edição
             if($user->can('servidor.update')) {
-                $html  = '<a style="margin-right: 5%;" title="Editar Servidor" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html .= '<li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar Servidor"><i class="material-icons">edit</i></a></li>';
             }
 
             # Verificando a permissão de remorção
             if(count($servidor->cgm->telefones) == 0 && count($servidor->relacaoTrabalho) == 0 && $user->can('servidor.destroy') 
                 && count($servidor->formacoes) == 0 && count($servidor->atividades) == 0 && count($servidor->alocacoes) == 0
                 && count($servidor->disponibilidades) == 0) {
-                $html .= '<a style="margin-right: 5%;" href="destroy/'.$row->id.'" title="Remover Servidor" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                $html .= '<li><a class="btn-floating" href="destroy/'.$row->id.'" title="Remover Servidor"><i class="material-icons">delete</i></a></li>';
             }
 
             # Verificando a permissão de adicionar telefone
             if($user->can('servidor.add.telefone')) {
                 # Html de adicionar telefones
-                $html .= '<a style="margin-right: 5%;" title="Adicionar Telefones" id="btnModalAdicionarTelefone" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-earphone"></i></a>';
+                $html .= '<li><a class="btn-floating" id="btnModalAdicionarTelefone" title="Adicionar Telefones"><i class="material-icons">phone</i></a></li>';
             }
 
             # Verificando a permissão de adicionar relações de trabalho
             if($user->can('servidor.add.relacao.trabalho')) {
                 # Html de adicionar relações de trabalho
-                $html .= '<a style="margin-right: 5%;" title="Adicionar Relação de trabalho" id="btnModalAdicionarRelacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-lock"></i></a>';
+                $html .= '<li><a class="btn-floating" id="btnModalAdicionarRelacao" title="Adicionar Relação de trabalho"><i class="material-icons">work</i></a></li>';
             }
 
             # Verificando a permissão de adicionar formação
             if($user->can('servidor.add.formacao')) {
                 # Html de adicionar formação
-                $html .= '<a style="margin-right: 5%;" title="Adicionar Formações" id="btnModalAdicionarFormacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+                $html .= '<li><a class="btn-floating" id="btnModalAdicionarFormacao" title="Adicionar Formações"><i class="material-icons">assignment</i></a></li>';
             }
 
             # Verificando a permissão de adicionar formação
             if($user->can('servidor.add.atividade')) {
                 # Html de adicionar atividade
-                $html .= '<a style="margin-right: 5%;" title="Adicionar Atividades" id="btnModalAdicionarAtividade" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+                $html .= '<li><a class="btn-floating" id="btnModalAdicionarAtividade" title="Adicionar Atividades"><i class="material-icons">folder</i></a></li>';
             }
 
             # Verificando a permissão de adicionar alocações
             if($user->can('servidor.add.alocacao')) {
                 # Html de adicionar alocação
-                $html .= '<a title="Adicionar Alocações" id="btnModalAdicionarAlocacao" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+                $html .= '<li><a class="btn-floating" id="btnModalAdicionarAlocacao" title="Adicionar Alocações"><i class="material-icons">redo</i></a></li>';
             }
 
            
             # Html de adicionar disponibilidades
-            $html .= '<a title="Adicionar Disponibilidades" id="btnModalAdicionarDisponibilidade" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-briefcase"></i></a>';
+            $html .= '<li><a class="btn-floating" id="btnModalAdicionarDisponibilidade" title="Adicionar Disponibilidades"><i class="material-icons">event</i></a></li>';
+
+
+            $html .= '</ul></div>';
 
             # Retorno
             return $html;

@@ -72,15 +72,18 @@
     @include('turma.modal_alunos')
     @include('turma.modal_pareceres')
     @include('turma.modal_horarios')
+    @include('turma.modal_historico')
 @stop
 
 @section('javascript')
     @parent
+    <script type="text/javascript" src="{{ asset('/dist/turma/loadFieldsHorarios.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_disciplinas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_alunos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_pareceres.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_horarios.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/dist/turma/loadFieldsHorarios.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turma/modal_historico.js') }}"></script>
+
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -96,9 +99,6 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
-
-        // Global idTurma
-        var idTurma, idEscola, idSerie, idTurno;
 
         // Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#btnModalDisciplinas", function () {
@@ -169,6 +169,28 @@
 
             // Executando o modal
             runModalHorarios(idTurma, idEscola, idSerie, idTurno);
+        });
+
+        // Evento para abrir o modal de históricos
+        $(document).on("click", "#btnModalHistorico", function () {
+
+            // Recuperando o id do turma
+            idTurma = table.row($(this).parents('tr')).data().id;
+            idEscola = table.row($(this).parents('tr')).data().escola_id;
+            idSerie = table.row($(this).parents('tr')).data().serie_id;
+            nomeSerie = table.row($(this).parents('tr')).data().serie;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#hiNome').text(nome);
+            $('#hiCodigo').text(codigo);
+            $('#serie').val(nomeSerie);
+
+            // Executando o modal
+            runModalHistorico(idTurma, idEscola, idSerie, nomeSerie);
         });
     </script>
 @stop

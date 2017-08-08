@@ -12,8 +12,8 @@ function loadTableAlunoTurmas (idAluno) {
         autoWidth: false,
         ajax: laroute.route('aluno.gridAlunoTurma', {'id' :idAluno }),
         columns: [
-            {data: 'matricula', name: 'edu_alunos_turmas.matricula'},
-            {data: 'data_matricula', name: 'edu_alunos_turmas.data_matricula'},
+            {data: 'matricula', name: 'edu_historico.matricula'},
+            {data: 'data_matricula', name: 'edu_historico.data_matricula'},
             {data: 'turma', name: 'edu_turmas.nome'},
             {data: 'escola', name: 'edu_escola.nome'},
             {data: 'curso', name: 'edu_cursos.nome'},
@@ -52,19 +52,19 @@ $(document).on('click', '#addAlunoTurma', function (event) {
 
     //Recuperando os valores dos campos do fomulário
     var turma = $('#turma').val();
-    var data = $('#data').val();
+    var vagas = $('#vagas-historico').val();
     
     // Verificando se os campos de preenchimento obrigatório foram preenchidos
-    if (!turma || !data) {
+    if (!turma) {
         swal("Oops...", "Há campos obrigatórios que não foram preenchidos!", "error");
         return false;
     }
 
     //Setando o o json para envio
     var dados = {
-        'alunos_id' : idAluno,
-        'turmas_id' : turma,
-        'data_matricula' : data
+        'aluno_id' : idAluno,
+        'turma_id' : turma,
+        'vagas'    : vagas
     };
 
     // Requisição Ajax
@@ -74,9 +74,14 @@ $(document).on('click', '#addAlunoTurma', function (event) {
         data: dados,
         datatype: 'json'
     }).done(function (json) {
-        swal("Aluno(s) matriculado(s) com sucesso!", "Click no botão abaixo!", "success");
-        tableAlunoTurmas.ajax.reload();
-        table.ajax.reload();
+
+        if (json['success']) {
+            swal("Aluno(s) matriculado(s) com sucesso!", "Click no botão abaixo!", "success");
+            tableAlunoTurmas.ajax.reload();
+            table.ajax.reload();
+        } else {
+            swal(json['mensagem'], "Click no botão abaixo!", "error");
+        }
 
         //Limpar os campos do formulário
         limparCamposAlunosTurmas();
@@ -94,32 +99,32 @@ $(document).on('change', '#turma', function () {
         'turma' : turma
     };
 
-    // Requisição Ajax
-    jQuery.ajax({
-        type: 'POST',
-        url: laroute.route('aluno.getDadosTurma'),
-        data: dados,
-        datatype: 'json'
-    }).done(function (retorno) {
+    if(turma) {
 
-        console.log(retorno);
+        // Requisição Ajax
+        jQuery.ajax({
+            type: 'POST',
+            url: laroute.route('aluno.getDadosTurma'),
+            data: dados,
+            datatype: 'json'
+        }).done(function (retorno) {
 
-        var html = '<tr>';
-        html += '<td>'+retorno['dados']['escola']+'</td>';
-        html += '<td>'+retorno['dados']['curso']+'</td>';
-        html += '<td>'+retorno['dados']['curriculo']+'</td>';
-        html += '<td>'+retorno['dados']['calendario_nome'] +' '+ retorno['dados']['calendario_ano']+'</td>';
-        html += '<td>'+retorno['dados']['serie']+'</td>';
-        html += '<td>'+retorno['dados']['turno']+'</td>';
-        html += '<td>'+retorno['dados']['vagas']+'</td>';
-        html += '<td>'+retorno['qtdAlunos']+'</td>';
-        html += '<td>'+retorno['vRestantes']+'</td>';
-        html += '</tr>';
+            $('#serie-historico').val(retorno['dados']['serie']);
+            $('#turno-historico').val(retorno['dados']['turno']);
+            $('#vagas-historico').val(retorno['dados']['vagas']);
+            $('#matriculados-historico').val(retorno['qtdAlunos']);
+            $('#vagas-restantes-historico').val(retorno['vRestantes']);
 
-        $('#dados-turma tbody tr').remove();
-        $('#dados-turma tbody').append(html);
+        });
 
-    });
+    } else {
+        $('#serie-historico').val("");
+        $('#turno-historico').val("");
+        $('#vagas-historico').val("");
+        $('#matriculados-historico').val("");
+        $('#vagas-restantes-historico').val("");
+    }
+
 
 });
 
