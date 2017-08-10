@@ -74,12 +74,16 @@
     </section>
 
     @include('aluno.modal_adicionar_aluno_turma')
+    @include('aluno.modal_historico')
+    @include('aluno.modal_mudanca_turma')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/dist/alunoTurma/loadFields.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_controller_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_adicionar_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_historico_aluno.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_mudanca_turma.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,

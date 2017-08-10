@@ -64,13 +64,6 @@ class Historico extends Model implements Transformable
         return $this->belongsTo(SituacaoMatricula::class, 'situacao_matricula_id');
     }
 
-    /**
-     * @return string
-     */
-    public function getDataMatriculaAttribute()
-    {
-        return SerbinarioDateFormat::toBrazil($this->attributes['data_matricula']);
-    }
 
     /**
      * @return string

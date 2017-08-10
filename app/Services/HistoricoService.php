@@ -154,25 +154,38 @@ class HistoricoService
 
     /**
      * @param array $data
-     * @param int $id
      * @return Historico
      * @throws \Exception
      */
-    public function update(array $data, int $id) : Historico
+    public function storeMudarTurma(array $data)
     {
+
         # Regras de negócios
         $this->tratamentoCampos($data);
 
-        #Atualizando no banco de dados
-        $historico = $this->repository->update($data, $id);
+        # pegando a turma selecionada
+        $historicoAtual = $this->repository->find($data['matricula_atual']);
+        $historicoAtual->situacao_matricula_id = '4';
+        $historicoAtual->save();
 
-        #Verificando se foi atualizado no banco de dados
-        if(!$historico) {
+        $dados['matricula'] = $historicoAtual->matricula;
+        $dados['data_matricula'] = $historicoAtual->data_matricula;
+        $dados['aluno_id'] = $historicoAtual->aluno_id;
+        $dados['serie_id'] = $historicoAtual->serie_id;
+        $dados['turma_id'] = $data['turma_id'];
+        $dados['escola_id'] = $historicoAtual->escola_id;
+        $dados['situacao_matricula_id'] = '1';
+
+        #Salvando o registro pincipal
+        $matricula =  $this->repository->create($dados);
+
+        #Verificando se foi criado no banco de dados
+        if(!$matricula) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $historico;
+        return ['retorno' => true, 'resposta' => $matricula];
     }
 
     /**

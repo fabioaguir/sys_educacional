@@ -83,6 +83,8 @@ class AlunoController extends Controller
                         where edu_historico.aluno_id = edu_alunos.id ORDER BY edu_historico.id DESC LIMIT 1)')
                 );
             })
+            ->leftJoin('edu_escola', 'edu_escola.id', '=', 'edu_historico.escola_id')
+            ->leftJoin('edu_series', 'edu_series.id', '=', 'edu_historico.serie_id')
             ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
             ->select([
                 'edu_alunos.id',
@@ -91,6 +93,10 @@ class AlunoController extends Controller
                 'gen_cgm.data_nascimento',
                 'gen_cgm.mae',
                 'edu_historico.situacao_matricula_id as situacao',
+                'edu_escola.id as escola_id',
+                'edu_series.id as serie_id',
+                'edu_historico.id as matricula',
+                'edu_historico.turma_id as turma_id'
             ]);
 
         #Editando a grid
@@ -102,7 +108,7 @@ class AlunoController extends Controller
             $aluno = $this->repository->find($row->id);
 
             # Variáveis de uso
-            $html = '<div class="fixed-action-btn horizontal">';
+            $html  = '<div class="fixed-action-btn horizontal">';
             $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
 
             # Verificando a permissão de edição
@@ -115,12 +121,19 @@ class AlunoController extends Controller
                 $html .= '<li><a class="btn-floating" href="destroy/'.$row->id.'" title="Remover Aluno"><i class="material-icons">delete</i></a></li>';
             }
 
+            # Html de histórico de matrícula
+            $html .= '<li><a id="btnModalHistoricoAluno" class="btn-floating" title="Histórico de matrícula"><i class="material-icons">storage</i></a></li>';
+
             # Verificando a permissão da matrícula
             if($user->can('aluno.matricula') && ($row->situacao != "1")) {
                 # Html de adicionar alunos em turma
                 $html .= '<li><a id="btnModalAdicionarAlunoTurma" class="btn-floating" title="Matricular"><i class="material-icons">school</i></a></li>';
             }
 
+            # Html de mudança de turma
+            if($row->matricula && $row->situacao == "1") {
+                $html .= '<li><a id="btnModalMudarTurma" class="btn-floating" title="Mudança de turma"><i class="material-icons">redo</i></a></li>';
+            }
 
             $html .= '</ul></div>';
 

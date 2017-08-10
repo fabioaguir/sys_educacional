@@ -165,7 +165,7 @@
                 <ul>
                     <li>
                         @permission('disciplina.select|disciplina.store|disciplina.update|disciplina.destroy')
-                        <a href="{{ route('disciplina.index')  }}">Disciplinas</a>
+                        <a href="{{ route('disciplina.index') }}">Disciplinas</a>
                         @endpermission
 
                         @permission('modalidade.select|modalidade.store|modalidade.update|modalidade.destroy')

@@ -185,10 +185,14 @@ class HistoricoController extends Controller
         $turmas = \DB::table('edu_turmas')
             ->join('edu_tipo_turmas', 'edu_tipo_turmas.id', '=', 'edu_turmas.tipo_turma_id')
             ->join('edu_series', 'edu_series.id', '=', 'edu_turmas.serie_id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
             ->where('edu_tipo_turmas.id', '=', '1')
             ->where('edu_series.id', $request->get('idSerie'))
             ->where('edu_turmas.escola_id', $request->get('idEscola'))
-            ->select('edu_turmas.id', 'edu_turmas.nome')
+            ->select(
+                'edu_turmas.id',
+                \DB::raw('CONCAT(edu_turmas.nome, " - " , edu_turnos.nome) as nome')
+            )
             ->get();
 
         return response()->json($turmas);

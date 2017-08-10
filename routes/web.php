@@ -299,9 +299,11 @@ Route::group(['middleware' => 'auth'], function () {
         # rotas para alunos turmas
         Route::get('gridAlunoTurma/{id}', ['middleware' => 'permission:aluno.matricula', 'as' => 'gridAlunoTurma', 'uses' => 'AlunoTurmasController@grid']);
         Route::post('getTurma', ['middleware' => 'permission:aluno.matricula', 'as' => 'getTurma', 'uses' => 'AlunoTurmasController@getTurma']);
+        Route::post('getTurmaMudanca', ['as' => 'getTurmaMudanca', 'uses' => 'AlunoTurmasController@getTurmaMudanca']);
         Route::post('storeAlunoTurma', ['middleware' => 'permission:aluno.matricula', 'as' => 'storeAlunoTurma', 'uses' => 'AlunoTurmasController@store']);
         Route::post('getDadosTurma', ['middleware' => 'permission:aluno.matricula', 'as' => 'getDadosTurma', 'uses' => 'AlunoTurmasController@getDadosTurma']);
-       //Route::post('updateTelefone/{id}', ['as' => 'updateTelefone', 'uses' => 'TelefonesController@update']);
+        Route::post('storeMudarTurma', ['as' => 'storeMudarTurma', 'uses' => 'AlunoTurmasController@storeMudarTurma']);
+        //Route::post('updateTelefone/{id}', ['as' => 'updateTelefone', 'uses' => 'TelefonesController@update']);
        //Route::post('removerTelefone/{id}', ['as' => 'removerTelefone', 'uses' => 'TelefonesController@destroy']);
     });
 

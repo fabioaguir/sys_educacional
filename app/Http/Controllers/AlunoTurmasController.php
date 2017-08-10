@@ -65,6 +65,7 @@ class AlunoTurmasController extends Controller
             ->join('edu_calendarios', 'edu_calendarios.id', '=', 'edu_turmas.calendario_id')
             ->join('edu_series', 'edu_series.id', '=', 'edu_turmas.serie_id')
             ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
+            ->join('edu_situacao_matricula', 'edu_situacao_matricula.id', '=', 'edu_historico.situacao_matricula_id')
             ->where('edu_historico.aluno_id', '=', $id)
             ->select([
                 'edu_historico.id as id',
@@ -77,6 +78,7 @@ class AlunoTurmasController extends Controller
                 'edu_series.nome as serie',
                 'edu_turnos.nome as turno',
                 \DB::raw('DATE_FORMAT(edu_historico.data_matricula,"%d/%m/%Y") as data_matricula'),
+                'edu_situacao_matricula.nome as situacao'
             ]);
 
         #Editando a grid
@@ -118,21 +120,23 @@ class AlunoTurmasController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function storeMudarTurma(Request $request)
     {
         try {
             # Recuperando os dados da requisição
             $data = $request->all();
 
             # Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            # Executando a ação
-            $this->service->update($data, $id);
+            #Executando a ação
+            $retorno = $this->service->storeMudarTurma($data);
+
+            if(!$retorno['retorno']) {
+                return \Illuminate\Support\Facades\Response::json(['success' => false, 'mensagem' => $retorno['resposta']]);
+            }
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true]);
@@ -161,13 +165,41 @@ class AlunoTurmasController extends Controller
     public function getTurma(Request $request)
     {
 
-        $tipos = \DB::table('edu_turmas')
+        $turmas = \DB::table('edu_turmas')
             ->join('edu_tipo_turmas', 'edu_tipo_turmas.id', '=', 'edu_turmas.tipo_turma_id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
             ->where('edu_tipo_turmas.id', '=', '1')
-            ->select('edu_turmas.id', 'edu_turmas.nome')
+            ->select([
+                    'edu_turmas.id',
+                    \DB::raw('CONCAT(edu_turmas.nome, " - " , edu_turnos.nome) as nome'),
+                ])
             ->get();
 
-        return response()->json($tipos);
+        return response()->json($turmas);
+
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getTurmaMudanca(Request $request)
+    {
+
+        $turmas = \DB::table('edu_turmas')
+            ->join('edu_tipo_turmas', 'edu_tipo_turmas.id', '=', 'edu_turmas.tipo_turma_id')
+            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
+            ->where('edu_tipo_turmas.id', '=', '1')
+            ->where('edu_turmas.serie_id', $request->get('idSerie'))
+            ->where('edu_turmas.escola_id', $request->get('idEscola'))
+            ->where('edu_turmas.id', '<>', $request->get('idTurma'))
+            ->select([
+                'edu_turmas.id',
+                \DB::raw('CONCAT(edu_turmas.nome, " - " , edu_turnos.nome) as nome'),
+            ])->get();
+
+        return response()->json($turmas);
 
     }
 
