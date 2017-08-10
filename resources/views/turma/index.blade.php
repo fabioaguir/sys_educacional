@@ -42,7 +42,8 @@
                     <table id="turma-grid" class="table table-hover">
                             <thead>
                             <tr>
-                                <th>Nome</th>
+                                <th>Turma</th>
+                                <th>Série/Ano</th>
                                 <th>Codigo</th>
                                 <th>Escola</th>
                                 <th>Curso</th>
@@ -53,7 +54,8 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Nome</th>
+                                <th>Turma</th>
+                                <th>Série/Ano</th>
                                 <th>Codigo</th>
                                 <th>Escola</th>
                                 <th>Curso</th>
@@ -91,6 +93,7 @@
             ajax: "{{ route('turma.grid') }}",
             columns: [
                 {data: 'nome', name: 'edu_turmas.nome'},
+                {data: 'serie', name: 'edu_series.nome'},
                 {data: 'codigo', name: 'edu_turmas.codigo'},
                 {data: 'escola', name: 'edu_escola.codigo'},
                 {data: 'curso', name: 'edu_cursos.codigo'},
