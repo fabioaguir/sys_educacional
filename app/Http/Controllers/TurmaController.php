@@ -113,7 +113,7 @@ class TurmaController extends Controller
 
             # Variáveis de uso
             $html = '<div class="fixed-action-btn horizontal">';
-            $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
+            $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul style="right: 100px">';
 
             # Verificando a permissão de editar
             if($user->can('turma.update')) {
@@ -136,22 +136,22 @@ class TurmaController extends Controller
             # Verificando a permissão dos alunos
             if($user->can('turma.aluno')) {
                 # Html de alunos
-                $html .= '<li><a id="btnModalAlunos" class="btn-floating" title="Alunos"><i class="material-icons">school</i></a></li>';
+                $html .= '<li><a id="btnModalAlunos" class="btn-floating" title="Alunos"><i class="material-icons">group</i></a></li>';
             }
 
             # Verificando a permissão dos pareceres
             if($user->can('turma.parecer')) {
                 # Html de pareceres
-                $html .= '<li><a id="btnModalPareceres" class="btn-floating" title="Pareceres"><i class="material-icons">school</i></a></li>';
+                $html .= '<li><a id="btnModalPareceres" class="btn-floating" title="Pareceres"><i class="material-icons">content_paste</i></a></li>';
             }
 
             # Verificando a permissão dos pareceres
             
             # Html de horários
-            $html .= '<li><a id="btnModalHorarios" class="btn-floating" title="Horários"><i class="material-icons">school</i></a></li>';
+            $html .= '<li><a id="btnModalHorarios" class="btn-floating" title="Horários"><i class="material-icons">alarm</i></a></li>';
 
             # Html de historico
-            $html .= '<li><a id="btnModalHistorico" class="btn-floating" title="Matricula"><i class="material-icons">school</i></a></li>';
+            $html .= '<li><a id="btnModalHistorico" class="btn-floating" title="Matricula"><i class="material-icons">person_add</i></a></li>';
 
             $html .= '</ul></div>';
 

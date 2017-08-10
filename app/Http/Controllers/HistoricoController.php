@@ -94,14 +94,15 @@ class HistoricoController extends Controller
             ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
             ->leftJoin('edu_turmas', 'edu_turmas.id', '=', 'edu_historico.turma_id')
             ->leftJoin('edu_situacao_matricula', 'edu_situacao_matricula.id', '=', 'edu_historico.situacao_matricula_id')
+            ->where('edu_turmas.id', $idTurma)
+            ->where('edu_historico.situacao_matricula_id', '<>', "1")
             ->select([
                 'edu_alunos.id',
                 'edu_historico.matricula',
                 'gen_cgm.nome',
                 \DB::raw('DATE_FORMAT(edu_historico.data_matricula, "%d/%m/%Y") as data_matricula'),
                 'edu_situacao_matricula.nome as situacao',
-            ])
-            ->where('edu_turmas.id', $idTurma);
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->make(true);

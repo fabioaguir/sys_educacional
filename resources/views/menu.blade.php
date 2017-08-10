@@ -185,7 +185,7 @@
                         @endpermission
 
                         @permission('curriculo.select|curriculo.store|curriculo.update|curriculo.destroy')
-                        <a href="{{ route('curriculo.index')  }}">Base Currícular</a>
+                        <a href="{{ route('curriculo.index')  }}">Matriz Currícular</a>
                         @endpermission
 
                         @permission('calendario.select|calendario.store|calendario.update|calendario.destroy')
@@ -201,10 +201,10 @@
                         @endpermission
 
                         @permission('aluno.select|aluno.store|aluno.update|aluno.destroy')
-                        <a href="{{ route('aluno.index')  }}">Alunos</a>
+                        <a href="{{ route('aluno.index') }}">Alunos</a>
                         @endpermission
 
-                        <a href="{{ route('matricular.index')  }}">Matricular</a>
+                        {{--<a href="{{ route('matricular.index')  }}">Matricular</a>--}}
 
                     </li>
                 </ul>

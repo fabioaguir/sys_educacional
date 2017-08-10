@@ -90,7 +90,6 @@ class HistoricoService
         return ['retorno' => true, 'resposta' => $historico];
     }
 
-
     /**
      * @param array $data
      * @return Historico

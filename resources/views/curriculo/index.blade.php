@@ -28,7 +28,7 @@
     <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Listar Bases Currículares</h2>
+                <h2>Listar Matriz Currículares</h2>
             </div>
 
             <div class="card material-table">
@@ -54,7 +54,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="text-right">
-                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('curriculo.create') }}">Nova Base Currícular</a>
+                                <a class="btn btn-primary btn-sm m-t-10", href="{{ route('curriculo.create') }}">Nova Matriz Currícular</a>
                             </div>
                         </div>
                     </div>

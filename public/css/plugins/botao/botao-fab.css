@@ -38,7 +38,7 @@ body {
 
 .btn-floating:hover {
   background-color: #26a69a;
-  box-shadow: 0 0px 5px 1px #555656; 
+  box-shadow: 0 0px 5px 1px #555656;
 }
 
 .btn-floating:before {
@@ -87,7 +87,7 @@ button.btn-floating {
 
 .fixed-action-btn.horizontal ul li {
   display: inline-block;
-  margin: 8px 5px 0px 0;
+  margin: 7px 5px 0px 0;
 }
 
 .fixed-action-btn ul {

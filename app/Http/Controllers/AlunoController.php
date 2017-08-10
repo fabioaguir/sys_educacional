@@ -76,13 +76,21 @@ class AlunoController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('edu_alunos')
+            ->leftJoin('edu_historico', function ($join) {
+                $join->on(
+                    'edu_historico.id', '=',
+                    \DB::raw('(SELECT edu_historico.id FROM edu_historico
+                        where edu_historico.aluno_id = edu_alunos.id ORDER BY edu_historico.id DESC LIMIT 1)')
+                );
+            })
             ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
             ->select([
                 'edu_alunos.id',
                 'edu_alunos.codigo',
                 'gen_cgm.nome',
                 'gen_cgm.data_nascimento',
-                'gen_cgm.mae'
+                'gen_cgm.mae',
+                'edu_historico.situacao_matricula_id as situacao',
             ]);
 
         #Editando a grid
@@ -108,7 +116,7 @@ class AlunoController extends Controller
             }
 
             # Verificando a permissão da matrícula
-            if($user->can('aluno.matricula')) {
+            if($user->can('aluno.matricula') && ($row->situacao != "1")) {
                 # Html de adicionar alunos em turma
                 $html .= '<li><a id="btnModalAdicionarAlunoTurma" class="btn-floating" title="Matricular"><i class="material-icons">school</i></a></li>';
             }
