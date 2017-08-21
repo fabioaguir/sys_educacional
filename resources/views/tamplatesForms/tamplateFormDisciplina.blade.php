@@ -8,19 +8,22 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <div class="fg-line">
-                            <div class="fg-line">
-                                <label for="nome">Nome *</label>
-                                {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome da Disciplina')) !!}
-                            </div>
+                            <label for="nome">Nome *</label>
+                            {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome da Disciplina')) !!}
                         </div>
                     </div>
 
                     <div class="form-group col-md-4">
                         <div class="fg-line">
-                            <div class="fg-line">
-                                <label for="codigo">Código *</label>
-                                {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código da Disciplina')) !!}
-                            </div>
+                            <label for="codigo">Código *</label>
+                            {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código da Disciplina')) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <div class="fg-line">
+                            <label for="carga_horaria">Carga horária</label>
+                            {!! Form::text('carga_horaria', Session::getOldInput('carga_horaria'), array('class' => 'form-control input-sm', 'placeholder' => 'Carga horaria')) !!}
                         </div>
                     </div>
                 </div>

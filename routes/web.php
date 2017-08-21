@@ -398,6 +398,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     # Rotas das turmas
     Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
+
         Route::get('index', ['middleware' => 'permission:turma.select', 'as' => 'index', 'uses' => 'TurmaController@index']);
         Route::get('grid', ['middleware' => 'permission:turma.select', 'as' => 'grid', 'uses' => 'TurmaController@grid']);
         Route::get('create', ['middleware' => 'permission:turma.store', 'as' => 'create', 'uses' => 'TurmaController@create']);
@@ -449,6 +450,14 @@ Route::group(['middleware' => 'auth'], function () {
             //Route::post('adicionarParecer', ['as' => 'adicionarParecer', 'uses' => 'TurmaParecerController@adicionarParecer']);
             //Route::post('removerParecer', ['as' => 'removerParecer', 'uses' => 'TurmaParecerController@removerParecer']);
         });
+
+        # Modal de matricula
+        Route::group(['prefix' => 'nota', 'as' => 'nota.'], function () {
+            Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'NotaController@index']);
+            Route::post('consultar', ['as' => 'consultar', 'uses' => 'NotaController@consultar']);
+            Route::post('store', ['as' => 'store', 'uses' => 'NotaController@store']);
+        });
+
     });
 
     # Rotas das turmas complementares

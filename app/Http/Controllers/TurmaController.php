@@ -153,6 +153,10 @@ class TurmaController extends Controller
             # Html de historico
             $html .= '<li><a id="btnModalHistorico" class="btn-floating" title="Matricula"><i class="material-icons">person_add</i></a></li>';
 
+
+            // Nota
+            $html .= '<li><a class="btn-floating" href="nota/index/'.$row->id.'" title="Nota"><i class="material-icons">edit</i></a></li>';
+
             $html .= '</ul></div>';
 
             # Retorno

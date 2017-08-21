@@ -185,7 +185,7 @@
                         @endpermission
 
                         @permission('curriculo.select|curriculo.store|curriculo.update|curriculo.destroy')
-                        <a href="{{ route('curriculo.index')  }}">Matriz Currícular</a>
+                        <a href="{{ route('curriculo.index')  }}">Matriz Curricular</a>
                         @endpermission
 
                         @permission('calendario.select|calendario.store|calendario.update|calendario.destroy')
@@ -298,6 +298,7 @@
 
 {{-- Mascaras https://igorescobar.github.io/jQuery-Mask-Plugin/ --}}
 <script src="{{ asset('/lib/jquery-mask-plugin/dist/jquery.mask.js') }}"></script>
+<script src="{{ asset('/dist/js/mascaras.js') }}"></script>
 
 <!-- Placeholder for IE9 -->
 <script type="text/javascript" src={{ asset('/lib/jquery-placeholder/jquery.placeholder.min.js') }}></script>
