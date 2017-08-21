@@ -45,7 +45,7 @@ class NotaService
             $data['media'] = number_format($media, 2, '.', ' ');
         }
 
-        if(isset($data['idNota'])) {
+        if(isset($data['idNota']) && $data['idNota']) {
             #Editando o registro pincipal
             $nota =  $this->repository->update($data, $data['idNota']);
         } else {
