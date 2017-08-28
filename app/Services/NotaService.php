@@ -27,7 +27,62 @@ class NotaService
      * @return Nota
      * @throws \Exception
      */
-    public function store(array $data) : Nota
+    public function store(array $data)
+    {
+
+        $dados = [];
+        $nota = null;
+
+        for ($i = 0; $i < count($data['disciplinas']); $i++) {
+
+            $dados['turma_id']      = $data['turma'];
+            $dados['aluno_id']      = $data['aluno'];
+            $dados['periodo_id']    = $data['periodo'];
+            $dados['disciplina_id'] = $data['disciplinas'][$i];
+
+            # tratando as notas caso venham vazia
+            $dados['nota_ativ1']        = $data['nota_ativ1'][$i] ? $data['nota_ativ1'][$i] : null;
+            $dados['nota_ativ2']        = $data['nota_ativ2'][$i] ? $data['nota_ativ2'][$i] :  null;
+            $dados['nota_ativ3']        = $data['nota_ativ3'][$i] ? $data['nota_ativ3'][$i] : null;
+            $dados['nota_verif_aprend'] = $data['nota_verif_aprend'][$i] ? $data['nota_verif_aprend'][$i] : null;
+            $dados['media']             = $data['media'][$i] ? $data['media'][$i] : null;
+            $dados['recup_paralela']    = $data['recup_paralela'][$i] ? $data['recup_paralela'][$i] :  null;
+            $dados['nota_para_recup']   = $data['nota_para_recup'][$i] ? $data['nota_para_recup'][$i] : null;
+
+            # calculando a média caso as 3 antas de atividade sejam calculadas
+            if($data['nota_ativ1'][$i] && $data['nota_ativ2'][$i] && $data['nota_ativ3'][$i]) {
+                $media = ($data['nota_ativ1'][$i] + $data['nota_ativ2'][$i] + $data['nota_ativ3'][$i]) / 3;
+                $dados['media'] = number_format($media, 2, '.', ' ');
+            }
+
+            if(isset($data['idNota'][$i]) && $data['idNota'][$i]) {
+                #Editando o registro pincipal
+                $nota =  $this->repository->update($dados, $data['idNota'][$i]);
+            } else {
+                #Salvando o registro pincipal
+                $nota =  $this->repository->create($dados);
+            }
+
+        }
+
+        #Verificando se foi criado no banco de dados
+        if(!$nota) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        # Trazendo as notas do aluno
+        $notas = $this->getNotasAluno($data);
+
+        #Retorno
+        return $notas;
+    }
+
+    /**
+     * @param array $data
+     * @return Nota
+     * @throws \Exception
+     */
+    public function storeOld(array $data) : Nota
     {
 
         # tratando as notas caso venham vazia
@@ -62,12 +117,53 @@ class NotaService
         return $nota;
     }
 
-
     /**
      * @param array $data
      * @return mixed
      */
     public function consultar(array $data)
+    {
+
+        # Trazendo as notas do aluno
+        $notas = $this->getNotasAluno($data);
+
+        #retorno
+        return $notas;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    private function getNotasAluno(array $data)
+    {
+        # Trazendo as notas do aluno
+        $rows = \DB::table('edu_notas')
+            ->where('edu_notas.turma_id', $data['turma'])
+            ->where('edu_notas.aluno_id', $data['aluno'])
+            ->where('edu_notas.periodo_id', $data['periodo'])
+            ->whereIn('edu_notas.disciplina_id', $data['disciplinas'])
+            ->select([
+                'edu_notas.id',
+                'edu_notas.nota_ativ1',
+                'edu_notas.nota_ativ2',
+                'edu_notas.nota_ativ3',
+                'edu_notas.nota_verif_aprend',
+                'edu_notas.media',
+                'edu_notas.recup_paralela',
+                'edu_notas.nota_para_recup',
+                'edu_notas.disciplina_id'
+            ])->get();
+
+        return $rows;
+    }
+
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function consultarOld(array $data)
     {
 
         # Trazendo as notas do aluno

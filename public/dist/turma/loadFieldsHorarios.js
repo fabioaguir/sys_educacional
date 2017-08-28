@@ -21,8 +21,6 @@ function disciplinasHorario(id, idTurma, idSerie) {
     }).done(function (json) {
         var option = '';
 
-        console.log(json[0]['id']);
-
         option += '<option value="">Selecione uma disciplna</option>';
         for (var i = 0; i < json.length; i++) {
             if (json[i]['id'] == id) {
@@ -41,7 +39,7 @@ function disciplinasHorario(id, idTurma, idSerie) {
 function professores(id, idEscola) {
 
     var dados = {
-        'idEscola' : idEscola,
+        'idEscola' : idEscola
     };
 
     jQuery.ajax({
@@ -51,8 +49,6 @@ function professores(id, idEscola) {
         data: dados
     }).done(function (json) {
         var option = '';
-
-        console.log(json[0]['id']);
 
         option += '<option value="">Selecione um professor</option>';
         for (var i = 0; i < json.length; i++) {
@@ -68,41 +64,27 @@ function professores(id, idEscola) {
     });
 }
 
-// Pegando os dias disponíveis para um determinado professor
-$(document).on('change', '#professor', function(){
 
-    var idProfessor = $(this).val();
+//Função para listar os professores
+function dias(id) {
 
-    if (idProfessor) {
+    jQuery.ajax({
+        type: 'POST',
+        url: laroute.route('turma.horario.getDias'),
+        datatype: 'json',
+    }).done(function (json) {
+        var option = '';
 
-        //Setando o o json para envio
-        var dados = {
-            'idProfessor' : idProfessor,
-            'idEscola' : idEscola,
-        };
+        option += '<option value="">Selecione um dia</option>';
+        for (var i = 0; i < json.length; i++) {
+            option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+        }
 
-        jQuery.ajax({
-            type: 'POST',
-            data: dados,
-            url: laroute.route('turma.horario.getDias'),
-            datatype: 'json',
-        }).done(function (json) {
-            var option = '';
-            
-            option += '<option value="">Selecione um dia</option>';
-            for (var i = 0; i < json.length; i++) {
-                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-            }
+        $('#dia option').remove();
+        $('#dia').append(option);
+    });
+}
 
-            $('#dia option').remove();
-            $('#dia').append(option);
-        });
-
-    } else {
-        swal("Nenhum dia encontrado para esse professor", "error");
-    }
-
-});
 
 // Pegando os horários disponíveis para um determinado professor
 $(document).on('change', '#dia', function(){
@@ -115,9 +97,9 @@ $(document).on('change', '#dia', function(){
         //Setando o o json para envio
         var dados = {
             'idDia' : idDia,
-            'idEscola' : idEscola,
             'idProfessor' : idProfessor,
-            'idTurno' : idTurno
+            'idTurno' : idTurno,
+            'idTurma' : idTurma
         };
 
         jQuery.ajax({
@@ -143,6 +125,7 @@ $(document).on('change', '#dia', function(){
 
 });
 
+// ############################################################################################################
 
 //Função para pegar as series para matrícula
 function series(id, idSerie) {

@@ -157,6 +157,9 @@ class TurmaController extends Controller
             // Nota
             $html .= '<li><a class="btn-floating" href="nota/index/'.$row->id.'" title="Nota"><i class="material-icons">edit</i></a></li>';
 
+            // Frequência
+            $html .= '<li><a class="btn-floating" href="frequencia/index/'.$row->id.'" title="Frequência"><i class="material-icons">edit</i></a></li>';
+
             $html .= '</ul></div>';
 
             # Retorno

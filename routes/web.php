@@ -451,11 +451,19 @@ Route::group(['middleware' => 'auth'], function () {
             //Route::post('removerParecer', ['as' => 'removerParecer', 'uses' => 'TurmaParecerController@removerParecer']);
         });
 
-        # Modal de matricula
+        # rotas para atribuição de notas
         Route::group(['prefix' => 'nota', 'as' => 'nota.'], function () {
             Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'NotaController@index']);
             Route::post('consultar', ['as' => 'consultar', 'uses' => 'NotaController@consultar']);
             Route::post('store', ['as' => 'store', 'uses' => 'NotaController@store']);
+        });
+
+        # rotas para atribuição de frequência
+        Route::group(['prefix' => 'frequencia', 'as' => 'frequencia.'], function () {
+            Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'FrequenciaController@index']);
+            Route::post('getDisciplinas', ['as' => 'getDisciplinas', 'uses' => 'FrequenciaController@getDisciplinas']);
+            Route::post('consultar', ['as' => 'consultar', 'uses' => 'FrequenciaController@consultar']);
+            Route::post('store', ['as' => 'store', 'uses' => 'FrequenciaController@store']);
         });
 
     });
@@ -486,6 +494,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('adicionarAtividade', ['middleware' => 'permission:turma.complementar.add.aluno', 'as' => 'adicionarAluno', 'uses' => 'TurmaComplementarAlunoController@adicionarAluno']);
             Route::post('removerAtividade', ['middleware' => 'permission:turma.complementar.add.aluno', 'as' => 'removerAluno', 'uses' => 'TurmaComplementarAlunoController@removerAluno']);
         });
+
     });
 
     # Rotas de pareceres

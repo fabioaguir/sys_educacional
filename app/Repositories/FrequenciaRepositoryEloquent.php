@@ -6,7 +6,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use SerEducacional\Repositories\FrequenciaRepository;
 use SerEducacional\Entities\Frequencia;
-use SerEducacional\Validators\FrequenciaValidator;
 
 /**
  * Class FrequenciaRepositoryEloquent
@@ -23,8 +22,6 @@ class FrequenciaRepositoryEloquent extends BaseRepository implements FrequenciaR
     {
         return Frequencia::class;
     }
-
-    
 
     /**
      * Boot up the repository, pushing criteria

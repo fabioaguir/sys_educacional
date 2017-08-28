@@ -214,18 +214,10 @@ class HorariosController extends Controller
      */
     public function getDias(Request $request)
     {
-        $dados = $request->request->all();
-
 
         $query = \DB::table('edu_dias_semana')
-            ->join('edu_disponibilidades', 'edu_disponibilidades.dia_semana_id', '=', 'edu_dias_semana.id')
-            ->join('edu_servidor', 'edu_disponibilidades.servidor_id', '=', 'edu_servidor.id')
-            ->join('edu_escola', 'edu_disponibilidades.escola_id', '=', 'edu_escola.id')
-            ->where('edu_escola.id', $dados['idEscola'])
-            ->where('edu_servidor.id', $dados['idProfessor'])
             ->select('edu_dias_semana.id', 'edu_dias_semana.nome')
             ->get();
-
 
         return response()->json($query);
 
@@ -241,22 +233,16 @@ class HorariosController extends Controller
         $dados = $request->request->all();
 
         $query = \DB::table('edu_horas')
-            ->join('edu_disponibilidades', 'edu_disponibilidades.hora_id', '=', 'edu_horas.id')
-            ->join('edu_servidor', 'edu_disponibilidades.servidor_id', '=', 'edu_servidor.id')
-            ->join('edu_escola', 'edu_disponibilidades.escola_id', '=', 'edu_escola.id')
             ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_horas.turnos_id')
-            ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_disponibilidades.dia_semana_id')
-            ->where('edu_escola.id', $dados['idEscola'])
-            ->where('edu_servidor.id', $dados['idProfessor'])
-            ->where('edu_dias_semana.id', '=', $dados['idDia'])
             ->where('edu_turnos.id', '=', $dados['idTurno'])
             ->whereNotIn('edu_horas.id', function ($where) use ($dados) {
                 $where->from('edu_horas')
                     ->select('edu_horas.id')
                     ->join('edu_horarios', 'edu_horarios.horas_id', '=', 'edu_horas.id')
+                    ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turmas_id')
                     ->join('edu_servidor', 'edu_horarios.servidor_id', '=', 'edu_servidor.id')
                     ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_horarios.dia_semana_id')
-                    ->where('edu_servidor.id', $dados['idProfessor'])
+                    ->where('edu_turmas.id', $dados['idTurma'])
                     ->where('edu_dias_semana.id', '=', $dados['idDia']);
             })
             ->select(

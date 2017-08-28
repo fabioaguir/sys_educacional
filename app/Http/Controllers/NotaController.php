@@ -71,6 +71,7 @@ class NotaController extends Controller
      */
     public function consultar(Request $request)
     {
+
         #Carregando os dados para o cadastro
         $return = $this->service->consultar($request->request->all());
 

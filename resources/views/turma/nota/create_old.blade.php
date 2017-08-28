@@ -54,7 +54,7 @@
                                 </div>
                             </div>
 
-                            {{--<div class="form-group col-md-3">
+                            <div class="form-group col-md-3">
                                 <div class=" fg-line">
                                     <label for="disciplina">Disciplina</label>
                                     <select class="form-control" id="disciplina">
@@ -64,7 +64,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>--}}
+                            </div>
 
                             <div class="form-group col-md-1" style="margin-top: 20px">
                                 <div class=" fg-line">
@@ -77,60 +77,50 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="display table table-border compact">
-                                    <thead>
+                            <table class="table table-border compact">
+                                <thead>
                                     <tr>
-                                        <th colspan="8">
-                                            <b>ALUNO(A): </b><span id="nomeAluno"></span> -- <b>PERÍODO:</b> <span
-                                                    id="nomePeriodo"></span>
+                                        <th colspan="7">
+                                            <b>ALUNO(A): </b><span id="nomeAluno"></span> -- <b>PERÍODO:</b> <span id="nomePeriodo"></span>
+                                            -- <b>DICISPLNA:</b> <span id="nomeDisciplina"></span>
                                         </th>
                                     </tr>
+                                <tr>
+                                    <th>1º Ativ.</th>
+                                    <th>2º Ativ.</th>
+                                    <th>3º Ativ.</th>
+                                    <th>Verif. de Aprend.</th>
+                                    <th>Média</th>
+                                    <th>Recup. Paralela</th>
+                                    <th>Nota P/ Recuper.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
-                                        <th>Disciplina</th>
-                                        <th>1º Ativ.</th>
-                                        <th>2º Ativ.</th>
-                                        <th>3º Ativ.</th>
-                                        <th>Verif. de Aprend.</th>
-                                        <th>Média</th>
-                                        <th>Recup. Paralela</th>
-                                        <th>Nota P/ Recuper.</th>
+                                        <td>
+                                            <input class="form-control nota" id="1_ativ">
+                                        </td>
+                                        <td>
+                                            <input class="form-control nota" id="2_ativ">
+                                        </td>
+                                        <td>
+                                            <input class="form-control nota" id="3_ativ">
+                                        </td>
+                                        <td>
+                                            <input class="form-control nota" id="verif_aprend">
+                                        </td>
+                                        <td>
+                                            <input disabled readonly class="form-control nota" id="media">
+                                        </td>
+                                        <td>
+                                            <input class="form-control nota" id="recup_paralela">
+                                        </td>
+                                        <td>
+                                            <input class="form-control nota" id="nota_recuper">
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($disciplinas as $disciplina)
-                                        <tr>
-                                            <td style="width: 20%">
-                                                <b>{{ $disciplina->nome }}</b>
-                                                <input type="hidden" value="{{ $disciplina->id }}" class="form-control disciplina disciplina_{{ $disciplina->id }}">
-                                                <input type="hidden" class="form-control idNota idNota_{{ $disciplina->id}}">
-                                            </td>
-                                            <td>
-                                                <input class="form-control nota 1_ativ 1_ativ_{{ $disciplina->id}}">
-                                            </td>
-                                            <td>
-                                                <input class="form-control nota 2_ativ 2_ativ_{{ $disciplina->id}}">
-                                            </td>
-                                            <td>
-                                                <input class="form-control nota 3_ativ 3_ativ_{{ $disciplina->id}}">
-                                            </td>
-                                            <td>
-                                                <input class="form-control nota verif_aprend verif_aprend_{{ $disciplina->id}}">
-                                            </td>
-                                            <td>
-                                                <input disabled readonly class="form-control nota media media_{{ $disciplina->id}}">
-                                            </td>
-                                            <td>
-                                                <input class="form-control nota recup_paralela recup_paralela_{{ $disciplina->id}}">
-                                            </td>
-                                            <td>
-                                                <input class="form-control nota nota_recuper nota_recuper_{{ $disciplina->id}}">
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group col-md-1" style="margin-top: 20px">

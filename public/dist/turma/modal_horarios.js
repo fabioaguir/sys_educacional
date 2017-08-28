@@ -38,10 +38,7 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
     // Carregando os campos selects
     disciplinasHorario("", idTurma, idSerie);
     professores("", idEscola);
-    
-    // Desabilitando o botão de editar
-    //$('#edtDisponibilidade').prop('disabled', true);
-    //$('#edtDisponibilidade').hide();
+    dias("");
 
     // Exibindo o modal
     $('#modal-horarios').modal({'show' : true});
@@ -91,50 +88,6 @@ $(document).on('click', '#addHorario', function (event) {
     });
 });
 
-//Evento do click no botão editar evento
-$(document).on('click', '#edtDisponibilidade', function (event) {
-
-    //Recuperando os valores dos campos do fomulário
-    var escola   = $('#escolaDisp').val();
-    var dia      = $('#dia').val();
-    var hora     = $('#hora').val();
-
-    // Verificando se os campos de preenchimento obrigatório foram preenchidos
-    if (!escola || !hora || !dia) {
-        swal("Oops...", "Há campos obrigatórios que não foram preenchidos!", "error");
-        return false;
-    }
-
-    //Setando o o json para envio
-    var dados = {
-        'escola_id' : escola,
-        'dia_semana_id' : dia,
-        'hora_id' : hora,
-        'servidor_id' : idServidor,
-    };
-
-    // Requisição Ajax
-    jQuery.ajax({
-        type: 'POST',
-        url: laroute.route('servidor.updateDisponibilidade', {'id' : idDisponibilidade}),
-        data: dados,
-        datatype: 'json'
-    }).done(function (json) {
-        swal("Disponibilidade(s) editado(s) com sucesso!", "Click no botão abaixo!", "success");
-        tableDisponibilidades.ajax.reload();
-        table.ajax.reload();
-
-        //Limpar os campos do formulário
-        limparCamposDisponibilidade();
-
-        // Desabilitando o botão de editar
-        $('#edtDisponibilidade').prop('disabled', true);
-        $('#edtDisponibilidade').hide();
-        $('#addDisponibilidade').show();
-
-    });
-});
-
 //Evento de remover o telefone
 $(document).on('click', '#deleteHorario', function () {
 
@@ -159,36 +112,12 @@ $(document).on('click', '#deleteHorario', function () {
 });
 
 
-// Evento para editar o evento letivos
-$(document).on("click", "#editarDisponibilidade", function () {
-    //Recuperando o id da relacao
-    idDisponibilidade = tableDisponibilidades.row($(this).parents('tr')).data().id;
-
-    // Recuperando os dados do evento
-    var escola  = tableDisponibilidades.row($(this).parents('tr')).data().escola_id;
-    var dia     = tableDisponibilidades.row($(this).parents('tr')).data().dia_semana_id;
-    var turno   = tableDisponibilidades.row($(this).parents('tr')).data().turno_id;
-    var hora    = tableDisponibilidades.row($(this).parents('tr')).data().hora_id;
-
-    // prenchendo o os campos de relação
-    escolasDisp(escola);
-    dias(dia);
-    turnos(turno);
-    horas(turno, hora);
-
-    // Desabilitando o botão de editar
-    $('#edtDisponibilidade').prop('disabled', false);
-    $('#edtDisponibilidade').show();
-    $('#addDisponibilidade').hide();
-
-});
-
 //Limpar os campos do formulário
 function limparCamposHorarios()
 {
     disciplinasHorario("", idTurma, idSerie);
     professores("", idEscola);
-    $('#dia option').remove();
+    dias("");
     $('#hora option').remove();
 }
 
