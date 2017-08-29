@@ -458,6 +458,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'NotaController@store']);
         });
 
+        # rotas para atribuição de notas por parecer
+        Route::group(['prefix' => 'notaparecer', 'as' => 'notaparecer.'], function () {
+            Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'NotaParecerController@index']);
+            Route::post('consultar', ['as' => 'consultar', 'uses' => 'NotaParecerController@consultar']);
+            Route::post('store', ['as' => 'store', 'uses' => 'NotaParecerController@store']);
+        });
+
         # rotas para atribuição de frequência
         Route::group(['prefix' => 'frequencia', 'as' => 'frequencia.'], function () {
             Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'FrequenciaController@index']);

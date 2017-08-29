@@ -35,35 +35,6 @@ function disciplinasHorario(id, idTurma, idSerie) {
     });
 }
 
-//Função para listar os professores
-function professores(id, idEscola) {
-
-    var dados = {
-        'idEscola' : idEscola
-    };
-
-    jQuery.ajax({
-        type: 'POST',
-        url: laroute.route('turma.horario.getProfessores'),
-        datatype: 'json',
-        data: dados
-    }).done(function (json) {
-        var option = '';
-
-        option += '<option value="">Selecione um professor</option>';
-        for (var i = 0; i < json.length; i++) {
-            if (json[i]['id'] == id) {
-            option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-            } else {
-            option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-            }
-        }
-
-        $('#professor option').remove();
-        $('#professor').append(option);
-    });
-}
-
 
 //Função para listar os professores
 function dias(id) {
@@ -86,18 +57,55 @@ function dias(id) {
 }
 
 
+// Pegando os professores que ainda não
+$(document).on('change', '#hora', function(){
+
+    var idHora = $(this).val();
+    var idDia = $("#dia").val();
+
+    if (idDia && idHora) {
+
+        //Setando o o json para envio
+        var dados = {
+            'idDia' : idDia,
+            'idHora' : idHora,
+            'idEscola' : idEscola
+        };
+
+        jQuery.ajax({
+            type: 'POST',
+            data: dados,
+            url: laroute.route('turma.horario.getProfessores'),
+            datatype: 'json'
+        }).done(function (json) {
+            var option = '';
+
+            option += '<option value="">Selecione um horário</option>';
+            for (var i = 0; i < json.length; i++) {
+                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            }
+
+            $('#professor option').remove();
+            $('#professor').append(option);
+        });
+
+    } else {
+        swal("Nenhum professor disponível para esse dia e horário", "error");
+    }
+
+});
+
 // Pegando os horários disponíveis para um determinado professor
 $(document).on('change', '#dia', function(){
 
     var idDia = $(this).val();
     var idProfessor = $("#professor").val();
 
-    if (idDia && idProfessor) {
+    if (idDia) {
 
         //Setando o o json para envio
         var dados = {
             'idDia' : idDia,
-            'idProfessor' : idProfessor,
             'idTurno' : idTurno,
             'idTurma' : idTurma
         };

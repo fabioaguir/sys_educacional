@@ -26,28 +26,6 @@
                 <div class="row">
 
                     <div class="col-md-12">
-
-                        <div class="form-group col-md-3">
-                            <div class=" fg-line">
-                                <label for="disciplina">Disciplina *</label>
-                                <div class="select">
-                                    {!! Form::select("disciplina", array(), null, array('class'=> 'form-control', 'id' => 'disciplina')) !!}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-5">
-                            <div class=" fg-line">
-                                <label for="professor">Professore *</label>
-                                <div class="select">
-                                    {!! Form::select("professor", array(), null, array('class'=> 'form-control', 'id' => 'professor')) !!}
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-12">
                         <div class="form-group col-md-2">
                             <div class=" fg-line">
                                 <label for="dia">Dia *</label>
@@ -64,6 +42,29 @@
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="form-group col-md-5">
+                            <div class=" fg-line">
+                                <label for="professor">Professore *</label>
+                                <div class="select">
+                                    {!! Form::select("professor", array(), null, array('class'=> 'form-control', 'id' => 'professor')) !!}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <div class=" fg-line">
+                                <label for="disciplina">Disciplina *</label>
+                                <div class="select">
+                                    {!! Form::select("disciplina", array(), null, array('class'=> 'form-control', 'id' => 'disciplina')) !!}
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group col-md-2">
                             <div class="fg-line" style="margin-top: 20px">
                                 <div class="fg-line">
@@ -72,6 +73,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                     <!-- Gerendiamento dos horários -->

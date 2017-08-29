@@ -37,7 +37,7 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
 
     // Carregando os campos selects
     disciplinasHorario("", idTurma, idSerie);
-    professores("", idEscola);
+    //professores("", idEscola);
     dias("");
 
     // Exibindo o modal
@@ -116,9 +116,9 @@ $(document).on('click', '#deleteHorario', function () {
 function limparCamposHorarios()
 {
     disciplinasHorario("", idTurma, idSerie);
-    professores("", idEscola);
     dias("");
     $('#hora option').remove();
+    $('#professor option').remove();
 }
 
 

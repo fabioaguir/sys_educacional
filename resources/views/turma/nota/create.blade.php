@@ -138,6 +138,11 @@
                                     <button id="inserirNota"  class="btn btn-primary btn-sm m-t-10">Salvar</button>
                                 </div>
                             </div>
+                            <div class="form-group col-md-1" style="margin-top: 20px">
+                                <div class=" fg-line">
+                                    <a href="{{ route('turma.index') }}" class="btn btn-default btn-sm m-t-10">Voltar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

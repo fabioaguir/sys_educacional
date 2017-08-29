@@ -23,7 +23,7 @@
             </div>
 
             <div class="block-header">
-                <h2>Atribuição de notas</h2>
+                <h2>Atribuição de notas por parecer</h2>
             </div>
             <div class="card">
                 <div class="card-body card-padding">
@@ -54,18 +54,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <div class=" fg-line">
-                                    <label for="disciplina">Disciplina</label>
-                                    <select class="form-control" id="disciplina">
-                                        <option value="" >Selecione a disciplina</option>
-                                        @foreach($disciplinas as $disciplina)
-                                            <option value="{{ $disciplina->id }}">{{ $disciplina->nome }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
                             <div class="form-group col-md-1" style="margin-top: 20px">
                                 <div class=" fg-line">
                                     <button id="consultarNota"  class="btn btn-primary btn-sm m-t-10">Consultar</button>
@@ -77,55 +65,26 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-border compact">
-                                <thead>
-                                    <tr>
-                                        <th colspan="7">
-                                            <b>ALUNO(A): </b><span id="nomeAluno"></span> -- <b>PERÍODO:</b> <span id="nomePeriodo"></span>
-                                            -- <b>DICISPLNA:</b> <span id="nomeDisciplina"></span>
-                                        </th>
-                                    </tr>
-                                <tr>
-                                    <th>1º Ativ.</th>
-                                    <th>2º Ativ.</th>
-                                    <th>3º Ativ.</th>
-                                    <th>Verif. de Aprend.</th>
-                                    <th>Média</th>
-                                    <th>Recup. Paralela</th>
-                                    <th>Nota P/ Recuper.</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input class="form-control nota" id="1_ativ">
-                                        </td>
-                                        <td>
-                                            <input class="form-control nota" id="2_ativ">
-                                        </td>
-                                        <td>
-                                            <input class="form-control nota" id="3_ativ">
-                                        </td>
-                                        <td>
-                                            <input class="form-control nota" id="verif_aprend">
-                                        </td>
-                                        <td>
-                                            <input disabled readonly class="form-control nota" id="media">
-                                        </td>
-                                        <td>
-                                            <input class="form-control nota" id="recup_paralela">
-                                        </td>
-                                        <td>
-                                            <input class="form-control nota" id="nota_recuper">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="form-group col-md-12">
+                                <div class=" fg-line">
+                                    <label for="relato">Parecer</label>
+                                    <div class="textarea">
+                                        {!! Form::textarea('parecer', Session::getOldInput('parecer'),
+                                            array('id' => 'parecer', 'class' => 'form-control', 'rows' => '5')) !!}
+                                    </div>
+                                    <input type="hidden" class="form-control" id="id-nota">
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group col-md-1" style="margin-top: 20px">
                                 <div class=" fg-line">
                                     <button id="inserirNota"  class="btn btn-primary btn-sm m-t-10">Salvar</button>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-1" style="margin-top: 20px">
+                                <div class=" fg-line">
+                                    <a href="{{ route('turma.index') }}" class="btn btn-default btn-sm m-t-10">Voltar</a>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +97,7 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/dist/turma/notacomum/inserir_nota.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turma/notaparecer/inserir_nota.js')  }}"></script>
     <script>
         idTurma = "{{ $idTurma  }}";
     </script>

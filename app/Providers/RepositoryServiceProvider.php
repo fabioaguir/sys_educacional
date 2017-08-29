@@ -273,6 +273,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \SerEducacional\Repositories\NotaRepository::class,
             \SerEducacional\Repositories\NotaRepositoryEloquent::class);
 
+        $this->app->bind(
+            \SerEducacional\Repositories\NotaParecerRepository::class,
+            \SerEducacional\Repositories\NotaParecerRepositoryEloquent::class);
+
         //:end-bindings:
     }
 }

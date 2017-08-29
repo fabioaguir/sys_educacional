@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
+use SerEducacional\Repositories\SerieRepository;
 use SerEducacional\Repositories\TurmaRepository;
 use SerEducacional\Services\TurmaService;
 use SerEducacional\Validators\TurmaValidator;
@@ -25,6 +26,11 @@ class TurmaController extends Controller
      * @var TurmaValidator
      */
     protected $validator;
+
+    /**
+     * @var SerieRepository
+     */
+    protected $serieRepository;
 
     /**
      * @var array
@@ -47,16 +53,18 @@ class TurmaController extends Controller
     private $service;
 
     /**
-     * TurmaController constructor.
      * @param TurmaRepository $repository
      * @param TurmaValidator $validator
      * @param TurmaService $service
+     * @param SerieRepository $serieRepository
      */
     public function __construct(TurmaRepository $repository,
                                 TurmaValidator $validator,
-                                TurmaService $service)
+                                TurmaService $service,
+                                SerieRepository $serieRepository)
     {
         $this->repository = $repository;
+        $this->serieRepository = $serieRepository;
         $this->validator  = $validator;
         $this->service = $service;
     }
@@ -108,6 +116,9 @@ class TurmaController extends Controller
             # Recuperando o usuário
             $user = Auth::user();
 
+            // Pegando a série da turma
+            $serie = $this->serieRepository->find($row->serie_id);
+
             # recuperando o curriculo
             $turma = $this->repository->find($row->id);
 
@@ -154,11 +165,18 @@ class TurmaController extends Controller
             $html .= '<li><a id="btnModalHistorico" class="btn-floating" title="Matricula"><i class="material-icons">person_add</i></a></li>';
 
 
-            // Nota
-            $html .= '<li><a class="btn-floating" href="nota/index/'.$row->id.'" title="Nota"><i class="material-icons">edit</i></a></li>';
+            if ($serie['codigo'] != '1' && $serie['codigo'] != '2') {
+                // Nota Comum
+                $html .= '<li><a class="btn-floating" href="nota/index/'.$row->id.'" title="Nota"><i class="material-icons">spellcheck</i></a></li>';
+            } else {
+                $html .= '<li><a class="btn-floating" href="notaparecer/index/'.$row->id.'" title="Parecer"><i class="material-icons">spellcheck</i></a></li>';
+            }
 
-            // Frequência
-            $html .= '<li><a class="btn-floating" href="frequencia/index/'.$row->id.'" title="Frequência"><i class="material-icons">edit</i></a></li>';
+            if ($serie['codigo'] >= '6') {
+                // Frequência
+                $html .= '<li><a class="btn-floating" href="frequencia/index/'.$row->id.'" title="Frequência"><i class="material-icons">done</i></a></li>';
+            }
+
 
             $html .= '</ul></div>';
 

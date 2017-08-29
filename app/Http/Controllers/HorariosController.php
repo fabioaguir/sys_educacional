@@ -197,6 +197,15 @@ class HorariosController extends Controller
             ->join('edu_escola', 'edu_escola.id', '=', 'edu_alocacoes.escola_id')
             ->join('edu_funcoes', 'edu_funcoes.id', '=', 'edu_servidor.funcoes_id')
             ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_servidor.id_cgm')
+            ->whereNotIn('edu_servidor.id', function ($where) use ($dados) {
+                $where->from('edu_servidor')
+                    ->select('edu_servidor.id')
+                    ->join('edu_horarios', 'edu_servidor.id', '=', 'edu_horarios.servidor_id')
+                    ->join('edu_horas', 'edu_horarios.horas_id', '=', 'edu_horas.id')
+                    ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_horarios.dia_semana_id')
+                    ->where('edu_horas.id', $dados['idHora'])
+                    ->where('edu_dias_semana.id', '=', $dados['idDia']);
+            })
             ->where('edu_escola.id', $dados['idEscola'])
             ->where('edu_funcoes.funcao_professor', '1')
             ->select([
@@ -240,7 +249,6 @@ class HorariosController extends Controller
                     ->select('edu_horas.id')
                     ->join('edu_horarios', 'edu_horarios.horas_id', '=', 'edu_horas.id')
                     ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turmas_id')
-                    ->join('edu_servidor', 'edu_horarios.servidor_id', '=', 'edu_servidor.id')
                     ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_horarios.dia_semana_id')
                     ->where('edu_turmas.id', $dados['idTurma'])
                     ->where('edu_dias_semana.id', '=', $dados['idDia']);

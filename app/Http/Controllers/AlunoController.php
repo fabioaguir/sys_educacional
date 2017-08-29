@@ -216,8 +216,6 @@ class AlunoController extends Controller
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            dd($data);
-
             #Executando a ação
             $this->service->update($data, $id);
 

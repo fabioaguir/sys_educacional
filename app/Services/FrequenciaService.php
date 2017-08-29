@@ -148,7 +148,8 @@ class FrequenciaService
                     ->where('edu_dias_semana.nome', $semana)
                     ->select([
                         'edu_horarios.id',
-                        \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS nome"),
+                        //\DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS nome"),
+                        'edu_horas.obs as nome',
                         'edu_horarios.disciplinas_id'
                     ])->get();
 

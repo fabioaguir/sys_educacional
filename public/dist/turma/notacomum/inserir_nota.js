@@ -22,7 +22,6 @@ $(document).on('click', '#consultarNota', function (event) {
     nomePeriodo     = $('select[id=periodo] option:selected').text();
 
     $('#nomeAluno').text(nomeAluno);
-    $('#nomeDisciplina').text(nomeDisciplina);
     $('#nomePeriodo').text(nomePeriodo);
 
     // Verificando se os campos de preenchimento obrigatório foram preenchidos
