@@ -451,6 +451,15 @@ Route::group(['middleware' => 'auth'], function () {
             //Route::post('removerParecer', ['as' => 'removerParecer', 'uses' => 'TurmaParecerController@removerParecer']);
         });
 
+        # Modal de concelho pedagógico
+        Route::group(['prefix' => 'concelho', 'as' => 'concelho.'], function () {
+            Route::get('grid/{id}', ['as' => 'grid', 'uses' => 'ConcelhoPedagogicoController@grid']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ConcelhoPedagogicoController@store']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ConcelhoPedagogicoController@update']);
+            Route::post('remover/{id}', ['as' => 'remover', 'uses' => 'ConcelhoPedagogicoController@destroy']);
+            Route::post('getPeriodos', ['as' => 'getPeriodos', 'uses' => 'ConcelhoPedagogicoController@getPeriodos']);
+        });
+
         # rotas para atribuição de notas
         Route::group(['prefix' => 'nota', 'as' => 'nota.'], function () {
             Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'NotaController@index']);
@@ -471,6 +480,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('getDisciplinas', ['as' => 'getDisciplinas', 'uses' => 'FrequenciaController@getDisciplinas']);
             Route::post('consultar', ['as' => 'consultar', 'uses' => 'FrequenciaController@consultar']);
             Route::post('store', ['as' => 'store', 'uses' => 'FrequenciaController@store']);
+        });
+
+        # rotas para atribuição de frequência simples
+        Route::group(['prefix' => 'frequenciasimples', 'as' => 'frequenciasimples.'], function () {
+            Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'FrequenciaSimplesController@index']);
+            Route::post('consultar', ['as' => 'consultar', 'uses' => 'FrequenciaSimplesController@consultar']);
+            Route::post('store', ['as' => 'store', 'uses' => 'FrequenciaSimplesController@store']);
         });
 
     });

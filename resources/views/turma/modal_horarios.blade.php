@@ -26,12 +26,20 @@
                 <div class="row">
 
                     <div class="col-md-12">
+                        <div class="form-group col-md-3">
+                            <div class=" fg-line">
+                                <label for="tipo-turma">Turma do 6º ao 9º ano? *</label>
+                                <select class="form-control" id="tipo-turma">
+                                    <option value="">Selecione a opção</option>
+                                    <option value="1">Sim</option>
+                                    <option value="2">Não</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group col-md-2">
                             <div class=" fg-line">
                                 <label for="dia">Dia *</label>
-                                <div class="select">
-                                    {!! Form::select("dia", array(), null, array('class'=> 'form-control', 'id' => 'dia')) !!}
-                                </div>
+                                {!! Form::select("dia", array(), null, array('class'=> 'form-control', 'id' => 'dia')) !!}
                             </div>
                         </div>
                         <div class="form-group col-md-3">
@@ -56,7 +64,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-3" id="div-disciplina">
                             <div class=" fg-line">
                                 <label for="disciplina">Disciplina *</label>
                                 <div class="select">

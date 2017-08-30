@@ -29,6 +29,12 @@ class HorarioService
      */
     public function store(array $data) : Horario
     {
+
+        // Anulando o campo disciplina caso seja praa turma de 1 ao 5 ano
+        if ($data['tipo_turma'] == '2') {
+            $data['disciplinas_id'] = null;
+        }
+
         # Regras de negócios
         $this->tratamentoCampos($data);
 

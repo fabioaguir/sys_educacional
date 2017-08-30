@@ -37,18 +37,20 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
 
     // Carregando os campos selects
     disciplinasHorario("", idTurma, idSerie);
-    //professores("", idEscola);
     dias("");
 
     // Exibindo o modal
     $('#modal-horarios').modal({'show' : true});
+
+    // Ocultando por padrão o campo disciplina
+    $('#div-disciplina').hide();
 }
 
 // Id do horario
 var idHoraro;
 
 
-//Evento do click no botão adicionar período
+//Evento do click no botão adicionar horário
 $(document).on('click', '#addHorario', function (event) {
 
     //Recuperando os valores dos campos do fomulário
@@ -56,9 +58,10 @@ $(document).on('click', '#addHorario', function (event) {
     var professor    = $('#professor').val();
     var dia          = $('#dia').val();
     var hora         = $('#hora').val();
+    var tipo         = $('#tipo-turma').val();
     
     // Verificando se os campos de preenchimento obrigatório foram preenchidos
-    if (!disciplina || !professor || !dia || !hora) {
+    if (!tipo || !professor || !dia || !hora) {
         swal("Oops...", "Há campos obrigatórios que não foram preenchidos!", "error");
         return false;
     }
@@ -69,7 +72,8 @@ $(document).on('click', '#addHorario', function (event) {
         'turmas_id' : idTurma,
         'disciplinas_id' : disciplina,
         'servidor_id' : professor,
-        'dia_semana_id' : dia
+        'dia_semana_id' : dia,
+        'tipo_turma' : tipo
     };
 
     // Requisição Ajax

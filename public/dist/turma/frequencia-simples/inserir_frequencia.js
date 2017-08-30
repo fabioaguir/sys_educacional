@@ -1,4 +1,7 @@
 
+// Global idTurma
+var idTurma, idProfessor, dataInicio;
+
 //Evento do click para matricular
 $(document).on('click', '#consultarFrequencia', function (event) {
 
@@ -6,27 +9,25 @@ $(document).on('click', '#consultarFrequencia', function (event) {
     //Recuperando os valores dos campos do fomulário
     var turma    = idTurma;
     idProfessor  = $('#professor').val();
-    idDisciplina = $('#disciplina').val();
     dataInicio   = $('#data_inicio').val();
 
     // Verificando se os campos de preenchimento obrigatório foram preenchidos
-    if (!idDisciplina && !dataInicio) {
+    if (!dataInicio) {
         swal("Oops...", "Há campos obrigatórios que não foram preenchidos!", "error");
         return false;
     }
 
-    //Setando o o json para envio
+    //Setando o  json para envio
     var dados = {
         'turma' : turma,
         'professor' : idProfessor,
-        'disciplina' : idDisciplina,
         'dataInicio' : dataInicio
     };
 
     // Requisição Ajax
     jQuery.ajax({
         type: 'POST',
-        url: laroute.route('turma.frequencia.consultar'),
+        url: laroute.route('turma.frequenciasimples.consultar'),
         data: dados,
         datatype: 'json'
     }).done(function (json) {

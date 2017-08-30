@@ -44,7 +44,8 @@ class TurmaController extends Controller
         'Calendario',
         'TipoAtendimento',
         'Dependencia',
-        'Escola'
+        'Escola',
+        'ProfessorUnico'
     ];
 
     /**
@@ -108,7 +109,8 @@ class TurmaController extends Controller
                 'edu_turnos.nome as turno',
                 'edu_turnos.id as turno_id',
                 'edu_series.id as serie_id',
-                'edu_series.nome as serie'
+                'edu_series.nome as serie',
+                'edu_turmas.professor_unico_id as professor_unico'
             ]);
 
         #Editando a grid
@@ -164,6 +166,8 @@ class TurmaController extends Controller
             # Html de historico
             $html .= '<li><a id="btnModalHistorico" class="btn-floating" title="Matricula"><i class="material-icons">person_add</i></a></li>';
 
+            # Html de concelho pedagógico
+            $html .= '<li><a id="btnModalConcelho" class="btn-floating" title="Concelho pedagógico"><i class="material-icons">thumbs_up_down</i></a></li>';
 
             if ($serie['codigo'] != '1' && $serie['codigo'] != '2') {
                 // Nota Comum
@@ -172,8 +176,10 @@ class TurmaController extends Controller
                 $html .= '<li><a class="btn-floating" href="notaparecer/index/'.$row->id.'" title="Parecer"><i class="material-icons">spellcheck</i></a></li>';
             }
 
-            if ($serie['codigo'] >= '6') {
+            if ($row->professor_unico == '1') {
                 // Frequência
+                $html .= '<li><a class="btn-floating" href="frequenciasimples/index/'.$row->id.'" title="Frequência"><i class="material-icons">done</i></a></li>';
+            } else {
                 $html .= '<li><a class="btn-floating" href="frequencia/index/'.$row->id.'" title="Frequência"><i class="material-icons">done</i></a></li>';
             }
 

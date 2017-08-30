@@ -133,6 +133,51 @@ $(document).on('change', '#dia', function(){
 
 });
 
+// Ação para adaptar a montagem do horário de acordo com a série/ano da turma
+$(document).on('change', '#tipo-turma', function(){
+
+    var valor = $(this).val();
+
+    if (valor == '1') {
+        $('#div-disciplina').show();
+    } else if (!valor || valor == '2') {
+        $('#div-disciplina').hide();
+    }
+
+});
+
+
+// ############################################################################################################
+
+//Função para pegar as series para matrícula
+function periodos(id, idTurma) {
+
+    var dados = {
+        'idTurma' : idTurma
+    };
+
+    jQuery.ajax({
+        type: 'POST',
+        url: laroute.route('turma.concelho.getPeriodos'),
+        datatype: 'json',
+        data: dados
+    }).done(function (json) {
+        var option = '';
+
+        option += '<option value="">Selecione um período</option>';
+        for (var i = 0; i < json.length; i++) {
+            if (json[i]['id'] == id) {
+                option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            } else {
+                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            }
+        }
+
+        $('#periodo option').remove();
+        $('#periodo').append(option);
+    });
+}
+
 // ############################################################################################################
 
 //Função para pegar as series para matrícula

@@ -27,7 +27,8 @@ class Turma extends Model implements Transformable
         'vagas',
         'aprovacao_automatica',
         'observacao',
-        'tipo_turma_id'
+        'tipo_turma_id',
+        'professor_unico_id'
     ];
 
     /**
@@ -60,5 +61,13 @@ class Turma extends Model implements Transformable
     public function pareceres()
     {
         return $this->belongsToMany(Parecer::class, 'edu_turmas_pareceres', 'turma_id', 'parecer_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function professorUnico()
+    {
+        return $this->belongsTo(ProfessorUnico::class, 'professor_unico_id');
     }
 }

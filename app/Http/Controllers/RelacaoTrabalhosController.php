@@ -139,6 +139,10 @@ class RelacaoTrabalhosController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
         try {

@@ -66,7 +66,7 @@ class HorariosController extends Controller
             ->join('edu_horas', 'edu_horas.id', '=', 'edu_horarios.horas_id')
             ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_horas.turnos_id')
             ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_horarios.dia_semana_id')
-            ->join('edu_disciplinas', 'edu_disciplinas.id', '=', 'edu_horarios.disciplinas_id')
+            ->leftJoin('edu_disciplinas', 'edu_disciplinas.id', '=', 'edu_horarios.disciplinas_id')
             ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_horarios.servidor_id')
             ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_servidor.id_cgm')
             ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turmas_id')
@@ -117,29 +117,6 @@ class HorariosController extends Controller
         }
     }
 
-    /**
-     * @param Request $request
-     * @param $id
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, $id)
-    {
-        try {
-            #Recuperando os dados da requisição
-            $data = $request->all();
-
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            #Executando a ação
-            $this->service->update($data, $id);
-
-            # Retorno
-            return \Illuminate\Support\Facades\Response::json(['success' => true]);
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
-        }
-    }
 
     /**
      * @param $id

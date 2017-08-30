@@ -128,20 +128,29 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
                         <div class=" fg-line">
                             <label for="dependencia_id">Dependência *</label>
                             <div class="select">
-                                {!! Form::select("dependencia_id", ["" => "Selecione uma dependência"] + $loadFields['dependencia']->toArray(), null, array('class'=> 'form-control')) !!}
+                                {!! Form::select("dependencia_id", ["" => "Selecione"] + $loadFields['dependencia']->toArray(), null, array('class'=> 'form-control')) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <div class=" fg-line">
+                            <label for="turno_id">Turno *</label>
+                            <div class="select">
+                                {!! Form::select("turno_id", ["" => "Selecione um turno"] + $loadFields['turno']->toArray(), null, array('class'=> 'form-control')) !!}
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group col-md-4">
                         <div class=" fg-line">
-                            <label for="turno_id">Turno *</label>
+                            <label for="professor_unico_id">Possui mais de um professor? *</label>
                             <div class="select">
-                                {!! Form::select("turno_id", ["" => "Selecione um turno"] + $loadFields['turno']->toArray(), null, array('class'=> 'form-control')) !!}
+                                {!! Form::select("professor_unico_id", ["" => "Selecione"] + $loadFields['professorunico']->toArray(), null, array('class'=> 'form-control')) !!}
                             </div>
                         </div>
                     </div>

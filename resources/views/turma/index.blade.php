@@ -75,6 +75,7 @@
     @include('turma.modal_pareceres')
     @include('turma.modal_horarios')
     @include('turma.modal_historico')
+    @include('turma.modal_concelho_pedagogico')
 @stop
 
 @section('javascript')
@@ -85,6 +86,7 @@
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_pareceres.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_horarios.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/turma/modal_historico.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/turma/modal_conselho_pedagogico.js') }}"></script>
 
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
@@ -194,6 +196,23 @@
 
             // Executando o modal
             runModalHistorico(idTurma, idEscola, idSerie, nomeSerie);
+        });
+
+        // Evento para abrir o modal de concelho pedagógico
+        $(document).on("click", "#btnModalConcelho", function () {
+            // Recuperando o id da turma
+            idTurma = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e o código
+            var codigo = table.row($(this).parents('tr')).data().codigo;
+            var nome   = table.row($(this).parents('tr')).data().nome;
+
+            // prenchendo o titulo do nome do aluno
+            $('#cNome').text(nome);
+            $('#cCodigo').text(codigo);
+
+            // Executando o modal
+            runModalAdicionarConcelho(idTurma);
         });
     </script>
 @stop
