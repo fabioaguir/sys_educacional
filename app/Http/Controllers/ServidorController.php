@@ -146,7 +146,7 @@ class ServidorController extends Controller
 
            
             # Html de adicionar disponibilidades
-            $html .= '<li><a class="btn-floating" id="btnModalAdicionarDisponibilidade" title="Adicionar Disponibilidades"><i class="material-icons">event</i></a></li>';
+            //$html .= '<li><a class="btn-floating" id="btnModalAdicionarDisponibilidade" title="Adicionar Disponibilidades"><i class="material-icons">event</i></a></li>';
 
 
             $html .= '</ul></div>';

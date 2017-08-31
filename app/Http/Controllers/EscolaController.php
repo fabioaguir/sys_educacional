@@ -105,10 +105,10 @@ class EscolaController extends Controller
             }
 
             # Verificando a permissão de adicionar cursos
-            if($user->can('escola.add.curso')) {
+            /*if($user->can('escola.add.curso')) {
                 # Html de adicionar cursos
                 $html .= '<a style="margin-right: 3%;" title="Adicionar Cursos" id="btnModalAdicionarCursos" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';
-            }
+            }*/
 
             # Html de adicionar cursos
             $html .= '<a title="Adicionar Dependência" id="btnModalAdicionarDependencias" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a>';

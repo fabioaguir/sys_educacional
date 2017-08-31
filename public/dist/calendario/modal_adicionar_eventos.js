@@ -16,7 +16,7 @@ function loadTableEventos (idCalendario) {
             {data: 'data_feriado', name: 'edu_feriados_eventos.data_feriado'},
             {data: 'dia_semana', name: 'edu_feriados_eventos.dia_semana'},
             {data: 'dia_letivo', name: 'edu_dia_letivo.nome'},
-            {data: 'edu_tipo_evento', name: 'edu_tipo_evento.nome'},
+            {data: 'tipo_evento', name: 'edu_tipo_evento.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

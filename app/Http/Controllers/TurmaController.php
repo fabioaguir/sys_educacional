@@ -95,6 +95,7 @@ class TurmaController extends Controller
             ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_turmas.curriculo_id')
             ->join('edu_series', 'edu_series.id', '=', 'edu_turmas.serie_id')
             ->join('edu_formas_avaliacoes', 'edu_formas_avaliacoes.id', '=', 'edu_turmas.forma_avaliacao_id')
+            ->join('edu_tipos_resultados', 'edu_tipos_resultados.id', '=', 'edu_formas_avaliacoes.tipo_resultado_id')
             ->join('edu_dependencias', 'edu_dependencias.id', '=', 'edu_turmas.dependencia_id')
             ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
             ->where('edu_turmas.tipo_turma_id', 1)
@@ -110,7 +111,8 @@ class TurmaController extends Controller
                 'edu_turnos.id as turno_id',
                 'edu_series.id as serie_id',
                 'edu_series.nome as serie',
-                'edu_turmas.professor_unico_id as professor_unico'
+                'edu_turmas.professor_unico_id as professor_unico',
+                'edu_tipos_resultados.id as tipo_resultado'
             ]);
 
         #Editando a grid
@@ -169,10 +171,10 @@ class TurmaController extends Controller
             # Html de concelho pedagógico
             $html .= '<li><a id="btnModalConcelho" class="btn-floating" title="Concelho pedagógico"><i class="material-icons">thumbs_up_down</i></a></li>';
 
-            if ($serie['codigo'] != '1' && $serie['codigo'] != '2') {
+            if ($row->tipo_resultado == '1') {
                 // Nota Comum
                 $html .= '<li><a class="btn-floating" href="nota/index/'.$row->id.'" title="Nota"><i class="material-icons">spellcheck</i></a></li>';
-            } else {
+            } else if ($row->tipo_resultado == '3') {
                 $html .= '<li><a class="btn-floating" href="notaparecer/index/'.$row->id.'" title="Parecer"><i class="material-icons">spellcheck</i></a></li>';
             }
 

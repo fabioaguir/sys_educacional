@@ -22,7 +22,7 @@ class Parecer extends Model implements Transformable
      */
     public function turmas()
     {
-        return $this->belongsToMany(Turma::class, 'turmas_pareceres', 'parecer_id', 'turma_id');
+        return $this->belongsToMany(Turma::class, 'edu_turmas_pareceres', 'parecer_id', 'turma_id');
     }
 
 }

@@ -34,7 +34,7 @@ class CurriculosController extends Controller
         'Turno',
         'Serie',
         'Disciplina',
-        'Frequencia',
+        'FrequenciaCurriculo',
         'ControleFrequencia'
     ];
 

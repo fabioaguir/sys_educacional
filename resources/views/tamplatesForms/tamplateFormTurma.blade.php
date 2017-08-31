@@ -62,7 +62,7 @@
 
                     <div class="form-group col-md-4">
                         <div class=" fg-line">
-                            <label for="curriculo_id">Base Curricular *</label>
+                            <label for="curriculo_id">Matriz Curricular *</label>
                             <div class="select">
                                 @if(isset($model->curriculo))
                                     {!! Form::select("curriculo_id", [$model->curriculo->id => $model->curriculo->nome], null,

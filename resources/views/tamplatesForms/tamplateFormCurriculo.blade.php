@@ -1,5 +1,5 @@
 <div class="block-header">
-    <h2>Cadastro de Bases Currículares</h2>
+    <h2>Cadastro de Matriz Curricular</h2>
 </div>
 <div class="card">
     <div class="card-body card-padding">
@@ -38,8 +38,8 @@
 
                     <div class="form-group col-md-4">
                         <div class="fg-line">
-                            <label for="frequencia_id">Frequência</label>
-                            {!! Form::select("frequencia_id", ["" => "Selecione uma frequência"] + $loadFields['frequencia']->toArray(), null, array('class'=> 'form-control')) !!}
+                            <label for="frequencia_curriculo_id">Frequência</label>
+                            {!! Form::select("frequencia_curriculo_id", ["" => "Selecione uma frequência"] + $loadFields['frequenciacurriculo']->toArray(), null, array('class'=> 'form-control')) !!}
                         </div>
                     </div>
 
