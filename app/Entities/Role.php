@@ -47,6 +47,6 @@ class Role extends Model implements RoleHasRelationsContract
      */
     public function scopeResolvedName($query)
     {
-        return $query->select('name as nome', 'id');
+        return $query->where('roles.sistema', 1)->select('name as nome', 'id');
     }
 }

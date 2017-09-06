@@ -28,9 +28,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <div class="fg-line">
+                                        <div class="fg-line">
+                                            <label for="password">Senha *</label>
+                                            {!! Form::password('password', array('class' => 'form-control input-sm', 'placeholder' => 'Senha do Usuário')) !!}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group col-md-4">
                                     <div class="fg-line">
                                         <div class="fg-line">
@@ -42,15 +47,16 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-4">
-                                    <div class="fg-line">
-                                        <div class="fg-line">
-                                            <label for="password">Senha *</label>
-                                            {!! Form::password('password', array('class' => 'form-control input-sm', 'placeholder' => 'Senha do Usuário')) !!}
+                                <div class="form-group col-sm-6">
+                                    <div class=" fg-line">
+                                        <label for="escola">Escola</label>
+                                        <div class="select">
+                                            {!! Form::select("escola", (["" => "Selecione"] + $loadFields['escola']->toArray()), null, array('class' => 'form-control')) !!}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <!-- Fim Dados Gerais -->
 

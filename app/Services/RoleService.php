@@ -58,7 +58,8 @@ class RoleService
     public function store(array $data) : Role
     {
         #tratando o slug
-        $data['slug'] = $data['name'];
+        $data['slug']    = $data['name'];
+        $data['sistema'] = 1;
 
         #Salvando o registro pincipal
         $role =  $this->repository->create($data);

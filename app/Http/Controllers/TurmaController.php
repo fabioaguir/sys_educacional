@@ -155,10 +155,10 @@ class TurmaController extends Controller
             }
 
             # Verificando a permissão dos pareceres
-            if($user->can('turma.parecer')) {
+            /*if($user->can('turma.parecer')) {
                 # Html de pareceres
                 $html .= '<li><a id="btnModalPareceres" class="btn-floating" title="Pareceres"><i class="material-icons">content_paste</i></a></li>';
-            }
+            }*/
 
             # Verificando a permissão dos pareceres
             
