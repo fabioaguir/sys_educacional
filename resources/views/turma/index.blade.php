@@ -97,7 +97,7 @@
                 {data: 'nome', name: 'edu_turmas.nome'},
                 {data: 'serie', name: 'edu_series.nome'},
                 {data: 'codigo', name: 'edu_turmas.codigo'},
-                {data: 'escola', name: 'edu_escola.codigo'},
+                {data: 'escola', name: 'edu_escola.nome'},
                 {data: 'curso', name: 'edu_cursos.codigo'},
                 {data: 'curriculo', name: 'edu_curriculos.codigo'},
                 {data: 'turno', name: 'edu_turnos.nome'},

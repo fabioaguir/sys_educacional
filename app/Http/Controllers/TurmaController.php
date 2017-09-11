@@ -77,6 +77,7 @@ class TurmaController extends Controller
      */
     public function index()
     {
+
         # Retorno para view
         return view('turma.index');
     }
@@ -86,6 +87,9 @@ class TurmaController extends Controller
      */
     public function grid()
     {
+
+        $servidor = Auth::user();
+
         #Criando a consulta
         $rows = \DB::table('edu_turmas')
             ->join('edu_escola', 'edu_escola.id', '=', 'edu_turmas.escola_id')
@@ -103,7 +107,7 @@ class TurmaController extends Controller
                 'edu_turmas.id',
                 'edu_turmas.nome',
                 'edu_turmas.codigo',
-                'edu_escola.codigo as escola',
+                'edu_escola.nome as escola',
                 'edu_escola.id as escola_id',
                 'edu_cursos.codigo as curso',
                 'edu_curriculos.codigo as curriculo',
@@ -114,6 +118,13 @@ class TurmaController extends Controller
                 'edu_turmas.professor_unico_id as professor_unico',
                 'edu_tipos_resultados.id as tipo_resultado'
             ]);
+
+
+        // Pegas as turmas apenas de escola selecionada ao se autenticar
+        if (\Session::has('escola')) {
+            $rows->where('edu_escola.id', \Session::get('escola')->id);
+        }
+
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -171,6 +182,16 @@ class TurmaController extends Controller
             # Html de concelho pedagógico
             $html .= '<li><a id="btnModalConcelho" class="btn-floating" title="Concelho pedagógico"><i class="material-icons">thumbs_up_down</i></a></li>';
 
+            /*$profTurma = "";
+            if ($user->tipo_usuario_id == 4) {
+                $profTurma = \DB::table('edu_horarios')
+                    ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turnas_id')
+                    ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_horarios.servidor_id')
+                    ->where('edu_servidor.id', $user->edu_servidor_id)
+                    ->where('edu_turnas.id', $row->id)
+                    ->first();
+            }*/
+
             if ($row->tipo_resultado == '1') {
                 // Nota Comum
                 $html .= '<li><a class="btn-floating" href="nota/index/'.$row->id.'" title="Nota"><i class="material-icons">spellcheck</i></a></li>';
@@ -180,9 +201,9 @@ class TurmaController extends Controller
 
             if ($row->professor_unico == '1') {
                 // Frequência
-                $html .= '<li><a class="btn-floating" href="frequenciasimples/index/'.$row->id.'" title="Frequência"><i class="material-icons">done</i></a></li>';
-            } else {
                 $html .= '<li><a class="btn-floating" href="frequencia/index/'.$row->id.'" title="Frequência"><i class="material-icons">done</i></a></li>';
+            } else {
+                $html .= '<li><a class="btn-floating" href="frequenciasimples/index/'.$row->id.'" title="Frequência"><i class="material-icons">done</i></a></li>';
             }
 
 

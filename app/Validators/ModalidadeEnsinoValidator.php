@@ -7,6 +7,9 @@ use \Prettus\Validator\LaravelValidator;
 
 class ModalidadeEnsinoValidator extends LaravelValidator
 {
+
+    use TraitReplaceRulesValidator;
+
     protected $attributes = [
         'nome' => 'Nome',
         'codigo' => 'Código',

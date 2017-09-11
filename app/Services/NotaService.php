@@ -4,6 +4,8 @@ namespace SerEducacional\Services;
 
 use SerEducacional\Repositories\NotaRepository;
 use SerEducacional\Entities\Nota;
+use SerEducacional\Repositories\TurmaRepository;
+use Illuminate\Support\Facades\Auth;
 
 class NotaService
 {
@@ -15,11 +17,18 @@ class NotaService
     private $repository;
 
     /**
+     * @var TurmaRepository
+     */
+    private $turmaRepository;
+
+    /**
      * @param NotaRepository $repository
      */
-    public function __construct(NotaRepository $repository)
+    public function __construct(NotaRepository $repository,
+                                TurmaRepository $turmaRepository)
     {
-        $this->repository = $repository;
+        $this->repository      = $repository;
+        $this->turmaRepository = $turmaRepository;
     }
 
     /**
@@ -77,45 +86,6 @@ class NotaService
         return $notas;
     }
 
-    /**
-     * @param array $data
-     * @return Nota
-     * @throws \Exception
-     */
-    public function storeOld(array $data) : Nota
-    {
-
-        # tratando as notas caso venham vazia
-        $data['nota_ativ1'] = $data['nota_ativ1'] ? $data['nota_ativ1'] : null;
-        $data['nota_ativ2'] = $data['nota_ativ2'] ? $data['nota_ativ2'] : null;
-        $data['nota_ativ3'] = $data['nota_ativ3'] ? $data['nota_ativ3'] : null;
-        $data['nota_verif_aprend'] = $data['nota_verif_aprend'] ? $data['nota_verif_aprend'] : null;
-        $data['media'] = $data['media'] ? $data['media'] : null;
-        $data['recup_paralela'] = $data['recup_paralela'] ? $data['recup_paralela'] : null;
-        $data['nota_para_recup'] = $data['nota_para_recup'] ? $data['nota_para_recup'] : null;
-
-        # calculando a média caso as 3 antas de atividade sejam calculadas
-        if($data['nota_ativ1'] && $data['nota_ativ2'] && $data['nota_ativ3']) {
-            $media = ($data['nota_ativ1'] + $data['nota_ativ2'] + $data['nota_ativ3']) / 3;
-            $data['media'] = number_format($media, 2, '.', ' ');
-        }
-
-        if(isset($data['idNota']) && $data['idNota']) {
-            #Editando o registro pincipal
-            $nota =  $this->repository->update($data, $data['idNota']);
-        } else {
-            #Salvando o registro pincipal
-            $nota =  $this->repository->create($data);
-        }
-
-        #Verificando se foi criado no banco de dados
-        if(!$nota) {
-            throw new \Exception('Ocorreu um erro ao cadastrar!');
-        }
-
-        #Retorno
-        return $nota;
-    }
 
     /**
      * @param array $data
@@ -160,40 +130,17 @@ class NotaService
 
 
     /**
-     * @param array $data
-     * @return mixed
-     */
-    public function consultarOld(array $data)
-    {
-
-        # Trazendo as notas do aluno
-        $notas = \DB::table('edu_notas')
-            ->where('edu_notas.turma_id', $data['turma'])
-            ->where('edu_notas.aluno_id', $data['aluno'])
-            ->where('edu_notas.periodo_id', $data['periodo'])
-            ->where('edu_notas.disciplina_id', $data['disciplina'])
-            ->select([
-                'edu_notas.id',
-                'edu_notas.nota_ativ1',
-                'edu_notas.nota_ativ2',
-                'edu_notas.nota_ativ3',
-                'edu_notas.nota_verif_aprend',
-                'edu_notas.media',
-                'edu_notas.recup_paralela',
-                'edu_notas.nota_para_recup',
-            ])->first();
-
-        #retorno
-        return $notas;
-    }
-
-    /**
      * @param int $id
      * @return bool
      * @throws \Exception
      */
     public function loadFields(int $id)
     {
+        # Recuperando a turma
+        $turma = $this->turmaRepository->find($id);
+
+        # Pegando o usuário autenticado
+        $user = Auth::user();
 
         # Trazendo os alunos da turma
         $alunos = \DB::table('edu_alunos')
@@ -220,19 +167,40 @@ class NotaService
                 'edu_periodos.id'
             ])->get();
 
-        # Trazendo os alunos as disciplnas
-        $disciplinas = \DB::table('edu_curriculos_series_disciplinas')
-            ->join('edu_disciplinas', 'edu_disciplinas.id', '=', 'edu_curriculos_series_disciplinas.disciplina_id')
-            ->join('edu_curriculos_series', 'edu_curriculos_series.id', '=', 'edu_curriculos_series_disciplinas.curriculo_serie_id')
-            ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_curriculos_series.curriculo_id')
-            ->join('edu_series', 'edu_series.id', '=', 'edu_curriculos_series.serie_id')
-            ->join('edu_turmas', 'edu_series.id', '=', 'edu_turmas.serie_id')
-            ->where('edu_turmas.id', $id)
-            ->orderBy('edu_disciplinas.nome', 'ASC')
-            ->select([
-                'edu_disciplinas.nome',
-                'edu_disciplinas.id'
-            ])->get();
+
+        if ($turma->professor_unico_id == 2 ||
+            ($user->tipo_usuario_id == 1 || $user->tipo_usuario_id == 2 || $user->tipo_usuario_id == 3)) {
+
+            # Pegando as disciplnas
+            $disciplinas = \DB::table('edu_curriculos_series_disciplinas')
+                ->join('edu_disciplinas', 'edu_disciplinas.id', '=', 'edu_curriculos_series_disciplinas.disciplina_id')
+                ->join('edu_curriculos_series', 'edu_curriculos_series.id', '=', 'edu_curriculos_series_disciplinas.curriculo_serie_id')
+                ->join('edu_curriculos', 'edu_curriculos.id', '=', 'edu_curriculos_series.curriculo_id')
+                ->join('edu_series', 'edu_series.id', '=', 'edu_curriculos_series.serie_id')
+                ->join('edu_turmas', 'edu_series.id', '=', 'edu_turmas.serie_id')
+                ->where('edu_turmas.id', $id)
+                ->orderBy('edu_disciplinas.nome', 'ASC')
+                ->select([
+                    'edu_disciplinas.nome',
+                    'edu_disciplinas.id'
+                ])->get();
+
+        } else {
+
+            # Pegando as disciplnas
+            $disciplinas = \DB::table('edu_disciplinas')
+                ->join('edu_horarios', 'edu_disciplinas.id', '=', 'edu_horarios.disciplinas_id')
+                ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turmas_id')
+                ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_horarios.servidor_id')
+                ->where('edu_turmas.id', $id)
+                ->where('edu_servidor.id', $user->edu_servidor_id)
+                ->groupBy('edu_disciplinas.id', 'edu_disciplinas.nome')
+                ->orderBy('edu_disciplinas.nome', 'ASC')
+                ->select([
+                    'edu_disciplinas.nome',
+                    'edu_disciplinas.id'
+                ])->get();
+        }
 
         #retorno
         return ['alunos' => $alunos, 'periodos' => $periodos, 'disciplinas' => $disciplinas];

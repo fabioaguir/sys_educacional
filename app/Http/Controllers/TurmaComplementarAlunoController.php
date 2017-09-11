@@ -41,11 +41,11 @@ class TurmaComplementarAlunoController extends Controller
             ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_alunos_turmas_complementares.turma_complementar_id')
             ->join('edu_alunos', 'edu_alunos.id', '=', 'edu_alunos_turmas_complementares.aluno_id')
             ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
-            ->join('edu_alunos_turmas', function ($join) {
+            ->join('edu_historico', function ($join) {
                 $join->on(
-                    'edu_alunos_turmas.id', '=',
-                    \DB::raw('(SELECT turma_atual.id FROM edu_alunos_turmas as turma_atual
-                        where turma_atual.alunos_id = edu_alunos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                    'edu_historico.id', '=',
+                    \DB::raw('(SELECT edu_historico.id FROM edu_historico
+                        where edu_historico.aluno_id = edu_alunos.id ORDER BY edu_historico.id DESC LIMIT 1)')
                 );
             })
             ->select([
@@ -53,7 +53,7 @@ class TurmaComplementarAlunoController extends Controller
                 'edu_alunos.codigo as matricular',
                 'gen_cgm.nome',
                 \DB::raw('DATE_FORMAT(edu_alunos_turmas_complementares.data_inclusao, "%d/%m/%Y") as data_inclusao'),
-                \DB::raw('DATE_FORMAT(edu_alunos_turmas.data_matricula, "%d/%m/%Y") as data_matricula')
+                \DB::raw('DATE_FORMAT(edu_historico.data_matricula, "%d/%m/%Y") as data_matricula')
             ])
             ->where('edu_turmas.id', $idTurmaComplementar);
 
@@ -91,14 +91,18 @@ class TurmaComplementarAlunoController extends Controller
 
             # QUery Principal
             $query = \DB::table('edu_alunos')
-                ->join('edu_alunos_turmas', function ($join) {
+                ->join('edu_historico', function ($join) {
                     $join->on(
-                        'edu_alunos_turmas.id', '=',
-                        \DB::raw('(SELECT turma_atual.id FROM edu_alunos_turmas as turma_atual
-                        where turma_atual.alunos_id = edu_alunos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                        'edu_historico.id', '=',
+                        \DB::raw('(SELECT edu_historico.id FROM edu_historico
+                        where edu_historico.aluno_id = edu_alunos.id ORDER BY edu_historico.id DESC LIMIT 1)')
                     );
                 })
                 ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
+                ->leftJoin('edu_escola', 'edu_escola.id', '=', 'edu_historico.turma_id')
+                ->leftJoin('edu_situacao_matricula', 'edu_situacao_matricula.id', '=', 'edu_historico.situacao_matricula_id')
+                ->where('edu_escola.id', \Session::get('escola')->id)
+                ->where('edu_historico.situacao_matricula_id', '=', "1")
                 ->whereNotIn('edu_alunos.id', function ($where) use ($idTurmaComplementar) {
                    $where->from('edu_alunos')
                        ->select('edu_alunos.id')

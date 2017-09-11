@@ -15,6 +15,7 @@ class EscolaValidator extends LaravelValidator
         'inep' => 'INEP',
         'portaria' => 'Portaria',
         'dt_pub_portaria' => 'Data de Publicação',
+        'latitude' => 'Latitude',
 
         //endereço
         'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',

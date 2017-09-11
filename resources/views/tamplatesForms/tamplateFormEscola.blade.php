@@ -132,7 +132,7 @@
                             <div class="fg-line">
                                 <div class="fg-line">
                                     <label for="latitude">Latitude</label>
-                                    {!! Form::text("latitude", Session::getOldInput("latitude"), array('class' => 'form-control input-sm', 'placeholder' => 'Latitude')) !!}
+                                    {!! Form::text("latitude", Session::getOldInput("latitude"), array('class' => 'form-control input-sm area', 'placeholder' => 'Latitude')) !!}
                                 </div>
                             </div>
                         </div>

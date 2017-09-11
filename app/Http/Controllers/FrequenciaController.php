@@ -11,6 +11,7 @@ use SerEducacional\Repositories\FrequenciaRepository;
 use SerEducacional\Services\FrequenciaService;
 use SerEducacional\Validators\FrequenciaValidator;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
 
 
 class FrequenciaController extends Controller
@@ -59,13 +60,31 @@ class FrequenciaController extends Controller
     public function index($idTurma)
     {
 
-        #Carregando os dados para o cadastro
-        $loadFields = $this->service->loadFields($idTurma);
+        $user = Auth::user();
 
-        $professores = $loadFields;
+        // Valida se o servidor autenticado é um administrador ou professor
+        if ($user->tipo_usuario_id == 1 || $user->tipo_usuario_id == 2 || $user->tipo_usuario_id == 3) {
+            #Carregando os dados para o cadastro
+            $loadFields  = $this->service->loadFields($idTurma);
 
-        # Retorno para view
-        return view('turma.frequencia.create', compact('idTurma', 'professores'));
+            $professores = $loadFields;
+
+            # Retorno para view
+            return view('turma.frequencia.create', compact('idTurma', 'professores'));
+
+        } else if ($user->tipo_usuario_id == 4) {
+
+            $dados['idTurma']     = $idTurma;
+            $dados['idProfessor'] = $user->edu_servidor_id;
+
+            #Carregando os dados para o cadastro
+            $disciplinas = $this->service->getDisciplinas($dados);
+
+            # Retorno para view
+            return view('turma.frequencia.create', compact('idTurma', 'disciplinas'));
+
+        }
+
     }
 
     /**

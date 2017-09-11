@@ -30,26 +30,33 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            <div class="form-group col-md-3">
-                                <div class=" fg-line">
-                                    <label for="professor">Professores *</label>
-                                    <select class="form-control" id="professor">
-                                        <option value="" >Selecione o professor</option>
-                                        @foreach($professores as $professore)
-                                            <option value="{{ $professore->id }}">{{ $professore->nome }}</option>
-                                        @endforeach
-                                    </select>
+                            @if(Auth::user()->tipo_usuario_id == 1
+                            || Auth::user()->tipo_usuario_id == 2
+                            || Auth::user()->tipo_usuario_id == 3)
+                                <div class="form-group col-md-3">
+                                    <div class=" fg-line">
+                                        <label for="professor">Professores *</label>
+                                        <select class="form-control" id="professor">
+                                            @foreach($professores as $professore)
+                                                <option value="{{ $professore->id }}">{{ $professore->nome }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                                <input type="hidden" value="{{ Auth::user()->edu_servidor_id }}" id="professor">
+                            @endif
 
                             <div class="form-group col-md-3">
                                 <div class=" fg-line">
                                     <label for="disciplina">Disciplina *</label>
                                     <select class="form-control" id="disciplina">
-                                        {{--<option value="" >Selecione a disciplina</option>--}}
-                                        {{--@foreach($periodos as $periodo)
-                                            <option value="{{ $periodo->id }}">{{ $periodo->nome }}</option>
-                                        @endforeach--}}
+                                        @if(Auth::user()->tipo_usuario_id == 4)
+                                            <option value="" >Selecione a disciplina</option>
+                                            @foreach($disciplinas as $disciplina)
+                                                <option value="{{ $disciplina->id }}">{{ $disciplina->nome }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>

@@ -319,6 +319,11 @@
     $.validator.setDefaults({
         ignore: []
     });
+
+    @if(!Session::has('escola'))
+        $('#modal-escolas').modal({'show': true});
+    @endif
+
 </script>
 
 @yield('javascript')

@@ -47,12 +47,18 @@
                             </div>
 
                             <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <div class=" fg-line">
+                                        <label for="tipo_usuario_id">Qual tipo do usuário? *</label>
+                                        <div class="select">
+                                            {!! Form::select("tipo_usuario_id", (["" => "Selecione"] + $loadFields['tipousuario']->toArray()), null, array('class' => 'form-control')) !!}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group col-sm-6">
                                     <div class=" fg-line">
-                                        <label for="escola">Escola</label>
-                                        <div class="select">
-                                            {!! Form::select("escola", (["" => "Selecione"] + $loadFields['escola']->toArray()), null, array('class' => 'form-control')) !!}
-                                        </div>
+                                        <label for="edu_servidor_id">Servidor *</label><br />
+                                        {!! Form::select("edu_servidor_id", array() , null, array('id' => 'servidor', 'class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -96,4 +102,44 @@
 
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/user.js')  }}"></script>
+    <script type="text/javascript">
+
+
+        $("#servidor").select2({
+            placeholder: 'Selecione:',
+            theme: "bootstrap",
+            ajax: {
+                type: 'POST',
+                url: "/index.php/util/select2",
+                dataType: 'json',
+                delay: 250,
+                crossDomain: true,
+                data: function (params) {
+                    return {
+                        'search':     params.term, // search term
+                        'tableName':  'edu_servidor',
+                        'fieldName':  'nome',
+                        'joinTable':  'gen_cgm',
+                        'joinName':   'id_cgm',
+                        'page':       params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.data,
+                        pagination: {
+                            more: data.more
+                        }
+                    };
+                }
+            }
+        });
+
+    </script>
 @endsection

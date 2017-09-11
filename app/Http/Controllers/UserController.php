@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     private $loadFields = [
         'Role|resolvedName',
-        'Escola'
+        'TipoUsuario'
     ];
 
     /**

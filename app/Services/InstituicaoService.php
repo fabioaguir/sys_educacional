@@ -110,7 +110,8 @@ class InstituicaoService
         $findInstituicao = $this->repository->find($id);
 
         // Busca endereco
-        $findEndereco = \DB::table('endereco')->where('id', '=', $findInstituicao->endereco_id)->first();
+        $findEndereco = \DB::table('gen_endereco')->where('id', '=', $findInstituicao->endereco_id)->first();
+
 
         if ($findEndereco) {
 

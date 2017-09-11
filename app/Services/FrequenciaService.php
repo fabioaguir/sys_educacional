@@ -55,7 +55,7 @@ class FrequenciaService
      */
     public function getDisciplinas(array $data)
     {
-        $professores = \DB::table('edu_disciplinas')
+        $disciplinas = \DB::table('edu_disciplinas')
             ->join('edu_horarios', 'edu_horarios.disciplinas_id', '=', 'edu_disciplinas.id')
             ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_horarios.servidor_id')
             ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turmas_id')
@@ -67,7 +67,7 @@ class FrequenciaService
                 'edu_disciplinas.nome as nome',
             ])->get();
 
-        return $professores;
+        return $disciplinas;
     }
 
     /**

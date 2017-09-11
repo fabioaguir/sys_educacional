@@ -8,6 +8,8 @@ use \Prettus\Validator\LaravelValidator;
 class FuncaoValidator extends LaravelValidator
 {
 
+    use TraitReplaceRulesValidator;
+
     protected $attributes = [
         'nome' => 'Nome',
         'sigla' => 'Sigla',

@@ -417,15 +417,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-sm-4">
+                        {{--<div class="form-group col-sm-4">
                             <div class=" fg-line">
                                 <label for="servidor[habilitacao_escolaridade_id]">Habilitação\Escolaridade</label>
                                 <div class="select">
-                                    {{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}
+                                    --}}{{--["" => "Selecione bairro"] + $loadFields['bairro']->toArray()--}}{{--
                                     {!! Form::select("habilitacao_escolaridade_id", (["" => "Selecione"] + $loadFields['habilitacaoescolaridade']->toArray()), null, array('class'=> 'form-control')) !!}
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
 
                     <div class="row">

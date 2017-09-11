@@ -530,6 +530,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['middleware' => 'permission:parecer.update', 'as' => 'update', 'uses' => 'ParecerController@update']);
         Route::get('destroy/{id}', ['middleware' => 'permission:parecer.destroy', 'as' => 'destroy', 'uses' => 'ParecerController@destroy']);
     });
+
+    Route::group(['prefix' => 'util', 'as' => 'util.'], function () {
+        Route::post('search', ['as' => 'search', 'uses' => 'UtilController@search']);
+        Route::post('select2', ['as' => 'select2', 'uses' => 'UtilController@queryByselect2']);
+    });
+
+    Route::group(['prefix' => 'default', 'as' => 'default.'], function () {
+        Route::post('changeescola', ['as' => 'changeescola', 'uses' => 'DefaultController@changeEscola']);
+    });
+
 });
 
 # ROtas de autenticação

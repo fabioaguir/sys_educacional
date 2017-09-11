@@ -50,6 +50,9 @@ class LoginController extends Controller
      */
     public function logout()
     {
+
+        \Session::flush();
+
         # Logout
         Auth::logout();
 
