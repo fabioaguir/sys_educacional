@@ -56,12 +56,10 @@
             <a href="index.html">SerEducacional</a>
         </li>
 
-        <li class="pull-right">
+        <li class="pull-left">
             <ul class="hi-menu">
-
-
                 <li class="hidden-xs ma-trigger" data-ma-action="sidebar-open" data-ma-target="#chat">
-                    <a href=""><i class="him-icon zmdi zmdi-comment-alt-text"></i></a>
+                    <a href="" id="trocar-escola" style="text-transform: uppercase; left: 85px; top: 10px">{{ Session::get('escola')->nome }}</a>
                 </li>
             </ul>
         </li>
@@ -323,6 +321,10 @@
     @if(!Session::has('escola'))
         $('#modal-escolas').modal({'show': true});
     @endif
+
+    $(document).on('click', '#trocar-escola', function(){
+        $('#modal-escolas').modal({'show': true});
+    });
 
 </script>
 
