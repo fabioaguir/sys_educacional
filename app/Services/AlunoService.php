@@ -112,6 +112,10 @@ class AlunoService
      */
     public function store(array $data) : Aluno
     {
+
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
+
         # Regras de negócios
         $this->tratamentoCampos($data);
         $this->tratamentoCampos($data['cgm']['endereco']);
@@ -130,6 +134,29 @@ class AlunoService
 
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
+
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE gen_cgm SET path_image = '{$imgCam}', tipo_img = 2 where id = {$pessoaFisica->id}";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($aluno->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE gen_cgm SET path_image = '{$imgCam}', tipo_img = 2 where id = {$pessoaFisica->id} ";
+
+            $pdo->query($query);
+
+        }
 
         #metodo responsavel por salvar o telefone do aluno
         $this->tratamentoTelefone($data, $pessoaFisica->id);
@@ -151,6 +178,11 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
+
+
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
+
         $this->tratamentoCampos($data);
         $this->tratamentoCampos($data['cgm']['endereco']);
 
@@ -161,13 +193,48 @@ class AlunoService
         $pessoaFisica = $this->pessoaFisicaRepository->find($aluno->cgm_id);
         $this->pessoaFisicaRepository->update($data['cgm'], $pessoaFisica->id);
 
-        #buscando e atualizando registro de endereço (tabela endereco)
-        $endereco = $this->enderecoRepository->find($pessoaFisica->endereco_id);
-        $this->enderecoRepository->update($data['cgm']['endereco'], $endereco->id);
+        if(isset($pessoaFisica->endereco_id)) {
+            #buscando e atualizando registro de endereço (tabela endereco)
+            $endereco = $this->enderecoRepository->find($pessoaFisica->endereco_id);
+            $this->enderecoRepository->update($data['cgm']['endereco'], $endereco->id);
+
+        } else {
+            $endereco = $this->enderecoRepository->create($data['cgm']['endereco']);
+            $pessoaFisica->endereco_id = $endereco->id;
+            $pessoaFisica->save();
+        }
 
         #buscando e atualizando registro de telefone (tabela telefones)
         $telefone = $this->telefoneRepository->findWhere(['cgm_id' => $pessoaFisica->id]);
-        $dados = $this->telefoneRepository->update($data['telefone'], $telefone[0]->id);
+        if(count($telefone) > 0) {
+            $this->telefoneRepository->update($data['telefone'], $telefone[0]->id);
+        } else {
+            $data['telefone']['cgm_id'] = $pessoaFisica->id;
+            $this->telefoneRepository->create($data['telefone']);
+        }
+
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE gen_cgm SET path_image = '{$imgCam}', tipo_img = 2 where id = {$pessoaFisica->id}";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($aluno->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE gen_cgm SET path_image = '{$imgCam}', tipo_img = 2 where id = {$pessoaFisica->id}";
+
+            $pdo->query($query);
+
+        }
 
         #Verificando se foi atualizado no banco de dados
         if(!$aluno) {
@@ -219,5 +286,33 @@ class AlunoService
 
         #retorno
         return $aluno;
+    }
+
+    /**
+     * @param $id
+     */
+    public function insertImg($id, $tipo)
+    {
+        #tratando a imagem
+        if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
+
+            $tmpName = $_FILES['img']['tmp_name'];
+
+            $fp = fopen($tmpName, 'r');
+
+            $add = fread($fp, filesize($tmpName));
+
+            $add = addslashes($add);
+
+            fclose($fp);
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE gen_cgm SET path_image = '{$add}', tipo_img = {$tipo} where id =  $id ";
+
+            $pdo->query($query);
+
+        }
+
     }
 }

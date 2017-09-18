@@ -165,10 +165,13 @@ class AlunoTurmasController extends Controller
     public function getTurma(Request $request)
     {
 
+        $escola = \Session::get('escola')->id;
+
         $turmas = \DB::table('edu_turmas')
             ->join('edu_tipo_turmas', 'edu_tipo_turmas.id', '=', 'edu_turmas.tipo_turma_id')
             ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_turmas.turno_id')
             ->where('edu_tipo_turmas.id', '=', '1')
+            ->where('edu_turmas.escola_id', $escola)
             ->select([
                     'edu_turmas.id',
                     \DB::raw('CONCAT(edu_turmas.nome, " - " , edu_turnos.nome) as nome'),

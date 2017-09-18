@@ -50,6 +50,8 @@ class PessoaFisica extends Model implements Transformable
         'numero_zona',
         'carteira_prof',
         'serie_carteira',
+        'path_image',
+        'tipo_img'
     ];
 
     /**

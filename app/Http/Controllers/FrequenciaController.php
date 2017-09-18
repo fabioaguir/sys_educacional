@@ -62,15 +62,18 @@ class FrequenciaController extends Controller
 
         $user = Auth::user();
 
+        $turma = \DB::table('edu_turmas')->where('id', $idTurma)->first();
+
         // Valida se o servidor autenticado é um administrador ou professor
         if ($user->tipo_usuario_id == 1 || $user->tipo_usuario_id == 2 || $user->tipo_usuario_id == 3) {
+
             #Carregando os dados para o cadastro
             $loadFields  = $this->service->loadFields($idTurma);
 
             $professores = $loadFields;
 
             # Retorno para view
-            return view('turma.frequencia.create', compact('idTurma', 'professores'));
+            return view('turma.frequencia.create', compact('idTurma', 'professores', 'turma'));
 
         } else if ($user->tipo_usuario_id == 4) {
 
@@ -81,7 +84,7 @@ class FrequenciaController extends Controller
             $disciplinas = $this->service->getDisciplinas($dados);
 
             # Retorno para view
-            return view('turma.frequencia.create', compact('idTurma', 'disciplinas'));
+            return view('turma.frequencia.create', compact('idTurma', 'disciplinas', 'turma'));
 
         }
 

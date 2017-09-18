@@ -46,28 +46,63 @@
                     @endpermission
                 </div>
 
-                <div class="table-responsive">
-                    <table id="aluno-grid" class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Codigo</th>
-                                <th>Data de Nascimento</th>
-                                <th>Nome da Mãe</th>
-                                <th>Açao</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Codigo</th>
-                                <th>Data de Nascimento</th>
-                                <th>Nome da Mãe</th>
-                                <th>Açao</th>
-                            </tr>
-                            </tfoot>
-                    </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table id="aluno-grid" class="table table-hover compact">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Codigo</th>
+                                    <th>Data de Nascimento</th>
+                                    <th>Nome da Mãe</th>
+                                    <th>Açao</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Codigo</th>
+                                    <th>Data de Nascimento</th>
+                                    <th>Nome da Mãe</th>
+                                    <th>Açao</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Relatórios de Alunos
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <select class="form-control" id="report_id" name="relatorios">
+                                                        <option value="">Selecione um relatório</option>
+                                                        <option value="1">Fixa do aluno</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -76,6 +111,7 @@
     @include('aluno.modal_adicionar_aluno_turma')
     @include('aluno.modal_historico')
     @include('aluno.modal_mudanca_turma')
+    @include('relatorios.alunos.modals.modal_report_fixa_do_aluno')
 @stop
 
 @section('javascript')
@@ -84,6 +120,11 @@
     <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_adicionar_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_historico_aluno.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/dist/alunoTurma/modal_mudanca_turma.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('/dist/relatorios/alunos/chamar_relatorios.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/relatorios/alunos/loadFields.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/dist/relatorios/alunos/modal_fixa_do_aluno.js') }}"></script>
+
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -96,6 +137,21 @@
                 {data: 'mae', name: 'gen_cgm.mae'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Geriamento dos relatórios avançadas
+        $(document).on('change', '#report_id', function () {
+            // Recuperando o id do relatório
+            var reportId = $('#report_id').val();
+
+            // Validando o id do relatório
+            if(!reportId) {
+                return false;
+            }
+
+            // Chama o modal do relatórios correspondente
+            chamarRelatorio(reportId);
+
         });
 
     </script>

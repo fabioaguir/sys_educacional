@@ -26,12 +26,39 @@
                         <div role="tabpanel" class="tab-pane active" id="dadosPessoais">
 
                             <div class="row">
+
+                                <div class="col-md-2">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-preview thumbnail" id="captura" data-trigger="fileinput"
+                                             style="width: 135px; height: 115px;">
+                                            @if(isset($model) && $model->cgm->path_image != null)
+                                                <div id="midias">
+                                                    <img id="logo"
+                                                         src="{{route('aluno.getImgAluno', ['id' => $model->cgm->id])}}"
+                                                         alt="Foto" height="120" width="100"/><br/>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                           <span class="btn btn-primary btn-xs btn-block btn-file">
+                                               <span class="fileinput-new">Selecionar</span>
+                                               <input type="file" id="img" name="img">
+                                               <input type="hidden" id="cod_img" name="cod_img">
+                                           </span>
+                                            <input type=button id="foto" value="Webcam"
+                                                   class="btn btn-primary btn-sm btn-block" data-toggle="modal"
+                                                   data-target="#myModal">
+                                            <!--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group col-md-6">
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[nome]">Nome *</label>
                                             {!! Form::text('cgm[nome]', Session::getOldInput('cgm[nome]'), array('class' => 'form-control input-sm', 'id' => 'nome', 'placeholder' => 'Nome completo')) !!}
-                                            <input type="hidden" value="" name="cgm_id" id="cgm_id">
+                                            <input type="hidden" value="@if(isset($model)) {{ $model->cgm->id }} @endif" name="cgm_id" id="cgm_id">
                                             <input type="hidden" value="" name="endereco_id" id="endereco_id">
                                         </div>
                                     </div>
@@ -39,7 +66,7 @@
                                 <div class="col-md-1">
                                     <label for="nome_id"></label>
                                     <div class="form-group">
-                                        <button class="btn btn-primary btn-sm m-t-10"  {{--data-toggle="modal" data-target="#modal-pesquisar-pessoa"--}} id="nome-search" style="margin-left: -31px;" type="button">
+                                        <button class="btn btn-primary btn-sm m-t-10"   id="nome-search" style="margin-left: -31px;" type="button">
                                             Pesquisar
                                         </button>
                                     </div>
@@ -132,7 +159,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="telefone[nome]">Telefone</label>
-                                            @if (isset($model))
+                                            @if (isset($model->cgm))
                                                 {!! Form::text('telefone[nome]', $model->cgm->telefone->first()->nome ?? '', array('id' => 'telefone', 'class' => 'form-control input-sm', 'placeholder' => 'Telefone do responsável')) !!}
                                             @else
                                                 {!! Form::text('telefone[nome]', Session::getOldInput('telefone[nome]'), array('id' => 'telefone', 'class' => 'form-control input-sm', 'placeholder' => 'Telefone do responsável')) !!}
@@ -273,6 +300,26 @@
             </div>
         </div>
     </div>
+
+<div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Foto</h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-left: -11px;" id="my_camera"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                <button type="button" onClick="take_snapshot()" class="btn btn-primary">Tirar foto</button>
+            </div>
+        </div>
+    </div>
+</div>
 {{--</div>--}}
 
 
@@ -293,6 +340,35 @@
     <script type="text/javascript" src="{{ asset('/dist/aluno/modal_pesquisar_pessoa.js')  }}"></script>
 
     <script type="text/javascript">
+
+        Webcam.set({
+            width: 260,
+            height: 240,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+
+        $(document).on('click', '#foto', function(){
+            Webcam.attach( '#my_camera' );
+        });
+
+        function take_snapshot() {
+
+            // take snapshot and get image data
+            Webcam.snap( function(data_uri) {
+
+                // display results in page
+                document.getElementById('captura').innerHTML = '<img src="'+data_uri+'"/>';
+                var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+                document.getElementById('cod_img').value = raw_image_data;
+
+                $(".my-profile").modal('hide');
+                Webcam.reset();
+                // $(".modal-dialog").modal('toggle');
+
+            } );
+        }
+
         {{-- MASCARAS --}}
         $(document).ready(function() {
             //$('#cpf').mask('000.000.000-00', {reverse: true});

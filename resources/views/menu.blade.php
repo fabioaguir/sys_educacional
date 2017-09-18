@@ -59,7 +59,7 @@
         <li class="pull-left">
             <ul class="hi-menu">
                 <li class="hidden-xs ma-trigger" data-ma-action="sidebar-open" data-ma-target="#chat">
-                    <a href="" id="trocar-escola" style="text-transform: uppercase; left: 85px; top: 10px">{{ Session::get('escola')->nome }}</a>
+                    <a href="" id="trocar-escola" style="text-transform: uppercase; left: 85px; top: 10px">@if(Session::has('escola')) {{ Session::get('escola')->nome }} @endif</a>
                 </li>
             </ul>
         </li>
@@ -272,6 +272,9 @@
     <strong>Copyright &copy; 2015-2016 <a target="_blank" href="http://serbinario.com.br"><i></i>SERBINARIO</a> .</strong> Todos os direitos reservados.
 </footer>
 
+
+@include('modal.modal_selecionar_escola')
+
 <!-- Javascript Libraries -->
 <script src="{{ asset('/lib/jquery/dist/jquery.js') }}"></script>
 <script src="{{ asset('/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -282,6 +285,7 @@
 <script src="{{ asset('/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/lib/select2/dist/js/select2.full.js') }}"></script>
 <script src="{{ asset('/js/plugins/botao/materialize.min.js')  }}"></script>
+<script src="{{ asset('/js/webcam.js')  }}"></script>
 
 <!-- Datepicker e suas dependencias. Sempre importa-lo nessa ordem -->
 <script src="{{ asset('/lib/flot/jquery.flot.js') }}"></script>
@@ -323,6 +327,8 @@
     @endif
 
     $(document).on('click', '#trocar-escola', function(){
+                console.log('sfdf');
+                $('#modal-escolas').modal({'show': false});
         $('#modal-escolas').modal({'show': true});
     });
 

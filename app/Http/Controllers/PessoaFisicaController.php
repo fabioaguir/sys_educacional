@@ -153,6 +153,18 @@ class PessoaFisicaController extends Controller
             ->leftJoin('gen_bairros', 'gen_bairros.id', '=', 'gen_endereco.bairro_id')
             ->leftJoin('gen_cidades', 'gen_cidades.id', '=', 'gen_bairros.cidades_id')
             ->leftJoin('gen_estados', 'gen_estados.id', '=', 'gen_cidades.estados_id')
+            ->whereNotIn('gen_cgm.id', function ($where) {
+                $where->from('gen_cgm')
+                    ->select('gen_cgm.id')
+                    ->join('edu_alunos', 'edu_alunos.cgm_id', '=', 'gen_cgm.id');
+                    //->where('edu_alunos.cgm_id', '=','gen_cgm.id');
+            })
+            ->whereNotIn('gen_cgm.id', function ($where) {
+                $where->from('gen_cgm')
+                    ->select('gen_cgm.id')
+                    ->join('edu_servidor', 'edu_servidor.id_cgm', '=', 'gen_cgm.id');
+                //->where('edu_alunos.cgm_id', '=','gen_cgm.id');
+            })
             ->select([
                 'gen_cgm.id',
                 'gen_cgm.nome',

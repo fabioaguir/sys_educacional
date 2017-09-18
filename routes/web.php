@@ -292,6 +292,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('update/{id}', ['middleware' => 'permission:aluno.update', 'as' => 'update', 'uses' => 'AlunoController@update']);
         Route::get('destroy/{id}', ['middleware' => 'permission:aluno.destroy', 'as' => 'destroy', 'uses' => 'AlunoController@destroy']);
 
+        Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'AlunoController@getImgAluno']);
+
         Route::post('findBairro', ['as' => 'findBairro', 'uses' => 'AlunoController@findBairro']);
         Route::post('findCidade', ['as' => 'findCidade', 'uses' => 'AlunoController@findCidade']);
         Route::post('searchCpf', ['as' => 'searchCpf', 'uses' => 'AlunoController@searchCpf']);
@@ -538,6 +540,20 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'default', 'as' => 'default.'], function () {
         Route::post('changeescola', ['as' => 'changeescola', 'uses' => 'DefaultController@changeEscola']);
+    });
+
+    Route::group(['prefix' => 'loadfields', 'as' => 'loadfields.'], function () {
+        Route::post('getCalendarios', ['as' => 'getCalendarios', 'uses' => 'Relatorios\LoadFieldsReportsController@getCalendarios']);
+        Route::post('getTurmaByCalendario', ['as' => 'getTurmaByCalendario', 'uses' => 'Relatorios\LoadFieldsReportsController@getTurmaByCalendario']);
+        Route::post('getAlunosByTurma', ['as' => 'getAlunosByTurma', 'uses' => 'Relatorios\LoadFieldsReportsController@getAlunosByTurma']);
+    });
+
+    Route::group(['prefix' => 'relatorios', 'as' => 'relatorios.'], function () {
+
+        Route::group(['prefix' => 'alunos', 'as' => 'alunos.'], function () {
+            Route::get('fixa/{alunoId}', ['as' => 'fixa', 'uses' => 'Relatorios\Alunos\FixaDoAlunoController@index']);
+        });
+
     });
 
 });

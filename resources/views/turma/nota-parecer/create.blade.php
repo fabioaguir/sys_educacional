@@ -23,7 +23,7 @@
             </div>
 
             <div class="block-header">
-                <h2>Atribuição de notas por parecer</h2>
+                <h2>Atribuição de notas por parecer - {{ $turma->nome }}</h2>
             </div>
             <div class="card">
                 <div class="card-body card-padding">

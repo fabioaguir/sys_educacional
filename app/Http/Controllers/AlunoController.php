@@ -109,7 +109,7 @@ class AlunoController extends Controller
 
             # Variáveis de uso
             $html  = '<div class="fixed-action-btn horizontal">';
-            $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
+            $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul style="right: 60px">';
 
             # Verificando a permissão de edição
             if($user->can('aluno.update')) {
@@ -322,5 +322,23 @@ class AlunoController extends Controller
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
+    }
+
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    public function getImgAluno($id)
+    {
+
+        $model = \DB::table('gen_cgm')->where('id', $id)->select(['path_image', 'tipo_img'])->first();
+
+        if($model->tipo_img == 1) {
+            return response($model->path_image)->header('Content-Type', 'image/jpeg');
+        } else {
+            return response(base64_decode($model->path_image ))->header('Content-Type', 'image/jpeg');
+        }
+
+
     }
 }

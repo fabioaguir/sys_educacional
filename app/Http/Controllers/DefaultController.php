@@ -26,7 +26,9 @@ class DefaultController extends Controller
 
         $escolas = $escolas->get();
 
-        return view('default.index', compact('escolas'));
+        \Session::put('escolas', $escolas);
+
+        return view('default.index');
     }
 
     /**

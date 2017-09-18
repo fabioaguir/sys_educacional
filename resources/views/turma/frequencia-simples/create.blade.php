@@ -23,7 +23,7 @@
             </div>
 
             <div class="block-header">
-                <h2>Frequência</h2>
+                <h2>Frequência - {{ $turma->nome }}</h2>
             </div>
             <div class="card">
                 <div class="card-body card-padding">

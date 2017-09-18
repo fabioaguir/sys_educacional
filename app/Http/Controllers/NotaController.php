@@ -46,9 +46,9 @@ class NotaController extends Controller
                                 NotaRepository $repository,
                                 NotaValidator $validator)
     {
-        $this->repository           = $repository;
-        $this->validator            = $validator;
-        $this->service              = $service;
+        $this->repository  = $repository;
+        $this->validator   = $validator;
+        $this->service     = $service;
     }
 
     /**
@@ -63,7 +63,9 @@ class NotaController extends Controller
         $periodos = $loadFields['periodos'];
         $disciplinas = $loadFields['disciplinas'];
 
-        return view('turma.nota.create', compact('alunos', 'periodos', 'disciplinas', 'idTurma'));
+        $turma = \DB::table('edu_turmas')->where('id', $idTurma)->first();
+
+        return view('turma.nota.create', compact('alunos', 'periodos', 'disciplinas', 'idTurma', 'turma'));
     }
 
     /**

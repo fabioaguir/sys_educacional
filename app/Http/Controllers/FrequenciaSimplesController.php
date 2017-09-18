@@ -64,8 +64,10 @@ class FrequenciaSimplesController extends Controller
 
         $professores = $loadFields;
 
+        $turma = \DB::table('edu_turmas')->where('id', $idTurma)->first();
+
         # Retorno para view
-        return view('turma.frequencia-simples.create', compact('idTurma', 'professores'));
+        return view('turma.frequencia-simples.create', compact('idTurma', 'professores', 'turma'));
     }
 
     /**

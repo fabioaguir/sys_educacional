@@ -61,8 +61,10 @@ class NotaParecerController extends Controller
         $alunos = $loadFields['alunos'];
         $periodos = $loadFields['periodos'];
 
+        $turma = \DB::table('edu_turmas')->where('id', $idTurma)->first();
+
         # Retorno para view
-        return view('turma.nota-parecer.create', compact('alunos', 'periodos', 'idTurma'));
+        return view('turma.nota-parecer.create', compact('alunos', 'periodos', 'idTurma', 'turma'));
     }
 
     /**

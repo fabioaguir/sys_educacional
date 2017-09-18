@@ -23,7 +23,7 @@
             </div>
 
             <div class="block-header">
-                <h2>Frequência</h2>
+                <h2>Frequência - {{ $turma->nome }}</h2>
             </div>
             <div class="card">
                 <div class="card-body card-padding">
@@ -37,6 +37,7 @@
                                     <div class=" fg-line">
                                         <label for="professor">Professores *</label>
                                         <select class="form-control" id="professor">
+                                            <option value="">Selecione um professor</option>
                                             @foreach($professores as $professore)
                                                 <option value="{{ $professore->id }}">{{ $professore->nome }}</option>
                                             @endforeach
