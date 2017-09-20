@@ -65,6 +65,8 @@ function loadQuadroHorarios (idTurma) {
 
 }
 
+// Id do horario
+var idHorario;
 
 // Função de execução
 function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
@@ -76,6 +78,7 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
     dias("");
 
     // ocultando botões
+    $('.addHorario').show();
     $('.edtHorario').hide();
     $('.delHorario').hide();
 
@@ -84,10 +87,12 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
 
     // Ocultando por padrão o campo disciplina
     $('#div-disciplina').hide();
-}
 
-// Id do horario
-var idHorario;
+    //Limpar os campos do formulário
+    limparCamposHorarios();
+
+    idHorario = "";
+}
 
 
 //Carregar formulário com os dados para deletar e editar
