@@ -58,6 +58,12 @@ class HorarioService
      */
     public function update(array $data, int $id) : Horario
     {
+
+        // Anulando o campo disciplina caso seja praa turma de 1 ao 5 ano
+        if (isset($data['tipo_turma']) && $data['tipo_turma'] == '2') {
+            $data['disciplinas_id'] = null;
+        }
+
         # Regras de negócios
         $this->tratamentoCampos($data);
 
@@ -100,7 +106,7 @@ class HorarioService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $horario = $this->repository->find($id);
+        $horario = $this->repository->with(['hora'])->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$horario) {

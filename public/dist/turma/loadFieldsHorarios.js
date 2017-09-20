@@ -6,7 +6,7 @@
 var idTurma, idEscola, idSerie, idTurno, nomeSerie, idsAlunos;
 
 //Função para listar as disciplinas
-function disciplinasHorario(id, idTurma, idSerie) {
+function disciplinasHorario(id) {
     
     var dados = {
         'idTurma' : idTurma,
@@ -48,7 +48,11 @@ function dias(id) {
 
         option += '<option value="">Selecione um dia</option>';
         for (var i = 0; i < json.length; i++) {
-            option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            if (json[i]['id'] == id) {
+                option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            } else {
+                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            }
         }
 
         $('#dia option').remove();
@@ -56,6 +60,75 @@ function dias(id) {
     });
 }
 
+
+//Função para listar os professores
+function horas(id, hora, dia) {
+
+    if (dia) {
+
+        //Setando o o json para envio
+        var dados = {
+            'idDia'   : dia,
+            'idTurno' : idTurno,
+            'idTurma' : idTurma
+        };
+
+        jQuery.ajax({
+            type: 'POST',
+            data: dados,
+            url: laroute.route('turma.horario.getHoras'),
+            datatype: 'json'
+        }).done(function (json) {
+            var option = '';
+
+            option += '<option value="'+ id +'">' + hora + '</option>';
+            for (var i = 0; i < json.length; i++) {
+                if (json[i]['id'] == id) {
+                    option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                } else {
+                    option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                }
+            }
+
+            $('#hora option').remove();
+            $('#hora').append(option);
+        });
+
+    }
+}
+
+
+//Função para listar os professores
+function professores(id, professor, hora, dia) {
+
+    if (hora && dia) {
+
+        //Setando o o json para envio
+        var dados = {
+            'idDia'    : dia,
+            'idHora'   : hora,
+            'idEscola' : idEscola
+        };
+
+        jQuery.ajax({
+            type: 'POST',
+            data: dados,
+            url: laroute.route('turma.horario.getProfessores'),
+            datatype: 'json'
+        }).done(function (json) {
+            var option = '';
+
+            option += '<option value="'+ id +'">' + professor + '</option>';
+            for (var i = 0; i < json.length; i++) {
+                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            }
+
+            $('#professor option').remove();
+            $('#professor').append(option);
+        });
+
+    }
+}
 
 // Pegando os professores que ainda não
 $(document).on('change', '#hora', function(){
@@ -105,7 +178,7 @@ $(document).on('change', '#dia', function(){
 
         //Setando o o json para envio
         var dados = {
-            'idDia' : idDia,
+            'idDia'   : idDia,
             'idTurno' : idTurno,
             'idTurma' : idTurma
         };

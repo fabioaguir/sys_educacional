@@ -69,9 +69,6 @@ class PessoaFisicaValidator extends LaravelValidator
             'num_cnh' => 'numeric|digits_between:0,30',
             'cnh_categoria_id' => 'integer',
 
-            //Telefone
-            'telefone.nome' => 'required|digits_between:0,18',
-
             //Endereço
             'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
             'endereco.numero' => 'required|numeric|digits_between:0,10',
@@ -104,9 +101,6 @@ class PessoaFisicaValidator extends LaravelValidator
             'email' => 'email|max:45',
             'num_cnh' => 'numeric|digits_between:0,30',
             'cnh_categoria_id' => 'integer',
-
-            //Telefone
-            'telefone.nome' => 'required|digits_between:0,18',
 
             //Endereço
             'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',

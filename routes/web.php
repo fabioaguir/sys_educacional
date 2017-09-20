@@ -433,7 +433,9 @@ Route::group(['middleware' => 'auth'], function () {
         # Modal de horários
         Route::group(['prefix' => 'horario', 'as' => 'horario.'], function () {
             Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'HorariosController@grid']);
+            Route::post('quadro/{idTurma}', ['as' => 'quadro', 'uses' => 'HorariosController@quadro']);
             Route::post('store', ['as' => 'store', 'uses' => 'HorariosController@store']);
+            Route::get('find/{id}', ['as' => 'find', 'uses' => 'HorariosController@find']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'HorariosController@update']);
             Route::post('remover/{id}', ['as' => 'remover', 'uses' => 'HorariosController@destroy']);
             Route::post('getDisciplinas', ['as' => 'getDisciplinas', 'uses' => 'HorariosController@getDisciplinas']);

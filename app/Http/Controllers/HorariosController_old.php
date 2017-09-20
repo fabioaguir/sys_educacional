@@ -16,7 +16,7 @@ use Yajra\Datatables\Datatables;
 use SerEducacional\Uteis\SerbinarioDateFormat;
 
 
-class HorariosController extends Controller
+class HorariosControllerOld extends Controller
 {
     /**
      * @var HorarioRepository
@@ -59,10 +59,10 @@ class HorariosController extends Controller
     /**
      * @return mixed
      */
-    public function quadro(Request $request)
+    public function grid($idTurma)
     {
         #Criando a consulta
-        $disciplinas = \DB::table('edu_horarios')
+        $rows = \DB::table('edu_horarios')
             ->join('edu_horas', 'edu_horas.id', '=', 'edu_horarios.horas_id')
             ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_horas.turnos_id')
             ->join('edu_dias_semana', 'edu_dias_semana.id', '=', 'edu_horarios.dia_semana_id')
@@ -70,70 +70,29 @@ class HorariosController extends Controller
             ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_horarios.servidor_id')
             ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_servidor.id_cgm')
             ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turmas_id')
-            ->where('edu_turmas.id', '=', $request->get('turma_id'))
+            ->where('edu_turmas.id', '=', $idTurma)
             ->select([
                 'edu_horarios.id as id',
                 'edu_dias_semana.nome as dia',
                 'edu_dias_semana.id as dia_id',
                 'edu_turnos.nome as turno',
                 'edu_turnos.id as turno_id',
-                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' a ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS hora"),
+                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS hora"),
                 'edu_horas.id as hora_id',
-                'edu_disciplinas.codigo as disciplina',
+                'edu_disciplinas.nome as disciplina',
                 'edu_disciplinas.id as disciplina_id',
                 'gen_cgm.nome as professor',
                 'edu_servidor.id as professor_id',
-            ])->get();
-
-
-        $horarios = \DB::table('edu_horarios')
-            ->join('edu_horas', 'edu_horas.id', '=', 'edu_horarios.horas_id')
-            ->join('edu_turnos', 'edu_turnos.id', '=', 'edu_horas.turnos_id')
-            ->join('edu_turmas', 'edu_turmas.id', '=', 'edu_horarios.turmas_id')
-            ->where('edu_turmas.id', '=', $request->get('turma_id'))
-            ->groupBy('edu_horas.id', 'hora')
-            ->select([
-                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' a ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS hora"),
-                'edu_horas.id as hora_id',
-            ])->get();
-
-
-        return response()->json(['horarios' => $horarios, 'disciplinas' => $disciplinas]);
-    }
-
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function find($id)
-    {
-        try {
-            #Executando a ação
-            $retorno = \DB::table('edu_horarios')
-                ->join('edu_horas', 'edu_horas.id', '=', 'edu_horarios.horas_id')
-                ->join('edu_servidor', 'edu_servidor.id', '=', 'edu_horarios.servidor_id')
-                ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_servidor.id_cgm')
-                ->where('edu_horarios.id', '=', $id)
-                ->select([
-                    'edu_horarios.id',
-                    'edu_horarios.turmas_id',
-                    'edu_horarios.disciplinas_id',
-                    'edu_horarios.servidor_id',
-                    'edu_horarios.dia_semana_id',
-                    \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' a ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS hora"),
-                    'edu_horas.id as hora_id',
-                    'edu_servidor.id as professor_id',
-                    'gen_cgm.nome as professor'
-                ])->first();
-
-            //dd($retorno);
+            ]);
+        
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            //$html = '<a style="margin-right: 5%;" title="Editar" id="editarTelefone" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+            $html = '<a title="Remover" id="deleteHorario" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
 
             # Retorno
-            return \Illuminate\Support\Facades\Response::json($retorno);
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
-        }
+            return $html;
+        })->make(true);
     }
 
     /**
@@ -158,30 +117,6 @@ class HorariosController extends Controller
         }
     }
 
-
-    /**
-     * @param Request $request
-     * @param $id
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, $id)
-    {
-        try {
-            #Recuperando os dados da requisição
-            $data = $request->all();
-
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            #Executando a ação
-            $this->service->update($data, $id);
-
-            # Retorno
-            return \Illuminate\Support\Facades\Response::json(['success' => true]);
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
-        }
-    }
 
     /**
      * @param $id
@@ -297,7 +232,7 @@ class HorariosController extends Controller
             })
             ->select(
                 'edu_horas.id as id',
-                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' a ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS nome"))
+                \DB::raw("CONCAT(DATE_FORMAT(edu_horas.hora_inicial,'%h:%i'),' - ',DATE_FORMAT(edu_horas.hora_final,'%h:%i')) AS nome"))
             ->get();
 
         return response()->json($query);

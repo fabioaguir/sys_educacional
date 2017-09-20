@@ -150,10 +150,10 @@ class PessoaFisicaService
         $endereco = $this->enderecoRepository->update($data['endereco'], $objTelefone->id);
 
         #Buscando e atualizando registro de telefone
-        $objTelefone = $this->telefoneRepository->findWhere(['cgm_id' => $pessoaFisica->id]);
+        /*$objTelefone = $this->telefoneRepository->findWhere(['cgm_id' => $pessoaFisica->id]);
         $idTelefone = $objTelefone[0]->id;
 
-        $telefone = $this->telefoneRepository->update($data['telefone'], $idTelefone);
+        $telefone = $this->telefoneRepository->update($data['telefone'], $idTelefone);*/
 
         #Verificando se foi atualizado no banco de dados
         if(!$pessoaFisica) {

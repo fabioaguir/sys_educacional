@@ -73,19 +73,12 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-2 addHorario">
+                        <div class="form-group col-md-2">
                             <div class="fg-line" style="margin-top: 20px">
-                                <button type="button" id="addHorario" class="btn btn-primary btn-sm m-t-10">Adicionar</button>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-2 edtHorario">
-                            <div class="fg-line" style="margin-top: 20px">
-                                <button type="button" id="edtHorario" class="btn btn-success btn-sm m-t-10">Editar</button>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-2 delHorario">
-                            <div class="fg-line" style="margin-top: 20px; margin-left: -75px">
-                                <button type="button" id="delHorario" class="btn btn-danger btn-sm m-t-10">Deletar</button>
+                                <div class="fg-line">
+                                    <button type="button" id="addHorario" class="btn btn-primary btn-sm m-t-10">Adicionar</button>
+                                    {{--<button style="margin-left: 5px" type="button" id="edtTelefone" class="btn btn-success btn-sm m-t-10">Editar</button>--}}
+                                </div>
                             </div>
                         </div>
 
@@ -95,22 +88,17 @@
                     <div class="col-md-12">
                         <!-- Table de horários -->
                         <div class="table-responsive">
-                            <table id="quadro-horarios" class=" table table-bordered" cellspacing="0" width="100%">
+                            <table id="horarios-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>Segunda</th>
-                                    <th>Terça</th>
-                                    <th>Quarta</th>
-                                    <th>Quinta</th>
-                                    <th>Sexta</th>
-                                    <th>Sábado</th>
-                                    <th>Domingo</th>
+                                    <th>Dia</th>
+                                    <th>Turno</th>
+                                    <th>Hora</th>
+                                    <th>Disciplina</th>
+                                    <th>Professor</th>
+                                    <th style="width: 10%">Ação</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-
-                                </tbody>
                             </table>
                         </div>
                         <!-- Fim Table de horários -->

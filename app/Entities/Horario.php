@@ -19,4 +19,12 @@ class Horario extends Model implements Transformable
         'servidor_id',
         'dia_semana_id'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function hora()
+    {
+        return $this->belongsTo(Hora::class, 'horas_id');
+    }
 }
