@@ -33,4 +33,12 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function servidor()
+    {
+        return $this->belongsTo(Servidor::class, 'edu_servidor_id');
+    }
 }

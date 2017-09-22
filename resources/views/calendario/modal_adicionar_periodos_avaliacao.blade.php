@@ -38,23 +38,31 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="data_inicial">Data inicial *</label>
-                                        {!! Form::text('data_inicial', null, array('class' => 'form-control input-sm', 'id' => 'dtInicial', 'placeholder' => 'Data inicial')) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <div class="fg-line">
-                                    <div class="fg-line">
-                                        <label for="data_final">Data final *</label>
-                                        {!! Form::text('data_final', null, array('class' => 'form-control input-sm', 'id' => 'dtFinal', 'placeholder' => 'Data final')) !!}
+                                        {!! Form::text('data_inicial', null, array('class' => 'form-control input-sm date', 'id' => 'dtInicial', 'placeholder' => 'Data inicial')) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-2">
+                                <div class="fg-line">
+                                    <div class="fg-line">
+                                        <label for="data_final">Data final *</label>
+                                        {!! Form::text('data_final', null, array('class' => 'form-control input-sm date', 'id' => 'dtFinal', 'placeholder' => 'Data final')) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="fg-line">
+                                    <div class="fg-line">
+                                        <label for="data_final">Data Fechamento *</label>
+                                        {!! Form::text('data_fechamento', null, array('class' => 'form-control input-sm date', 'id' => 'dtFechamento', 'placeholder' => 'Data Fechamento')) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-1">
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="dias_letivos">Dias letivos</label>
@@ -107,6 +115,7 @@
                                     <th style="width: 20%;">Período</th>
                                     <th>Data inicial</th>
                                     <th>Data Final</th>
+                                    <th>Data Fechamento</th>
                                     <th>Dias letivos</th>
                                     <th>Semanas letivas</th>
                                     <th style="width: 8%;">Acão</th>

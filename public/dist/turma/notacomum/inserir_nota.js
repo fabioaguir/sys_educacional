@@ -46,23 +46,32 @@ $(document).on('click', '#consultarNota', function (event) {
         datatype: 'json'
     }).done(function (json) {
 
-        if (json['return'].length > 0) {
+        if (json['msg'] == 'success') {
 
-            // Varrendo as notas existentes do aluno por disciplina
-            for (var i = 0; i < json['return'].length; i++ ) {
-                $(".1_ativ_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_ativ1']);
-                $(".2_ativ_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_ativ2']);
-                $(".3_ativ_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_ativ3']);
-                $(".verif_aprend_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_verif_aprend']);
-                $(".media_"+json['return'][i]['disciplina_id']).val(json['return'][i]['media']);
-                $(".recup_paralela_"+json['return'][i]['disciplina_id']).val(json['return'][i]['recup_paralela']);
-                $(".nota_recuper_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_para_recup']);
-                $(".idNota_"+json['return'][i]['disciplina_id']).val(json['return'][i]['id']);
+            $(".notas").show();
+
+            if (json['return'].length > 0) {
+
+                // Varrendo as notas existentes do aluno por disciplina
+                for ( var i = 0; i < json['return'].length; i++ ) {
+                    $(".1_ativ_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_ativ1']);
+                    $(".2_ativ_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_ativ2']);
+                    $(".3_ativ_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_ativ3']);
+                    $(".verif_aprend_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_verif_aprend']);
+                    $(".media_"+json['return'][i]['disciplina_id']).val(json['return'][i]['media']);
+                    $(".recup_paralela_"+json['return'][i]['disciplina_id']).val(json['return'][i]['recup_paralela']);
+                    $(".nota_recuper_"+json['return'][i]['disciplina_id']).val(json['return'][i]['nota_para_recup']);
+                    $(".idNota_"+json['return'][i]['disciplina_id']).val(json['return'][i]['id']);
+                }
+
+            } else {
+                $('.nota').val('');
+                $('.idNota').val('');
             }
 
         } else {
-            $('.nota').val('');
-            $('.idNota').val('');
+            swal("Oops...", json['msg'], "error");
+            $(".notas").hide();
         }
 
     });

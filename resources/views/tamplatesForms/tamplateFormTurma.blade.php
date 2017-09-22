@@ -38,7 +38,7 @@
                         <div class="fg-line">
                             <div class="fg-line">
                                 <label for="vagas">Vagas *</label>
-                                {!! Form::text('vagas', Session::getOldInput('vagas'), array('class' => 'form-control input-sm', 'placeholder' => 'Vagas')) !!}
+                                {!! Form::text('vagas', Session::getOldInput('vagas'), array('class' => 'form-control input-sm', 'placeholder' => 'Vagas', 'id' => 'vagas')) !!}
                             </div>
                         </div>
                     </div>
@@ -94,12 +94,22 @@
                         <div class=" fg-line">
                             <label for="escola_id">Escola *</label>
                             <div class="select">
-                                {!! Form::select("escola_id", ["" => "Selecione uma escola"] + $loadFields['escola']->toArray(), null, array('class'=> 'form-control')) !!}
+                                {!! Form::select("escola_id", ["" => "Selecione uma escola"] + $loadFields['escola']->toArray(),
+                                Session::get('escola')->id, array('class'=> 'form-control', 'id' => 'escola')) !!}
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
+                        <div class=" fg-line">
+                            <label for="dependencia_id">Dependência *</label>
+                            <div class="select">
+                                {!! Form::select("dependencia_id", ["" => "Selecione"] + $loadFields['dependencia']->toArray(), null, array('class'=> 'form-control', 'id' => 'dependencia')) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
                         <div class=" fg-line">
                             <label for="forma_avaliacao_id">Forma de Avaliação *</label>
                             <div class="select">
@@ -108,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <div class=" fg-line">
                             <label for="calendario_id">Calendario *</label>
                             <div class="select">
@@ -130,15 +140,6 @@
 
                     <div class="form-group col-md-2">
                         <div class=" fg-line">
-                            <label for="dependencia_id">Dependência *</label>
-                            <div class="select">
-                                {!! Form::select("dependencia_id", ["" => "Selecione"] + $loadFields['dependencia']->toArray(), null, array('class'=> 'form-control')) !!}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-2">
-                        <div class=" fg-line">
                             <label for="turno_id">Turno *</label>
                             <div class="select">
                                 {!! Form::select("turno_id", ["" => "Selecione um turno"] + $loadFields['turno']->toArray(), null, array('class'=> 'form-control')) !!}
@@ -146,7 +147,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <div class=" fg-line">
                             <label for="professor_unico_id">Possui mais de um professor? *</label>
                             <div class="select">
@@ -185,6 +186,43 @@
     {{--Regras de validação--}}
     <script type="text/javascript" src="{{ asset('/dist/js/validacao/turma.js')  }}"></script>
     <script type="text/javascript">
+
+        //Incio - Retorno de dependencias
+        $(document).on('change', "#escola", function () {
+
+            //Removendo as cidades
+            $('#dependencia option').remove();
+
+            //Recuperando o estado
+            var escola = $(this).val();
+
+            if (escola !== "") {
+
+                var dados = {
+                    'table' : 'edu_dependencias',
+                    'field_search' : 'escola_id',
+                    'value_search' : escola
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('util.search')  }}',
+                    data: dados,
+                    datatype: 'json'
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#dependencia option').remove();
+                    $('#dependencia').append(option);
+                });
+            }
+        });
+
         /*
         * Evento para preencher automaticamete o select de
         * currículo pelo curso escolhido
@@ -251,6 +289,27 @@
                 // Alterando o dom
                 $('#serie option').remove();
                 $('#serie').append(option);
+            });
+        });
+
+
+        /*
+         * Evento para preencher automaticamete a quantidade de vagas da turma pela capacidade da dependência
+         */
+        $(document).on('change', '#dependencia', function () {
+
+            //Recuperando o estado
+            var dependencia = $(this).val();
+
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: laroute.route('dependencia.find', {'id' : dependencia}),
+                datatype: 'json'
+            }).done(function (json) {
+
+                $('#vagas').val(json['capacidade']);
+
             });
         });
     </script>

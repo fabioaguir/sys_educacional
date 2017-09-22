@@ -184,6 +184,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', ['middleware' => 'permission:dependencia.update', 'as' => 'edit', 'uses' => 'DependenciasController@edit']);
         Route::post('update/{id}', ['middleware' => 'permission:dependencia.update', 'as' => 'update', 'uses' => 'DependenciasController@update']);
         Route::post('destroy/{id}', ['middleware' => 'permission:dependencia.destroy', 'as' => 'destroy', 'uses' => 'DependenciasController@destroy']);
+        Route::get('find/{id}', [ 'as' => 'find', 'uses' => 'DependenciasController@find']);
     });
 
     # ROtas do série

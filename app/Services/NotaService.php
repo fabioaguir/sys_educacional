@@ -2,6 +2,7 @@
 
 namespace SerEducacional\Services;
 
+use SerEducacional\Entities\FormaAvaliacao;
 use SerEducacional\Repositories\NotaRepository;
 use SerEducacional\Entities\Nota;
 use SerEducacional\Repositories\TurmaRepository;
@@ -23,6 +24,7 @@ class NotaService
 
     /**
      * @param NotaRepository $repository
+     * @param TurmaRepository $turmaRepository
      */
     public function __construct(NotaRepository $repository,
                                 TurmaRepository $turmaRepository)
@@ -42,6 +44,9 @@ class NotaService
         $dados = [];
         $nota = null;
 
+        $formaAvaliacao = \DB::table('edu_formas_avaliacoes')
+            ->where('tipo_resultado_id', '1')->select(['*'])->first();
+
         for ($i = 0; $i < count($data['disciplinas']); $i++) {
 
             $dados['turma_id']      = $data['turma'];
@@ -50,26 +55,38 @@ class NotaService
             $dados['disciplina_id'] = $data['disciplinas'][$i];
 
             # tratando as notas caso venham vazia
-            $dados['nota_ativ1']        = $data['nota_ativ1'][$i] ? $data['nota_ativ1'][$i] : null;
-            $dados['nota_ativ2']        = $data['nota_ativ2'][$i] ? $data['nota_ativ2'][$i] :  null;
-            $dados['nota_ativ3']        = $data['nota_ativ3'][$i] ? $data['nota_ativ3'][$i] : null;
-            $dados['nota_verif_aprend'] = $data['nota_verif_aprend'][$i] ? $data['nota_verif_aprend'][$i] : null;
+            $dados['nota_ativ1']        = $data['nota_ativ1'][$i] ? $this->arredondamentoNotas($data['nota_ativ1'][$i]) : null;
+            $dados['nota_ativ2']        = $data['nota_ativ2'][$i] ? $this->arredondamentoNotas($data['nota_ativ2'][$i]) :  null;
+            $dados['nota_ativ3']        = $data['nota_ativ3'][$i] ? $this->arredondamentoNotas($data['nota_ativ3'][$i]) : null;
+            $dados['nota_verif_aprend'] = $data['nota_verif_aprend'][$i] ? $this->arredondamentoNotas($data['nota_verif_aprend'][$i]) : null;
             $dados['media']             = $data['media'][$i] ? $data['media'][$i] : null;
-            $dados['recup_paralela']    = $data['recup_paralela'][$i] ? $data['recup_paralela'][$i] :  null;
+            $dados['recup_paralela']    = $data['recup_paralela'][$i] ? $this->arredondamentoNotas($data['recup_paralela'][$i])  :  null;
             $dados['nota_para_recup']   = $data['nota_para_recup'][$i] ? $data['nota_para_recup'][$i] : null;
 
+
             # calculando a média caso as 3 antas de atividade sejam calculadas
-            if($data['nota_ativ1'][$i] && $data['nota_ativ2'][$i] && $data['nota_ativ3'][$i]) {
-                $media = ($data['nota_ativ1'][$i] + $data['nota_ativ2'][$i] + $data['nota_ativ3'][$i]) / 3;
-                $dados['media'] = number_format($media, 2, '.', ' ');
+            if($data['nota_ativ1'][$i] && $data['nota_ativ2'][$i]
+                && $data['nota_ativ3'][$i] && $dados['nota_verif_aprend']) {
+
+                $nota = ($data['nota_ativ1'][$i] + $data['nota_ativ2'][$i] + $data['nota_ativ3'][$i] + $dados['nota_verif_aprend']) / 4;
+
+                $dados['media']  = $this->arredondamentoNotas($nota);
+
             }
 
+            // Salva ou edita a nota
             if(isset($data['idNota'][$i]) && $data['idNota'][$i]) {
                 #Editando o registro pincipal
                 $nota =  $this->repository->update($dados, $data['idNota'][$i]);
             } else {
                 #Salvando o registro pincipal
                 $nota =  $this->repository->create($dados);
+            }
+
+            # pega o maior valor entre a média e recuperação paralela e define a média final do aluno
+            if($nota->media && $nota->recup_paralela) {
+                $nota->nota_para_recup = max($nota->media, $nota->recup_paralela);
+                $nota->save();
             }
 
         }
@@ -86,6 +103,35 @@ class NotaService
         return $notas;
     }
 
+    /**
+     * @param $valor
+     * @return float
+     * Função para arredondamento das notas
+     */
+    public function arredondamentoNotas($valor)
+    {
+        for ($i = 0; $i < 100; $i++) {
+
+            $media = round(number_format($valor, 2, '.', ' '), 1);
+            $exp = explode('.', $media);
+
+            if (count($exp) > 1) {
+                if ($exp[1] == 5 || $exp[1] == 0) {
+                    return $media;
+                    break;
+                } else if ($exp[1] < 5 && $exp[1] != 0) {
+                    $media = $media + 0.1;
+                } else if ($exp[1] > 5 && $exp[1] != 0) {
+                    return round(number_format($media, 2, '.', ' '));
+                }
+
+                $valor = $media;
+            } else {
+                return $valor;
+            }
+
+        }
+    }
 
     /**
      * @param array $data
@@ -94,11 +140,39 @@ class NotaService
     public function consultar(array $data)
     {
 
+        # Pegando o usuário autenticado
+        $user = Auth::user();
+
+        // Pegando a data atual
+        $date = new \Datetime("NOW");
+        $date = $date->format('Y-m-d');
+
+        // Pegando a turma
+        $turma = $this->turmaRepository->find($data['turma']);
+
+        // Pegando o período ao qual está sendo inserido a nota do aluno
+        $periodo = \DB::table('edu_periodos_avaliacao')
+            ->where('calendarios_id', $turma->calendario_id)
+            ->where('periodos_id', $data['periodo'])
+            ->select([
+                'data_fechamento'
+            ])->first();
+
+        // Valida se p usuário é um professor
+        if ($user->tipo_usuario_id == 4) {
+
+            // Valida se a data de fechamento do período já passou. foi encerrada
+            if(strtotime($periodo->data_fechamento) < strtotime($date)) {
+                return ['msg' => 'A data de fechamento do período já encerrou', 'return' => array()];
+            }
+
+        }
+
         # Trazendo as notas do aluno
         $notas = $this->getNotasAluno($data);
 
         #retorno
-        return $notas;
+        return ['msg' => 'success', 'return' => $notas];
     }
 
     /**

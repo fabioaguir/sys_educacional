@@ -22,35 +22,61 @@ function loadQuadroHorarios (idTurma) {
             html += '<tr>';
             html += '<td style="background-color: #e4e4e4">' + value['hora'] + '</td>';
 
+            html += '<td style="text-align: center">';
             $.each(json['disciplinas'], function( index, value2 ) {
                 value2['dia_id'] == '2' && value2['hora_id'] == value['hora_id']
-                    ?  html += '<td style="text-align: center" data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
-                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</td>' : '<td></td>';
-
-                value2['dia_id'] == '3' && value2['hora_id'] == value['hora_id']
-                    ?  html += '<td style="text-align: center" data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
-                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</td>' : '<td></td>';
-
-                value2['dia_id'] == '4' && value2['hora_id'] == value['hora_id']
-                    ?  html += '<td style="text-align: center" data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
-                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</td>' : '<td></td>';
-
-                value2['dia_id'] == '5' && value2['hora_id'] == value['hora_id']
-                    ?  html += '<td style="text-align: center" data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
-                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</td>' : '<td></td>';
-
-                value2['dia_id'] == '6' && value2['hora_id'] == value['hora_id']
-                    ?  html += '<td style="text-align: center" data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
-                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</td>' : '<td></td>';
-
-                value2['dia_id'] == '7' && value2['hora_id'] == value['hora_id']
-                    ?  html += '<td style="text-align: center" data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
-                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</td>' : '<td></td>';
-
-                value2['dia_id'] == '1' && value2['hora_id'] == value['hora_id']
-                    ?  html += '<td style="text-align: center" data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
-                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</td>' : '<td></td>';
+                    ?  html += '<span data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
+                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</span>' :  '';
             });
+            html += '</td>';
+
+            html += '<td style="text-align: center">';
+            $.each(json['disciplinas'], function( index, value2 ) {
+                value2['dia_id'] == '3' && value2['hora_id'] == value['hora_id']
+                    ?  html += '<span data='+ value2['id'] +'><b>' + value2['disciplina'] + '</b><br />'
+                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</span>' :  '';
+            });
+            html += '</td>';
+
+            html += '<td style="text-align: center">';
+            $.each(json['disciplinas'], function( index, value2 ) {
+                value2['dia_id'] == '4' && value2['hora_id'] == value['hora_id']
+                    ?  html += '<span data='+ value2['id'] + '><b>' + value2['disciplina'] + '</b><br />'
+                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</span>'  :  '';
+            });
+            html += '</td>';
+
+            html += '<td style="text-align: center">';
+            $.each(json['disciplinas'], function( index, value2 ) {
+                value2['dia_id'] == '5' && value2['hora_id'] == value['hora_id']
+                    ?  html += '<span data='+ value2['id'] + '><b>' + value2['disciplina'] + '</b><br />'
+                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</span>'  :  '';
+            });
+            html += '</td>';
+
+            html += '<td style="text-align: center">';
+            $.each(json['disciplinas'], function( index, value2 ) {
+                value2['dia_id'] == '6' && value2['hora_id'] == value['hora_id']
+                    ?  html += '<span data='+ value2['id'] + '><b>' + value2['disciplina'] + '</b><br />'
+                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</span>' :  '';
+            });
+            html += '</td>';
+
+            html += '<td style="text-align: center">';
+            $.each(json['disciplinas'], function( index, value2 ) {
+                value2['dia_id'] == '7' && value2['hora_id'] == value['hora_id']
+                    ?  html += '<span data='+ value2['id'] + '><b>' + value2['disciplina'] + '</b><br />'
+                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</span>' :  '';
+            });
+            html += '</td>';
+
+            html += '<td style="text-align: center">';
+            $.each(json['disciplinas'], function( index, value2 ) {
+                value2['dia_id'] == '1' && value2['hora_id'] == value['hora_id']
+                    ?  html += '<span data='+ value2['id'] + '><b>' + value2['disciplina'] + '</b><br />'
+                    + value2['professor'].substring(0, value2['professor'].indexOf(" ")) + '</span>' :  '';
+            });
+            html += '</td>';
 
             html += '</tr>';
 
@@ -81,6 +107,7 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
     $('.addHorario').show();
     $('.edtHorario').hide();
     $('.delHorario').hide();
+    $('.canHorario').hide();
 
     // Exibindo o modal
     $('#modal-horarios').modal({'show' : true});
@@ -98,7 +125,7 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
 //Carregar formulário com os dados para deletar e editar
 $(document).on('click', 'td', function () {
 
-    var id = $(this).attr('data');
+    var id = $(this).children().attr('data');
 
     if(id) {
 
@@ -126,9 +153,22 @@ $(document).on('click', 'td', function () {
             $('.addHorario').hide();
             $('.edtHorario').show();
             $('.delHorario').show();
+            $('.canHorario').show();
 
         });
 
+    } else {
+
+        // ocultando botões
+        $('.addHorario').show();
+        $('.edtHorario').hide();
+        $('.delHorario').hide();
+        $('.canHorario').hide();
+
+        //Limpar os campos do formulário
+        limparCamposHorarios();
+
+        idHorario = "";
     }
 
 });
@@ -221,6 +261,7 @@ $(document).on('click', '#edtHorario', function (event) {
         $('.addHorario').show();
         $('.edtHorario').hide();
         $('.delHorario').hide();
+        $('.canHorario').hide();
     });
 });
 
@@ -250,9 +291,24 @@ $(document).on('click', '#delHorario', function () {
         $('.addHorario').show();
         $('.edtHorario').hide();
         $('.delHorario').hide();
+        $('.canHorario').hide();
     });
 });
 
+//Evento de remover o telefone
+$(document).on('click', '#canHorario', function () {
+
+    //Limpar os campos do formulário
+    limparCamposHorarios();
+
+    // ocultando botões
+    $('.addHorario').show();
+    $('.edtHorario').hide();
+    $('.delHorario').hide();
+    $('.canHorario').hide();
+
+    idHorario = "";
+});
 
 //Limpar os campos do formulário
 function limparCamposHorarios()

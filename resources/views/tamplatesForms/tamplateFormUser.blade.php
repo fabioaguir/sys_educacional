@@ -58,7 +58,12 @@
                                 <div class="form-group col-sm-6">
                                     <div class=" fg-line">
                                         <label for="edu_servidor_id">Servidor *</label><br />
-                                        {!! Form::select("edu_servidor_id", array() , null, array('id' => 'servidor', 'class' => 'form-control')) !!}
+                                        @if(isset($model))
+                                            {!! Form::select("edu_servidor_id", [$model->servidor->id => $model->servidor->cgm->nome] , $model->servidor->id, array('id' => 'servidor', 'class' => 'form-control')) !!}
+                                        @else
+                                            {!! Form::select("edu_servidor_id", [] , null, array('id' => 'servidor', 'class' => 'form-control')) !!}
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>

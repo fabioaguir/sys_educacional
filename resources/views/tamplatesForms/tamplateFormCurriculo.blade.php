@@ -29,30 +29,31 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    {{--<div class="form-group col-md-4">
                         <div class="fg-line">
                             <label for="disciplina_global_id">Disciplina Global</label>
                             {!! Form::select("disciplina_global_id", ["" => "Selecione uma disciplina"] + $loadFields['disciplina']->toArray(), null, array('class'=> 'form-control')) !!}
                         </div>
-                    </div>
+                    </div>--}}
 
-                    <div class="form-group col-md-4">
+                    {{--<div class="form-group col-md-4">
+                        <div class=" fg-line">
+                            <label for="controle_frequencia_id">Controle de Frequência</label>
+                            {!! Form::select("controle_frequencia_id", ["" => "Selecione um controle de frequência"] + $loadFields['controlefrequencia']->toArray(), null, array('class'=> 'form-control')) !!}
+                        </div>
+                    </div>--}}
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-3">
                         <div class="fg-line">
                             <label for="frequencia_curriculo_id">Frequência</label>
                             {!! Form::select("frequencia_curriculo_id", ["" => "Selecione uma frequência"] + $loadFields['frequenciacurriculo']->toArray(), null, array('class'=> 'form-control')) !!}
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
-                        <div class=" fg-line">
-                            <label for="controle_frequencia_id">Controle de Frequência</label>
-                            {!! Form::select("controle_frequencia_id", ["" => "Selecione um controle de frequência"] + $loadFields['controlefrequencia']->toArray(), null, array('class'=> 'form-control')) !!}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <div class=" fg-line">
                             <label for="serie_inicial_id">Serie Inicial *</label>
                             {!! Form::select("serie_inicial_id", ["" => "Selecione uma Série"] + $loadFields['serie']->toArray(),
@@ -60,7 +61,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <div class=" fg-line">
                             <label for="serie_final_id">Serie Final *</label>
                             {!! Form::select("serie_final_id", ["" => "Selecione uma Série"] + $loadFields['serie']->toArray(),

@@ -20,6 +20,7 @@ class Evento extends Model implements Transformable
         'tipo_evento_id',
         'dia_letivo_id',
         'calendarios_id',
+        'escola_id'
     ];
 
     /**

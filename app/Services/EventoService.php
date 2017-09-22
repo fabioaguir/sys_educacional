@@ -4,6 +4,7 @@ namespace SerEducacional\Services;
 
 use SerEducacional\Repositories\EventoRepository;
 use SerEducacional\Entities\Evento;
+use Illuminate\Support\Facades\Auth;
 
 class EventoService
 {
@@ -24,13 +25,20 @@ class EventoService
 
     /**
      * @param array $data
-     * @return EventoRepository
+     * @return Evento
      * @throws \Exception
      */
     public function store(array $data) : Evento
     {
         # Regras de negócios
         $this->tratamentoCampos($data);
+
+        # Pegando o usuário autenticado
+        $user = Auth::user();
+
+        if ($user->tipo_usuario_id == 3) {
+            $data['escola_id'] = \Session::get('escola')->id;
+        }
 
         #Salvando o registro pincipal
         $evento =  $this->repository->create($data);
@@ -47,7 +55,7 @@ class EventoService
     /**
      * @param array $data
      * @param int $id
-     * @return EventoRepository
+     * @return Evento
      * @throws \Exception
      */
     public function update(array $data, int $id) : Evento

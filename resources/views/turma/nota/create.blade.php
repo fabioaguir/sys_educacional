@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row notas">
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="display table table-border compact">
@@ -124,7 +124,7 @@
                                                 <input class="form-control nota recup_paralela recup_paralela_{{ $disciplina->id}}">
                                             </td>
                                             <td>
-                                                <input class="form-control nota nota_recuper nota_recuper_{{ $disciplina->id}}">
+                                                <input disabled readonly class="form-control nota nota_recuper nota_recuper_{{ $disciplina->id}}">
                                             </td>
                                         </tr>
                                     @endforeach

@@ -4,6 +4,8 @@ namespace SerEducacional\Services;
 
 use SerEducacional\Repositories\NotaParecerRepository;
 use SerEducacional\Entities\NotaParecer;
+use SerEducacional\Repositories\TurmaRepository;
+use Illuminate\Support\Facades\Auth;
 
 class NotaParecerService
 {
@@ -15,11 +17,19 @@ class NotaParecerService
     private $repository;
 
     /**
-     * @param NotaParecerRepository $repository
+     * @var TurmaRepository
      */
-    public function __construct(NotaParecerRepository $repository)
+    private $turmaRepository;
+
+    /**
+     * @param NotaParecerRepository $repository
+     * @param TurmaRepository $turmaRepository
+     */
+    public function __construct(NotaParecerRepository $repository,
+                                TurmaRepository $turmaRepository)
     {
         $this->repository = $repository;
+        $this->turmaRepository = $turmaRepository;
     }
 
     /**
@@ -54,6 +64,33 @@ class NotaParecerService
      */
     public function consultar(array $data)
     {
+        # Pegando o usuário autenticado
+        $user = Auth::user();
+
+        // Pegando a data atual
+        $date = new \Datetime("NOW");
+        $date = $date->format('Y-m-d');
+
+        // Pegando a turma
+        $turma = $this->turmaRepository->find($data['turma']);
+
+        // Pegando o período ao qual está sendo inserido a nota do aluno
+        $periodo = \DB::table('edu_periodos_avaliacao')
+            ->where('calendarios_id', $turma->calendario_id)
+            ->where('periodos_id', $data['periodo'])
+            ->select([
+                'data_fechamento'
+            ])->first();
+
+        // Valida se p usuário é um professor
+        if ($user->tipo_usuario_id == 4) {
+
+            // Valida se a data de fechamento do período já passou. foi encerrada
+            if(strtotime($periodo->data_fechamento) < strtotime($date)) {
+                return ['msg' => 'A data de fechamento do período já encerrou', 'return' => array()];
+            }
+
+        }
 
         # Trazendo as notas do aluno
         $nota = \DB::table('edu_notas_parecer')
@@ -66,7 +103,7 @@ class NotaParecerService
             ])->first();
 
         #retorno
-        return $nota;
+        return ['msg' => 'success', 'return' => $nota];
     }
 
     /**

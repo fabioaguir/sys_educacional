@@ -15,6 +15,7 @@ function loadTablePeriodos (idCalendario) {
             {data: 'periodo', name: 'edu_periodos.nome'},
             {data: 'data_inicial', name: 'edu_periodos_avaliacao.data_inicial'},
             {data: 'data_final', name: 'edu_periodos_avaliacao.data_final'},
+            {data: 'data_fechamento', name: 'edu_periodos_avaliacao.data_fechamento'},
             {data: 'dias_letivos', name: 'edu_periodos_avaliacao.dias_letivos'},
             {data: 'semanas_letivas', name: 'edu_periodos_avaliacao.semanas_letivas'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -57,6 +58,7 @@ $(document).on('click', '#addPeriodo', function (event) {
     var periodo         = $('#periodo').val();
     var dtInicial       = $('#dtInicial').val();
     var dtFinal         = $('#dtFinal').val();
+    var dtFechamento    = $('#dtFechamento').val();
     var diasLetivos     = $('#diasLetivos').val();
     var semanasLetivas  = $('#semanasLetivas').val();
     
@@ -72,6 +74,7 @@ $(document).on('click', '#addPeriodo', function (event) {
         'periodos_id' : periodo,
         'data_inicial' : dtInicial,
         'data_final' : dtFinal,
+        'data_fechamento' : dtFechamento,
         'dias_letivos' : diasLetivos,
         'semanas_letivas' : semanasLetivas
     };
@@ -100,7 +103,8 @@ $(document).on("click", "#editarPeriodo", function () {
     // Recuperando os dados do evento
     var periodo         = tablePeriodos.row($(this).parents('tr')).data().periodo_id;
     var dataInicial     = tablePeriodos.row($(this).parents('tr')).data().data_inicial;
-    var diaFinal        = tablePeriodos.row($(this).parents('tr')).data().data_final;
+    var dataFinal       = tablePeriodos.row($(this).parents('tr')).data().data_final;
+    var dataFechamento  = tablePeriodos.row($(this).parents('tr')).data().data_fechamento;
     var dLetivo         = tablePeriodos.row($(this).parents('tr')).data().dias_letivos;
     var sLetivo         = tablePeriodos.row($(this).parents('tr')).data().semanas_letivas;
     var totalDia        = tablePeriodos.row($(this).parents('tr')).data().total_dias;
@@ -109,7 +113,8 @@ $(document).on("click", "#editarPeriodo", function () {
     // prenchendo o os campos de evento
     periodos(periodo);
     $('#dtInicial').val(dataInicial);
-    $('#dtFinal').val(diaFinal);
+    $('#dtFinal').val(dataFinal);
+    $('#dtFechamento').val(dataFechamento);
     $('#diasLetivos').val(dLetivo);
     $('#semanasLetivas').val(sLetivo);
     $('#totalDias').val(totalDia);
@@ -129,6 +134,7 @@ $(document).on('click', '#edtPeriodo', function (event) {
     var periodo         = $('#periodo').val();
     var dtInicial       = $('#dtInicial').val();
     var dtFinal         = $('#dtFinal').val();
+    var dtFechamento    = $('#dtFechamento').val();
     var diasLetivos     = $('#diasLetivos').val();
     var semanasLetivas  = $('#semanasLetivas').val();
 
@@ -144,6 +150,7 @@ $(document).on('click', '#edtPeriodo', function (event) {
         'periodos_id' : periodo,
         'data_inicial' : dtInicial,
         'data_final' : dtFinal,
+        'data_fechamento' : dtFechamento,
         'dias_letivos' : diasLetivos,
         'semanas_letivas' : semanasLetivas
     };
@@ -253,6 +260,7 @@ function limparCamposFormulario()
     $('#periodo').val("");
     $('#dtInicial').val("");
     $('#dtFinal').val("");
+    $('#dtFechamento').val("");
     $('#diasLetivos').val("");
     $('#semanasLetivas').val("");
 }

@@ -76,7 +76,7 @@ class NotaParecerController extends Controller
         #Carregando os dados para o cadastro
         $return = $this->service->consultar($request->request->all());
 
-        return \Illuminate\Support\Facades\Response::json(['return' => $return]);
+        return \Illuminate\Support\Facades\Response::json($return);
     }
 
     /**

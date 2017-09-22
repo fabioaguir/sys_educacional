@@ -71,6 +71,7 @@ class PeriodoAvaliacaosController extends Controller
                 'edu_periodos.nome as periodo',
                 \DB::raw('DATE_FORMAT(edu_periodos_avaliacao.data_inicial,"%d/%m/%Y") as data_inicial'),
                 \DB::raw('DATE_FORMAT(edu_periodos_avaliacao.data_final,"%d/%m/%Y") as data_final'),
+                \DB::raw('DATE_FORMAT(edu_periodos_avaliacao.data_fechamento,"%d/%m/%Y") as data_fechamento'),
                 'edu_periodos_avaliacao.dias_letivos',
                 'edu_periodos_avaliacao.semanas_letivas',
                 'edu_calendarios.dias_letivos as total_dias',

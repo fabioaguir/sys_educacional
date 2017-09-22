@@ -43,7 +43,7 @@ class TurmaController extends Controller
         'FormaAvaliacao',
         'Calendario',
         'TipoAtendimento',
-        'Dependencia',
+        'Dependencia|byEscola',
         'Escola',
         'ProfessorUnico'
     ];

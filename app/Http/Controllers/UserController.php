@@ -150,7 +150,7 @@ class UserController extends Controller
     {
         try {
             #Recuperando a empresa
-            $model = $this->repository->find($id);
+            $model = $this->repository->with(['servidor.cgm'])->find($id);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);

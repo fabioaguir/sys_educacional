@@ -63,7 +63,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row parecer-div">
                         <div class="col-md-12">
                             <div class="form-group col-md-12">
                                 <div class=" fg-line">

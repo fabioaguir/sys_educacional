@@ -83,9 +83,14 @@
                                 <button type="button" id="edtHorario" class="btn btn-success btn-sm m-t-10">Editar</button>
                             </div>
                         </div>
-                        <div class="form-group col-md-2 delHorario">
+                        <div class="form-group col-md-1 delHorario">
                             <div class="fg-line" style="margin-top: 20px; margin-left: -75px">
                                 <button type="button" id="delHorario" class="btn btn-danger btn-sm m-t-10">Deletar</button>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-1 canHorario">
+                            <div class="fg-line" style="margin-top: 20px; margin-left: -68px">
+                                <button type="button" id="canHorario" class="btn btn-default btn-sm m-t-10">Cancelar</button>
                             </div>
                         </div>
 

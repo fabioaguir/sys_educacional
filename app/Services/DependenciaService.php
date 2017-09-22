@@ -23,6 +23,25 @@ class DependenciaService
     }
 
     /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function find($id)
+    {
+        #Recuperando o registro no banco de dados
+        $dependencia = $this->repository->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$dependencia) {
+            throw new \Exception('Aluno não encontrado!');
+        }
+
+        #retorno
+        return $dependencia;
+    }
+
+    /**
      * @param array $data
      * @return Dependencia
      * @throws \Exception

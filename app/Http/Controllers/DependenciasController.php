@@ -160,7 +160,7 @@ class DependenciasController extends Controller
 
             #retorno para view
             return view('dependencia.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -190,7 +190,7 @@ class DependenciasController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -208,8 +208,25 @@ class DependenciasController extends Controller
             #Retorno para a view
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) {
-            dd($e);
             return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function find($id)
+    {
+        try {
+
+            #Executando a ação
+            $result = $this->service->find($id);
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json($result);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
         }
     }
 }

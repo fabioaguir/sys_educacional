@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 
 use SerEducacional\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use SerEducacional\Http\Requests\EventoCreateRequest;
 use SerEducacional\Http\Requests\EventoUpdateRequest;
 use SerEducacional\Repositories\EventoRepository;
 use SerEducacional\Validators\EventoValidator;
 use SerEducacional\Services\EventoService;
 use Yajra\Datatables\Datatables;
-use SerEducacional\Uteis\SerbinarioDateFormat;
+use Illuminate\Support\Facades\Auth;
 
 
 class EventosController extends Controller
@@ -61,12 +60,15 @@ class EventosController extends Controller
      */
     public function grid($id)
     {
+
         #Criando a consulta
         $rows = \DB::table('edu_feriados_eventos')
             ->join('edu_dia_letivo', 'edu_dia_letivo.id', '=', 'edu_feriados_eventos.dia_letivo_id')
             ->join('edu_tipo_evento', 'edu_tipo_evento.id', '=', 'edu_feriados_eventos.tipo_evento_id')
             ->join('edu_calendarios', 'edu_calendarios.id', '=', 'edu_feriados_eventos.calendarios_id')
             ->where('edu_feriados_eventos.calendarios_id', '=', $id)
+            ->where('edu_feriados_eventos.escola_id', null)
+            ->orWhere('edu_feriados_eventos.escola_id', \Session::get('escola')->id)
             ->select([
                 'edu_feriados_eventos.id as id',
                 'edu_feriados_eventos.nome as nome',
@@ -76,12 +78,28 @@ class EventosController extends Controller
                 'edu_dia_letivo.id as dia_letivo_id',
                 'edu_tipo_evento.nome as tipo_evento',
                 'edu_tipo_evento.id as tipo_evento_id',
+                'edu_feriados_eventos.escola_id'
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html = '<a style="margin-right: 5%;" title="Editar" id="editarEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
-            $html .= '<a title="Remover" id="deleteEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            # Pegando o usuário autenticado
+            $user = Auth::user();
+
+            $html = "";
+
+            if ($user->tipo_usuario_id == 1 || $user->tipo_usuario_id == 2) {
+                $html .= '<a style="margin-right: 5%;" title="Editar" id="editarEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html .= '<a title="Remover" id="deleteEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
+
+            if ($user->tipo_usuario_id == 3 && $row->escola_id
+                && ($row->escola_id == \Session::get('escola')->id)) {
+
+                $html .= '<a style="margin-right: 5%;" title="Editar" id="editarEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+                $html .= '<a title="Remover" id="deleteEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
 
             # Retorno
             return $html;

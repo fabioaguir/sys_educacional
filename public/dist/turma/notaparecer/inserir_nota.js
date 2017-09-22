@@ -39,14 +39,24 @@ $(document).on('click', '#consultarNota', function (event) {
         datatype: 'json'
     }).done(function (json) {
 
-        if (json['return']) {
 
-            $('#parecer').val(json['return']['parecer']);
-            $('#id-nota').val(json['return']['id']);
+        if (json['msg'] == 'success') {
+
+            $(".parecer-div").show();
+
+            if (json['return']) {
+
+                $('#parecer').val(json['return']['parecer']);
+                $('#id-nota').val(json['return']['id']);
+
+            } else {
+                $('#parecer').val('');
+                $('#id-nota').val('');
+            }
 
         } else {
-            $('#parecer').val('');
-            $('#id-nota').val('');
+            swal("Oops...", json['msg'], "error");
+            $(".parecer-div").hide();
         }
 
     });

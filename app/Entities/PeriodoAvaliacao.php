@@ -22,6 +22,7 @@ class PeriodoAvaliacao extends Model implements Transformable
         'total_semanas_letivas',
         'periodos_id',
         'calendarios_id',
+        'data_fechamento'
     ];
 
     /**
@@ -56,6 +57,24 @@ class PeriodoAvaliacao extends Model implements Transformable
     public function setDataFinalAttribute($value)
     {
         $this->attributes['data_final'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setDataFechamentoAttribute($value)
+    {
+        $this->attributes['data_fechamento'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataFechamentoAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_fechamento']);
     }
 
     /**

@@ -31,6 +31,15 @@ class Turma extends Model implements Transformable
         'professor_unico_id'
     ];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function calendario()
+    {
+        return $this->belongsTo(Calendario::class, 'calendario_id');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

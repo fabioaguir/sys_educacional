@@ -112,99 +112,105 @@
             <li class="sub-menu">
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-wrench"></i>Parâmetros</a>
                 <ul>
+                    @permission('instituicao.update')
                     <li>
-                        @permission('instituicao.update')
                         <a href="{{ route('instituicao.edit')  }}">Instituição</a>
-                        @endpermission
-
-                        @permission('forma.avaliacao.select|forma.avaliacao.store|forma.avaliacao.update|forma.avaliacao.destroy')
-                        <a href="{{ route('formaAvaliacao.index')  }}">Formas de Avaliações</a>
-                        @endpermission
-
-                        {{--@permission('procedimento.avaliacao.select|procedimento.avaliacao.store|procedimento.avaliacao.update|procedimento.avaliacao.destroy')
-                        <a href="{{ route('procedimentoAvaliacao.index')  }}">Procedimentos de avaliação</a>
-                        @endpermission--}}
-
-                        {{--@permission('dependencia.select|dependencia.store|dependencia.update|dependencia.destroy')
-                        <a href="{{ route('dependencia.index')  }}"> Dependências</a>
-                        @endpermission--}}
-
-                        @permission('periodo.select|periodo.store|periodo.update|periodo.destroy')
-                        <a href="{{ route('periodo.index')  }}">Períodos de avaliação</a>
-                        @endpermission
-
-                        @permission('tipo.evento.select|tipo.evento.store|tipo.evento.update|tipo.evento.destroy')
-                        <a href="{{ route('tipoEvento.index')  }}">Tipo Evento</a>
-                        @endpermission
-
-                        @permission('parecer.select|parecer.store|parecer.update|parecer.destroy')
-                        <a href="{{ route('parecer.index')  }}"> Pareceres</a>
-                        @endpermission
-
-                        @permission('cargo.select|cargo.store|cargo.update|cargo.destroy')
-                        <a href="{{ route('cargo.index')  }}"> Cargos</a>
-                        @endpermission
-
-                        @permission('funcao.select|funcao.store|funcao.update|funcao.destroy')
-                        <a href="{{ route('funcao.index')  }}">Funções</a>
-                        @endpermission
-
-                        @permission('user.select|user.store|user.update|user.destroy')
-                        <a href="{{ route('user.index')  }}">Usuários</a>
-                        @endpermission
-
-                        @permission('role.select|role.store|role.update|role.destroy')
-                        <a href="{{ route('role.index')  }}">Perfís</a>
-                        @endpermission
                     </li>
+                    @endpermission
+
+                    @permission('forma.avaliacao.select|forma.avaliacao.store|forma.avaliacao.update|forma.avaliacao.destroy')
+                    <li>
+                        <a href="{{ route('formaAvaliacao.index')  }}">Formas de Avaliações</a>
+                    </li>
+                    @endpermission
+
+                    @permission('periodo.select|periodo.store|periodo.update|periodo.destroy')
+                    <li>
+                        <a href="{{ route('periodo.index')  }}">Períodos de avaliação</a>
+                    </li>
+                    @endpermission
+
+                    @permission('tipo.evento.select|tipo.evento.store|tipo.evento.update|tipo.evento.destroy')
+                    <li>
+                        <a href="{{ route('tipoEvento.index')  }}">Tipo Evento</a>
+                    </li>
+                    @endpermission
+
+                    @permission('parecer.select|parecer.store|parecer.update|parecer.destroy')
+                    <li>
+                        <a href="{{ route('parecer.index')  }}"> Pareceres</a>
+                    </li>
+                    @endpermission
+
+                    @permission('disciplina.select|disciplina.store|disciplina.update|disciplina.destroy')
+                    <li>
+                        <a href="{{ route('disciplina.index') }}">Disciplinas</a>
+                    </li>
+                    @endpermission
+
+                    @permission('modalidade.select|modalidade.store|modalidade.update|modalidade.destroy')
+                    <li>
+                        <a href="{{ route('modalidadeEnsino.index')  }}">Modalidade de Ensino</a>
+                    </li>
+                    @endpermission
+
+                    @permission('nivel.select|nivel.store|nivel.update|nivel.destroy')
+                    <li>
+                        <a href="{{ route('nivelEnsino.index')  }}">Níveis de Ensino</a>
+                    </li>
+                    @endpermission
+
+                    @permission('curso.select|curso.store|curso.update|curso.destroy')
+                    <li>
+                        <a href="{{ route('curso.index')  }}">Cursos</a>
+                    </li>
+                    @endpermission
+
+                    {{--@permission('procedimento.avaliacao.select|procedimento.avaliacao.store|procedimento.avaliacao.update|procedimento.avaliacao.destroy')
+                    <a href="{{ route('procedimentoAvaliacao.index')  }}">Procedimentos de avaliação</a>
+                    @endpermission--}}
+
                 </ul>
 
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-home"></i>Escolas</a>
                 <ul>
+
+                    @permission('escola.select|escola.store|escola.update|escola.destroy')
                     <li>
-                        @permission('disciplina.select|disciplina.store|disciplina.update|disciplina.destroy')
-                        <a href="{{ route('disciplina.index') }}">Disciplinas</a>
-                        @endpermission
-
-                        @permission('modalidade.select|modalidade.store|modalidade.update|modalidade.destroy')
-                        <a href="{{ route('modalidadeEnsino.index')  }}">Modalidade de Ensino</a>
-                        @endpermission
-
-                        @permission('nivel.select|nivel.store|nivel.update|nivel.destroy')
-                        <a href="{{ route('nivelEnsino.index')  }}">Níveis de Ensino</a>
-                        @endpermission
-
-                        @permission('curso.select|curso.store|curso.update|curso.destroy')
-                        <a href="{{ route('curso.index')  }}">Cursos</a>
-                        @endpermission
-
-                        @permission('escola.select|escola.store|escola.update|escola.destroy')
                         <a href="{{ route('escola.index')  }}">Escolas</a>
-                        @endpermission
-
-                        @permission('curriculo.select|curriculo.store|curriculo.update|curriculo.destroy')
-                        <a href="{{ route('curriculo.index')  }}">Matriz Curricular</a>
-                        @endpermission
-
-                        @permission('calendario.select|calendario.store|calendario.update|calendario.destroy')
-                        <a href="{{ route('calendario.index')  }}">Calendário</a>
-                        @endpermission
-
-                        @permission('turma.select|turma.store|turma.update|turma.destroy')
-                        <a href="{{ route('turma.index')  }}">Turmas</a>
-                        @endpermission
-
-                        @permission('turma.complementar.select|turma.complementa.store|turma.complementa.update|turma.complementa.destroy')
-                        <a href="{{ route('turmaComplementar.index')  }}">Turmas Complementares</a>
-                        @endpermission
-
-                        @permission('aluno.select|aluno.store|aluno.update|aluno.destroy')
-                        <a href="{{ route('aluno.index') }}">Alunos</a>
-                        @endpermission
-
-                        {{--<a href="{{ route('matricular.index')  }}">Matricular</a>--}}
-
                     </li>
+                    @endpermission
+
+                    @permission('curriculo.select|curriculo.store|curriculo.update|curriculo.destroy')
+                    <li>
+                        <a href="{{ route('curriculo.index')  }}">Matriz Curricular</a>
+                    </li>
+                    @endpermission
+
+                    @permission('calendario.select|calendario.store|calendario.update|calendario.destroy')
+                    <li>
+                        <a href="{{ route('calendario.index')  }}">Calendário</a>
+                    </li>
+                    @endpermission
+
+                    @permission('turma.select|turma.store|turma.update|turma.destroy')
+                    <li>
+                        <a href="{{ route('turma.index')  }}">Turmas</a>
+                    </li>
+                    @endpermission
+
+                    @permission('turma.complementar.select|turma.complementa.store|turma.complementa.update|turma.complementa.destroy')
+                    <li>
+                        <a href="{{ route('turmaComplementar.index')  }}">Turmas Complementares</a>
+                    </li>
+                    @endpermission
+
+                    @permission('aluno.select|aluno.store|aluno.update|aluno.destroy')
+                    <li>
+                        <a href="{{ route('aluno.index') }}">Alunos</a>
+                    </li>
+                    @endpermission
+
                 </ul>
 
                 <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-accounts-alt"></i>RH</a>
@@ -225,17 +231,39 @@
                             @endpermission
                         </ul>
                     </li>
+
+                    @permission('servidor.select|servidor.store|servidor.update|servidor.destroy')
+                        <li>
+                            <a href="{{ route('servidor.index')  }}">Servidores</a>
+                        </li>
+                    @endpermission
+
+                    @permission('cargo.select|cargo.store|cargo.update|cargo.destroy')
                     <li>
-                        @permission('servidor.select|servidor.store|servidor.update|servidor.destroy')
-                        <a href="{{ route('servidor.index')  }}">Servidores</a>
-                        @endpermission
+                        <a href="{{ route('cargo.index')  }}"> Cargos</a>
                     </li>
+                    @endpermission
+
+                    @permission('funcao.select|funcao.store|funcao.update|funcao.destroy')
+                    <li>
+                        <a href="{{ route('funcao.index')  }}">Funções</a>
+                    </li>
+                    @endpermission
                 </ul>
 
-                <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-home"></i>Procedimentos</a>
+                <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-shield-security"></i>Segurança</a>
                 <ul>
-                    <li>
-                    </li>
+                    @permission('user.select|user.store|user.update|user.destroy')
+                        <li>
+                            <a href="{{ route('user.index')  }}">Usuários</a>
+                        </li>
+                    @endpermission
+                    @permission('role.select|role.store|role.update|role.destroy')
+                        <li>
+                            <a href="{{ route('role.index')  }}">Perfís</a>
+                        </li>
+                    @endpermission
+
                 </ul>
             </li>
         </ul>

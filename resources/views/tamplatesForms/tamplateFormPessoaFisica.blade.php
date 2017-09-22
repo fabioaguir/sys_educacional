@@ -371,9 +371,6 @@
                     url: '{{ route('pessoaFisica.findCidade')  }}',
                     data: dados,
                     datatype: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                    }
                 }).done(function (json) {
                     var option = "";
 

@@ -25,4 +25,13 @@ class Dependencia extends Model implements Transformable
     {
         return $this->belongsTo(Escola::class, 'escola_id');
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeByEscola($query)
+    {
+        return $query->where('escola_id', \Session::get('escola')->id)->select('nome', 'id');
+    }
 }
