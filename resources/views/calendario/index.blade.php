@@ -123,7 +123,7 @@
                 {data: 'data_resultado_final', name: 'edu_calendarios.data_resultado_final'},
                 {data: 'dias_letivos', name: 'edu_calendarios.dias_letivos'},
                 {data: 'semanas_letivas', name: 'edu_calendarios.semanas_letivas'},
-                {data: 'status', name: 'status.nome'},
+                {data: 'status', name: 'status.nome', orderable: false, searchable: false},
                 {data: 'duracao', name: 'edu_duracoes.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

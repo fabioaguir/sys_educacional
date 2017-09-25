@@ -46,6 +46,7 @@ class HistoricoService
             ])->first();
 
         if ($qtdAlunoTurma) {
+
             // Valida se a quantidade de vagas foi esgotada
             if($qtdAlunoTurma->qtdAlunos >= $data['vagas']) {
                 return ['retorno' => false, 'resposta' => 'Limte de vagas foi atingido!'];
@@ -61,12 +62,20 @@ class HistoricoService
 
         }
 
+        # gerando o número de matrícula
+        $date = new \DateTime('now');
+
         // Varrendos todos os alunos a serem matriculados e realizando a matrícula
         foreach ($data['alunos'] as $aluno) {
 
-            # gerando o número de matrícula
-            $date = new \DateTime('now');
-            $numMatricula = $date->format('YmdHis');
+            $matriculaExistente = \DB::table('edu_historico')->where('aluno_id', $aluno)->first();
+
+            // Validando se o aluno já possui uma matrícula
+            if ($matriculaExistente) {
+                $numMatricula = $matriculaExistente->matricula;
+            } else {
+                $numMatricula = $date->format('YmdHis');
+            }
 
             $dados['matricula'] = $numMatricula;
             $dados['data_matricula'] = $date->format('Y-m-d');
@@ -130,7 +139,15 @@ class HistoricoService
 
         # gerando o número de matrícula
         $date = new \DateTime('now');
-        $numMatricula = $date->format('YmdHis');
+
+        $matriculaExistente = \DB::table('edu_historico')->where('aluno_id', $data['aluno_id'])->first();
+
+        // Validando se o aluno já possui uma matrícula
+        if ($matriculaExistente) {
+            $numMatricula = $matriculaExistente->matricula;
+        } else {
+            $numMatricula = $date->format('YmdHis');
+        }
 
         $dados['matricula'] = $numMatricula;
         $dados['data_matricula'] = $date->format('Y-m-d');

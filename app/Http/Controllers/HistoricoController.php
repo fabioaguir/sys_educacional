@@ -88,14 +88,14 @@ class HistoricoController extends Controller
                 $join->on(
                     'edu_historico.id', '=',
                     \DB::raw('(SELECT edu_historico.id FROM edu_historico
-                        where edu_historico.aluno_id = edu_alunos.id ORDER BY edu_historico.id DESC LIMIT 1)')
+                        where edu_historico.aluno_id = edu_alunos.id AND edu_historico.situacao_matricula_id IN (2,3) ORDER BY edu_historico.id DESC LIMIT 1)')
                 );
             })
-            ->join('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
+            ->leftJoin('gen_cgm', 'gen_cgm.id', '=', 'edu_alunos.cgm_id')
             ->leftJoin('edu_turmas', 'edu_turmas.id', '=', 'edu_historico.turma_id')
             ->leftJoin('edu_situacao_matricula', 'edu_situacao_matricula.id', '=', 'edu_historico.situacao_matricula_id')
             ->where('edu_turmas.id', $idTurma)
-            ->where('edu_historico.situacao_matricula_id', '<>', "1")
+            //->where('edu_historico.situacao_matricula_id', '<>', "1")
             ->select([
                 'edu_alunos.id',
                 'edu_historico.matricula',
