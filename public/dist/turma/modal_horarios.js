@@ -112,8 +112,10 @@ function runModalHorarios(idTurma, idEscola, idSerie, idTurno)
     // Exibindo o modal
     $('#modal-horarios').modal({'show' : true});
 
-    // Ocultando por padrão o campo disciplina
-    $('#div-disciplina').hide();
+    if (profUnico == '2') {
+        // Ocultando por padrão o campo disciplina
+        $('#div-disciplina').hide();
+    }
 
     //Limpar os campos do formulário
     limparCamposHorarios();
@@ -141,13 +143,6 @@ $(document).on('click', 'td', function () {
             horas(retorno['hora_id'], retorno['hora'], retorno['dia_semana_id']);
             professores(retorno['professor_id'], retorno['professor'], retorno['hora_id'], retorno['dia_semana_id']);
             idHorario = retorno['id'];
-
-            if(retorno['disciplinas_id']) {
-                // Ocultando por padrão o campo disciplina
-                $('#div-disciplina').show();
-            } else {
-                $('#div-disciplina').hide();
-            }
 
             // ocultando botões
             $('.addHorario').hide();
@@ -182,10 +177,9 @@ $(document).on('click', '#addHorario', function (event) {
     var professor    = $('#professor').val();
     var dia          = $('#dia').val();
     var hora         = $('#hora').val();
-    var tipo         = $('#tipo-turma').val();
     
     // Verificando se os campos de preenchimento obrigatório foram preenchidos
-    if (!tipo || !professor || !dia || !hora) {
+    if (!professor || !dia || !hora) {
         swal("Oops...", "Há campos obrigatórios que não foram preenchidos!", "error");
         return false;
     }
@@ -197,7 +191,7 @@ $(document).on('click', '#addHorario', function (event) {
         'disciplinas_id' : disciplina,
         'servidor_id' : professor,
         'dia_semana_id' : dia,
-        'tipo_turma' : tipo
+        'tipo_turma' : profUnico
     };
 
     // Requisição Ajax
@@ -225,7 +219,6 @@ $(document).on('click', '#edtHorario', function (event) {
     var professor    = $('#professor').val();
     var dia          = $('#dia').val();
     var hora         = $('#hora').val();
-    var tipo         = $('#tipo-turma').val();
 
     // Verificando se os campos de preenchimento obrigatório foram preenchidos
     if (!professor || !dia || !hora) {
@@ -240,7 +233,7 @@ $(document).on('click', '#edtHorario', function (event) {
         'disciplinas_id' : disciplina,
         'servidor_id' : professor,
         'dia_semana_id' : dia,
-        'tipo_turma' : tipo
+        'tipo_turma' : profUnico
     };
 
     // Requisição Ajax

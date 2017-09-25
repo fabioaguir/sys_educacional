@@ -3,7 +3,7 @@
  */
 
 // Global idTurma
-var idTurma, idEscola, idSerie, idTurno, nomeSerie, idsAlunos;
+var idTurma, idEscola, idSerie, idTurno, nomeSerie, idsAlunos, profUnico;
 
 //Função para listar as disciplinas
 function disciplinasHorario(id) {
@@ -21,7 +21,7 @@ function disciplinasHorario(id) {
     }).done(function (json) {
         var option = '';
 
-        option += '<option value="">Selecione uma disciplna</option>';
+        option += '<option value="">Selecione</option>';
         for (var i = 0; i < json.length; i++) {
             if (json[i]['id'] == id) {
                 option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
@@ -46,7 +46,7 @@ function dias(id) {
     }).done(function (json) {
         var option = '';
 
-        option += '<option value="">Selecione um dia</option>';
+        option += '<option value="">Selecione</option>';
         for (var i = 0; i < json.length; i++) {
             if (json[i]['id'] == id) {
                 option += '<option selected value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
@@ -153,7 +153,7 @@ $(document).on('change', '#hora', function(){
         }).done(function (json) {
             var option = '';
 
-            option += '<option value="">Selecione um horário</option>';
+            option += '<option value="">Selecione</option>';
             for (var i = 0; i < json.length; i++) {
                 option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
             }
@@ -191,7 +191,7 @@ $(document).on('change', '#dia', function(){
         }).done(function (json) {
             var option = '';
 
-            option += '<option value="">Selecione um horário</option>';
+            option += '<option value="">Selecione</option>';
             for (var i = 0; i < json.length; i++) {
                 option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
             }

@@ -26,23 +26,13 @@
                 <div class="row">
 
                     <div class="col-md-12">
-                        <div class="form-group col-md-3">
-                            <div class=" fg-line">
-                                <label for="tipo-turma">Turma do 6º ao 9º ano? *</label>
-                                <select class="form-control" id="tipo-turma">
-                                    <option value="">Selecione a opção</option>
-                                    <option value="1">Sim</option>
-                                    <option value="2">Não</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="form-group col-md-2">
                             <div class=" fg-line">
                                 <label for="dia">Dia *</label>
                                 {!! Form::select("dia", array(), null, array('class'=> 'form-control', 'id' => 'dia')) !!}
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <div class=" fg-line">
                                 <label for="hora">Hora *</label>
                                 <div class="select">
@@ -50,10 +40,6 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-
-                    <div class="col-md-12">
 
                         <div class="form-group col-md-5">
                             <div class=" fg-line">
@@ -73,23 +59,27 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="col-md-12">
+
                         <div class="form-group col-md-2 addHorario">
-                            <div class="fg-line" style="margin-top: 20px">
+                            <div class="fg-line" style="margin-top: -8px">
                                 <button type="button" id="addHorario" class="btn btn-primary btn-sm m-t-10">Adicionar</button>
                             </div>
                         </div>
                         <div class="form-group col-md-2 edtHorario">
-                            <div class="fg-line" style="margin-top: 20px">
+                            <div class="fg-line" style="margin-top: -8px">
                                 <button type="button" id="edtHorario" class="btn btn-success btn-sm m-t-10">Editar</button>
                             </div>
                         </div>
                         <div class="form-group col-md-1 delHorario">
-                            <div class="fg-line" style="margin-top: 20px; margin-left: -75px">
+                            <div class="fg-line" style="margin-top: -8px; margin-left: -75px">
                                 <button type="button" id="delHorario" class="btn btn-danger btn-sm m-t-10">Deletar</button>
                             </div>
                         </div>
                         <div class="form-group col-md-1 canHorario">
-                            <div class="fg-line" style="margin-top: 20px; margin-left: -68px">
+                            <div class="fg-line" style="margin-top: -8px; margin-left: -68px">
                                 <button type="button" id="canHorario" class="btn btn-default btn-sm m-t-10">Cancelar</button>
                             </div>
                         </div>

@@ -163,6 +163,7 @@
             idEscola = table.row($(this).parents('tr')).data().escola_id;
             idSerie = table.row($(this).parents('tr')).data().serie_id;
             idTurno = table.row($(this).parents('tr')).data().turno_id;
+            profUnico = table.row($(this).parents('tr')).data().professor_unico;
 
             // Recuperando o nome e o código
             var codigo = table.row($(this).parents('tr')).data().codigo;
