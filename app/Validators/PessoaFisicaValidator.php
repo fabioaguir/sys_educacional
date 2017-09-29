@@ -45,69 +45,69 @@ class PessoaFisicaValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'estado_civil_id' => 'required|integer',
-            'sexo_id' => 'required|integer',
-            'nacionalidade_id' => 'required|integer',
-            'cgm_municipio_id' => 'integer|required',
-            'escolaridade_id' => 'integer|required',
-            'endereco_id' => 'integer',
+           // 'estado_civil_id' => 'required|integer',
+          //  'sexo_id' => 'required|integer',
+           // 'nacionalidade_id' => 'required|integer',
+          //  'cgm_municipio_id' => 'integer|required',
+         //   'escolaridade_id' => 'integer|required',
+         //   'endereco_id' => 'integer',
             //'num_cgm' => 'number',
-            'cpf' => 'required|cpf_br|digits_between:0,20|unique:gen_cgm,cpf',
-            'rg' => 'required|numeric||digits_between:0,20',
-            'orgao_emissor' => 'required|serbinario_alpha_space|max:30',
+        //    'cpf' => 'required|cpf_br|digits_between:0,20|unique:gen_cgm,cpf',
+        //    'rg' => 'required|numeric||digits_between:0,20',
+         //   'orgao_emissor' => 'required|serbinario_alpha_space|max:30',
             'nome' => 'required|serbinario_alpha_space|max:45',
-            'pai' => 'required|serbinario_alpha_space|max:45',
-            'mae' => 'required|serbinario_alpha_space|max:45',
-            'naturalidade' => 'serbinario_alpha_space|max:45',
-            'inscricao_estadual' => 'numeric|digits_between:0,30',
-            'data_nascimento' => 'required|max:15', //|serbinario_date_format
-            'data_falecimento' => 'max:15', //|serbinario_date_format
-            'data_expedicao' => 'required|max:15', //|serbinario_date_format
-            //'data_cadastramento',
-            'data_vencimento_cnh' => 'max:15', //|serbinario_date_format
-            'email' => 'email|max:45',
-            'num_cnh' => 'numeric|digits_between:0,30',
-            'cnh_categoria_id' => 'integer',
+         //   'pai' => 'required|serbinario_alpha_space|max:45',
+         //   'mae' => 'required|serbinario_alpha_space|max:45',
+        //    'naturalidade' => 'serbinario_alpha_space|max:45',
+        //    'inscricao_estadual' => 'numeric|digits_between:0,30',
+        //    'data_nascimento' => 'required|max:15', //|serbinario_date_format
+       //     'data_falecimento' => 'max:15', //|serbinario_date_format
+        //    'data_expedicao' => 'required|max:15', //|serbinario_date_format
+        //    //'data_cadastramento',
+       //     'data_vencimento_cnh' => 'max:15', //|serbinario_date_format
+        //    'email' => 'email|max:45',
+       //     'num_cnh' => 'numeric|digits_between:0,30',
+       //     'cnh_categoria_id' => 'integer',
 
             //Endereço
-            'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
-            'endereco.numero' => 'required|numeric|digits_between:0,10',
-            'endereco.complemento' => 'serbinario_alpha_space|max:120',
-            'endereco.cep' => 'numeric|digits_between:0,15',
-            'endereco.bairro_id' => 'integer'
+          //  'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
+        //    'endereco.numero' => 'required|numeric|digits_between:0,10',
+        //    'endereco.complemento' => 'serbinario_alpha_space|max:120',
+        //    'endereco.cep' => 'numeric|digits_between:0,15',
+        //    'endereco.bairro_id' => 'integer'
         ],
 
         ValidatorInterface::RULE_UPDATE => [
-            'estado_civil_id' => 'required|integer',
-            'sexo_id' => 'required|integer',
-            'nacionalidade_id' => 'required|integer',
-            'cgm_municipio_id' => 'integer|required',
-            'escolaridade_id' => 'integer|required',
-            'endereco_id' => 'integer',
+          //  'estado_civil_id' => 'required|integer',
+        //    'sexo_id' => 'required|integer',
+        //    'nacionalidade_id' => 'required|integer',
+        //    'cgm_municipio_id' => 'integer|required',
+        //    'escolaridade_id' => 'integer|required',
+        //    'endereco_id' => 'integer',
             //'num_cgm' => 'number',
             //'cpf' => 'required|cpf_br|digits_between:0,20|unique:cgm,cpf,:id',
-            'rg' => 'required|numeric|digits_between:0,20',
-            'orgao_emissor' => 'required|serbinario_alpha_space|max:30',
+         //   'rg' => 'required|numeric|digits_between:0,20',
+        //    'orgao_emissor' => 'required|serbinario_alpha_space|max:30',
             'nome' => 'required|serbinario_alpha_space|max:45',
-            'pai' => 'required|serbinario_alpha_space|max:45',
-            'mae' => 'required|serbinario_alpha_space|max:45',
-            'naturalidade' => 'serbinario_alpha_space|max:45',
-            'inscricao_estadual' => 'numeric|digits_between:0,30',
-            'data_nascimento' => 'required|max:15', //|serbinario_date_format
-            'data_falecimento' => 'max:15', //|serbinario_date_format
-            'data_expedicao' => 'required|max:15', //|serbinario_date_format
+        //    'pai' => 'required|serbinario_alpha_space|max:45',
+        //    'mae' => 'required|serbinario_alpha_space|max:45',
+        //    'naturalidade' => 'serbinario_alpha_space|max:45',
+        //    'inscricao_estadual' => 'numeric|digits_between:0,30',
+        //    'data_nascimento' => 'required|max:15', //|serbinario_date_format
+        //    'data_falecimento' => 'max:15', //|serbinario_date_format
+        //    'data_expedicao' => 'required|max:15', //|serbinario_date_format
             //'data_cadastramento',
-            'data_vencimento_cnh' => 'max:15', //|serbinario_date_format
-            'email' => 'email|max:45',
-            'num_cnh' => 'numeric|digits_between:0,30',
-            'cnh_categoria_id' => 'integer',
+       //    'data_vencimento_cnh' => 'max:15', //|serbinario_date_format
+        //    'email' => 'email|max:45',
+        //    'num_cnh' => 'numeric|digits_between:0,30',
+        //    'cnh_categoria_id' => 'integer',
 
             //Endereço
-            'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
-            'endereco.numero' => 'required|numeric|digits_between:0,10',
-            'endereco.complemento' => 'serbinario_alpha_space|max:120',
-            'endereco.cep' => 'numeric|digits_between:0,15',
-            'endereco.bairro_id' => 'integer'
+       //     'endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
+         //   'endereco.numero' => 'required|numeric|digits_between:0,10',
+        //    'endereco.complemento' => 'serbinario_alpha_space|max:120',
+        //    'endereco.cep' => 'numeric|digits_between:0,15',
+       //     'endereco.bairro_id' => 'integer'
         ],
    ];
 }

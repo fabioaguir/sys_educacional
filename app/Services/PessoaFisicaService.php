@@ -145,9 +145,14 @@ class PessoaFisicaService
         #Atualizando no banco de dados
         $pessoaFisica = $this->repository->update($data, $id);
 
-        #Buscando e atualizando registro de endereço
-        $objTelefone = $this->enderecoRepository->find($pessoaFisica->endereco_id);
-        $endereco = $this->enderecoRepository->update($data['endereco'], $objTelefone->id);
+        #Atualizando no banco de dados endereço
+        if(isset($pessoaFisica->endereco_id)) {
+            $this->enderecoRepository->update($data['endereco'], $pessoaFisica->endereco_id);
+        } else {
+            $endereco = $this->enderecoRepository->create($data['endereco']);
+            $pessoaFisica->endereco_id = $endereco->id;
+            $pessoaFisica->save();
+        }
 
         #Buscando e atualizando registro de telefone
         /*$objTelefone = $this->telefoneRepository->findWhere(['cgm_id' => $pessoaFisica->id]);

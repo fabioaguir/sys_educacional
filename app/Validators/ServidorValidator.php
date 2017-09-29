@@ -49,53 +49,53 @@ class ServidorValidator extends LaravelValidator
 
            //Tabela CGM
             'cgm.nome' => 'required|serbinario_alpha_space|max:45',
-            'cgm.sexo_id' => 'required|integer',
-            'cgm.data_nascimento' => 'required|max:15',
-            'cgm.nacionalidade_id' => 'required|integer',
-            'cgm.cgm_municipio_id' => 'required|integer',
-            'cgm.estado_civil_id' => 'required|integer',
-            'cgm.escolaridade_id' => 'required|integer',
-            'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:gen_cgm,cpf',
-            'cgm.rg' => 'required|numeric|digits_between:0,20',
+           // 'cgm.sexo_id' => 'required|integer',
+          //  'cgm.data_nascimento' => 'required|max:15',
+          //  'cgm.nacionalidade_id' => 'required|integer',
+         //   'cgm.cgm_municipio_id' => 'required|integer',
+         ////   'cgm.estado_civil_id' => 'required|integer',
+        //    'cgm.escolaridade_id' => 'required|integer',
+         //   'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:gen_cgm,cpf',
+        //    'cgm.rg' => 'required|numeric|digits_between:0,20',
 
             //Tabela Servidor
-            'data_admicao' => 'required|max:15',
+         //   'data_admicao' => 'required|max:15',
             'carga_horaria' => 'required|numeric',
-            'tipo_vinculo_servidor_id' => 'integer',
+        //    'tipo_vinculo_servidor_id' => 'integer',
             'cargos_id' => 'required|integer',
             'funcoes_id' => 'integer',
 
             //Tabela Endereço
-            'cgm.endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
-            'cgm.endereco.numero' => 'required|numeric|digits_between:0,10',
-            'cgm.endereco.complemento' => 'serbinario_alpha_space|max:120',
-            'cgm.endereco.bairro_id' => 'integer'
+         //   'cgm.endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
+         //   'cgm.endereco.numero' => 'required|numeric|digits_between:0,10',
+         //   'cgm.endereco.complemento' => 'serbinario_alpha_space|max:120',
+         //   'cgm.endereco.bairro_id' => 'integer'
         ],
         
         ValidatorInterface::RULE_UPDATE => [
             //Tabela CGM
             'cgm.nome' => 'required',
-            'cgm.sexo_id' => 'required',
-            'cgm.data_nascimento' => 'required|max:15',
-            'cgm.nacionalidade_id' => 'required',
-            'cgm.cgm_municipio_id' => 'required',
-            'cgm.estado_civil_id' => 'required',
-            'cgm.escolaridade_id' => 'required',
-            'cgm.cpf' => '',
-            'cgm.rg' => 'required',
+         //   'cgm.sexo_id' => 'required',
+        //    'cgm.data_nascimento' => 'required|max:15',
+        //    'cgm.nacionalidade_id' => 'required',
+        //    'cgm.cgm_municipio_id' => 'required',
+       //     'cgm.estado_civil_id' => 'required',
+        //    'cgm.escolaridade_id' => 'required',
+        //    'cgm.cpf' => '',
+        //    'cgm.rg' => 'required',
 
             //Tabela Servidor
-            'data_admicao' => 'required|max:15',
+        //    'data_admicao' => 'required|max:15',
             'carga_horaria' => 'required',
-            'tipo_vinculo_servidor_id' => '',
+         //   'tipo_vinculo_servidor_id' => '',
             'cargos_id' => 'required',
             'funcoes_id' => '',
 
             //Tabela Endereço
-            'cgm.endereco.logradouro' => 'required',
-            'cgm.endereco.numero' => 'required|max:99999',
-            'cgm.endereco.complemento' => 'max:100',
-            'cgm.endereco.bairro_id' => 'required|integer',
+          //  'cgm.endereco.logradouro' => 'required',
+         //   'cgm.endereco.numero' => 'required|max:99999',
+         //   'cgm.endereco.complemento' => 'max:100',
+          //  'cgm.endereco.bairro_id' => 'required|integer',
         ],
    ];
 }
