@@ -27,7 +27,7 @@
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="nome">Nome *</label>
-                                        {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm', 'placeholder' => 'Nome completo')) !!}
+                                        {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control input-sm upercase', 'placeholder' => 'Nome completo')) !!}
                                     </div>
                                 </div>
                             </div>

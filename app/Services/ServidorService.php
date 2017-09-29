@@ -109,7 +109,7 @@ class ServidorService
     /**
      * @param array $data
      * @param int $id
-     * @return ConvenioCallCenter
+     * @return Servidor
      * @throws \Exception
      */
     public function update(array $data, int $id) : Servidor
@@ -121,7 +121,13 @@ class ServidorService
         $cgm = $this->pessoaFisicaRepository->update($data['cgm'], $servidor->id_cgm);
 
         #Atualizando no banco de dados endereço
-        $endereco = $this->enderecoRepository->update($data['cgm']['endereco'], $cgm->endereco_id);
+        if(isset($cgm->endereco_id)) {
+            $this->enderecoRepository->update($data['cgm']['endereco'], $cgm->endereco_id);
+        } else {
+            $endereco = $this->enderecoRepository->create($data['cgm']['endereco']);
+            $cgm->endereco_id = $endereco->id;
+            $cgm->save();
+        }
 
         #Verificando se foi atualizado no banco de dados
         if(!$servidor) {

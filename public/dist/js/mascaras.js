@@ -68,4 +68,9 @@ $(document).ready(function(){
             };
         $('.telefone').mask(maskBehavior, options);
     });
+
+    $(document).on('keypress', ".upercase", function () {
+       var texto = $('.upercase').val().toUpperCase();
+        $('.upercase').val(texto);
+    });
 });

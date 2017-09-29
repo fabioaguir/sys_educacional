@@ -57,7 +57,7 @@
                                     <div class="fg-line">
                                         <div class="fg-line">
                                             <label for="cgm[nome]">Nome *</label>
-                                            {!! Form::text('cgm[nome]', Session::getOldInput('cgm[nome]'), array('class' => 'form-control input-sm', 'id' => 'nome', 'placeholder' => 'Nome completo')) !!}
+                                            {!! Form::text('cgm[nome]', Session::getOldInput('cgm[nome]'), array('class' => 'form-control input-sm upercase', 'id' => 'nome', 'placeholder' => 'Nome completo')) !!}
                                             <input type="hidden" value="@if(isset($model)) {{ $model->cgm->id }} @endif" name="cgm_id" id="cgm_id">
                                             <input type="hidden" value="" name="endereco_id" id="endereco_id">
                                         </div>

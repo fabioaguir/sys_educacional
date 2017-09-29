@@ -129,7 +129,7 @@ class FrequenciaService
         }
 
         // Validando se a data de ininial é maior que a data atual
-        if(strtotime($dataInicioUS) > strtotime($dataAtualUS)) {
+        if (strtotime($dataInicioUS) > strtotime($dataAtualUS)) {
             return ['return' => false, 'msg' => "Não será permitido realizar frequência para datas seguintes da data atual"];
         }
 
