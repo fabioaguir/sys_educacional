@@ -43,7 +43,7 @@
 
                         <div class="form-group col-md-5">
                             <div class=" fg-line">
-                                <label for="professor">Professore *</label>
+                                <label for="professor">Professores *</label>
                                 <div class="select">
                                     {!! Form::select("professor", array(), null, array('class'=> 'form-control', 'id' => 'professor')) !!}
                                 </div>

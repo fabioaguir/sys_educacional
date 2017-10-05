@@ -48,6 +48,7 @@ class ServidorController extends Controller
         'HabilitacaoEscolaridade',
         'TipoVinculo',
         'Situacao',
+        'Alergia'
     ];
 
     /**
@@ -88,6 +89,7 @@ class ServidorController extends Controller
                 'gen_cgm.nome',
                 'edu_servidor.matricula',
                 'gen_cgm.id as cgm_id',
+                'edu_servidor.carga_horaria'
             ]);
 
         #Editando a grid

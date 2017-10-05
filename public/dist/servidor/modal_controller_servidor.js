@@ -4,7 +4,7 @@
 
 
 //Global idCgm, idServidor
-var idCgm, idServidor;
+var idCgm, idServidor, cargaHoraria;
 
 // Evento para abrir o modal de telefones
 $(document).on("click", "#btnModalAdicionarTelefone", function () {
@@ -77,7 +77,8 @@ $(document).on("click", "#btnModalAdicionarAtividade", function () {
 // Evento para abrir o modal de alocações
 $(document).on("click", "#btnModalAdicionarAlocacao", function () {
     // Recuperando o id da alocação
-    idServidor = table.row($(this).parents('tr')).data().id;
+    idServidor   = table.row($(this).parents('tr')).data().id;
+    cargaHoraria = table.row($(this).parents('tr')).data().carga_horaria;
 
     // Recuperando o nome e matrícula
     var nome = table.row($(this).parents('tr')).data().nome;
@@ -88,7 +89,7 @@ $(document).on("click", "#btnModalAdicionarAlocacao", function () {
     $('.sMatricula').text(matricula);
 
     // Executando o modal
-    runModalAdicionarAlocacoes(idServidor);
+    runModalAdicionarAlocacoes(idServidor, cargaHoraria);
 });
 
 // Evento para abrir o modal de disponibilidades

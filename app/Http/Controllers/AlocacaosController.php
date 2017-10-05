@@ -66,6 +66,7 @@ class AlocacaosController extends Controller
             ->select([
                 'edu_alocacoes.id as id',
                 'edu_escola.nome as escola',
+                'edu_alocacoes.carga_horaria'
             ]);
 
         #Editando a grid
@@ -142,14 +143,48 @@ class AlocacaosController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+    public function getCargaHorariaDisponivel (Request $request)
+    {
+
+        try {
+
+            #Executando a ação
+
+            # verificar quantidade de horas alocadas
+            $alocacao = \DB::table('edu_alocacoes')
+                ->where('edu_alocacoes.servidor_id', $request->get('id'))
+                ->groupBy('edu_alocacoes.servidor_id')
+                ->select([
+                    \DB::raw('SUM( edu_alocacoes.carga_horaria ) as carga_horaria_utilizada')
+                ])->first();
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json($alocacao);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getEscolas(Request $request)
     {
 
-        $tipos = \DB::table('edu_escola')
-            ->select('edu_escola.id', 'edu_escola.nome')
-            ->get();
+        try {
 
-        return response()->json($tipos);
+            #Executando a ação
+            $escolas = \DB::table('edu_escola')
+                ->select('edu_escola.id', 'edu_escola.nome')
+                ->get();
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json($escolas);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
 
     }
 

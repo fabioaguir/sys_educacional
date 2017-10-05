@@ -37,7 +37,9 @@ class AlunoController extends Controller
         'Bairro',
         'Nacionalidade',
         'Zona',
-        'Sexo'
+        'Sexo',
+        'NecessidadeEspecial',
+        'TransporteEscolar'
     ];
 
     /**

@@ -7,6 +7,8 @@ function loadQuadroHorarios (idTurma) {
         'turma_id' : idTurma
     };
 
+    $('#img-loading-ajax').modal('show');
+
     // Requisição Ajax
     jQuery.ajax({
         type: 'POST',
@@ -16,6 +18,8 @@ function loadQuadroHorarios (idTurma) {
     }).done(function (json) {
 
         var html = "";
+
+        $('#img-loading-ajax').modal('hide');
 
         $.each(json['horarios'], function( index, value ) {
 
@@ -82,10 +86,8 @@ function loadQuadroHorarios (idTurma) {
 
         });
 
-
         $('#quadro-horarios tbody tr').remove();
         $('#quadro-horarios tbody').append(html);
-
 
     });
 

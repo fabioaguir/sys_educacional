@@ -20,6 +20,7 @@ class ServidorValidator extends LaravelValidator
         'cgm.escolaridade_id' => 'Escolaridade',
         'cgm.cpf' => 'CPF',
         'cgm.rg' => 'RG',
+        'alergia_id' => 'Alergia',
 
         'data_admicao' => 'Data de admissão',
         'carga_horaria' => 'Carga horária',
@@ -63,7 +64,8 @@ class ServidorValidator extends LaravelValidator
             'carga_horaria' => 'required|numeric',
         //    'tipo_vinculo_servidor_id' => 'integer',
             'cargos_id' => 'required|integer',
-            'funcoes_id' => 'integer',
+            'funcoes_id' => 'required|integer',
+            'alergia_id' => 'required|integer',
 
             //Tabela Endereço
          //   'cgm.endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
@@ -88,8 +90,9 @@ class ServidorValidator extends LaravelValidator
         //    'data_admicao' => 'required|max:15',
             'carga_horaria' => 'required',
          //   'tipo_vinculo_servidor_id' => '',
-            'cargos_id' => 'required',
-            'funcoes_id' => '',
+            'cargos_id' => 'required|integer',
+            'funcoes_id' => 'required|integer',
+            'alergia_id' => 'required|integer',
 
             //Tabela Endereço
           //  'cgm.endereco.logradouro' => 'required',

@@ -302,6 +302,7 @@
 
 
 @include('modal.modal_selecionar_escola')
+@include('modal.modal_loading_ajax')
 
 <!-- Javascript Libraries -->
 <script src="{{ asset('/lib/jquery/dist/jquery.js') }}"></script>
@@ -350,13 +351,14 @@
         ignore: []
     });
 
+    $('#img-loading-ajax').modal({'show': false});
+
     @if(!Session::has('escola'))
         $('#modal-escolas').modal({'show': true});
     @endif
 
     $(document).on('click', '#trocar-escola', function(){
-                console.log('sfdf');
-                $('#modal-escolas').modal({'show': false});
+        $('#modal-escolas').modal({'show': false});
         $('#modal-escolas').modal({'show': true});
     });
 

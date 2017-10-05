@@ -15,6 +15,7 @@ class Alocacao extends Model implements Transformable
     protected $fillable = [
         'servidor_id',
         'escola_id',
+        'carga_horaria'
     ];
 
     /**

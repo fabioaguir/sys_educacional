@@ -25,7 +25,8 @@ class Servidor extends Model implements Transformable
         'habilitacao_escolaridade_id',
         'cargos_id',
         'funcoes_id',
-        'situacao_servidores_id'
+        'situacao_servidores_id',
+        'alergia_id'
     ];
 
     /**

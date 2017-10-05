@@ -15,6 +15,8 @@
                     <ul id="tabs" class="tab-nav" role="tablist" data-tab-color="cyan">
                         <li class="active"><a href="#dadosPessoais" aria-controls="dadosPessoais" role="tab" data-toggle="tab">Dados Pessoais</a>
                         </li>
+                        <li><a href="#documento" aria-controls="documento" role="tab" data-toggle="tab">Documentos</a>
+                        </li>
                         <li><a href="#endereco" aria-controls="endereco" role="tab" data-toggle="tab">Endereço</a>
                         </li>
                     </ul>
@@ -89,17 +91,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="fg-line">
-                                        <div class="fg-line">
-                                            <label for="codigo">Código</label>
-                                            {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código do aluno')) !!}
-                                        </div>
+                                        <label for="codigo">Código</label>
+                                        {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control input-sm', 'placeholder' => 'Código do aluno')) !!}
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="fg-line">
@@ -122,24 +121,6 @@
                                 <div class="form-group col-md-4">
                                     <div class="fg-line">
                                         <div class="fg-line">
-                                            <label for="cgm[cpf]">CPF</label>
-                                            {!! Form::text('cgm[cpf]', Session::getOldInput('cgm[cpf]'), array('id' => 'cpf', 'class' => 'form-control input-sm', 'placeholder' => 'Número')) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <div class="fg-line">
-                                        <div class="fg-line">
-                                            <label for="cgm[rg]">RG</label>
-                                            {!! Form::text('cgm[rg]', Session::getOldInput('cgm[rg]'), array( 'id' => 'rg',  'class' => 'form-control input-sm', 'placeholder' => 'Nome completo da mãe')) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <div class="fg-line">
-                                        <div class="fg-line">
                                             <label for="cgm[pai]">Nome Pai</label>
                                             {!! Form::text('cgm[pai]', Session::getOldInput('cgm[pai]'), array('id' => 'pai', 'class' => 'form-control input-sm', 'placeholder' => 'Nome completo do pai')) !!}
                                         </div>
@@ -148,17 +129,33 @@
                                 <div class="form-group col-md-4">
                                     <div class="fg-line">
                                         <div class="fg-line">
-                                            <label for="cgm[mae]">Nome Mãe</label>
+                                            <label for="cgm[mae]">Nome Mãe *</label>
                                             {!! Form::text('cgm[mae]', Session::getOldInput('cgm[mae]'), array('id' => 'mae', 'class' => 'form-control input-sm', 'placeholder' => 'Nome completo da mãe')) !!}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="form-group col-sm-4">
+                                <div class="form-group col-md-4">
+                                    <div class="fg-line">
+                                        <label for="profissao_pai">Profissão Pai *</label>
+                                        {!! Form::text('profissao_pai', Session::getOldInput('profissao_pai'), array('class' => 'form-control input-sm', 'placeholder' => 'Profissão do Pai')) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="fg-line">
+                                        <label for="profissao_mae">Profissão Mãe *</label>
+                                        {!! Form::text('profissao_mae', Session::getOldInput('profissao_mae'), array('class' => 'form-control input-sm', 'placeholder' => 'Profissão Mãe')) !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-sm-2">
                                     <div class="fg-line">
                                         <div class="fg-line">
-                                            <label for="telefone[nome]">Telefone</label>
+                                            <label for="telefone[nome]">Telefone *</label>
                                             @if (isset($model->cgm))
                                                 {!! Form::text('telefone[nome]', $model->cgm->telefone->first()->nome ?? '', array('id' => 'telefone', 'class' => 'form-control input-sm', 'placeholder' => 'Telefone do responsável')) !!}
                                             @else
@@ -175,28 +172,123 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-2">
                                     <div class=" fg-line">
                                         <label for="cgm[nacionalidade_id]">Nacionalidade</label>
-                                        <div class="select">
-                                            {!! Form::select('cgm[nacionalidade_id]', (["" => "Selecione nacionalidade"] + $loadFields['nacionalidade']->toArray()), null, array('id' => 'nacionalidade_id', 'class'=> 'form-control')) !!}
-                                        </div>
+                                        {!! Form::select('cgm[nacionalidade_id]', (["" => "Selecione nacionalidade"] + $loadFields['nacionalidade']->toArray()), null, array('id' => 'nacionalidade_id', 'class'=> 'form-control')) !!}
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <div class="fg-line">
-                                        <div class="fg-line">
-                                            <label for="cgm[naturalidade]">Naturalidade</label>
-                                            {!! Form::text('cgm[naturalidade]', Session::getOldInput('cgm[naturalidade]'), array('id' => 'naturalidade', 'class' => 'form-control input-sm', 'placeholder' => 'Cidade natal')) !!}
-                                        </div>
+                                        <label for="cgm[naturalidade]">Naturalidade</label>
+                                        {!! Form::text('cgm[naturalidade]', Session::getOldInput('cgm[naturalidade]'), array('id' => 'naturalidade', 'class' => 'form-control input-sm', 'placeholder' => 'Cidade natal')) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <div class=" fg-line">
+                                        <label for="necessidade_especial_id">Necessidade especial *</label>
+                                        {!! Form::select('necessidade_especial_id', (["" => "Selecione"] + $loadFields['necessidadeespecial']->toArray()), null, array('class'=> 'form-control')) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="fg-line">
+                                        <label for="cid_patologia">Cid Patologia</label>
+                                        {!! Form::text('cid_patologia', Session::getOldInput('cid_patologia'), array('class' => 'form-control input-sm', 'placeholder' => 'Cid Patologia')) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class=" fg-line">
+                                        <label for="transporte_escolar_id">Transporte Escolar *</label>
+                                        {!! Form::select('transporte_escolar_id', (["" => "Selecione"] + $loadFields['transporteescolar']->toArray()), null, array('class'=> 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {{--#1--}}
+
                         {{--#2--}}
+                        <div role="tabpanel" class="tab-pane" id="documento">
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <div class="fg-line">
+                                        <label for="cgm[cpf]">CPF</label>
+                                        {!! Form::text('cgm[cpf]', Session::getOldInput('cgm[cpf]'), array('id' => 'cpf', 'class' => 'form-control input-sm', 'placeholder' => 'CPF')) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="fg-line">
+                                        <label for="cgm[rg]">RG</label>
+                                        {!! Form::text('cgm[rg]', Session::getOldInput('cgm[rg]'), array( 'id' => 'rg',  'class' => 'form-control input-sm', 'placeholder' => 'RG')) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <div class="fg-line">
+                                        <label for="nome_cartorio_rg_civil">Nome do cartório de registro Civil *</label>
+                                        {!! Form::text('nome_cartorio_rg_civil', Session::getOldInput('nome_cartorio_rg_civil'), array( 'class' => 'form-control input-sm', 'placeholder' => 'Nome do cartório de registro Civil')) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="fg-line">
+                                        <label for="num_registro_nascimento">Número registro de nascimento *</label>
+                                        {!! Form::text('num_registro_nascimento', Session::getOldInput('num_registro_nascimento'), array( 'class' => 'form-control input-sm', 'placeholder' => 'Número registro de nascimento')) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="fg-line">
+                                        <label for="livro">Livro *</label>
+                                        {!! Form::text('livro', Session::getOldInput('livro'), array( 'class' => 'form-control input-sm', 'placeholder' => 'Livro')) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="fg-line">
+                                        <label for="folha">Folha *</label>
+                                        {!! Form::text('folha', Session::getOldInput('folha'), array( 'class' => 'form-control input-sm', 'placeholder' => 'Folha')) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="fg-line">
+                                        <label for="data_emissao">Data de emissão *</label>
+                                        {!! Form::text('data_emissao', Session::getOldInput('data_emissao'), array( 'class' => 'form-control input-sm date-picker', 'placeholder' => 'Data de emissão')) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <div class=" fg-line">
+                                        <label for="estado_certidao">Estado certidão *</label>
+                                        @if(isset($model->cidade->estado->id))
+                                            <div class="select">
+                                                {!! Form::select("estado_certidao", (["" => "Selecione"] + $loadFields['estado']->toArray()), $model->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado_certidao')) !!}
+                                            </div>
+                                        @else
+                                            <div class="select">
+                                                {!! Form::select("estado_certidao", (["" => "Selecione"] + $loadFields['estado']->toArray()), null,array('class' => 'form-control', 'id' => 'estado_certidao')) !!}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <div class=" fg-line">
+                                        <label for="cidade_certidao">Cidade certidão *</label>
+                                        @if(isset($model->cidade->id))
+                                            <div class="select">
+                                                {!! Form::select("cidade_certidao", array($model->cidade->id => $model->cidade->nome), $model->cidade->id, array('class' => 'form-control', 'id' => 'cidade_certidao')) !!}
+                                            </div>
+                                        @else
+                                            <div class="select">
+                                                {!! Form::select("cidade_certidao", array(), Session::getOldInput('cidade_certidao'), array('class' => 'form-control', 'id' => 'cidade_certidao')) !!}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{--#3--}}
                         <div role="tabpanel" class="tab-pane" id="endereco">
                             <div class="row">
                                 <div class="form-group col-sm-4">
@@ -456,5 +548,38 @@
             }
         });
         //Fim - Retorno de cidades associadas ao estados
+
+        //Incio - Retorno de cidades associadas aos estados certidão
+        $(document).on('change', "#estado_certidao", function () {
+
+            //Removendo as cidades
+            $('#cidade_certidao option').remove();
+
+            //Recuperando o estado
+            var estado = $(this).val();
+
+            if (estado !== "") {
+                var dados = {
+                    'id' : estado
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('aluno.findCidade')  }}',
+                    data: dados,
+                    datatype: 'json',
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione um municipio</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#cidade_certidao option').remove();
+                    $('#cidade_certidao').append(option);
+                });
+            }
+        });
     </script>
 @endsection

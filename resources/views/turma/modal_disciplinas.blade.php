@@ -27,31 +27,6 @@
                     <!-- Gerendiamento das Disciplinas da Séries -->
                     <div class="col-md-12">
                         <!-- Adicionar Disciplina -->
-                        {{--<div class="row">--}}
-                            {{--<div class="col-md-12">--}}
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-md-6">--}}
-                                        {{--<select id="select-disciplinas" class="form-control"></select>--}}
-                                    {{--</div>--}}
-
-                                    {{--<div class="col-md-2">--}}
-                                        {{--<input type="text" id="periodo" class="form-control" placeholder="Períodos">--}}
-                                    {{--</div>--}}
-
-                                    {{--<div class="col-md-2">--}}
-                                        {{--<select id="obrigatorio" class="form-control">--}}
-                                            {{--<option value="0">É obrigatória ? </option>--}}
-                                            {{--<option value="1">Sim</option>--}}
-                                            {{--<option value="0">Não</option>--}}
-                                        {{--</select>--}}
-                                    {{--</div>--}}
-
-                                    {{--<div class="col-md-2">--}}
-                                        {{--<button class="btn btn-primary" id="addDisciplina" type="button">Adicionar</button>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                         <!-- Fim Adicionar Disciplina -->
 
                         <!-- Table de disciplinas -->

@@ -30,19 +30,41 @@
                     <div class="col-md-12">
                         <!-- Adicionar Alocações -->
                         <div class="row" style="margin-top: -2%; margin-bottom: 3%;">
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-4">
                                 <div class=" fg-line">
                                     <label for="escola">Escola *</label>
-                                    <div class="select">
-                                        {!! Form::select("escola", array(), null, array('class'=> 'form-control', 'id' => 'escola')) !!}
-                                    </div>
+                                    {!! Form::select("escola", array(), null, array('class'=> 'form-control', 'id' => 'escola')) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <div class="fg-line">
+                                    <label for="carga-horaria">Carga horária *</label>
+                                    {!! Form::text('carga-horaria', null,
+                                       array('class' => 'form-control', 'id' => 'carga-horaria')) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <div class="fg-line">
+                                    <label for="carga-horaria-disp">Carga horária disponível</label>
+                                    {!! Form::text('carga_horaria_disp', null,
+                                       array('class' => 'form-control', 'id' => 'carga-horaria-disp', 'readonly' => 'readonly')) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <div class="fg-line">
+                                    <label for="carga-horaria-total">Carga horária total</label>
+                                    {!! Form::text('carga_horaria_total', null,
+                                       array('class' => 'form-control', 'id' => 'carga-horaria-total','readonly' => 'readonly')) !!}
                                 </div>
                             </div>
 
                             <div class="form-group col-md-2">
                                 <div class="fg-line" style="margin-top: 20px">
                                     <div class="fg-line">
-                                        <button type="button" id="addAlocacao" class="btn btn-primary btn-sm m-t-10">Adicionar</button>
+                                        <button type="button"   id="addAlocacao" class="btn btn-primary btn-sm m-t-10">Adicionar</button>
                                     </div>
                                 </div>
                             </div>
@@ -56,6 +78,7 @@
                                 <thead>
                                 <tr>
                                     <th>Escola</th>
+                                    <th>Carga Horaria Alocada</th>
                                     <th style="width: 8%;">Acão</th>
                                 </tr>
                                 </thead>

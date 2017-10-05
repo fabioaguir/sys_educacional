@@ -195,6 +195,7 @@ class TurmaController extends Controller
             if ($row->tipo_resultado == '1') {
                 // Nota Comum
                 $html .= '<li><a class="btn-floating" href="nota/index/'.$row->id.'" title="Nota"><i class="material-icons">spellcheck</i></a></li>';
+                $html .= '<li><a class="btn-floating" href="notabydisciplina/index/'.$row->id.'" title="Nota por disciplina"><i class="material-icons">spellcheck</i></a></li>';
             } else if ($row->tipo_resultado == '3') {
                 $html .= '<li><a class="btn-floating" href="notaparecer/index/'.$row->id.'" title="Parecer"><i class="material-icons">spellcheck</i></a></li>';
             }

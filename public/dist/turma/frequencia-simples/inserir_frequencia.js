@@ -24,6 +24,8 @@ $(document).on('click', '#consultarFrequencia', function (event) {
         'dataInicio' : dataInicio
     };
 
+    $('#img-loading-ajax').modal('show');
+
     // Requisição Ajax
     jQuery.ajax({
         type: 'POST',
@@ -33,6 +35,8 @@ $(document).on('click', '#consultarFrequencia', function (event) {
     }).done(function (json) {
 
         if(json['return']) {
+
+            $('#img-loading-ajax').modal('hide');
 
             var html = "";
 

@@ -130,6 +130,50 @@ function professores(id, professor, hora, dia) {
     }
 }
 
+// Pegando os horários disponíveis para um determinado professor
+$(document).on('change', '#dia', function(){
+
+    var idDia = $(this).val();
+    var idProfessor = $("#professor").val();
+
+    if (idDia) {
+
+        //Setando o o json para envio
+        var dados = {
+            'idDia'   : idDia,
+            'idTurno' : idTurno,
+            'idTurma' : idTurma
+        };
+
+        $('#img-loading-ajax').modal('show');
+
+        jQuery.ajax({
+            type: 'POST',
+            data: dados,
+            url: laroute.route('turma.horario.getHoras'),
+            datatype: 'json'
+        }).done(function (json) {
+
+            $('#img-loading-ajax').modal('hide');
+
+            var option = '';
+
+            option += '<option value="">Selecione</option>';
+            for (var i = 0; i < json.length; i++) {
+                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            }
+
+            $('#hora option').remove();
+            $('#hora').append(option);
+        });
+
+    } else {
+        swal("Nenhum horário encontrado para esse professor", "error");
+    }
+
+});
+
+
 // Pegando os professores que ainda não
 $(document).on('change', '#hora', function(){
 
@@ -145,6 +189,8 @@ $(document).on('change', '#hora', function(){
             'idEscola' : idEscola
         };
 
+        $('#img-loading-ajax').modal('show');
+
         jQuery.ajax({
             type: 'POST',
             data: dados,
@@ -152,6 +198,8 @@ $(document).on('change', '#hora', function(){
             datatype: 'json'
         }).done(function (json) {
             var option = '';
+
+            $('#img-loading-ajax').modal('hide');
 
             option += '<option value="">Selecione</option>';
             for (var i = 0; i < json.length; i++) {
@@ -168,40 +216,35 @@ $(document).on('change', '#hora', function(){
 
 });
 
-// Pegando os horários disponíveis para um determinado professor
-$(document).on('change', '#dia', function(){
+// Valida se o professor já está vinculado ao horário e dia da semana selecionado
+$(document).on('change', '#professor', function(){
 
-    var idDia = $(this).val();
-    var idProfessor = $("#professor").val();
+    var idProfessor = $(this).val();
+    var idHora      = $("#hora").val();
+    var idDia       = $("#dia").val();
 
-    if (idDia) {
+    if (idDia && idHora && idProfessor) {
 
         //Setando o o json para envio
         var dados = {
-            'idDia'   : idDia,
-            'idTurno' : idTurno,
-            'idTurma' : idTurma
+            'idDia'    : idDia,
+            'idHora'   : idHora,
+            'idProfessor' : idProfessor
         };
 
         jQuery.ajax({
             type: 'POST',
             data: dados,
-            url: laroute.route('turma.horario.getHoras'),
-            datatype: 'json',
+            url: laroute.route('turma.horario.validarprofessor'),
+            datatype: 'json'
         }).done(function (json) {
-            var option = '';
 
-            option += '<option value="">Selecione</option>';
-            for (var i = 0; i < json.length; i++) {
-                option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+            if (json['return']) {
+                swal("Este professor já está vinculado ao dia da semana e horário selecionado!", "Click no botão abaixo!", "warning");
             }
 
-            $('#hora option').remove();
-            $('#hora').append(option);
         });
 
-    } else {
-        swal("Nenhum horário encontrado para esse professor", "error");
     }
 
 });

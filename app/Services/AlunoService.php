@@ -273,7 +273,8 @@ class AlunoService
     {
         $relacao = [
             'cgm.endereco.bairro.cidade.estado',
-            'cgm.telefone'
+            'cgm.telefone',
+            'cidade.estado'
         ];
 
         #Recuperando o registro no banco de dados

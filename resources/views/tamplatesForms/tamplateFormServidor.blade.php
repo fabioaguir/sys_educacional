@@ -91,6 +91,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group col-sm-3">
+                            <div class=" fg-line">
+                                <label for="alergia_id">Alergia *</label>
+                                <div class="select">
+                                    {!! Form::select('alergia_id', (["" => "Selecione"] + $loadFields['alergia']->toArray()), null, array('id' => 'alergia_id', 'class'=> 'form-control')) !!}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-4">

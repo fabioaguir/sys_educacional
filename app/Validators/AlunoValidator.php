@@ -13,6 +13,16 @@ class AlunoValidator extends LaravelValidator
     protected $attributes = [
         'codigo' => 'Código',
         'num_inep' => 'No. INEP',
+        'nome_cartorio_rg_civil' => 'Nome do cartório do registro civil',
+        'num_registro_nascimento' => 'Número do registro de nascimento',
+        'livro' => 'Livro',
+        'folha' => 'Folha',
+        'cidade_certidao' => 'Cidade da certidão',
+        'data_emissao' => 'Data de emissão',
+        'profissao_pai' => 'Profissão do pai',
+        'profissao_mae' => 'Profissão da mãe',
+        'necessidade_especial_id' => 'Necessidade especial',
+        'transporte_escolar_id' => 'Transporte escolar',
 
         //Tabela CGM
         'cgm.nome' => 'Nome',
@@ -56,6 +66,16 @@ class AlunoValidator extends LaravelValidator
             //Tabela alunos
            // 'codigo' => 'required|numeric|digits_between:0,45',
           //  'num_inep' => 'required|numeric|digits_between:0,30',
+            'nome_cartorio_rg_civil' => 'required',
+            'num_registro_nascimento' => 'required',
+            'livro' => 'required',
+            'folha' => 'required',
+            'cidade_certidao' => 'required',
+            'data_emissao' => 'required',
+            'profissao_pai' => 'required',
+            'profissao_mae' => 'required',
+            'necessidade_especial_id' => 'required',
+            'transporte_escolar_id' => 'required',
 
             //Tabela CGM
             'cgm.nome' => 'required|serbinario_alpha_space|max:45',
@@ -64,14 +84,14 @@ class AlunoValidator extends LaravelValidator
             //'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:cgm,cpf',
          //   'cgm.rg' => 'numeric|digits_between:0,20',
          //   'cgm.pai' => 'serbinario_alpha_space|max:45',
-        //    'cgm.mae' => 'serbinario_alpha_space|max:45',
+            'cgm.mae' => 'serbinario_alpha_space|max:250',
         //    'cgm.email' => 'email|max:45',
         //    'cgm.nacionalidade_id' => 'integer',
          //   'cgm.naturalidade' => 'required|serbinario_alpha_space|max:45',
         //    'cgm.numero_nis' => 'required|numeric|digits_between:0,30',
 
             //Tabela telefone
-            //'telefone.nome' => 'required|numeric|digits_between:0,20',
+            'telefone.nome' => 'required|numeric|digits_between:0,20',
 
             //Tabela endereco
           //  'cgm.endereco.logradouro' => 'required|serbinario_alpha_space|max:200',
@@ -86,6 +106,16 @@ class AlunoValidator extends LaravelValidator
             //Tabela alunos
            // 'codigo' => 'required|numeric|digits_between:0,45',
           //  'num_inep' => 'required|numeric|digits_between:0,30',
+            'nome_cartorio_rg_civil' => 'required',
+            'num_registro_nascimento' => 'required',
+            'livro' => 'required',
+            'folha' => 'required',
+            'cidade_certidao' => 'required',
+            'data_emissao' => 'required',
+            'profissao_pai' => 'required',
+            'profissao_mae' => 'required',
+            'necessidade_especial_id' => 'required',
+            'transporte_escolar_id' => 'required',
 
             //Tabela CGM
             'cgm.nome' => 'required|serbinario_alpha_space|max:45',
@@ -94,14 +124,14 @@ class AlunoValidator extends LaravelValidator
             //'cgm.cpf' => 'cpf_br|digits_between:0,15|unique:gen_cgm,cpf,:id',
          //   'cgm.rg' => 'numeric|digits_between:0,20',
          //   'cgm.pai' => 'serbinario_alpha_space|max:45',
-        //    'cgm.mae' => 'serbinario_alpha_space|max:45',
+            'cgm.mae' => 'serbinario_alpha_space|max:45',
          //   'cgm.email' => 'email|max:45',
          //   'cgm.nacionalidade_id' => 'integer',
          //   'cgm.naturalidade' => 'required|serbinario_alpha_space|max:45',
          //   'cgm.numero_nis' => 'required|numeric|digits_between:0,30',
 
             //Tabela telefone
-          //  'telefone.nome' => 'required|numeric|digits_between:0,20',
+            'telefone.nome' => 'required|numeric|digits_between:0,20',
 
             //Tabela endereco
           //  'cgm.endereco.logradouro' => 'required|serbinario_alpha_space|max:200',

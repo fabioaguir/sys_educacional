@@ -131,6 +131,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('storeAlocacao', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'storeAlocacao', 'uses' => 'AlocacaosController@store']);
         Route::post('removerAlocacao/{id}', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'removerAlocacao', 'uses' => 'AlocacaosController@destroy']);
         Route::post('getEscolas', ['middleware' => 'permission:servidor.add.alocacao', 'as' => 'getEscolas', 'uses' => 'AlocacaosController@getEscolas']);
+        Route::post('getCargaHorariaDisponivel', ['as' => 'getCargaHorariaDisponivel', 'uses' => 'AlocacaosController@getCargaHorariaDisponivel']);
 
         # rotas para disponibilidades
         Route::get('gridDisponibilidade/{id}', ['as' => 'gridDisponibilidade', 'uses' => 'DisponibilidadesController@grid']);
@@ -443,6 +444,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('getProfessores', ['as' => 'getProfessores', 'uses' => 'HorariosController@getProfessores']);
             Route::post('getDias', ['as' => 'getDias', 'uses' => 'HorariosController@getDias']);
             Route::post('getHoras', ['as' => 'getHoras', 'uses' => 'HorariosController@getHoras']);
+            Route::post('validarprofessor', ['as' => 'validarprofessor', 'uses' => 'HorariosController@validarProfessores']);
         });
 
         # Modal de matricula
@@ -470,6 +472,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'NotaController@index']);
             Route::post('consultar', ['as' => 'consultar', 'uses' => 'NotaController@consultar']);
             Route::post('store', ['as' => 'store', 'uses' => 'NotaController@store']);
+        });
+
+        # rotas para atribuição de notas
+        Route::group(['prefix' => 'notabydisciplina', 'as' => 'notabydisciplina.'], function () {
+            Route::get('index/{idTurma}', ['as' => 'index', 'uses' => 'NotaByDisciplinasController@index']);
+            Route::post('consultar', ['as' => 'consultar', 'uses' => 'NotaByDisciplinasController@consultar']);
+            Route::post('store', ['as' => 'store', 'uses' => 'NotaByDisciplinasController@store']);
         });
 
         # rotas para atribuição de notas por parecer
